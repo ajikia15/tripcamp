@@ -17,3 +17,4 @@ export default function Home() {
 
 // Hello, World // Your Mother // 
 // ენაცვალოს დედამ! //
+//Mamamac//
