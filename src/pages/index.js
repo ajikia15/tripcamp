@@ -10,6 +10,7 @@ export default function Home() {
     >
       <Navbar />
       <p className='text-blue-400'>big balls</p>
+      <p className='text-Slate-900'> Enacvalos Mamam </p>
     </main>
   )
 }
