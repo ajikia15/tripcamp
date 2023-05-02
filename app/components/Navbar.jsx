@@ -1,10 +1,10 @@
 export default function Navbar() {
   return (
-    <div>
+    <div className="">
       <h1 className="py-5 border-b border border-gray-200 text-xl font-semibold text-center ">
         TripCamp
       </h1>
-      <div className="w-full grid place-items-center my-5">
+      <div className="w-full grid place-items-center mt-5 mb-8">
         <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr]">
           <ul className="flex flex-row items-center gap-3 cursor-pointer  ">
             <li>
@@ -22,7 +22,7 @@ export default function Navbar() {
             <li className="flex flex-col">
               <h3 className="font-semibold">Where to?</h3>
               <p className="text-gray-500 text-xs">
-                Anywhere . Any Week . Add guests
+                Anywhere • Any Week • Add guests
               </p>
             </li>
           </ul>
