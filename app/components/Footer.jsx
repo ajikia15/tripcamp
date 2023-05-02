@@ -41,7 +41,7 @@ export default function Footer() {
 
       <div className="border-t border-t-gray-300 border-t-solid">
         <div className="md:text-zinc-800 md:pt-4 md:flex md:items-center md:flex-col-reverse md:w-4/5 md:mx-auto md:gap-y-4 lg:flex lg:flex-row lg:justify-between lg:w-4/5 lg:mx-auto lg:text-zinc-800 lg:pt-4 lg:pb-4">
-          <div className="md:gap-y-2 pb-4 md:pb-0 md:flex md:items-center md:flex-col lg:flex lg:flex-row lg:gap-x-4">
+          <div className="md:gap-y-2 pb-4 md: md:flex md:items-center md:flex-col lg:flex lg:flex-row lg:gap-x-4">
             <div className="flex flex-row gap-x-4 text-xs  items-center">
               <p> © 2023 TripCamp, Inc.</p>
               <p className="md:hidden lg:block"> · </p>
@@ -108,7 +108,7 @@ export default function Footer() {
                   fill="currentColor"
                   fill-rule="evenodd"
                   d="M6.77 3.082a47.472 47.472 0 0 1 10.46 0c1.899.212 3.43 1.707 3.653 3.613a45.67 45.67 0 0 1 0 10.61c-.223 1.906-1.754 3.401-3.652 3.614a47.468 47.468 0 0 1-10.461 0c-1.899-.213-3.43-1.708-3.653-3.613a45.672 45.672 0 0 1 0-10.611C3.34 4.789 4.871 3.294 6.77 3.082ZM17 6a1 1 0 1 0 0 2a1 1 0 0 0 0-2Zm-9.75 6a4.75 4.75 0 1 1 9.5 0a4.75 4.75 0 0 1-9.5 0Z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
               <svg
@@ -130,7 +130,7 @@ export default function Footer() {
                   fill="currentColor"
                   fill-rule="evenodd"
                   d="M18.483 19.79v-.002l.018-.043L21.5 4.625v-.048c0-.377-.14-.706-.442-.903c-.265-.173-.57-.185-.784-.169a2.681 2.681 0 0 0-.586.12a3.23 3.23 0 0 0-.24.088l-.013.005l-16.72 6.559l-.005.002a1.353 1.353 0 0 0-.149.061a2.27 2.27 0 0 0-.341.19c-.215.148-.624.496-.555 1.048c.057.458.372.748.585.899a2.062 2.062 0 0 0 .403.22l.032.014l.01.003l.007.003l2.926.985c-.01.183.008.37.057.555l1.465 5.559a1.5 1.5 0 0 0 2.834.196l2.288-2.446l3.929 3.012l.056.024c.357.156.69.205.995.164c.305-.042.547-.17.729-.315a1.742 1.742 0 0 0 .49-.635l.008-.017l.003-.006l.001-.003ZM7.135 13.875a.3.3 0 0 1 .13-.33l9.921-6.3s.584-.355.563 0c0 0 .104.062-.209.353c-.296.277-7.071 6.818-7.757 7.48a.278.278 0 0 0-.077.136L8.6 19.434l-1.465-5.56Z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
               <svg
