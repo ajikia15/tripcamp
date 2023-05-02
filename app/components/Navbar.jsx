@@ -5,7 +5,7 @@ export default function Navbar() {
         TripCamp
       </h1>
       <div className="w-full grid place-items-center my-5">
-        <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid grid-cols-[3fr_5fr]">
+        <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr]">
           <ul className="flex flex-row items-center gap-3 cursor-pointer  ">
             <li>
               <svg
@@ -26,7 +26,7 @@ export default function Navbar() {
               </p>
             </li>
           </ul>
-          <ul className="mx-3 justify-between item-center grid grid-cols-3">
+          <ul className="mx-3 justify-between item-center  grid-cols-3 hidden md:grid">
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
               <h3 className="font-semibold">When</h3>
               <p className="text-gray-500 text-xs">
