@@ -1,10 +1,15 @@
 import Image from 'next/image'
-import categIcons from './components/reusable/categIcons'
+import Card from './components/reusable/Card'
 export default function Home() {
   return (
     <main className="m-0 p-0">
-      <h1>hello</h1>
-      <categIcons/>
+      <div className='w-full grid place-items-center'>
+        <div className='w-4/5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+          {[...Array(5)].map((_, index) => (
+            <Card key={index} />
+          ))}
+        </div>
+      </div>
     </main>
   )
 }
