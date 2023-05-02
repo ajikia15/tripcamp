@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.overflow-y-auto::-webkit-scrollbar {
+.overflow-x-auto::-webkit-scrollbar {
   display: none;
 }
