@@ -1,12 +1,52 @@
+"use client";
 import CategIcons from "./reusable/CategIcons";
+import { useRef, useState } from "react";
 export default function Categories() {
+  const containerRef = useRef(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    setScrollPosition(containerRef.current.scrollLeft);
+  };
+  const handleScrollLeft = () => {
+    containerRef.current.scrollBy({
+      left: -300,
+      behavior: "smooth",
+    });
+    setScrollPosition(containerRef.current.scrollLeft);
+  };
+
+  const handleScrollRight = () => {
+    containerRef.current.scrollBy({
+      left: 300,
+      behavior: "smooth",
+    });
+    setScrollPosition(containerRef.current.scrollLeft);
+  };
   return (
     <div className="w-full my-10">
-      <div className="flex gap-x-8 flex-row items-center justify-center w-4/5 mx-auto">
-        <div className="border rounded-full border-solid border-12 border-black">
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.41z"/></svg>
+      <div className="flex gap-x-8 flex-row items-center justify-center w-11/12 mx-auto">
+        <div
+          className={`rounded-full border-solid border-2 border-black opacity-70 transition-all cursor-pointer ${
+            scrollPosition < 1 &&
+            "opacity-0 hover:opacity-100"
+          }`}
+          onClick={handleScrollLeft}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.41z"
+            />
+          </svg>
         </div>
-        <div className="flex flex-row overflow-y-auto gap-x-8 ">
+        <div
+          ref={containerRef}
+          onScroll={handleScroll}
+          className="flex flex-row overflow-x-auto gap-x-8"
+          style={{ overflowX: "scroll" }}>
           <CategIcons
             name={"Cottage"}
             svg={
@@ -346,8 +386,44 @@ export default function Categories() {
             }
           />
         </div>
-        <div className="border rounded-full border-solid border-12 border-black">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g transform="rotate(180 12 12)"><path fill="currentColor" d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.41z"/></g></svg>
+        <div
+          className="rounded-full border-solid border-2 border-black cursor-pointer"
+          onClick={handleScrollRight}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24">
+            <g transform="rotate(180 12 12)">
+              <path
+                fill="currentColor"
+                d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.41z"
+              />
+            </g>
+          </svg>
+        </div>
+        <div>
+          <button className="border-2 p-3 rounded-xl border-gray-400 font-semibold flex flex-row gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 8h9m4 0h3m-9 8h9M4 16h3"
+                />
+                <circle cx="9" cy="16" r="2" />
+                <circle cx="15" cy="8" r="2" />
+              </g>
+            </svg>
+            Filters
+          </button>
         </div>
       </div>
     </div>
