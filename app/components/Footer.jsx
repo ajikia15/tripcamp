@@ -40,8 +40,8 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-t-gray-300 border-t-solid">
-        <div className="flex flex-col w-11/12 py-2 mx-auto md:justify-between text-zinc-800 md:flex-row">
-          <div className="flex flex-col md:flex-row md:gap-y-2 md:items-center lg:gap-x-4">
+        <div className="flex flex-col w-11/12 py-2 mx-auto gap-y-2 lg:justify-between text-zinc-800 lg:flex-row">
+          <div className="flex items-center md:flex-row md:gap-y-2 lg:gap-x-4">
             <div className="flex flex-row items-center text-xs gap-x-4">
               <p> © 2023 TripCamp, Inc.</p>
               <p className="md:hidden lg:block"> · </p>
