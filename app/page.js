@@ -2,9 +2,9 @@ import Image from 'next/image'
 import Card from './components/reusable/Card'
 export default function Home() {
   return (
-    <main className="m-0 p-0">
-      <div className='w-full grid place-items-center'>
-        <div className='w-4/5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+    <main className="p-0 m-0">
+      <div className='grid w-full place-items-center'>
+        <div className='grid w-4/5 grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4'>
           {[...Array(5)].map((_, index) => (
             <Card key={index} />
           ))}

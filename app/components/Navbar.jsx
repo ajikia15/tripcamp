@@ -1,12 +1,12 @@
 export default function Navbar() {
   return (
     <div className="">
-      <h1 className="py-5 border-b border border-gray-200 text-xl font-semibold text-center ">
+      <h1 className="py-5 text-xl font-semibold text-center border border-b border-gray-200 ">
         TripCamp
       </h1>
-      <div className="w-full grid place-items-center mt-5 mb-8">
+      <div className="grid w-full mt-5 mb-8 place-items-center">
         <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr]">
-          <ul className="flex flex-row items-center gap-3 cursor-pointer  ">
+          <ul className="flex flex-row items-center gap-3 cursor-pointer ">
             <li>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -21,30 +21,30 @@ export default function Navbar() {
             </li>
             <li className="flex flex-col">
               <h3 className="font-semibold">Where to?</h3>
-              <p className="text-gray-500 text-xs">
+              <p className="text-xs text-gray-500">
                 Anywhere • Any Week • Add guests
               </p>
             </li>
           </ul>
-          <ul className="mx-3 justify-between item-center  grid-cols-3 hidden md:grid">
+          <ul className="justify-between hidden grid-cols-3 mx-3 item-center md:grid">
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
               <h3 className="font-semibold">When</h3>
-              <p className="text-gray-500 text-xs">
+              <p className="text-xs text-gray-500">
                 Anytime
               </p>
             </li>
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
               <h3 className="font-semibold">Price</h3>
-              <p className="text-gray-500 text-xs">
+              <p className="text-xs text-gray-500">
                 Any amount
               </p>
             </li>
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
               <h3 className="font-semibold">Who</h3>
-              <p className="text-gray-500 text-xs">
+              <p className="text-xs text-gray-500">
                 2 guests
               </p>
-              <div className="rounded-full aspect-square p-2 absolute right-0 translate-x-1/2 top-1/2 -translate-y-1/2 bg-blue-500">
+              <div className="absolute right-0 p-2 translate-x-1/2 -translate-y-1/2 bg-blue-500 rounded-full aspect-square top-1/2">
                 <svg
                   className="text-white"
                   xmlns="http://www.w3.org/2000/svg"

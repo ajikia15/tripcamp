@@ -2,13 +2,13 @@ export default function Card() {
   return (
     <div className="flex flex-col">
       <a href="listings/1">
-        <div className="rounded-xl relative">
+        <div className="relative rounded-xl">
           <img
             className="aspect-square rounded-xl"
             src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
             alt=""
           />
-          <div className="absolute top-4 right-4 text-white">
+          <div className="absolute text-white top-4 right-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -22,14 +22,14 @@ export default function Card() {
           </div>
         </div>
         <div>
-          <a href="#" className="lg:w-1/4 md:w-1/2 w-full">
-            <h4 className="font-medium text-lg pt-2">
+          <a href="#" className="w-full lg:w-1/4 md:w-1/2">
+            <h4 className="pt-2 text-lg font-medium">
               Underground Hygge
             </h4>
-            <h5 className="text-sm text-gray-600 mb-1 py-1">
+            <h5 className="py-1 mb-1 text-sm text-gray-600">
               Georgia, Racha, Ambrolauri, Jvarisa
             </h5>
-            <p className="text-black text-sm mb-1 font-semibold ">
+            <p className="mb-1 text-sm font-semibold text-black ">
               $150/night
             </p>
           </a>
