@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Card from './components/reusable/Card'
-import Listing from './components/reusable/Listing'
 export default function Home() {
   return (
     <main className="m-0 p-0">
@@ -11,7 +10,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <Listing />
     </main>
   )
 }
