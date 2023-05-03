@@ -24,7 +24,7 @@ export default function Categories() {
   };
   return (
     <div className="w-full my-10">
-      <div className="flex gap-x-8 flex-row items-center justify-center w-11/12 mx-auto">
+      <div className="flex flex-row items-center justify-center w-11/12 mx-auto gap-x-8">
         <div
           className={`rounded-full border-solid border-2 border-black transition-all cursor-pointer ${
             scrollPosition < 1 &&
@@ -387,7 +387,7 @@ export default function Categories() {
           />
         </div>
         <div
-          className="rounded-full border-solid border-2 border-black cursor-pointer opacity-50 hover:opacity-100 transition-all"
+          className="transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer hover:opacity-100"
           onClick={handleScrollRight}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -403,7 +403,7 @@ export default function Categories() {
           </svg>
         </div>
         <div>
-          <button className="border-2 p-3 rounded-xl border-gray-400 font-semibold flex flex-row gap-2">
+          <button className="flex flex-row gap-2 p-3 font-semibold border-2 border-gray-400 rounded-xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
