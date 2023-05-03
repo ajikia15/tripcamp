@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
     <div className="hidden w-full bg-gray-100 md:block lg:block">
-      <div className="grid grid-cols-1 mx-auto w-4/5 gap-y-10 md:grid-cols-1 lg:grid-cols-4 py-14">
-        <div className="space-y-4 grid text-xs text-gray-800">
+      <div className="grid w-4/5 grid-cols-1 mx-auto gap-y-10 md:grid-cols-1 lg:grid-cols-4 py-14">
+        <div className="grid space-y-4 text-xs text-gray-800">
           <h5 className="font-bold">Support</h5>
-          <div className="md:grid grid-cols-3 md:grid-rows-2 md:grid-cols-3 md:gap-y-3 lg:grid-cols-1 lg:grid-rows-5 lg:gap-y-4">
+          <div className="grid-cols-3 md:grid md:grid-rows-2 md:grid-cols-3 md:gap-y-3 lg:grid-cols-1 lg:grid-rows-5 lg:gap-y-4">
             <p>Help Center</p>
             <p>Supporting people with disabilities</p>
             <p>Cancellation options</p>
@@ -19,7 +19,7 @@ export default function Footer() {
         </div>
         <div className="space-y-4 text-xs text-gray-800">
           <h5 className="font-bold">Hosting</h5>
-          <div className="md:grid grid-cols-3 md:grid-rows-2 md:grid-cols-3 md:gap-y-3 lg:grid-cols-1 lg:grid-rows-5 lg:gap-y-4">
+          <div className="grid-cols-3 md:grid md:grid-rows-2 md:grid-cols-3 md:gap-y-3 lg:grid-cols-1 lg:grid-rows-5 lg:gap-y-4">
             <p>tripmcamp your home</p>
             <p>tripcover for hosts</p>
             <p>Explore hosting resources</p>
@@ -29,7 +29,7 @@ export default function Footer() {
         </div>
         <div className="space-y-4 text-xs text-gray-800">
           <h5 className="font-bold">TripCamp</h5>
-          <div className="md:grid grid-cols-3 md:grid-rows-2 md:grid-cols-3 md:gap-y-3 lg:grid-cols-1 lg:grid-rows-5 lg:gap-y-4">
+          <div className="grid-cols-3 md:grid md:grid-rows-2 md:grid-cols-3 md:gap-y-3 lg:grid-cols-1 lg:grid-rows-5 lg:gap-y-4">
             <p>Newsroom</p>
             <p>learn about features</p>
             <p>Careers</p>
@@ -40,13 +40,13 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-t-gray-300 border-t-solid">
-        <div className="md:text-zinc-800 md:pt-4 md:flex md:items-center md:flex-col-reverse md:w-4/5 md:mx-auto md:gap-y-4 lg:flex lg:flex-row lg:justify-between lg:w-4/5 lg:mx-auto lg:text-zinc-800 lg:pt-4 lg:pb-4">
-          <div className="md:gap-y-2 pb-4 md: md:flex md:items-center md:flex-col lg:flex lg:flex-row lg:gap-x-4">
-            <div className="flex flex-row gap-x-4 text-xs  items-center">
+        <div className="flex flex-col w-11/12 py-2 mx-auto md:justify-between text-zinc-800 md:flex-row">
+          <div className="flex flex-col md:flex-row md:gap-y-2 md:items-center lg:gap-x-4">
+            <div className="flex flex-row items-center text-xs gap-x-4">
               <p> © 2023 TripCamp, Inc.</p>
               <p className="md:hidden lg:block"> · </p>
             </div>
-            <div className="flex flex-row gap-x-4 text-xs items-center">
+            <div className="flex flex-row items-center text-xs gap-x-4">
               <p> Terms </p>
               <p> · </p>
               <p> Sitemap </p>
@@ -56,8 +56,8 @@ export default function Footer() {
               <p> Security </p>
             </div>
           </div>
-          <div className="flex flex-row gap-x-8 text-xs">
-            <div className="flex flex-row gap-x-3 items-center">
+          <div className="flex flex-row text-xs gap-x-8">
+            <div className="flex flex-row items-center gap-x-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -70,11 +70,11 @@ export default function Footer() {
               </svg>
               <p> English </p>
             </div>
-            <div className="flex flex-row gap-x-3 items-center">
+            <div className="flex flex-row items-center gap-x-3">
               {/* Currency selector */}
               <p> $ USD </p>
             </div>
-            <div className="flex flex-row gap-x-4 items-center">
+            <div className="flex flex-row items-center gap-x-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
