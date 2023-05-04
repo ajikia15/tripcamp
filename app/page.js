@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import Card from './components/reusable/Card'
+import Modal from './components/reusable/Modal'
+
 export default function Home() {
   return (
     <main className="p-0 m-0">
@@ -9,6 +11,9 @@ export default function Home() {
             <Card key={index} />
           ))}
         </div>
+      </div>
+      <div>
+        <Modal><div>balls</div></Modal>
       </div>
     </main>
   )
