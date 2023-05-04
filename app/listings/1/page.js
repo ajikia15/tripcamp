@@ -1,15 +1,15 @@
 export default function Listing() {
     return (
         <div className="w-11/12 mx-auto xl:w-5/6">
+            <div className="w-4/5">
+                <p className="text-sm"> Address </p>
+                <h1 className="text-3xl font-bold"> Title </h1>
+            </div>
+            <div>
+                <p> Photos </p>
+            </div>
             <div className="relative flex flex-row">
                 <div className="w-4/5">
-                    <div>
-                        <p className="text-sm"> Address </p>
-                        <h1 className="text-3xl font-bold"> Title </h1>
-                    </div>
-                    <div>
-                        <p> Photos </p>
-                    </div>
                     <div className="flex flex-row items-center mt-12 mb-4">
                         <div className="flex flex-col pb-4 border-b-2 gap-y-4">
                             <h2 className="text-xl"> Price/Night </h2>
@@ -232,13 +232,14 @@ export default function Listing() {
                         </div>
                     </div>
                 </div>
-                <div className="p-2 border border-yellow-500 ">
-                    <div className="sticky border border-red-500 top-2">
-                        <h1>Scan qr code to find pipe bomb recipe</h1>
+                <div >
+                    <div className="p-4 sticky top-2 hidden md:w-[284px] md:h-[340px] md:ml-2 md:flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex lg:flex justify-center items-center">
+                            <div className="md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 flex md:flex-row rounded-lg bg-zinc-800 justify-center items-center">QR</div>
+                            <p className="w-36 text-sm text-zinc-800 md:text-center">Scan code to Download Tripcamp application to make reservation</p>
                     </div>
                 </div>
             </div>
-            {/* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
+            {/* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ES RA ARIIIS BAVSHVI?!*/}
             <div className="w-full">
                 <div>
                     <h2 className="mb-4 text-xl"> List Title </h2>
