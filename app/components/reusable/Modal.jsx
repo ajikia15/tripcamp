@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const Modal = ({ showModal, children }) => {
+const Modal = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <div>
