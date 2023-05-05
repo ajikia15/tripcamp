@@ -33,7 +33,7 @@ const ChangeCurrency = () => {
             closeModal();
           }}>
           <div
-            className="absolute p-4 text-lg bg-white rounded-2xl"
+            className="p-4 text-lg bg-white rounded-2xl"
             onClick={(e) => e.stopPropagation()}></div>
         </div>
       ) : null}

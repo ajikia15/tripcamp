@@ -1,0 +1,12 @@
+.footerFloatIn {
+  animation-name: floatInFromBottom;
+  animation-duration: 0.6s;
+}
+@keyframes floatInFromBottom {
+  from {
+    bottom: -70%;
+  }
+  to {
+    bottom: 0;
+  }
+}
