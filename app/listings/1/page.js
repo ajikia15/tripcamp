@@ -1,3 +1,7 @@
+// import Twins from '../public/Twins.jpg';
+import Image from 'next/image'
+
+
 export default function Listing() {
     return (
         <div className="w-11/12 mx-auto xl:w-5/6">
@@ -5,8 +9,48 @@ export default function Listing() {
                 <p className="text-sm"> Address </p>
                 <h1 className="text-3xl font-bold"> Title </h1>
             </div>
-            <div>
-                <p> Photos </p>
+            <div className="flex gap-2">
+                <div className="w-1/2 aspect-square bg-zinc-800 rounded-md rounded-r-none">
+                    <img
+                        className="object-cover h-full w-full"
+                        src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                        alt="Listing Image"
+                    />
+                </div>
+                <div className="w-1/2 flex flex-col gap-y-2">
+                    <div className="flex flex-row gap-2">
+                        <div className="w-full h-full aspect-square bg-zinc-800">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                        <div className="w-full h-full aspect-square bg-zinc-800 rounded-md rounded-br-none rounded-l-none">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                    </div>
+                    <div className="flex flex-row gap-2">
+                        <div className="w-full h-full aspect-square bg-zinc-800">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                        <div className="w-full h-full aspect-square bg-zinc-800 rounded-md rounded-l-none rounded-tr-none">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="relative flex flex-row">
                 <div className="w-4/5">
@@ -281,7 +325,7 @@ export default function Listing() {
                     <h2 className="mb-4 text-xl">
                         Things you must know
                     </h2>
-                    <div className="grid grid-cols-1 text-sm md:grid-cols-3 gap-x-12 md:gap-x-24 lg:gap-x-32">
+                    <div className="grid grid-cols-1 text-sm md:grid-cols-3 gap-x-12 md:gap-x-24 lg:gap-x-32 mb-8">
                         <div className="flex flex-col gap-y-3">
                             <h3 className="font-semibold">Rules</h3>
                             <div className="flex justify-between">
