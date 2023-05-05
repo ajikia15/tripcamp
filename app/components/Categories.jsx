@@ -24,7 +24,7 @@ export default function Categories() {
   };
   return (
     <div className="w-full my-10">
-      <div className="flex flex-row items-center justify-center w-11/12 mx-auto gap-x-8">
+      <div className="flex flex-row items-center justify-center w-full ">
         <div
           className={`rounded-full border-solid border-2 border-black transition-all cursor-pointer ${
             scrollPosition < 1 &&
@@ -45,7 +45,7 @@ export default function Categories() {
         <div
           ref={containerRef}
           onScroll={handleScroll}
-          className="flex flex-row overflow-x-auto gap-x-8"
+          className="flex flex-row mx-10 overflow-x-auto 2xl:w-3/5 gap-x-3 lg:gap-x-6"
           style={{ overflowX: "scroll" }}>
           <CategIcons
             name={"Cottage"}
@@ -403,7 +403,7 @@ export default function Categories() {
           </svg>
         </div>
         <div>
-          <button className="flex flex-row gap-2 p-3 font-semibold border-2 border-gray-400 rounded-xl">
+          <div className="flex flex-row gap-2 p-2 ml-2 font-semibold border-2 border-gray-400 md:p-3 rounded-xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -422,8 +422,8 @@ export default function Categories() {
                 <circle cx="15" cy="8" r="2" />
               </g>
             </svg>
-            Filters
-          </button>
+            <p className="hidden md:block">Filters</p>
+          </div>
         </div>
       </div>
     </div>
