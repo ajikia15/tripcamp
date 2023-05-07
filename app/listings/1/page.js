@@ -1,15 +1,59 @@
+// import Twins from '../public/Twins.jpg';
+import Image from 'next/image'
+
+
 export default function Listing() {
     return (
         <div className="w-11/12 mx-auto xl:w-5/6">
+            <div className="w-4/5">
+                <p className="text-sm"> Address </p>
+                <h1 className="text-3xl font-bold"> Title </h1>
+            </div>
+            <div className="flex gap-2">
+                <div className="w-1/2 aspect-square bg-zinc-800 rounded-md rounded-r-none">
+                    <img
+                        className="object-cover h-full w-full"
+                        src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                        alt="Listing Image"
+                    />
+                </div>
+                <div className="w-1/2 flex flex-col gap-y-2">
+                    <div className="flex flex-row gap-2">
+                        <div className="w-full h-full aspect-square bg-zinc-800">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                        <div className="w-full h-full aspect-square bg-zinc-800 rounded-md rounded-br-none rounded-l-none">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                    </div>
+                    <div className="flex flex-row gap-2">
+                        <div className="w-full h-full aspect-square bg-zinc-800">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                        <div className="w-full h-full aspect-square bg-zinc-800 rounded-md rounded-l-none rounded-tr-none">
+                            <img
+                                className="object-cover h-full w-full" 
+                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
+                                alt="Listing Image" 
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="relative flex flex-row">
                 <div className="w-4/5">
-                    <div>
-                        <p className="text-sm"> Address </p>
-                        <h1 className="text-3xl font-bold"> Title </h1>
-                    </div>
-                    <div>
-                        <p> Photos </p>
-                    </div>
                     <div className="flex flex-row items-center mt-12 mb-4">
                         <div className="flex flex-col pb-4 border-b-2 gap-y-4">
                             <h2 className="text-xl"> Price/Night </h2>
@@ -232,13 +276,14 @@ export default function Listing() {
                         </div>
                     </div>
                 </div>
-                <div className="p-2 border border-yellow-500 ">
-                    <div className="sticky border border-red-500 top-2">
-                        <h1>Scan qr code to find pipe bomb recipe</h1>
+                <div >
+                    <div className="p-4 sticky top-2 hidden md:w-[284px] md:h-[340px] md:ml-2 md:flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex lg:flex justify-center items-center">
+                            <div className="md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 flex md:flex-row rounded-lg bg-zinc-800 justify-center items-center">QR</div>
+                            <p className="w-36 text-sm text-zinc-800 md:text-center">Scan code to Download Tripcamp application to make reservation</p>
                     </div>
                 </div>
             </div>
-            {/* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
+            {/* AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ES RA ARIIIS BAVSHVI?!*/}
             <div className="w-full">
                 <div>
                     <h2 className="mb-4 text-xl"> List Title </h2>
@@ -280,7 +325,7 @@ export default function Listing() {
                     <h2 className="mb-4 text-xl">
                         Things you must know
                     </h2>
-                    <div className="grid grid-cols-1 text-sm md:grid-cols-3 gap-x-12 md:gap-x-24 lg:gap-x-32">
+                    <div className="grid grid-cols-1 text-sm md:grid-cols-3 gap-x-12 md:gap-x-24 lg:gap-x-32 mb-8">
                         <div className="flex flex-col gap-y-3">
                             <h3 className="font-semibold">Rules</h3>
                             <div className="flex justify-between">
