@@ -414,8 +414,8 @@ export default function Categories() {
                 stroke="currentColor"
                 strokeWidth="1.5">
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M4 8h9m4 0h3m-9 8h9M4 16h3"
                 />
                 <circle cx="9" cy="16" r="2" />
