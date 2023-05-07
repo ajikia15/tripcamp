@@ -1,4 +1,5 @@
-export default function Card(props) {
+"use server";
+export default async function Card(props) {
   return (
     <div className="flex flex-col">
       <a href="listings/1">

@@ -1,6 +1,7 @@
-export default function Navbar() {
+"use server";
+export default async function Navbar() {
   return (
-    <div className="">
+    <>
       <h1 className="py-5 text-xl font-semibold text-center border border-b border-gray-200 ">
         TripCamp
       </h1>
@@ -61,6 +62,6 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 }
