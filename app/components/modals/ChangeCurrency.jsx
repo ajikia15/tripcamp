@@ -46,8 +46,8 @@ const ChangeCurrency = () => {
                   <path
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     stroke-width="2"
                     d="m6.5 17l6 6l13-13"
                   />

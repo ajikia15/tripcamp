@@ -1,4 +1,4 @@
-export default function Card() {
+export default function Card(props) {
   return (
     <div className="flex flex-col">
       <a href="listings/1">
@@ -24,13 +24,13 @@ export default function Card() {
         <div>
           <a href="#" className="w-full lg:w-1/4 md:w-1/2">
             <h4 className="pt-2 text-lg font-medium">
-              Underground Hygge
+              {props.name}
             </h4>
             <h5 className="py-1 mb-1 text-sm text-gray-600">
               Georgia, Racha, Ambrolauri, Jvarisa
             </h5>
             <p className="mb-1 text-sm font-semibold text-black ">
-              $150/night
+              ${props.price}/Night
             </p>
           </a>
         </div>
