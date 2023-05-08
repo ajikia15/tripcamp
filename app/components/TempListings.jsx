@@ -21,6 +21,7 @@
 
 
 import Card from "./reusable/Card";
+import Page from "../listings/1/page";
 const slides = [
   "https://images.unsplash.com/photo-1565008576549-57569a49371d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1258&q=80",
   "https://images.unsplash.com/photo-1549466785-f5c1771646cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80",
