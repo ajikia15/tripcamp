@@ -1,41 +1,48 @@
-"use server";
-export default async function Card(props) {
-  return (
-    <div className="flex flex-col">
-      <a href="listings/1">
-        <div className="relative rounded-xl">
-          <img
-            className="aspect-square rounded-xl"
-            src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-            alt=""
-          />
-          <div className="absolute text-white top-4 right-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"
-              />
-            </svg>
-          </div>
+"use client"
+import { useState } from "react"
+import React, { useEffect } from 'react';
+
+export default function Card ({
+  children: slides,
+  // autoSlide = false,
+  // autoSlideInterval = 3000,
+}) {
+  const [curr, setCurr] = useState(0)
+
+  const prev = () =>
+    setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1))
+  const next = () =>
+    setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1))
+
+    // useEffect(() => {
+    //   if (!autoSlide) return
+    //   const slideInterval = setInterval(next, autoSlideInterval)
+    //   return () => clearInterval(slideInterval)
+    // }, [])
+
+    return (
+    <div className="overflow-hidden relative rounded-md">
+      <div className="flex transition-transform ease-out duration-500 object-contain" style={{transform: `translateX(-${curr * 100}%)`}}>
+        {slides}
+      </div>
+       <div className="absolute inset-0 text-white flex items-center justify-between p-4">
+          <button onClick={prev} className="h-0 shadow opacity-80 hover:opacity-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11.8 13H15q.425 0 .713-.288T16 12q0-.425-.288-.713T15 11h-3.2l.9-.9q.275-.275.275-.7t-.275-.7q-.275-.275-.7-.275t-.7.275l-2.6 2.6q-.3.3-.3.7t.3.7l2.6 2.6q.275.275.7.275t.7-.275q.275-.275.275-.7t-.275-.7l-.9-.9Zm.2 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"/></svg>
+        </button>
+        <button onClick={next} className="h-0 shadow opacity-80 hover:opacity-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g transform="translate(24 0) scale(-1 1)"><path fill="currentColor" d="M11.8 13H15q.425 0 .713-.288T16 12q0-.425-.288-.713T15 11h-3.2l.9-.9q.275-.275.275-.7t-.275-.7q-.275-.275-.7-.275t-.7.275l-2.6 2.6q-.3.3-.3.7t.3.7l2.6 2.6q.275.275.7.275t.7-.275q.275-.275.275-.7t-.275-.7l-.9-.9Zm.2 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Z"/></g></svg>
+        </button>
+      </div>
+      <div className="absolute bottom-4 right-0 left-0">
+        <div className="flex items-center justify-center gap-2">
+          {slides.map((_, i) => (
+            <div className={`
+                transition-all w-3 h-3 bg-white rounded-full
+                ${curr===i ? "p-2" : "bg-opacity-50"}
+            `}/>
+          ))}
         </div>
-        <div>
-          <a href="#" className="w-full lg:w-1/4 md:w-1/2">
-            <h4 className="pt-2 text-lg font-medium">
-              {props.name}
-            </h4>
-            <h5 className="py-1 mb-1 text-sm text-gray-600">
-              Georgia, Racha, Ambrolauri, Jvarisa
-            </h5>
-            <p className="mb-1 text-sm font-semibold text-black ">
-              ${props.price}/Night
-            </p>
-          </a>
-        </div>
-      </a>
+      </div>
     </div>
-  );
+    )
 }
