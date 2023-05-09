@@ -31,7 +31,7 @@ export default function Card({ children: slides }) {
       className="flex flex-col gap-2 overflow-x-hidden ">
       <div className="relative overflow-hidden rounded-2xl">
         <div
-          className="flex object-contain transition-transform duration-1000 ease-out aspect-square "
+          className="flex transition-transform duration-1000 ease-out aspect-square "
           style={{
             transform: `translateX(-${curr * 100}%)`,
           }}>
