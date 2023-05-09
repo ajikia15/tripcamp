@@ -13,7 +13,7 @@ export default function TempListings() {
         {[...Array(8)].map((_, index) => (
           <Card key={index}>
             {slides.map((s) => (
-              <img src={s} className="" />
+              <img src={s} className="object-cover" />
             ))}
           </Card>
         ))}
