@@ -29,7 +29,7 @@ export default function Card({ children: slides }) {
     <a
       href="listings/1"
       className="flex flex-col gap-2 overflow-x-hidden ">
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-2xl">
         <div
           className="flex object-contain transition-transform duration-1000 ease-out aspect-square "
           style={{
@@ -92,11 +92,13 @@ export default function Card({ children: slides }) {
           </div>
         </div>
       </div>
-      <div>
-        <h2 className="text-xl font-semibold">Title</h2>
-        <h6 className="">Location</h6>
-        <h1>Price</h1>
-      </div>
+      <ul className="flex flex-col gap-0 ml-1">
+        <li className="text-xl font-semibold">Title</li>
+        <li className="text-sm text-gray-600">Location</li>
+        <li className="font-semibold">
+          146$ <span className="font-[500]">Night</span>
+        </li>
+      </ul>
     </a>
   );
 }
