@@ -1,6 +1,7 @@
 "use client";
 import CategIcons from "./reusable/CategIcons";
 import { useRef, useState } from "react";
+import Filter from "../components/modals/Filter";
 export default function Categories() {
   const containerRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -79,27 +80,7 @@ export default function Categories() {
           </svg>
         </div>
       </div>
-      <div className="flex-row items-center hidden gap-2 p-2 font-semibold border-2 border-gray-400 md:flex rounded-xl">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 8h9m4 0h3m-9 8h9M4 16h3"
-            />
-            <circle cx="9" cy="16" r="2" />
-            <circle cx="15" cy="8" r="2" />
-          </g>
-        </svg>
-        <p className="hidden md:block">Filters</p>
-      </div>
+      <Filter />
     </div>
   );
 }
