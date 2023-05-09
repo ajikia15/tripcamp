@@ -23,13 +23,10 @@ export default function Categories() {
     setScrollPosition(containerRef.current.scrollLeft);
   };
   return (
-    <div className="w-full my-10">
-      <div className="flex flex-row items-center justify-center w-full ">
+    <div className="flex flex-row justify-between w-11/12 my-10">
+      <div className="flex flex-row items-center justify-center w-full px-4">
         <div
-          className={`rounded-full border-solid border-2 border-black transition-all cursor-pointer ${
-            scrollPosition < 1 &&
-            "opacity-0 hover:opacity-100"
-          }`}
+          className="hidden transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer md:block hover:opacity-100"
           onClick={handleScrollLeft}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +42,7 @@ export default function Categories() {
         <div
           ref={containerRef}
           onScroll={handleScroll}
-          className="flex flex-row mx-10 overflow-x-auto 2xl:w-3/5 gap-x-3 lg:gap-x-6"
-          style={{ overflowX: "scroll" }}>
+          className="flex flex-row mx-10 overflow-x-hidden 2xl:w-3/5 gap-x-3 lg:gap-x-6">
           {[...Array(30)].map((_, index) => (
             <CategIcons
               name={"Cottage"}
@@ -67,7 +63,7 @@ export default function Categories() {
           ))}
         </div>
         <div
-          className="transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer hover:opacity-100"
+          className="hidden transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer md:block hover:opacity-100"
           onClick={handleScrollRight}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,29 +78,27 @@ export default function Categories() {
             </g>
           </svg>
         </div>
-        <div>
-          <div className="flex flex-row gap-2 p-2 ml-2 font-semibold border-2 border-gray-400 md:p-3 rounded-xl">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24">
-              <g
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 8h9m4 0h3m-9 8h9M4 16h3"
-                />
-                <circle cx="9" cy="16" r="2" />
-                <circle cx="15" cy="8" r="2" />
-              </g>
-            </svg>
-            <p className="hidden md:block">Filters</p>
-          </div>
-        </div>
+      </div>
+      <div className="flex-row items-center hidden gap-2 p-2 font-semibold border-2 border-gray-400 md:flex rounded-xl">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24">
+          <g
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 8h9m4 0h3m-9 8h9M4 16h3"
+            />
+            <circle cx="9" cy="16" r="2" />
+            <circle cx="15" cy="8" r="2" />
+          </g>
+        </svg>
+        <p className="hidden md:block">Filters</p>
       </div>
     </div>
   );
