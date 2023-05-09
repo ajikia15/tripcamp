@@ -28,8 +28,8 @@ export default function Card({ children: slides }) {
   return (
     <a
       href="listings/1"
-      className="relative flex flex-col gap-2 overflow-x-hidden">
-      <div>
+      className="flex flex-col gap-2 overflow-x-hidden ">
+      <div className="relative">
         <div
           className="flex object-contain transition-transform duration-1000 ease-out aspect-square "
           style={{
