@@ -4,10 +4,10 @@ import Footer from "./Footer";
 
 export default function FooterFixed() {
   return (
-    <div className="sticky bottom-0 z-30 w-full bg-white border-t border-t-gray-300 border-t-solid">
-      <div className="items-center flex flex-col w-11/12 py-2 mx-auto gap-y-2 lg:justify-between text-zinc-800 lg:flex-row">
+    <div className="sticky bottom-0 z-30 hidden w-full bg-white border-t border-t-gray-300 border-t-solid md:block">
+      <div className="flex flex-col items-center w-11/12 py-2 mx-auto gap-y-2 lg:justify-between text-zinc-800 lg:flex-row">
         <div className="flex items-center md:flex-row md:gap-y-2 lg:gap-x-4">
-          <div className="flex-col flex md:flex-row items-center text-xs gap-x-4">
+          <div className="flex flex-col items-center text-xs md:flex-row gap-x-4">
             <div>
               <p> © 2023 TripCamp, Inc.</p>
             </div>
