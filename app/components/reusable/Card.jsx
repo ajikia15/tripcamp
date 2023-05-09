@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Card({ children: slides }) {
   const [curr, setCurr] = useState(0);
@@ -27,16 +26,18 @@ export default function Card({ children: slides }) {
     setCurr((curr) => (curr = i));
   };
   return (
-    <div className="relative overflow-hidden rounded-md">
-      <a href="listings/1">
+    <a
+      href="listings/1"
+      className="relative flex flex-col gap-2 overflow-x-hidden">
+      <div>
         <div
-          className="flex object-contain transition-transform duration-1000 ease-out"
+          className="flex object-contain transition-transform duration-1000 ease-out aspect-square "
           style={{
             transform: `translateX(-${curr * 100}%)`,
           }}>
           {slides}
         </div>
-        <div className="absolute inset-0 flex items-center justify-between p-4 text-white opacity-0 hover:opacity-100 hover:transition hover:duration-500 hover:ease-in-out">
+        <div className="absolute inset-0 flex items-center justify-between p-4 text-white opacity-0 hover:opacity-100 hover:transition hover:duration-500 hover:ease-in-out ">
           <button
             onClick={(event) => prev(event)}
             className="h-0 transition-all shadow opacity-80 hover:opacity-100">
@@ -90,7 +91,12 @@ export default function Card({ children: slides }) {
             ))}
           </div>
         </div>
-      </a>
-    </div>
+      </div>
+      <div>
+        <h2 className="text-xl font-semibold">Title</h2>
+        <h6 className="">Location</h6>
+        <h1>Price</h1>
+      </div>
+    </a>
   );
 }
