@@ -4,49 +4,49 @@ import Image from 'next/image'
 
 export default function Listing() {
     return (
-        <div className="w-11/12 mx-auto xl:w-5/6">
-            <div className="w-4/5">
+        <div className="flex flex-col w-11/12 mx-auto xl:w-4/5">
+            <div>
                 <p className="text-sm"> Address </p>
                 <h1 className="text-3xl font-bold"> Title </h1>
             </div>
-            <div className="flex gap-2">
-                <div className="w-1/2 aspect-square bg-zinc-800 rounded-md rounded-r-none">
+            <div className="flex gap-2 overflow-hidden rounded-2xl">
+                <div className="w-1/2 aspect-square bg-zinc-800">
                     <img
-                        className="object-cover h-full w-full"
+                        className="object-cover w-full h-full"
                         src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
                         alt="Listing Image"
                     />
                 </div>
-                <div className="w-1/2 flex flex-col gap-y-2">
+                <div className="flex flex-col w-1/2 gap-y-2">
                     <div className="flex flex-row gap-2">
                         <div className="w-full h-full aspect-square bg-zinc-800">
                             <img
-                                className="object-cover h-full w-full" 
+                                className="object-cover w-full h-full"
                                 src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                alt="Listing Image" 
+                                alt="Listing Image"
                             />
                         </div>
-                        <div className="w-full h-full aspect-square bg-zinc-800 rounded-md rounded-br-none rounded-l-none">
+                        <div className="w-full h-full aspect-square bg-zinc-800">
                             <img
-                                className="object-cover h-full w-full" 
+                                className="object-cover w-full h-full"
                                 src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                alt="Listing Image" 
+                                alt="Listing Image"
                             />
                         </div>
                     </div>
                     <div className="flex flex-row gap-2">
                         <div className="w-full h-full aspect-square bg-zinc-800">
                             <img
-                                className="object-cover h-full w-full" 
+                                className="object-cover w-full h-full"
                                 src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                alt="Listing Image" 
+                                alt="Listing Image"
                             />
                         </div>
-                        <div className="w-full h-full aspect-square bg-zinc-800 rounded-md rounded-l-none rounded-tr-none">
+                        <div className="w-full h-full aspect-square bg-zinc-800">
                             <img
-                                className="object-cover h-full w-full" 
+                                className="object-cover w-full h-full"
                                 src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                alt="Listing Image" 
+                                alt="Listing Image"
                             />
                         </div>
                     </div>
@@ -278,8 +278,8 @@ export default function Listing() {
                 </div>
                 <div >
                     <div className="p-4 sticky top-2 hidden md:w-[284px] md:h-[340px] md:ml-2 md:flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex lg:flex justify-center items-center">
-                            <div className="md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 flex md:flex-row rounded-lg bg-zinc-800 justify-center items-center">QR</div>
-                            <p className="w-36 text-sm text-zinc-800 md:text-center">Scan code to Download Tripcamp application to make reservation</p>
+                        <div className="flex items-center justify-center rounded-lg md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 md:flex-row bg-zinc-800">QR</div>
+                        <p className="text-sm w-36 text-zinc-800 md:text-center">Scan code to Download Tripcamp application to make reservation</p>
                     </div>
                 </div>
             </div>
@@ -325,7 +325,7 @@ export default function Listing() {
                     <h2 className="mb-4 text-xl">
                         Things you must know
                     </h2>
-                    <div className="grid grid-cols-1 text-sm md:grid-cols-3 gap-x-12 md:gap-x-24 lg:gap-x-32 mb-8">
+                    <div className="grid grid-cols-1 mb-8 text-sm md:grid-cols-3 gap-x-12 md:gap-x-24 lg:gap-x-32">
                         <div className="flex flex-col gap-y-3">
                             <h3 className="font-semibold">Rules</h3>
                             <div className="flex justify-between">
