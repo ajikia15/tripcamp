@@ -1,6 +1,6 @@
 "use server"
 import Image from 'next/image'
-import Card from './components/reusable/Card'
+import Card from './components/Card'
 import Modal from './components/modals/Modal'
 import ChangeCurrency from './components/modals/ChangeCurrency'
 import Listings from './components/Listings'
