@@ -1,5 +1,5 @@
 "use client";
-import Card from "./reusable/Card";
+import Card from "./Card";
 import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
