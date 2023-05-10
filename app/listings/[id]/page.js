@@ -2,7 +2,7 @@
 import Image from 'next/image'
 
 
-export default function Listing() {
+export default function Listing(params) {
     return (
         <div className="flex flex-col w-11/12 mx-auto xl:w-4/5">
             <div>
