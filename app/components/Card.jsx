@@ -107,7 +107,7 @@ export default function Card({ listing }) {
           {listing.location}
         </li>
         <li className="font-semibold">
-          {listing.price}${" "}
+          {listing.price}$
           <span className="font-[500]">Night</span>
         </li>
       </ul>
