@@ -48,7 +48,7 @@ const ChangeCurrency = () => {
             closeModal();
           }}>
           <div
-            className="text-lg bg-white rounded-2xl"
+            className="text-lg bg-white rounded-2xl  overflow-y-scroll h-4/5"
             onClick={(e) => e.stopPropagation()}>
               <div className="p-6 flex flex-col gap-y-5">
                 <div>
@@ -148,26 +148,172 @@ const ChangeCurrency = () => {
                   <div className="grid grid-cols-2 grid-rows-1">
                     <div>
                       <div className="flex gap-x-4 items-center">
-                        <div className="w-4 h-4 rounded-sm border border-zinc-400"></div>
-                        <p>Ani</p>
+                      <input
+                        type="checkbox"
+                        className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                        id="exampleCheckbox"
+                      />
+                      <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                      Ani
+                      </label>
                       </div>
                       <div className="flex gap-x-4 items-center">
-                        <div className="w-4 h-4 rounded-sm border border-zinc-400"></div>
-                        <p>Ani</p>
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
                       </div>
                     </div>
                     <div>
                       <div className="flex gap-x-4 items-center">
-                        <div className="w-4 h-4 rounded-sm border border-zinc-400"></div>
-                        <p>Ani</p>
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
                       </div>
                       <div className="flex gap-x-4 items-center">
-                        <div className="w-4 h-4 rounded-sm border border-zinc-400"></div>
-                        <p>Ani</p>
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
                       </div>
                     </div>
                   </div>
                   <p className="text-sm underline mb-5 font-bold text-zinc-700">Show More</p>
+                </div>
+                <div className="border-b-2 flex flex-col gap-y-5">
+                  <div>
+                    <p className="font-bold text-lg">Types Of Glamping</p>
+                    <p className="text-sm text-zinc-400">Choose glamping type what you want</p>
+                  </div>
+                  <div className="grid grid-cols-2 grid-rows-1">
+                    <div>
+                      <div className="flex gap-x-4 items-center">
+                      <input
+                        type="checkbox"
+                        className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                        id="exampleCheckbox"
+                      />
+                      <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                      Ani
+                      </label>
+                      </div>
+                      <div className="flex gap-x-4 items-center">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex gap-x-4 items-center">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
+                      </div>
+                      <div className="flex gap-x-4 items-center">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-sm underline mb-5 font-bold text-zinc-700">Show More</p>
+                </div>
+                <div className="border-b-2 flex flex-col gap-y-5">
+                  <div>
+                    <p className="font-bold text-lg">Types Of Glamping</p>
+                    <p className="text-sm text-zinc-400">Choose glamping type what you want</p>
+                  </div>
+                  <div className="grid grid-cols-2 grid-rows-1">
+                    <div>
+                      <div className="flex gap-x-4 items-center">
+                      <input
+                        type="checkbox"
+                        className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                        id="exampleCheckbox"
+                      />
+                      <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                      Ani
+                      </label>
+                      </div>
+                      <div className="flex gap-x-4 items-center">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex gap-x-4 items-center">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
+                      </div>
+                      <div className="flex gap-x-4 items-center">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                          id="exampleCheckbox"
+                        />
+                        <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                        Ani
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-sm underline mb-5 font-bold text-zinc-700">Show More</p>
+                </div>
+                <div className="border-b-2 flex flex-col gap-y-5">
+                  <div>
+                    <p className="font-bold text-lg">Types Of Glamping</p>
+                    <p className="text-sm text-zinc-400">Choose glamping type what you want</p>
+                  </div>
+                  <div>
+                    <p> Number of identical glampings </p>
+                    <div className="w-3/4 grid grid-cols-5 gap-4 mt-2 mb-5 ">
+                      <div className="bg-blue-500 rounded-full flex justify-center items-center"> Any </div>
+                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center pb-2 pt-2"> 1 </div>
+                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center"> 2 </div>
+                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center"> 3 </div>
+                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center"> 4 </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="">
                   <div className="grid grid-cols-2 grid-rows-1">
