@@ -3,7 +3,7 @@ const listingsData = [
         id: 1,
         name: "Luxury Villa",
         location: "Bali, Indonesia",
-        price: "$500",
+        price: "500",
         days: 7,
         description: "Escape to this luxurious villa in Bali and enjoy breathtaking ocean views from the infinity pool.",
         slides: [
@@ -19,7 +19,7 @@ const listingsData = [
         id: 2,
         name: "Beachfront Condo",
         location: "Miami, Florida",
-        price: "$200",
+        price: "200",
         days: 4,
         description: "Stay in this beautiful beachfront condo in Miami and wake up to the sound of waves crashing on the shore.",
         slides: [
@@ -32,7 +32,7 @@ const listingsData = [
         id: 3,
         name: "Charming Cottage",
         location: "Cotswolds, England",
-        price: "$150",
+        price: "150",
         days: 3,
         description: "Experience the English countryside in this charming cottage in the Cotswolds. Relax by the fireplace and take in the beautiful views.",
         slides: [
@@ -45,7 +45,7 @@ const listingsData = [
         id: 4,
         name: "Beachfront Condo",
         location: "Miami, Florida",
-        price: "$200",
+        price: "200",
         days: 4,
         description: "Stay in this beautiful beachfront condo in Miami and wake up to the sound of waves crashing on the shore.",
         slides: [
@@ -58,7 +58,7 @@ const listingsData = [
         id: 5,
         name: "Beachfront Condo",
         location: "Miami, Florida",
-        price: "$200",
+        price: "200",
         days: 4,
         description: "Stay in this beautiful beachfront condo in Miami and wake up to the sound of waves crashing on the shore.",
         slides: [
@@ -71,7 +71,7 @@ const listingsData = [
         id: 6,
         name: "Beachfront Condo",
         location: "Miami, Florida",
-        price: "$200",
+        price: "200",
         days: 4,
         description: "Stay in this beautiful beachfront condo in Miami and wake up to the sound of waves crashing on the shore.",
         slides: [
