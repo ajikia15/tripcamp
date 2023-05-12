@@ -33,9 +33,9 @@ export default function Card({ listing }) {
           style={{
             transform: `translateX(-${curr * 100}%)`,
           }}>
-          {/* {listing.slides.map((slide, i) => (
+          {listing.slides.map((slide, i) => (
             <img src={slide} key={i} />
-          ))} */}
+          ))}
         </div>
         <div className="absolute inset-0 flex items-center justify-between p-4 text-white opacity-0 hover:opacity-100 hover:transition hover:duration-500 hover:ease-in-out ">
           <button
@@ -75,7 +75,7 @@ export default function Card({ listing }) {
         </div>
         <div className="absolute left-0 right-0 bottom-4">
           <div className="flex items-center justify-center gap-1">
-            {/* {listing.slides.map((_, i) => (
+            {listing.slides.map((_, i) => (
               <div
                 key={i}
                 onClick={(event) => setSlider(event, i)}
@@ -88,19 +88,19 @@ export default function Card({ listing }) {
                   }
               `}
               />
-            ))} */}
+            ))}
           </div>
         </div>
       </div>
       <ul className="flex flex-col gap-0 ml-1">
         <li className="text-xl font-semibold">
-          {listing.Name}
+          {listing.name}
         </li>
         <li className="text-sm text-gray-600">
-          {listing.Location}
+          {listing.location}
         </li>
         <li className="font-semibold">
-          {listing.Price}$
+          {listing.price}$
           <span className="font-[500]">/Night</span>
         </li>
       </ul>

@@ -1,7 +1,7 @@
 import ChangeCurrency from "../modals/ChangeCurrency";
 import LangChange from "../modals/ChangeCurrency";
 import Footer from "./Footer";
-
+import firebaseLogin from "../buttons/firebaselogin";
 export default function FooterFixed() {
   return (
     <div className="sticky bottom-0 z-30 hidden w-full bg-white border-t border-t-gray-300 border-t-solid md:block">
