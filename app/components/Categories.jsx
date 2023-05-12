@@ -47,6 +47,7 @@ export default function Categories() {
           {[...Array(30)].map((_, index) => (
             <CategIcons
               name={"Cottage"}
+              key={index}
               svg={
                 <svg
                   width="33"
