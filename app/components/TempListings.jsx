@@ -1,5 +1,5 @@
 "use server";
-import Card from "./Card";
+import Card from "./TempCard";
 import Page from "../listings/[id]/page";
 import list from "../list";
 import Link from "next/link";
