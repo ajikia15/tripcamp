@@ -1,5 +1,5 @@
 "use client";
-import Card from "./reusable/Card";
+import Card from "./Card";
 import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -26,7 +26,8 @@ export default function Listings(props) {
         {houses.map((house) => {
           return (
             <div>
-              <Card name={house.Name} price={house.Price} />
+              {/* <Card name={house.Name} price={house.Price} /> */}
+              <Card listing={house} />
             </div>
           );
         })}

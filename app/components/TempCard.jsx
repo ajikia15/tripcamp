@@ -1,22 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
-export default function Card({ children: slides }) {
+import Image from "next/image";
+export default function Card({ listing }) {
   const [curr, setCurr] = useState(0);
 
   const prev = (event) => {
     event.stopPropagation();
     event.preventDefault();
     setCurr((curr) =>
-      curr === 0 ? slides.length - 1 : curr - 1
+      curr === 0 ? listing.slides.length - 1 : curr - 1
     );
   };
   const next = (event) => {
     event.stopPropagation();
     event.preventDefault();
     setCurr((curr) =>
-      curr === slides.length - 1 ? 0 : curr + 1
+      curr === listing.slides.length - 1 ? 0 : curr + 1
     );
   };
   const setSlider = (event, i) => {
@@ -26,16 +26,16 @@ export default function Card({ children: slides }) {
     setCurr((curr) => (curr = i));
   };
   return (
-    <a
-      href="listings/1"
-      className="flex flex-col gap-2 overflow-x-hidden ">
+    <div className="flex flex-col gap-2 overflow-x-hidden ">
       <div className="relative overflow-hidden rounded-2xl">
         <div
           className="flex transition-transform duration-1000 ease-out aspect-square "
           style={{
             transform: `translateX(-${curr * 100}%)`,
           }}>
-          {slides}
+          {listing.slides.map((slide, i) => (
+            <img src={slide} key={i} />
+          ))}
         </div>
         <div className="absolute inset-0 flex items-center justify-between p-4 text-white opacity-0 hover:opacity-100 hover:transition hover:duration-500 hover:ease-in-out ">
           <button
@@ -75,7 +75,7 @@ export default function Card({ children: slides }) {
         </div>
         <div className="absolute left-0 right-0 bottom-4">
           <div className="flex items-center justify-center gap-1">
-            {slides.map((_, i) => (
+            {listing.slides.map((_, i) => (
               <div
                 key={i}
                 onClick={(event) => setSlider(event, i)}
@@ -93,12 +93,17 @@ export default function Card({ children: slides }) {
         </div>
       </div>
       <ul className="flex flex-col gap-0 ml-1">
-        <li className="text-xl font-semibold">Title</li>
-        <li className="text-sm text-gray-600">Location</li>
+        <li className="text-xl font-semibold">
+          {listing.name}
+        </li>
+        <li className="text-sm text-gray-600">
+          {listing.location}
+        </li>
         <li className="font-semibold">
-          146$ <span className="font-[500]">Night</span>
+          {listing.price}$
+          <span className="font-[500]">/Night</span>
         </li>
       </ul>
-    </a>
+    </div>
   );
 }
