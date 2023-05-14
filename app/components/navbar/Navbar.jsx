@@ -1,4 +1,5 @@
 "use server";
+import Search from "./Search";
 export default async function Navbar() {
   return (
     <>
@@ -20,12 +21,7 @@ export default async function Navbar() {
                 />
               </svg>
             </li>
-            <li className="flex flex-col">
-              <h3 className="font-semibold">Where to?</h3>
-              <p className="text-xs text-gray-500">
-                Anywhere • Any Week • Add guests
-              </p>
-            </li>
+            <Search />
           </ul>
           <ul className="justify-between hidden grid-cols-3 mx-3 item-center md:grid">
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
