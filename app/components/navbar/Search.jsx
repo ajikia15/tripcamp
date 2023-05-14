@@ -32,23 +32,30 @@ export default function Search() {
   }, [active, inputRef]);
 
   return (
-    <div className="flex flex-col">
+    <>
       {active ? (
-        <input
-          className="w-full outline-none"
-          type="text"
-          autoFocus
-          ref={inputRef}
-          placeholder="Where to?"
-        />
+        <li className="relative flex flex-col">
+          <input
+            className="w-full outline-none"
+            type="text"
+            autoFocus
+            ref={inputRef}
+            placeholder="Where to?"
+          />
+          <ul className="absolute -left-12 right-0 flex flex-col top-[calc(100%+1rem)] bg-white border-black border rounded-xl">
+            <li>balls</li>
+          </ul>
+        </li>
       ) : (
-        <li className="" onClick={clickedInside}>
+        <li
+          className="flex flex-col"
+          onClick={clickedInside}>
           <h3 className="font-semibold">Where to?</h3>
           <p className="text-xs text-gray-500">
             Anywhere • Any Week • Add guests
           </p>
         </li>
       )}
-    </div>
+    </>
   );
 }
