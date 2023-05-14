@@ -3,9 +3,9 @@ import { db } from "../../../firebase-config";
 import {
   collection,
   query,
-  where,
   getDocs,
   limit,
+  project,
 } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
 
@@ -41,11 +41,12 @@ export default function Search(props) {
   const [houses, setHouses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const housesCollectionRef = collection(db, "Houses");
+  const fields = ["Name", "Address"];
   const housesQuery = query(housesCollectionRef, limit(10));
 
   useEffect(() => {
     const getHouses = async () => {
-      const data = await getDocs(housesQuery);
+      const data = await getDocs(housesQuery, { fields });
       console.log(
         "data:",
         data.docs.map((doc) => doc.data())
@@ -66,12 +67,14 @@ export default function Search(props) {
     setSearchTerm(value);
   };
 
-  const filteredHouses = houses.filter(
-    (house) =>
-      house.Name.toLowerCase().includes(
-        searchTerm.toLowerCase()
-      ) && searchTerm != ""
-  );
+  const filteredHouses =
+    searchTerm !== ""
+      ? houses.filter((house) =>
+          house.Name.toLowerCase().includes(
+            searchTerm.toLowerCase()
+          )
+        )
+      : [];
   //   console.log("filteredHouses:", filteredHouses);
 
   return (
@@ -87,12 +90,34 @@ export default function Search(props) {
             onChange={handleInputChange}
             placeholder="Where to?"
           />
-          <ul className="absolute -left-12 right-0 flex flex-col top-[calc(100%+1rem)] bg-white shadow-xl rounded-xl gap-y-3">
+          <ul className="absolute -left-12 -right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y z-10">
             {filteredHouses.map((house) => {
+              const addressParts = house.Address.split("~"); // split the address string into parts
+              const visibleAddress =
+                addressParts.length > 1
+                  ? addressParts[1]
+                  : house.Address;
+              const name = house.Name;
+              const startIndex = name
+                .toLowerCase()
+                .indexOf(searchTerm.toLowerCase());
+              const endIndex =
+                startIndex + searchTerm.length;
               return (
-                <li key={house.Id}>
-                  {house.Name} <br />
-                  <p className="text-sm">{house.Address}</p>
+                <li
+                  key={house.Id}
+                  className="flex flex-col p-2 text-black cursor-pointer group">
+                  <p className="transition-all group-hover:text-blue-600">
+                    {name.slice(0, startIndex)}
+                    <span className="text-blue-600 ">
+                      {name.slice(startIndex, endIndex)}
+                    </span>
+                    <span>{name.slice(endIndex)}</span>
+                  </p>
+
+                  <small className="text-sm">
+                    {visibleAddress}
+                  </small>
                 </li>
               );
             })}
