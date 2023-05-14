@@ -1,6 +1,7 @@
 "use server"
 import Image from 'next/image'
 import list from '../../list'
+import Gallery from '../../Gallery'
 export default async function Listing(props) {
     // console.log(props.params.id);
     const { id } = props.params;
@@ -58,6 +59,7 @@ export default async function Listing(props) {
                     </div>
                 </div>
             </div>
+            <Gallery />
             <div className="relative flex flex-row">
                 <div className="w-4/5">
                     <div className="flex flex-row items-center mt-12 mb-4">
@@ -274,7 +276,7 @@ export default async function Listing(props) {
                         </div>
                     </div>
                 </div>
-                <div >
+                <div>
                     <div className="p-4 sticky top-2 hidden md:w-[284px] md:h-[340px] md:ml-2 md:flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex lg:flex justify-center items-center">
                         <div className="flex items-center justify-center rounded-lg md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 md:flex-row bg-zinc-800">QR</div>
                         <p className="text-sm w-36 text-zinc-800 md:text-center">Scan code to Download Tripcamp application to make reservation</p>
