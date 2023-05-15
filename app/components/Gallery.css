@@ -1,0 +1,15 @@
+.gallery .pics:hover {
+    filter: opacity(.8)
+}
+.model.open {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+.model {
+    position: fixed;
+    z-index: 999;
+    visibility: hidden;
+    overflow: hidden;
+    transform: scale(0);
+}
