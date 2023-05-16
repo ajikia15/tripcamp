@@ -1,6 +1,7 @@
 "use client";
 import Search from "./Search";
 import PriceFilter from "./PriceFilter";
+import AddGuests from "./AddGuests";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
@@ -8,19 +9,27 @@ export default function Navbar() {
   const [searchState, setSearchState] = useState(false);
   const [priceFilterState, setPriceFilterState] =
     useState(false);
+  const [guestsState, setGuestsState] = useState(false);
 
   const searchRef = useRef(null);
   const priceFilterRef = useRef(null);
+  const guestsRef = useRef(null);
+
   const searchWasClicked = (e) => {
     e.preventDefault();
     setSearchState(true);
   };
 
   const priceFilterWasClicked = (e) => {
-    // Handler for PriceFilter click
     e.preventDefault();
     setPriceFilterState(true);
   };
+
+  const guestsWasClicked = (e) => {
+    e.preventDefault();
+    setGuestsState(true);
+  };
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -29,10 +38,14 @@ export default function Navbar() {
           !searchRef.current.contains(e.target)) ||
         (priceFilterState &&
           priceFilterRef.current &&
-          !priceFilterRef.current.contains(e.target))
+          !priceFilterRef.current.contains(e.target)) ||
+        (guestsState &&
+          guestsRef.current &&
+          !guestsRef.current.contains(e.target))
       ) {
         setSearchState(false);
-        setPriceFilterState(false); // Reset PriceFilter state
+        setPriceFilterState(false);
+        setGuestsState(false);
       }
     };
 
@@ -44,7 +57,7 @@ export default function Navbar() {
         handleClickOutside
       );
     };
-  }, [searchState, priceFilterState]);
+  }, [searchState, priceFilterState, guestsState]);
   return (
     <>
       <Link href="/">
@@ -52,7 +65,7 @@ export default function Navbar() {
           TripCamp
         </h1>
       </Link>
-      {(searchState || priceFilterState) && (
+      {(searchState || priceFilterState || guestsState) && (
         <div className="fixed inset-0 z-30 bg-black opacity-50" />
       )}
       <div className="grid w-full mt-5 mb-8 place-items-center">
@@ -88,27 +101,37 @@ export default function Navbar() {
               ref={priceFilterRef}
               onClick={priceFilterWasClicked}
               className="w-full">
-              <PriceFilter active={priceFilterState} />{" "}
+              <PriceFilter
+                active={priceFilterState}
+                initialMin={0}
+                initialMax={400}
+                min={0}
+                max={400}
+                step={10}
+                priceCap={10}
+              />
             </div>
-            <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
-              <h3 className="font-semibold">Who</h3>
-              <p className="text-xs text-gray-500">
-                2 guests
-              </p>
-              <div className="absolute right-0 p-2 translate-x-1/2 -translate-y-1/2 bg-blue-500 rounded-full aspect-square top-1/2">
-                <svg
-                  className="text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
-                  />
-                </svg>
-              </div>
-            </li>
+
+            <div
+              ref={guestsRef}
+              onClick={guestsWasClicked}
+              className="w-full">
+              <AddGuests active={guestsState} />
+            </div>
+
+            {/* <div className="absolute right-0 p-2 translate-x-1/2 -translate-y-1/2 bg-blue-500 rounded-full aspect-square top-1/2">
+              <svg
+                className="text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
+                />
+              </svg>
+            </div> */}
           </ul>
         </div>
       </div>
