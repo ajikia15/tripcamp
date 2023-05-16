@@ -1,44 +1,21 @@
 "use client";
+import { useState, useEffect, useRef } from "react";
 import "./style.css";
-import React, { useState } from "react";
-
-const ChangeCurrency = () => {
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => {
-    setShowModal(true);
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "19px"; // Need to make mobile compatible
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    document.body.style.overflow = "auto";
-    document.body.style.paddingRight = "";
-  };
+const AddGuests = ({ active }) => {
   return (
-    <>
-      <div
-        className="cursor-pointer"
-        type="button"
-        onClick={openModal}>
-        <button className="p-4 border border-gray-400">
-          Click Me
-        </button>
-      </div>
-      {showModal ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 outline-none changeFadeIn focus:outline-none"
-          onClick={(e) => {
-            e.stopPropagation();
-            closeModal();
-          }}>
-          <div
-            className="p-4 text-lg bg-white rounded-2xl"
-            onClick={(e) => e.stopPropagation()}></div>
+    <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2 cursor-pointer">
+      <h3 className="font-semibold">Who?</h3>
+      <p className="text-xs text-gray-500">
+        {1 == 1 ? "Add Guests" : null}
+      </p>
+      {active && (
+        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] -left-24 -right-24">
+          <div className="flex items-center justify-between my-6 ">
+            aqane guestebis racxa
+          </div>
         </div>
-      ) : null}
-    </>
+      )}
+    </li>
   );
 };
-
-export default ChangeCurrency;
+export default AddGuests;
