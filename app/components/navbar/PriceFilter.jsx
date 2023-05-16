@@ -76,28 +76,29 @@ const PriceFilter = ({
       </p>
       {active && (
         <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] -left-24 -right-24">
-          <div className="flex items-center justify-between my-6 ">
-            <div className="rounded-md">
-              <span className="p-2 font-semibold">Min</span>
+          <div className="flex justify-between items-center my-6">
+            <div className="rounded-md flex flex-col justify-start border-2 border-gray-200 pl-3 pr-8">
+              <span className="text-gray-600 text-sm"> Minimum price </span>
               <input
                 onChange={(e) =>
                   setMinValue(e.target.value)
                 }
                 type="number"
                 value={minValue}
-                className="w-24 border border-gray-400 rounded-md no-arrows"
+                className="w-24 border border-gray-400 rounded-md no-arrows border-none"
               />
+              
             </div>
-
-            <div className="">
-              <span className="p-2 font-semibold">Max</span>
+            <p> - </p>
+            <div className="rounded-md flex flex-col justify-start border-2 border-gray-200 pl-3 pr-8">
+              <span className="text-gray-600 text-sm"> Maximum Price </span>
               <input
                 onChange={(e) =>
                   setMaxValue(e.target.value)
                 }
                 type="number"
                 value={maxValue}
-                className="w-24 border border-gray-400 rounded-md no-arrows"
+                className="w-24 border border-gray-400 rounded-md no-arrows border-none"
               />
             </div>
           </div>
@@ -105,11 +106,12 @@ const PriceFilter = ({
           <div className="mb-4">
             <div className="relative h-1 bg-gray-300 rounded-md slider">
               <div
-                className="absolute h-1 bg-blue-500 rounded progress "
+                className="absolute h-1 bg-black rounded progress"
                 ref={progressRef}></div>
             </div>
 
             <div className="relative range-input ">
+              
               <input
                 onChange={handleMin}
                 type="range"
@@ -117,9 +119,9 @@ const PriceFilter = ({
                 step={step}
                 max={max}
                 value={minValue}
-                className="absolute w-full h-1 bg-transparent appearance-none pointer-events-none range-min -top-1"
+                className="absolute w-full h-1 bg-transparent  appearance-none pointer-events-none range-min -top-1"
               />
-
+            
               <input
                 onChange={handleMax}
                 type="range"
