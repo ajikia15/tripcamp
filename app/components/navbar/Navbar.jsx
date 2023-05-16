@@ -1,9 +1,37 @@
-"use server";
+"use client";
 import Search from "./Search";
 import RangeSlider from "./RangeSlider";
+import PriceFilter from "./PriceFilter";
 import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
 
-export default async function Navbar() {
+export default function Navbar() {
+  const [searchState, setSearchState] = useState(false);
+  const searchRef = useRef(null);
+  const searchWasClicked = (e) => {
+    e.preventDefault();
+    setSearchState(true);
+  };
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        searchState &&
+        searchRef.current &&
+        !searchRef.current.contains(e.target)
+      ) {
+        setSearchState(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener(
+        "click",
+        handleClickOutside
+      );
+    };
+  }, [searchState, searchRef]);
   return (
     <>
       <Link href="/">
@@ -26,8 +54,12 @@ export default async function Navbar() {
                 />
               </svg>
             </li>
-            <Search />
-            <dataPicker />
+            <div
+              ref={searchRef}
+              onClick={searchWasClicked}
+              className="w-full">
+              <Search active={searchState} />
+            </div>
           </ul>
           <ul className="justify-between hidden grid-cols-3 mx-3 item-center md:grid">
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
@@ -36,12 +68,7 @@ export default async function Navbar() {
                 Anytime
               </p>
             </li>
-            <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
-              <h3 className="font-semibold">Price</h3>
-              <p className="text-xs text-gray-500">
-                Any amount
-              </p>
-            </li>
+            <PriceFilter />
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
               <h3 className="font-semibold">Who</h3>
               <p className="text-xs text-gray-500">
