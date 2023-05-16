@@ -1,6 +1,5 @@
 "use client";
 import Card from "./TempCard";
-import Page from "../listings/[id]/page";
 import list from "../list";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,10 +8,13 @@ import { useState, useRef, useEffect } from "react";
 export default function TempListings() {
   const [mapState, setMapState] = useState(false);
   const mapRef = useRef(null);
+
   return (
     <>
       {mapState ? (
-        <div className="w-full h-full">AQANE MAPI</div>
+        <div className="w-full min-h-[60vh]">
+          AQANE MAPI
+        </div>
       ) : (
         <div className="grid w-full grid-cols-1 mb-6 place-items-center">
           <ul className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:w-11/12 2xl:w-4/5 ">
