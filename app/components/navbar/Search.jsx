@@ -9,7 +9,8 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
 
-export default function Search(props) {
+export default function Search({ active }) {
+  /*
   const [active, setActive] = useState(false);
   const inputRef = useRef(null);
 
@@ -38,6 +39,7 @@ export default function Search(props) {
       );
     };
   }, [active, inputRef]);
+  */
   const [houses, setHouses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const housesCollectionRef = collection(db, "Houses");
@@ -63,7 +65,6 @@ export default function Search(props) {
 
   const handleInputChange = (event) => {
     const value = event.target.value;
-    // console.log("searchTerm:", value);
     setSearchTerm(value);
   };
 
@@ -75,7 +76,6 @@ export default function Search(props) {
           )
         )
       : [];
-  //   console.log("filteredHouses:", filteredHouses);
   const formatAddress = (address) => {
     const parts = address.split("~").slice(0, 3);
     let formattedAddress = parts.join(", ");
@@ -85,12 +85,11 @@ export default function Search(props) {
   return (
     <>
       {active ? (
-        <li className="relative flex flex-col">
+        <li className="relative z-40 flex flex-col ">
           <input
             className="w-full outline-none"
             type="text"
             autoFocus
-            ref={inputRef}
             value={searchTerm}
             onChange={handleInputChange}
             placeholder="Where to?"
@@ -142,9 +141,7 @@ export default function Search(props) {
           </ul>
         </li>
       ) : (
-        <li
-          className="flex flex-col w-full"
-          onClick={clickedInside}>
+        <li className="z-40 flex flex-col w-full">
           <h3 className="w-full font-semibold">
             {searchTerm || "Where to?"}
           </h3>
