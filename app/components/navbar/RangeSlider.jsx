@@ -1,13 +1,23 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import "./range.css";
-const RangeSlider = ({ initialMin, initialMax, min, max, step, priceCap }) => {
+import "./style.css";
+const RangeSlider = ({
+  initialMin,
+  initialMax,
+  min,
+  max,
+  step,
+  priceCap,
+}) => {
   const progressRef = useRef(null);
   const [minValue, setMinValue] = useState(initialMin);
   const [maxValue, setMaxValue] = useState(initialMax);
 
   const handleMin = (e) => {
-    if (maxValue - minValue >= priceCap && maxValue <= max) {
+    if (
+      maxValue - minValue >= priceCap &&
+      maxValue <= max
+    ) {
       if (parseInt(e.target.value) > parseInt(maxValue)) {
       } else {
         setMinValue(parseInt(e.target.value));
@@ -20,7 +30,10 @@ const RangeSlider = ({ initialMin, initialMax, min, max, step, priceCap }) => {
   };
 
   const handleMax = (e) => {
-    if (maxValue - minValue >= priceCap && maxValue <= max) {
+    if (
+      maxValue - minValue >= priceCap &&
+      maxValue <= max
+    ) {
       if (parseInt(e.target.value) < parseInt(minValue)) {
       } else {
         setMaxValue(parseInt(e.target.value));
@@ -33,13 +46,18 @@ const RangeSlider = ({ initialMin, initialMax, min, max, step, priceCap }) => {
   };
 
   useEffect(() => {
-    progressRef.current.style.left = (minValue / max) * step + "%";
-    progressRef.current.style.right = step - (maxValue / max) * step + "%";
+    progressRef.current.style.left =
+      (minValue / max) * step + "%";
+    progressRef.current.style.right =
+      step - (maxValue / max) * step + "%";
   }, [minValue, maxValue, max, step]);
 
   return (
     <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl w-96">
-      <h1 className="mb-1 text-3xl font-bold text-gray-800"> Price Range</h1>
+      <h1 className="mb-1 text-3xl font-bold text-gray-800">
+        {" "}
+        Price Range
+      </h1>
       <p className="text-lg font-semibold text-gray-700">
         Use slider or enter min and max price
       </p>
@@ -54,7 +72,10 @@ const RangeSlider = ({ initialMin, initialMax, min, max, step, priceCap }) => {
             className="w-24 border border-gray-400 rounded-md"
           />
         </div>
-        <div className="ml-2 text-lg font-semibold"> - </div>
+        <div className="ml-2 text-lg font-semibold">
+          {" "}
+          -{" "}
+        </div>
         <div className="">
           <span className="p-2 font-semibold"> Max</span>
           <input
@@ -70,8 +91,7 @@ const RangeSlider = ({ initialMin, initialMax, min, max, step, priceCap }) => {
         <div className="relative h-1 bg-gray-300 rounded-md slider">
           <div
             className="absolute h-1 bg-green-300 rounded progress "
-            ref={progressRef}
-          ></div>
+            ref={progressRef}></div>
         </div>
 
         <div className="relative range-input ">
