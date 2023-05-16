@@ -5,7 +5,6 @@ import Modal from "./components/modals/Modal";
 import ChangeCurrency from "./components/footer/ChangeCurrency";
 import Listings from "./components/Listings";
 import TempListings from "./components/TempListings";
-import RangeSlider from "./components/navbar/RangeSlider";
 
 export default async function Home() {
   return (

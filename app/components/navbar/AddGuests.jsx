@@ -11,7 +11,15 @@ const AddGuests = ({ active }) => {
       {active && (
         <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] -left-24 -right-24">
           <div className="flex items-center justify-between my-6 ">
-            aqane guestebis racxa
+            <div>
+              <p className="text-zinc-800 test-md font-bold">Guests</p>
+              <p className="text-zinc-400 text-sm">Age 13+</p>
+            </div>
+            <div className="flex justify-between gap-x-4 items-center">
+              <div className="rounded-full border border-black w-10 h-10 flex justify-center items-center">-</div>
+              <div>4</div>
+              <div className="rounded-full border border-black w-10 h-10 flex justify-center items-center">+</div>
+            </div>
           </div>
         </div>
       )}

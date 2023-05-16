@@ -7,10 +7,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 input[type="range"]::-moz-range-thumb {
   pointer-events: auto;
-  width: 24px;
+  width: 30px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: 40%;
   -moz-appearance: none;
+  background-color: white;
+  border: 1px solid black;
 }
 .no-arrows::-webkit-inner-spin-button,
 .no-arrows::-webkit-outer-spin-button {
