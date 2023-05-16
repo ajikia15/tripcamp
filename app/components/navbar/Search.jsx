@@ -42,7 +42,7 @@ export default function Search(props) {
   const [searchTerm, setSearchTerm] = useState("");
   const housesCollectionRef = collection(db, "Houses");
   const fields = ["Name", "Address"];
-  const housesQuery = query(housesCollectionRef, limit(10));
+  const housesQuery = query(housesCollectionRef);
 
   useEffect(() => {
     const getHouses = async () => {
@@ -70,13 +70,18 @@ export default function Search(props) {
   const filteredHouses =
     searchTerm !== ""
       ? houses.filter((house) =>
-          house.Name.toLowerCase().includes(
+          house.Address.toLowerCase().includes(
             searchTerm.toLowerCase()
           )
         )
       : [];
   //   console.log("filteredHouses:", filteredHouses);
-
+  const formatAddress = (address) => {
+    const parts = address.split("~").slice(0, 3);
+    let formattedAddress = parts.join(", ");
+    // Remove trailing comma
+    return formattedAddress;
+  };
   return (
     <>
       {active ? (
@@ -90,33 +95,46 @@ export default function Search(props) {
             onChange={handleInputChange}
             placeholder="Where to?"
           />
-          <ul className="absolute -left-12 -right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y z-10">
+          <ul className="absolute -left-12 -right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y z-10 max-h-[70vh] overflow-y-scroll">
             {filteredHouses.map((house) => {
-              const addressParts = house.Address.split("~"); // split the address string into parts
-              const visibleAddress =
-                addressParts.length > 1
-                  ? addressParts[1]
-                  : house.Address;
-              const name = house.Name;
-              const startIndex = name
-                .toLowerCase()
-                .indexOf(searchTerm.toLowerCase());
-              const endIndex =
-                startIndex + searchTerm.length;
               return (
                 <li
                   key={house.Id}
                   className="flex flex-col p-2 text-black cursor-pointer group">
-                  <p className="transition-all group-hover:text-blue-600">
-                    {name.slice(0, startIndex)}
-                    <span className="text-blue-600 ">
-                      {name.slice(startIndex, endIndex)}
-                    </span>
-                    <span>{name.slice(endIndex)}</span>
-                  </p>
-
+                  <span className="">{house.Name}</span>
                   <small className="text-sm">
-                    {visibleAddress}
+                    {formatAddress(house.Address)
+                      .split(" ")
+                      .map((part, index) => {
+                        const startIndex = part
+                          .toLowerCase()
+                          .indexOf(
+                            searchTerm.toLowerCase()
+                          );
+                        const endIndex =
+                          startIndex + searchTerm.length;
+
+                        if (startIndex !== -1) {
+                          return (
+                            <span key={index}>
+                              {part.slice(0, startIndex)}
+                              <span className="text-blue-600">
+                                {part.slice(
+                                  startIndex,
+                                  endIndex
+                                )}
+                              </span>
+                              {part.slice(endIndex)}
+                            </span>
+                          );
+                        } else {
+                          return (
+                            <span key={index}>
+                              {part}&nbsp;
+                            </span>
+                          );
+                        }
+                      })}
                   </small>
                 </li>
               );
@@ -125,12 +143,16 @@ export default function Search(props) {
         </li>
       ) : (
         <li
-          className="flex flex-col"
+          className="flex flex-col w-full"
           onClick={clickedInside}>
-          <h3 className="font-semibold">Where to?</h3>
-          <p className="text-xs text-gray-500">
-            Anywhere • Any Week • Add guests
-          </p>
+          <h3 className="w-full font-semibold">
+            {searchTerm || "Where to?"}
+          </h3>
+          {searchTerm ? null : (
+            <p className="text-xs text-gray-500">
+              Anywhere • Any Week • Add guests
+            </p>
+          )}
         </li>
       )}
     </>
