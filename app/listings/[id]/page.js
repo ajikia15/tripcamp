@@ -1,7 +1,7 @@
 "use server"
 import Image from 'next/image'
 import list from '../../list'
-import Gallery from '../../Gallery'
+import Link from 'next/link';
 export default async function Listing(props) {
     // console.log(props.params.id);
     const { id } = props.params;
@@ -16,7 +16,8 @@ export default async function Listing(props) {
                 <p className="text-sm"> {listing.location} </p>
                 <h1 className="text-3xl font-bold"> {listing.name} </h1>
             </div>
-            <div className="flex gap-2 overflow-hidden rounded-2xl">
+            <div className="relative flex gap-2 overflow-hidden rounded-2xl">
+
                 <div className="w-1/2 aspect-square bg-zinc-800">
                     <img
                         className="object-cover w-full h-full"
@@ -59,7 +60,6 @@ export default async function Listing(props) {
                     </div>
                 </div>
             </div>
-            <Gallery />
             <div className="relative flex flex-row">
                 <div className="w-4/5">
                     <div className="flex flex-row items-center mt-12 mb-4">

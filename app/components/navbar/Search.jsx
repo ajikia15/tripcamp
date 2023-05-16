@@ -67,56 +67,88 @@ export default function Search({ active }) {
           <ul className="absolute -left-12 -right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y max-h-[70vh] overflow-y-scroll">
             <div>
               {filteredHouses.map((house) => {
-              return (
-                <li
-                  key={house.Id}
-                  className="flex flex-col p-2 text-black cursor-pointer group">
-                  <div className="flex items-center gap-x-4 border-b pb-2">
-                    <div><svg className="text-zinc-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="currentColor" d="M16 18a5 5 0 1 1 5-5a5.006 5.006 0 0 1-5 5Zm0-8a3 3 0 1 0 3 3a3.003 3.003 0 0 0-3-3Z"/><path fill="currentColor" d="m16 30l-8.436-9.949a35.076 35.076 0 0 1-.348-.451A10.889 10.889 0 0 1 5 13a11 11 0 0 1 22 0a10.884 10.884 0 0 1-2.215 6.597l-.001.003s-.3.394-.345.447ZM8.812 18.395c.002 0 .234.308.287.374L16 26.908l6.91-8.15c.044-.055.278-.365.279-.366A8.901 8.901 0 0 0 25 13a9 9 0 1 0-18 0a8.905 8.905 0 0 0 1.813 5.395Z"/></svg></div>
-                    <div>
-                      <span className="">{house.Name}</span>
-                      <small className="text-sm">
-                        {formatAddress(house.Address)
-                          .split(" ")
-                          .map((part, index) => {
-                            const startIndex = part
-                              .toLowerCase()
-                              .indexOf(
-                                searchTerm.toLowerCase()
-                              );
-                            const endIndex =
-                              startIndex + searchTerm.length;
+                return (
+                  <li
+                    key={house.Id}
+                    className="flex flex-col p-2 overflow-x-hidden text-black cursor-pointer group">
+                    <div className="flex flex-row pb-2 border-b gap-x-4">
+                      <div className="flex items-center text-gray-400">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 512 512">
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="32"
+                            d="M256 48c-79.5 0-144 61.39-144 137c0 87 96 224.87 131.25 272.49a15.77 15.77 0 0 0 25.5 0C304 409.89 400 272.07 400 185c0-75.61-64.5-137-144-137Z"
+                          />
+                          <circle
+                            cx="256"
+                            cy="192"
+                            r="48"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="32"
+                          />
+                        </svg>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="">
+                          {house.Name}
+                        </span>
+                        <small className="text-sm">
+                          {formatAddress(house.Address)
+                            .split(" ")
+                            .map((part, index) => {
+                              const startIndex = part
+                                .toLowerCase()
+                                .indexOf(
+                                  searchTerm.toLowerCase()
+                                );
+                              const endIndex =
+                                startIndex +
+                                searchTerm.length;
 
-                            if (startIndex !== -1) {
-                              return (
-                                <span key={index}>
-                                  {part.slice(0, startIndex)}
-                                  <span className="text-blue-600">
+                              if (startIndex !== -1) {
+                                return (
+                                  <span
+                                    key={index}
+                                    className="truncate ">
                                     {part.slice(
-                                      startIndex,
-                                      endIndex
+                                      0,
+                                      startIndex
                                     )}
+                                    <span className="text-blue-600">
+                                      {part.slice(
+                                        startIndex,
+                                        endIndex
+                                      )}
+                                    </span>
+                                    {part.slice(endIndex)}
+                                    &nbsp;
                                   </span>
-                                  {part.slice(endIndex)}
-                                </span>
-                              );
-                            } else {
-                              return (
-                                <span key={index}>
-                                  {part}&nbsp;
-                                </span>
-                              );
-                            }
-                          })}
-                      </small>
+                                );
+                              } else {
+                                return (
+                                  <span key={index}>
+                                    {part}&nbsp;
+                                  </span>
+                                );
+                              }
+                            })}
+                        </small>
+                      </div>
                     </div>
-                  </div>
-                  
-                </li>
-              );
-            })}
+                  </li>
+                );
+              })}
             </div>
-            
           </ul>
         </li>
       ) : (
