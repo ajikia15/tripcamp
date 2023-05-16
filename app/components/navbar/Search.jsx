@@ -10,36 +10,6 @@ import {
 import { useState, useEffect, useRef } from "react";
 
 export default function Search({ active }) {
-  /*
-  const [active, setActive] = useState(false);
-  const inputRef = useRef(null);
-
-  const clickedInside = (e) => {
-    e.preventDefault();
-    setActive(true);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        active &&
-        inputRef.current &&
-        !inputRef.current.contains(e.target)
-      ) {
-        setActive(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener(
-        "click",
-        handleClickOutside
-      );
-    };
-  }, [active, inputRef]);
-  */
   const [houses, setHouses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const housesCollectionRef = collection(db, "Houses");
@@ -85,7 +55,7 @@ export default function Search({ active }) {
   return (
     <>
       {active ? (
-        <li className="relative z-40 flex flex-col ">
+        <li className="relative flex flex-col ">
           <input
             className="w-full outline-none"
             type="text"
@@ -94,7 +64,7 @@ export default function Search({ active }) {
             onChange={handleInputChange}
             placeholder="Where to?"
           />
-          <ul className="absolute -left-12 -right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y z-10 max-h-[70vh] overflow-y-scroll">
+          <ul className="absolute -left-12 -right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y max-h-[70vh] overflow-y-scroll">
             {filteredHouses.map((house) => {
               return (
                 <li
@@ -141,7 +111,7 @@ export default function Search({ active }) {
           </ul>
         </li>
       ) : (
-        <li className="z-40 flex flex-col w-full">
+        <li className="flex flex-col w-full">
           <h3 className="w-full font-semibold">
             {searchTerm || "Where to?"}
           </h3>

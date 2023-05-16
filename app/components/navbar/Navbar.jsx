@@ -1,25 +1,38 @@
 "use client";
 import Search from "./Search";
-import RangeSlider from "./RangeSlider";
 import PriceFilter from "./PriceFilter";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
   const [searchState, setSearchState] = useState(false);
+  const [priceFilterState, setPriceFilterState] =
+    useState(false);
+
   const searchRef = useRef(null);
+  const priceFilterRef = useRef(null);
   const searchWasClicked = (e) => {
     e.preventDefault();
     setSearchState(true);
   };
+
+  const priceFilterWasClicked = (e) => {
+    // Handler for PriceFilter click
+    e.preventDefault();
+    setPriceFilterState(true);
+  };
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
-        searchState &&
-        searchRef.current &&
-        !searchRef.current.contains(e.target)
+        (searchState &&
+          searchRef.current &&
+          !searchRef.current.contains(e.target)) ||
+        (priceFilterState &&
+          priceFilterRef.current &&
+          !priceFilterRef.current.contains(e.target))
       ) {
         setSearchState(false);
+        setPriceFilterState(false); // Reset PriceFilter state
       }
     };
 
@@ -31,16 +44,19 @@ export default function Navbar() {
         handleClickOutside
       );
     };
-  }, [searchState, searchRef]);
+  }, [searchState, priceFilterState]);
   return (
     <>
       <Link href="/">
-        <h1 className="py-5 text-xl font-semibold text-center border border-b border-gray-200">
+        <h1 className="z-0 py-5 text-xl font-semibold text-center border border-b border-gray-200">
           TripCamp
         </h1>
       </Link>
+      {(searchState || priceFilterState) && (
+        <div className="fixed inset-0 z-30 bg-black opacity-50" />
+      )}
       <div className="grid w-full mt-5 mb-8 place-items-center">
-        <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr]">
+        <div className=" w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr] z-40 bg-white">
           <ul className="flex flex-row items-center gap-3 cursor-pointer ">
             <li>
               <svg
@@ -68,7 +84,12 @@ export default function Navbar() {
                 Anytime
               </p>
             </li>
-            <PriceFilter />
+            <div
+              ref={priceFilterRef}
+              onClick={priceFilterWasClicked}
+              className="w-full">
+              <PriceFilter active={priceFilterState} />{" "}
+            </div>
             <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
               <h3 className="font-semibold">Who</h3>
               <p className="text-xs text-gray-500">
