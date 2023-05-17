@@ -27,7 +27,6 @@ export default function Listings(props) {
           {houses.map((house) => {
             return (
               <div>
-                {/* <Card name={house.Name} price={house.Price} /> */}
                 <Card listing={house} />
               </div>
             );
