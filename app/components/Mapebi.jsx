@@ -28,17 +28,25 @@ function MapComponent() {
 
   return (
     <div>
+      <h1>My Map</h1>
       <GoogleMap
         defaultZoom={10}
-        defaultCenter={{ lat: 41.700523, lng: 44.815793 }}>
+        defaultCenter={{ lat: 41.700523, lng: 44.815793 }}
+      >
         {markers.map((marker) => (
           <OverlayView
             key={marker.name}
             position={{ lat: marker.lat, lng: marker.lng }}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}>
-            <div className="p-2 px-3 text-sm text-gray-600 bg-white border border-gray-400 rounded-full cursor-pointer">
-              $ 43
-            </div>
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          >
+            <div
+              style={{
+                background: "blue",
+                width: "20px",
+                height: "20px",
+                borderRadius: "50%",
+              }}
+            />
           </OverlayView>
         ))}
       </GoogleMap>
@@ -46,9 +54,7 @@ function MapComponent() {
   );
 }
 
-const WrappedMapComponent = withScriptjs(
-  withGoogleMap(MapComponent)
-);
+const WrappedMapComponent = withScriptjs(withGoogleMap(MapComponent));
 
 export default function Mapebi() {
   return (
