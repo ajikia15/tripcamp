@@ -2,6 +2,7 @@
 import Search from "./Search";
 import PriceFilter from "./PriceFilter";
 import AddGuests from "./AddGuests";
+import Calendar from "./Calendar";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
@@ -10,10 +11,12 @@ export default function Navbar() {
   const [priceFilterState, setPriceFilterState] =
     useState(false);
   const [guestsState, setGuestsState] = useState(false);
+  const [calendarState, setCalendarState] = useState(false);
 
   const searchRef = useRef(null);
   const priceFilterRef = useRef(null);
   const guestsRef = useRef(null);
+  const calendarRef = useRef(null);
 
   const searchWasClicked = (e) => {
     e.preventDefault();
@@ -29,6 +32,10 @@ export default function Navbar() {
     e.preventDefault();
     setGuestsState(true);
   };
+  const calendarWasClicked = (e) => {
+    e.preventDefault();
+    setCalendarState(true);
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -41,11 +48,15 @@ export default function Navbar() {
           !priceFilterRef.current.contains(e.target)) ||
         (guestsState &&
           guestsRef.current &&
-          !guestsRef.current.contains(e.target))
+          !guestsRef.current.contains(e.target)) ||
+        (calendarState &&
+          calendarRef.current &&
+          !calendarRef.current.contains(e.target))
       ) {
         setSearchState(false);
         setPriceFilterState(false);
         setGuestsState(false);
+        setCalendarState(false);
       }
     };
 
@@ -57,7 +68,12 @@ export default function Navbar() {
         handleClickOutside
       );
     };
-  }, [searchState, priceFilterState, guestsState]);
+  }, [
+    searchState,
+    priceFilterState,
+    guestsState,
+    calendarState,
+  ]);
   return (
     <>
       <Link href="/">
@@ -65,7 +81,10 @@ export default function Navbar() {
           TripCamp
         </h1>
       </Link>
-      {(searchState || priceFilterState || guestsState) && (
+      {(searchState ||
+        priceFilterState ||
+        guestsState ||
+        calendarState) && (
         <div className="fixed inset-0 z-30 bg-black opacity-50" />
       )}
       <div className="grid w-full mt-5 mb-8 place-items-center">
@@ -91,12 +110,12 @@ export default function Navbar() {
             </div>
           </ul>
           <ul className="justify-between hidden grid-cols-3 mx-3 item-center md:grid">
-            <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2">
-              <h3 className="font-semibold">When</h3>
-              <p className="text-xs text-gray-500">
-                Anytime
-              </p>
-            </li>
+            <div
+              className="w-full"
+              onClick={calendarWasClicked}
+              ref={calendarRef}>
+              <Calendar active={calendarState} />
+            </div>
             <div
               ref={priceFilterRef}
               onClick={priceFilterWasClicked}
