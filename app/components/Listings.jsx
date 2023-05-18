@@ -2,6 +2,7 @@
 import Card from "./Card";
 import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
+import Link from "next/link";
 
 import { useState, useEffect } from "react";
 export default function Listings(props) {
@@ -10,11 +11,11 @@ export default function Listings(props) {
   useEffect(() => {
     const getHouses = async () => {
       const data = await getDocs(housesCollectionRef);
-      console.log(data);
+      // console.log(data);
       setHouses(
         data.docs.map((doc) => ({
           ...doc.data(),
-          id: doc.Id,
+          id: doc.id,
         }))
       );
     };
@@ -26,9 +27,13 @@ export default function Listings(props) {
         <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6 ">
           {houses.map((house) => {
             return (
-              <div>
+              <Link
+                key={house.id}
+                href={`/listings/${encodeURIComponent(
+                  house.id
+                )}`}>
                 <Card listing={house} />
-              </div>
+              </Link>
             );
           })}
         </div>
