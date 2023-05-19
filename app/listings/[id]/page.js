@@ -104,27 +104,27 @@ export default function house(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="">
-                                <h2 className="mb-4 text-xl"> Amenities </h2>
-                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3">
+                            <div className="gap-3">
+                                <h2 className="mb-4 text-xl mt-4"> Amenities </h2>
+                                <ul className="grid grid-cols-1 border-b-2 pb-2 md:grid-cols-2 gap-y-3">
                                     {options.filter((option) => option >= 50 && option < 80).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
                                 </ul>
-                                <h2 className="mb-4 text-xl"> Activities </h2>
-                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3">
+                                <h2 className="mb-4 text-xl4 mt-4"> Activities </h2>
+                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3 pb-2">
                                     {options.filter((option) => option >= 80 && option < 100).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
                                 </ul>
-                                <h2 className="mb-4 text-xl"> Scenic Views </h2>
-                                <ul className="grid grid-cols-1 border-b-2 gap-y-3">
+                                <h2 className="mb-4 text-xl mt-4"> Scenic Views </h2>
+                                <ul className="grid grid-cols-1 border-b-2 gap-y-3 pb-2">
                                     {options.filter((option) => option >= 41 && option < 50).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
                                 </ul>
-                                <h2 className="mb-4 text-xl"> Features </h2>
-                                <ul className="grid grid-cols-1 border-b-2 gap-y-3">
+                                <h2 className="mb-4 text-xl mt-4"> Features </h2>
+                                <ul className="grid grid-cols-1 border-b-2 gap-y-3 pb-2">
                                     {options.filter((option) => option >= 31 && option < 40).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
@@ -137,7 +137,7 @@ export default function house(props) {
                             </div>
                         </div>
                         <div>
-                            <div className="p-4 sticky top-2 hidden md:w-[284px] md:h-[340px] md:ml-2 md:flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex lg:flex justify-center items-center">
+                            <div className="mt-4 p-4 sticky top-2 hidden md:w-[284px] md:h-[340px] md:ml-2 md:flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex lg:flex justify-center items-center">
                                 <div className="flex items-center justify-center rounded-lg md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 md:flex-row bg-zinc-800">QR</div>
                                 <p className="text-sm w-36 text-zinc-800 md:text-center">Scan code to Download Tripcamp application to make reservation</p>
                             </div>
