@@ -16,11 +16,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body className={inter.className}>
-          <div id="map"></div>
         <Navbar />
         <Categories />
         {children}
-        <FooterFixed />
       </body>
     </html>
   )

@@ -4,9 +4,14 @@ import { db } from "../../../firebase-config";
 import { doc, getDoc } from "firebase/firestore"
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
+import Image from "next/image";
+import list from "../../list"
+import StaticFooter from "@/app/components/footer/StaticFooter";
+import Link from "next/link";
 export default function house(props) {
     const [house, setHouse] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [options, setOptions] = useState([]);
     useEffect(() => {
         // Function to fetch the document
         const fetchHouse = async () => {
@@ -17,6 +22,8 @@ export default function house(props) {
                 if (docSnapshot.exists) {
                     // Document found
                     setHouse(docSnapshot.data());
+                    const houseOptions = docSnapshot.data().Options.split(',').map(Number);
+                    setOptions(houseOptions);
                 } else {
                     // Document does not exist
                     console.log("Document does not exist.");
@@ -30,68 +37,65 @@ export default function house(props) {
 
         fetchHouse();
     }, []);
-
     return (
-        <div>
+        <>
             {/* Render the house data */}
-            {loading && <p>loading...</p>}
+            {loading &&
+                <div role="status" class=" animate-pulse w-11/12 xl:w-4/5 mx-auto">
+                    <div className="flex flex-col justify-start w-full">
+                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-40 mb-2"></div>
+                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                        <div class="flex items-center justify-center w-full aspect-video bg-gray-300 rounded  dark:bg-gray-700 mb-2">
+                            <svg class="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" /></svg>
+                        </div>
+                        <div class="w-full">
+                            <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                            <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                        </div>
+
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            }
             {!loading && house && (
                 <div className="flex flex-col w-11/12 mx-auto xl:w-4/5">
                     <div className='pl-1 mb-2'>
-                        <p className="text-sm"> {house.Address} </p>
+                        <p className="text-sm"> {house.Address.split("~").join(" ")} </p>
                         <h1 className="text-3xl font-bold"> {house.Name} </h1>
                     </div>
-                    <div className="flex gap-2 overflow-hidden rounded-2xl">
-                        <div className="w-1/2 aspect-square bg-zinc-800">
-                            <img
-                                className="object-cover w-full h-full"
-                                src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                alt="house Image"
-                            />
+                    <div className="relative flex gap-2 overflow-hidden rounded-2xl">
+                        <Link href={`/listings/${props.params.id}/gallery/`}>
+                            <div className="absolute z-10 p-2 px-4 font-semibold bg-white rounded-lg cursor-pointer bottom-3 right-3">
+                                All Photos
+                            </div>
+                        </Link>
+                        <div className="relative w-1/2 overflow-hidden aspect-square bg-zinc-800">
+                            <Image src={house.Photo[0]} fill={true} />
                         </div>
-                        <div className="flex flex-col w-1/2 gap-y-2">
-                            <div className="flex flex-row gap-2">
-                                <div className="w-full h-full aspect-square bg-zinc-800">
-                                    <img
-                                        className="object-cover w-full h-full"
-                                        src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                        alt="house Image"
-                                    />
-                                </div>
-                                <div className="w-full h-full aspect-square bg-zinc-800">
-                                    <img
-                                        className="object-cover w-full h-full"
-                                        src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                        alt="house Image"
-                                    />
-                                </div>
+                        <div className="grid w-1/2 grid-cols-2 gap-y-2 gap-x-2">
+                            <div className="relative w-full h-full aspect-square bg-zinc-800">
+                                <Image src={house.Photo[1] ? house.Photo[1] : house.Photo[0]} fill={true} />
                             </div>
-                            <div className="flex flex-row gap-2">
-                                <div className="w-full h-full aspect-square bg-zinc-800">
-                                    <img
-                                        className="object-cover w-full h-full"
-                                        src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                        alt="house Image"
-                                    />
-                                </div>
-                                <div className="w-full h-full aspect-square bg-zinc-800">
-                                    <img
-                                        className="object-cover w-full h-full"
-                                        src="https://images.unsplash.com/photo-1575403071235-5dcd06cbf169?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=687&amp;q=80"
-                                        alt="house Image"
-                                    />
-                                </div>
+                            <div className="relative w-full h-full aspect-square bg-zinc-800">
+                                <Image src={house.Photo[2] ? house.Photo[2] : house.Photo[0]} fill={true} />
                             </div>
+                            <div className="relative w-full h-full aspect-square bg-zinc-800">
+                                <Image src={house.Photo[3] ? house.Photo[3] : house.Photo[0]} fill={true} />
+                            </div>
+                            <div className="relative w-full h-full aspect-square bg-zinc-800">
+                                <Image src={house.Photo[4] ? house.Photo[4] : house.Photo[0]} fill={true} />
+                            </div>
+
                         </div>
                     </div>
-                    {/* <Gallery /> */}
                     <div className="relative flex flex-row">
                         <div className="w-4/5">
                             <div className="flex flex-row items-center mt-12 mb-4">
                                 <div className="flex flex-col pb-4 border-b-2 gap-y-4">
-                                    <p>
-                                        {house.Description}
-                                    </p>
                                     <div>
                                         <p className="font-bold"> Location details </p>
                                         <p>
@@ -101,198 +105,30 @@ export default function house(props) {
                                 </div>
                             </div>
                             <div className="">
-                                <h2 className="mb-4 text-xl"> List Title </h2>
-                                <div className="grid grid-cols-1 grid-rows-2 pb-2 mb-4 border-b-2 md:grid-cols-2 md:grid-rows-1">
-                                    <div className="">
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-zinc-800">
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h2 className="mb-4 text-xl"> List Title </h2>
-                                <div className="grid pb-2 mb-4 border-b-2 sm:grid-cols-1 sm:grid-rows-1 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-2 lg:grid-rows-1">
-                                    <div className="text-zinc-800">
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h2 className="mb-4 text-xl"> List Title </h2>
-                                <div className="grid pb-2 mb-4 border-b-2 sm:grid-cols-1 sm:grid-rows-2 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-2 lg:grid-rows-1">
-                                    <div className="text-zinc-800">
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-zinc-800">
-                                        <div className="flex mb-2 gap-x-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    fill="currentColor"
-                                                    d="M9.5 17a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM8 16a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1Zm3 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1ZM11 6c2.464 0 3.863 1.573 4.066 3.474h.062c1.586 0 2.872 1.237 2.872 2.763C18 13.763 16.714 15 15.128 15H6.872C5.286 15 4 13.763 4 12.237c0-1.526 1.286-2.763 2.872-2.763h.062C7.138 7.56 8.535 6 11 6ZM3.803 8.7a.5.5 0 0 1-.228.6l-.082.036l-.801.276a.5.5 0 0 1-.408-.909l.082-.036l.802-.276a.5.5 0 0 1 .635.31ZM8.92 4.5c.332.162.625.373.873.62c-1.762.364-3.03 1.533-3.543 3.156l-.065.224l-.046.187l-.166.03a3.76 3.76 0 0 0-1.25.504A3.28 3.28 0 0 1 8.919 4.5Zm-6.003.17L3 4.702l.762.371a.5.5 0 0 1-.354.931l-.085-.032l-.761-.371a.5.5 0 0 1 .354-.931ZM9.99 2.295a.5.5 0 0 1 .262.585l-.032.084l-.371.762a.5.5 0 0 1-.931-.354l.032-.085l.371-.762a.5.5 0 0 1 .67-.23ZM6.2 2.263l.037.082l.276.802a.5.5 0 0 1-.909.407l-.037-.082l-.275-.801a.5.5 0 0 1 .908-.408Z"
-                                                />
-                                            </svg>
-                                            <p>name</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h2 className="hidden mb-4 text-xl sm:hidden md:block lg:block">
-
-                                    List Title
-                                </h2>
+                                <h2 className="mb-4 text-xl"> Amenities </h2>
+                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3">
+                                    {options.filter((option) => option >= 50 && option < 80).map((option) => (
+                                        <li key={option}>{list[option]}</li>
+                                    ))}
+                                </ul>
+                                <h2 className="mb-4 text-xl"> Activities </h2>
+                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3">
+                                    {options.filter((option) => option >= 80 && option < 100).map((option) => (
+                                        <li key={option}>{list[option]}</li>
+                                    ))}
+                                </ul>
+                                <h2 className="mb-4 text-xl"> Scenic Views </h2>
+                                <ul className="grid grid-cols-1 border-b-2 gap-y-3">
+                                    {options.filter((option) => option >= 41 && option < 50).map((option) => (
+                                        <li key={option}>{list[option]}</li>
+                                    ))}
+                                </ul>
+                                <h2 className="mb-4 text-xl"> Features </h2>
+                                <ul className="grid grid-cols-1 border-b-2 gap-y-3">
+                                    {options.filter((option) => option >= 31 && option < 40).map((option) => (
+                                        <li key={option}>{list[option]}</li>
+                                    ))}
+                                </ul>
                             </div>
                             <div className="pb-4 mb-4 border-b-2">
                                 <div className="flex items-center justify-center w-full text-white rounded-lg bg-zinc-800 h-96">
@@ -310,7 +146,7 @@ export default function house(props) {
                     <div className="w-full ">
                         <div>
                             <h2 className="mb-4 text-xl"> Location </h2>
-                            <div className="w-full h-full mb-2 overflow-hidden text-white rounded-lg bg-zinc-800">
+                            <div className="z-0 w-full h-full mb-2 overflow-hidden text-white rounded-lg bg-zinc-800">
                                 <MapContainer style={{ height: "24rem" }} scrollWheelZoom={false} center={[house.Position.Latit, house.Position.Longi]} zoom={13}>
                                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                                     <Marker position={[house.Position.Latit, house.Position.Longi]}>
@@ -321,106 +157,13 @@ export default function house(props) {
                         </div>
                         <div className="pb-4 mb-4 border-b-2">
                             <p className="text-lg">  ${house.Price}/Night </p>
-                            <p className="text-sm text-gray-600">
-                                Surrounded by beautiful mountains the glamping
-                                cottage offers comfortable rest for 3 persons. The
-                                property has huge green garden and relax zone.
-                                Guests can spend time in wild nature and enjoy the
-                                real village life.
-                            </p>
                         </div>
-                        <div>
-                            <h2 className="mb-4 text-xl"> Host </h2>
-                            <div className="flex flex-row items-center pb-4 mb-4 border-b-2 gap-x-5">
-                                <div className="flex items-center justify-center w-16 h-16 text-xs text-white bg-gray-800 rounded-full">
 
-                                    Img
-                                </div>
-                                <div>
-                                    <p className="text-xl text-zinc-800">
-
-                                        Name, Surname
-                                    </p>
-                                    <p className="text-xs text-gray-400">
-
-                                        Info about name surname
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mx-auto">
-                            <h2 className="mb-4 text-xl">
-                                Things you must know
-                            </h2>
-                            <div className="grid grid-cols-1 mb-8 text-sm md:grid-cols-3 gap-x-12 md:gap-x-24 lg:gap-x-32">
-                                <div className="flex flex-col gap-y-3">
-                                    <h3 className="font-semibold">Rules</h3>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-y-3">
-                                    <h3 className="font-semibold">Rules</h3>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-y-3">
-                                    <h3 className="font-semibold">Rules</h3>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-gray-600">
-                                            Free Cancelation Until
-                                        </div>
-                                        <div className="">Nov 10</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            )}
-        </div>
+            )
+            }
+            <StaticFooter />
+        </ >
     );
 }

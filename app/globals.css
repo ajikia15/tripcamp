@@ -9,3 +9,6 @@
   margin: 0;
   padding: 0;
 }
+.leaflet-container {
+  z-index: 0;
+}
