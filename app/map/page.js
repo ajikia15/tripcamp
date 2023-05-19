@@ -11,6 +11,7 @@ import L from "leaflet";
 import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
+import "../globals.css"
 
 const MainMap = () => {
     const [houses, setHouses] = useState([]);
@@ -67,7 +68,17 @@ const MainMap = () => {
                             className: "custom-icon",
                             html: `<div class="bg-white rounded-full font-semibold border-gray-500 border text-gray-600 w-12 h-8 grid place-items-center hover:bg-blue-400 hover:text-white transition-all">$${house.Price}</div>`,
                         })}>
-                        <Popup>{house.Name} CARD HERE</Popup>
+                        <Popup>
+                            <div className="flex flex-col gap-y-2">
+                                <img className="rounded-md aspect-square object-cover" src="https://images.unsplash.com/photo-1594495894542-a46cc73e081a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80" alt="Camping" />
+                                <p className="text-lg font-bold">Jvarisa Glamping</p>
+                                <p className="text-md text-zinc-500">Georgia, Rccha, Ambrolauri, Jvarisa</p>
+                                <div className="flex items-center gap-x-2">
+                                <p className="font-bold">147₾</p>
+                                <p className="text-md">Night</p>
+                                </div>
+                            </div>
+                        </Popup>
                     </Marker>
                 ))}
             </MapContainer>
