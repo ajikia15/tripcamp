@@ -104,27 +104,27 @@ export default function house(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="gap-3">
-                                <h2 className="mb-4 text-xl mt-4"> Amenities </h2>
-                                <ul className="grid grid-cols-1 border-b-2 pb-2 md:grid-cols-2 gap-y-3">
+                            <div className="flex flex-col gap-y-4">
+                                <h2 className="mb-4 text-xl"> Amenities </h2>
+                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3 pb-4">
                                     {options.filter((option) => option >= 50 && option < 80).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
                                 </ul>
-                                <h2 className="mb-4 text-xl4 mt-4"> Activities </h2>
-                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3 pb-2">
+                                <h2 className="text-xl4"> Activities </h2>
+                                <ul className="grid grid-cols-1 border-b-2 md:grid-cols-2 gap-y-3 pb-4">
                                     {options.filter((option) => option >= 80 && option < 100).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
                                 </ul>
-                                <h2 className="mb-4 text-xl mt-4"> Scenic Views </h2>
-                                <ul className="grid grid-cols-1 border-b-2 gap-y-3 pb-2">
+                                <h2 className="text-xl"> Scenic Views </h2>
+                                <ul className="grid grid-cols-1 border-b-2 gap-y-3 pb-4">
                                     {options.filter((option) => option >= 41 && option < 50).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
                                 </ul>
-                                <h2 className="mb-4 text-xl mt-4"> Features </h2>
-                                <ul className="grid grid-cols-1 border-b-2 gap-y-3 pb-2">
+                                <h2 className="text-xl"> Features </h2>
+                                <ul className="grid grid-cols-1 border-b-2 gap-y-3 pb-4">
                                     {options.filter((option) => option >= 31 && option < 40).map((option) => (
                                         <li key={option}>{list[option]}</li>
                                     ))}
