@@ -77,18 +77,17 @@ export default function house(props) {
                             <Image src={house.Photo[0]} fill={true} />
                         </div>
                         <div className="grid w-1/2 grid-cols-2 gap-y-2 gap-x-2">
-                            <div className="relative w-full h-full aspect-square bg-zinc-800">
-                                <Image src={house.Photo[1] ? house.Photo[1] : house.Photo[0]} fill={true} />
-                            </div>
-                            <div className="relative w-full h-full aspect-square bg-zinc-800">
-                                <Image src={house.Photo[2] ? house.Photo[2] : house.Photo[0]} fill={true} />
-                            </div>
-                            <div className="relative w-full h-full aspect-square bg-zinc-800">
-                                <Image src={house.Photo[3] ? house.Photo[3] : house.Photo[0]} fill={true} />
-                            </div>
-                            <div className="relative w-full h-full aspect-square bg-zinc-800">
-                                <Image src={house.Photo[4] ? house.Photo[4] : house.Photo[0]} fill={true} />
-                            </div>
+
+                            {house.Photo.map((photo, index) => {
+                                if (index <= 4 && index >= 1) {
+                                    return (
+                                        <div key={index} className="relative w-full h-full aspect-square bg-zinc-800">
+                                            <Image src={photo ? photo : house.Photo[0]} fill={true} />
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })}
 
                         </div>
                     </div>
