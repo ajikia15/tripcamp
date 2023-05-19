@@ -12,3 +12,8 @@
 .leaflet-container {
   z-index: 0;
 }
+
+/* style cards on the map */
+.leaflet-popup-content p {
+  margin: 0;
+}
