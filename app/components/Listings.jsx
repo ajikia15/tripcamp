@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import SkeletonLoad from "./SkeletonLoad";
 
 export default function Listings(props) {
   const mapRef = useRef(null);
@@ -86,6 +87,18 @@ export default function Listings(props) {
     <>
       <div className="grid w-full place-items-center">
         <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
+          {loading && (
+            <>
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+            </>
+          )}
           {houses.map((house) => (
             <Link
               key={house.id}
@@ -93,9 +106,9 @@ export default function Listings(props) {
               <Card listing={house} />
             </Link>
           ))}
+
+          <div ref={mapRef}></div>
         </div>
-        {loading && <p>Loading...</p>}
-        <div ref={mapRef}></div>
       </div>
       <div
         className="fixed z-20 -translate-x-1/2 cursor-pointer bottom-12 left-1/2"
