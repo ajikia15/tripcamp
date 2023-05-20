@@ -50,7 +50,7 @@ export default function Listings(props) {
         housesCollectionRef,
         orderBy("CreatedAt"),
         startAfter(lastHouse.CreatedAt),
-        limit(10)
+        limit(6)
       );
       const data = await getDocs(firestoreQuery);
       setHouses([
@@ -67,7 +67,7 @@ export default function Listings(props) {
     const getHouses = async () => {
       const firestoreQuery = query(
         housesCollectionRef,
-        limit(10)
+        limit(6)
       );
       const data = await getDocs(firestoreQuery);
       setHouses(
@@ -87,18 +87,6 @@ export default function Listings(props) {
     <>
       <div className="grid w-full place-items-center">
         <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
-          {loading && (
-            <>
-              <SkeletonLoad />
-              <SkeletonLoad />
-              <SkeletonLoad />
-              <SkeletonLoad />
-              <SkeletonLoad />
-              <SkeletonLoad />
-              <SkeletonLoad />
-              <SkeletonLoad />
-            </>
-          )}
           {houses.map((house) => (
             <Link
               key={house.id}
@@ -106,7 +94,14 @@ export default function Listings(props) {
               <Card listing={house} />
             </Link>
           ))}
-
+          {loading && (
+            <>
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+            </>
+          )}
           <div ref={mapRef}></div>
         </div>
       </div>
