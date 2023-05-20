@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore"
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
+import "./Gallery.css"
 export default function Gallery(props) {
     const [house, setHouse] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -39,14 +40,17 @@ export default function Gallery(props) {
             {loading && <p>Loading...</p>}
             {!loading && house && (
                 <>
-                    {house.Photo.map((item, index) => (
-                        <div className="relative pics filter opacity-80" key={index} onClick={() => getImg(house.Photos[index])}>
-                            <img src={house.Photo[index]} style={{ width: '100%' }} alt={`Photo ${index}`} />
-                        </div>
-                    ))}
+                    <div className="grid-wrapper">
+                        {house.Photo.map((item, index) => (
+                            <div className="" key={index}>
+                                <img className="img" src={house.Photo[index]} alt={`Photo ${index}`} />
+                            </div>
+                        ))}
+                    </div>
                 </>
             )}
         </>
     );
-
+    // mx-6 grid grid-cols-4 gap-6
+    // relative pics filter object-cover opacity-80
 }
