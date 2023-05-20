@@ -76,29 +76,32 @@ const PriceFilter = ({
       </p>
       {active && (
         <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] -left-24 -right-24">
-          <div className="flex justify-between items-center my-6">
-            <div className="rounded-md flex flex-col justify-start border-2 border-gray-200 pl-3 pr-8">
-              <span className="text-gray-600 text-sm"> Minimum price </span>
+          <div className="flex items-center justify-between my-6">
+            <div className="flex flex-col justify-start pl-3 pr-8 border-2 border-gray-200 rounded-md">
+              <span className="text-sm text-gray-600">
+                Minimum price
+              </span>
               <input
                 onChange={(e) =>
                   setMinValue(e.target.value)
                 }
                 type="number"
                 value={minValue}
-                className="w-24 border border-gray-400 rounded-md no-arrows border-none"
+                className="w-24 border border-gray-400 border-none rounded-md no-arrows"
               />
-              
             </div>
             <p> - </p>
-            <div className="rounded-md flex flex-col justify-start border-2 border-gray-200 pl-3 pr-8">
-              <span className="text-gray-600 text-sm"> Maximum Price </span>
+            <div className="flex flex-col justify-start pl-3 pr-8 border-2 border-gray-200 rounded-md">
+              <span className="text-sm text-gray-600">
+                Maximum Price
+              </span>
               <input
                 onChange={(e) =>
                   setMaxValue(e.target.value)
                 }
                 type="number"
                 value={maxValue}
-                className="w-24 border border-gray-400 rounded-md no-arrows border-none"
+                className="w-24 border border-gray-400 border-none rounded-md no-arrows"
               />
             </div>
           </div>
@@ -111,7 +114,6 @@ const PriceFilter = ({
             </div>
 
             <div className="relative range-input ">
-              
               <input
                 onChange={handleMin}
                 type="range"
@@ -119,9 +121,9 @@ const PriceFilter = ({
                 step={step}
                 max={max}
                 value={minValue}
-                className="absolute w-full h-1 bg-transparent  appearance-none pointer-events-none range-min -top-1"
+                className="absolute w-full h-1 bg-transparent appearance-none pointer-events-none range-min -top-1"
               />
-            
+
               <input
                 onChange={handleMax}
                 type="range"

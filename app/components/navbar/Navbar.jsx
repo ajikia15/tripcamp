@@ -1,79 +1,62 @@
 "use client";
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import Search from "./Search";
 import PriceFilter from "./PriceFilter";
 import AddGuests from "./AddGuests";
-import Link from "next/link";
 import Calendar from "./Calendar";
-import { useState, useEffect, useRef } from "react";
 
 export default function Navbar() {
-  const [searchState, setSearchState] = useState(false);
-  const [priceFilterState, setPriceFilterState] =
-    useState(false);
-  const [guestsState, setGuestsState] = useState(false);
-  const [calendarState, setCalendarState] = useState(false);
+  const [activeStates, setActiveStates] = useState({
+    search: false,
+    priceFilter: false,
+    guests: false,
+    calendar: false,
+  });
 
-  const searchRef = useRef(null);
-  const priceFilterRef = useRef(null);
-  const guestsRef = useRef(null);
-  const calendarRef = useRef(null);
-
-  const calendarWasClicked = (e) => {
-    e.preventDefault();
-    setCalendarState(true);
-  };
-  const searchWasClicked = (e) => {
-    e.preventDefault();
-    setSearchState(true);
+  const refMap = {
+    search: useRef(null),
+    priceFilter: useRef(null),
+    guests: useRef(null),
+    calendar: useRef(null),
   };
 
-  const priceFilterWasClicked = (e) => {
-    e.preventDefault();
-    setPriceFilterState(true);
-  };
-
-  const guestsWasClicked = (e) => {
-    e.preventDefault();
-    setGuestsState(true);
+  const handleClickOutside = (e) => {
+    for (const refKey in refMap) {
+      if (
+        activeStates[refKey] &&
+        refMap[refKey].current &&
+        !refMap[refKey].current.contains(e.target)
+      ) {
+        setActiveStates((prevState) => ({
+          ...prevState,
+          [refKey]: false,
+        }));
+      }
+    }
   };
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        (searchState &&
-          searchRef.current &&
-          !searchRef.current.contains(e.target)) ||
-        (priceFilterState &&
-          priceFilterRef.current &&
-          !priceFilterRef.current.contains(e.target)) ||
-        (guestsState &&
-          guestsRef.current &&
-          !guestsRef.current.contains(e.target)) ||
-        (calendarState &&
-          calendarRef.current &&
-          !calendarRef.current.contains(e.target))
-      ) {
-        setSearchState(false);
-        setPriceFilterState(false);
-        setGuestsState(false);
-        setCalendarState(false);
-      }
-    };
-
     document.addEventListener("click", handleClickOutside);
-
     return () => {
       document.removeEventListener(
         "click",
         handleClickOutside
       );
     };
-  }, [
-    searchState,
-    priceFilterState,
-    guestsState,
-    calendarState,
-  ]);
+  }, [activeStates]);
+
+  const handleChildClick = (childKey) => {
+    setActiveStates((prevState) => ({
+      ...prevState,
+      search: false,
+      priceFilter: false,
+      guests: false,
+      calendar: false,
+      [childKey]: true,
+    }));
+  };
+
   return (
     <>
       <Link href="/">
@@ -81,14 +64,14 @@ export default function Navbar() {
           TripCamp
         </h1>
       </Link>
-      {(searchState ||
-        priceFilterState ||
-        guestsState ||
-        calendarState) && (
+      {(activeStates.search ||
+        activeStates.priceFilter ||
+        activeStates.guests ||
+        activeStates.calendar) && (
         <div className="fixed inset-0 z-30 bg-black opacity-50" />
       )}
       <div className="grid w-full mt-5 mb-8 place-items-center">
-        <div className=" w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr] z-40 bg-white">
+        <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr] z-40 bg-white">
           <ul className="flex flex-row items-center gap-3 cursor-pointer ">
             <li>
               <svg
@@ -103,25 +86,27 @@ export default function Navbar() {
               </svg>
             </li>
             <div
-              ref={searchRef}
-              onClick={searchWasClicked}
+              ref={refMap.search}
+              onClick={() => handleChildClick("search")}
               className="w-full">
-              <Search active={searchState} />
+              <Search active={activeStates.search} />
             </div>
           </ul>
           <ul className="justify-between hidden grid-cols-3 mx-3 item-center md:grid">
             <div
-              ref={calendarRef}
-              onClick={calendarWasClicked}
+              ref={refMap.calendar}
+              onClick={() => handleChildClick("calendar")}
               className="w-full cursor-pointer">
-              <Calendar active={calendarState} />
+              <Calendar active={activeStates.calendar} />
             </div>
             <div
-              ref={priceFilterRef}
-              onClick={priceFilterWasClicked}
+              ref={refMap.priceFilter}
+              onClick={() =>
+                handleChildClick("priceFilter")
+              }
               className="w-full">
               <PriceFilter
-                active={priceFilterState}
+                active={activeStates.priceFilter}
                 initialMin={0}
                 initialMax={400}
                 min={0}
@@ -130,27 +115,12 @@ export default function Navbar() {
                 priceCap={10}
               />
             </div>
-
             <div
-              ref={guestsRef}
-              onClick={guestsWasClicked}
+              ref={refMap.guests}
+              onClick={() => handleChildClick("guests")}
               className="w-full">
-              <AddGuests active={guestsState} />
+              <AddGuests active={activeStates.guests} />
             </div>
-
-            {/* <div className="absolute right-0 p-2 translate-x-1/2 -translate-y-1/2 bg-blue-500 rounded-full aspect-square top-1/2">
-              <svg
-                className="text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
-                />
-              </svg>
-            </div> */}
           </ul>
         </div>
       </div>
