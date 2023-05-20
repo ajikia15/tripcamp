@@ -23,7 +23,7 @@ const ChangeCurrency = ({ active }) => {
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  stroke-width="2"
+                  strokeWidth="2"
                   d="m6.5 17l6 6l13-13"
                 />
               </svg>
