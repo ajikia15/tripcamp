@@ -12,6 +12,7 @@ import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import "../globals.css"
+import Image from "next/image";
 
 const MainMap = () => {
     const [houses, setHouses] = useState([]);
@@ -70,12 +71,15 @@ const MainMap = () => {
                         })}>
                         <Popup>
                             <div className="flex flex-col gap-y-2">
-                                <img className="rounded-md aspect-square object-cover" src="https://images.unsplash.com/photo-1594495894542-a46cc73e081a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80" alt="Camping" />
-                                <p className="text-lg font-bold">Jvarisa Glamping</p>
-                                <p className="text-md text-zinc-500">Georgia, Rccha, Ambrolauri, Jvarisa</p>
+                                {/* <img className="object-cover rounded-md aspect-square" src="https://images.unsplash.com/photo-1594495894542-a46cc73e081a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80" alt="Camping" /> */}
+                                <div className="relative w-full rounded-md aspect-square">
+                                    <Image src={house.Photo[0]} fill={true} />
+                                </div>
+                                <p className="text-lg font-bold">{house.Name}</p>
+                                <p className="text-md text-zinc-500">{house.Address.split("~").join(" ")}</p>
                                 <div className="flex items-center gap-x-2">
-                                <p className="font-bold">147₾</p>
-                                <p className="text-md">Night</p>
+                                    <p className="font-bold">{house.Price}₾</p>
+                                    <p className="text-md">Night</p>
                                 </div>
                             </div>
                         </Popup>
