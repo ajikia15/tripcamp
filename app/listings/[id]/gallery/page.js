@@ -40,10 +40,10 @@ export default function Gallery(props) {
             {loading && <p>Loading...</p>}
             {!loading && house && (
                 <>
-                    <div className="grid-wrapper">
+                    <div className="gallery px-4">
                         {house.Photo.map((item, index) => (
-                            <div className="" key={index}>
-                                <img className="img" src={house.Photo[index]} alt={`Photo ${index}`} />
+                            <div className="pics transition-all duration-350 ease mb-3 hover:opacity-80" key={index}>
+                                <img className="img rounded-md" src={house.Photo[index]} style={{width: '100%'}} alt={`Photo ${index}`} />
                             </div>
                         ))}
                     </div>
@@ -51,6 +51,4 @@ export default function Gallery(props) {
             )}
         </>
     );
-    // mx-6 grid grid-cols-4 gap-6
-    // relative pics filter object-cover opacity-80
 }
