@@ -2,24 +2,10 @@
 import "./style.css";
 import React, { useState } from "react";
 
-const ChangeCurrency = () => {
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => {
-    setShowModal(true);
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "19px"; // Need to make mobile compatible
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    document.body.style.overflow = "auto";
-    document.body.style.paddingRight = "";
-  };
+const Filter = ({ active }) => {
   return (
     <>
-      <div
-        className="flex-row items-center hidden gap-2 p-2 font-semibold border-2 border-gray-400 cursor-pointer md:flex rounded-xl"
-        onClick={openModal}>
+      <div className="flex-row items-center hidden gap-2 p-2 font-semibold border-2 border-gray-400 cursor-pointer md:flex rounded-xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -40,44 +26,33 @@ const ChangeCurrency = () => {
         </svg>
         <p className="hidden md:block">Filters</p>
       </div>
-      {showModal ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 outline-none changeFadeIn focus:outline-none"
-          onClick={(e) => {
-            e.stopPropagation();
-            closeModal();
-          }}>
-          <div
-            className="text-lg bg-white rounded-2xl  overflow-y-scroll h-4/5 p-x-4 relative"
-            onClick={(e) => e.stopPropagation()}>
-            <div className="p-6 flex flex-col gap-y-5">
-
-           {/* header */}
-           <div className="sticky top-0 bg-white">
-              <div class="top-0 left-0 right-0 absolute">
-              <div class="flex justify-end items-center bg-white p-5 border-b-2">
-                <div class="w-1/2 flex justify-between">
-                  <p class="font-bold text-md"> Filters</p>
-                  <div class="bg-zinc-100 hover:bg-zinc-200 transition-all rounded-sm p-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 256 256"><path fill="currentColor" d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z" /></svg>
+      {active && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 outline-none changeFadeIn focus:outline-none">
+          <div className="relative overflow-y-scroll text-lg bg-white rounded-2xl h-4/5 p-x-4">
+            <div className="flex flex-col p-6 gap-y-5">
+              {/* header */}
+              <div className="sticky top-0 bg-white">
+                <div class="top-0 left-0 right-0 absolute">
+                  <div class="flex justify-center items-center bg-white p-5 border-b-2">
+                    <p class="font-bold text-md">Filters</p>
                   </div>
                 </div>
               </div>
-            </div>
-           </div>
-           
-              
 
               {/* mainpart */}
               <div className="flex-1 overflow-y-auto mt-14">
-                <div className="border-b-2 flex flex-col gap-y-5">
+                <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
-                    <p className="font-bold text-lg">Types Of Glamping</p>
-                    <p className="text-sm text-zinc-400">Choose glamping type what you want</p>
+                    <p className="text-lg font-bold">
+                      Types Of Glamping
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Choose glamping type what you want
+                    </p>
                   </div>
                   <div className="flex flex-col gap-y-2">
                     <div className="grid grid-cols-4 grid-rows-1 gap-x-2">
-                      <div className="border p-6 rounded-md flex flex-col gap-y-2 items-center">
+                      <div className="flex flex-col items-center p-6 border rounded-md gap-y-2">
                         <div>
                           <svg
                             width="33"
@@ -91,10 +66,14 @@ const ChangeCurrency = () => {
                             />
                           </svg>
                         </div>
-                        <div className="text-sm font-bold">Cottage</div>
-                        <div className="text-zinc-400 text-sm">200 product</div>
+                        <div className="text-sm font-bold">
+                          Cottage
+                        </div>
+                        <div className="text-sm text-zinc-400">
+                          200 product
+                        </div>
                       </div>
-                      <div className="border p-6 rounded-md flex flex-col gap-y-2 items-center">
+                      <div className="flex flex-col items-center p-6 border rounded-md gap-y-2">
                         <div>
                           <svg
                             width="33"
@@ -108,10 +87,14 @@ const ChangeCurrency = () => {
                             />
                           </svg>
                         </div>
-                        <div className="text-sm font-bold">Cottage</div>
-                        <div className="text-zinc-400 text-sm">200 product</div>
+                        <div className="text-sm font-bold">
+                          Cottage
+                        </div>
+                        <div className="text-sm text-zinc-400">
+                          200 product
+                        </div>
                       </div>
-                      <div className="border p-6 rounded-md flex flex-col gap-y-2 items-center">
+                      <div className="flex flex-col items-center p-6 border rounded-md gap-y-2">
                         <div>
                           <svg
                             width="33"
@@ -125,10 +108,14 @@ const ChangeCurrency = () => {
                             />
                           </svg>
                         </div>
-                        <div className="text-sm font-bold">Cottage</div>
-                        <div className="text-zinc-400 text-sm">200 product</div>
+                        <div className="text-sm font-bold">
+                          Cottage
+                        </div>
+                        <div className="text-sm text-zinc-400">
+                          200 product
+                        </div>
                       </div>
-                      <div className="border py-6 px-8 rounded-md flex flex-col gap-y-2 items-center">
+                      <div className="flex flex-col items-center px-8 py-6 border rounded-md gap-y-2">
                         <div>
                           <svg
                             width="33"
@@ -142,114 +129,142 @@ const ChangeCurrency = () => {
                             />
                           </svg>
                         </div>
-                        <div className="text-sm font-bold">Cottage</div>
-                        <div className="text-zinc-400 text-sm">200 product</div>
+                        <div className="text-sm font-bold">
+                          Cottage
+                        </div>
+                        <div className="text-sm text-zinc-400">
+                          200 product
+                        </div>
                       </div>
                     </div>
-                    <p className="text-sm underline mb-5 font-bold text-zinc-700">Show More</p>
+                    <p className="mb-5 text-sm font-bold underline text-zinc-700">
+                      Show More
+                    </p>
                   </div>
                 </div>
-                <div className="border-b-2 flex flex-col gap-y-5">
+                <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
-                    <p className="font-bold text-lg">Types Of Glamping</p>
-                    <p className="text-sm text-zinc-400">Choose glamping type what you want</p>
+                    <p className="text-lg font-bold">
+                      Types Of Glamping
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Choose glamping type what you want
+                    </p>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="flex gap-x-4 items-center">
+                    <div className="flex items-center gap-x-4">
                       <input
                         type="checkbox"
-                        className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                        className="w-4 h-4 text-gray-600 border-2 border-gray-400 form-checkbox"
                         id="exampleCheckbox"
                       />
-                      <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                      <label
+                        htmlFor="exampleCheckbox"
+                        className="ml-1 text-gray-900">
                         Nini
                       </label>
                     </div>
-                    <div className="flex gap-x-4 items-center">
+                    <div className="flex items-center gap-x-4">
                       <input
                         type="checkbox"
-                        className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                        className="w-4 h-4 text-gray-600 border-2 border-gray-400 form-checkbox"
                         id="exampleCheckbox"
                       />
-                      <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                      <label
+                        htmlFor="exampleCheckbox"
+                        className="ml-1 text-gray-900">
                         Nini
                       </label>
                     </div>
                   </div>
-                  <p className="text-sm underline mb-5 font-bold text-zinc-700">Show More</p>
+                  <p className="mb-5 text-sm font-bold underline text-zinc-700">
+                    Show More
+                  </p>
                 </div>
-                <div className="border-b-2 flex flex-col gap-y-5">
+                <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
-                    <p className="font-bold text-lg">Types Of Glamping</p>
-                    <p className="text-sm text-zinc-400">Choose glamping type what you want</p>
+                    <p className="text-lg font-bold">
+                      Types Of Glamping
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Choose glamping type what you want
+                    </p>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="flex gap-x-4 items-center">
+                    <div className="flex items-center gap-x-4">
                       <input
                         type="checkbox"
-                        className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                        className="w-4 h-4 text-gray-600 border-2 border-gray-400 form-checkbox"
                         id="exampleCheckbox"
                       />
-                      <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                      <label
+                        htmlFor="exampleCheckbox"
+                        className="ml-1 text-gray-900">
                         Ani
                       </label>
                     </div>
-                    <div className="flex gap-x-4 items-center">
+                    <div className="flex items-center gap-x-4">
                       <input
                         type="checkbox"
-                        className="form-checkbox h-4 w-4 text-gray-600 border-2 border-gray-400"
+                        className="w-4 h-4 text-gray-600 border-2 border-gray-400 form-checkbox"
                         id="exampleCheckbox"
                       />
-                      <label htmlFor="exampleCheckbox" className="ml-1 text-gray-900">
+                      <label
+                        htmlFor="exampleCheckbox"
+                        className="ml-1 text-gray-900">
                         Ani
                       </label>
                     </div>
                   </div>
-                  <p className="text-sm underline mb-5 font-bold text-zinc-700">Show More</p>
+                  <p className="mb-5 text-sm font-bold underline text-zinc-700">
+                    Show More
+                  </p>
                 </div>
-                <div className="border-b-2 flex flex-col gap-y-5">
+                <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
-                    <p className="font-bold text-lg">Types Of Glamping</p>
-                    <p className="text-sm text-zinc-400">Choose glamping type what you want</p>
+                    <p className="text-lg font-bold">
+                      Types Of Glamping
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Choose glamping type what you want
+                    </p>
                   </div>
                   <div>
                     <p> Number of identical glampings </p>
-                    <div className="w-3/4 grid grid-cols-5 gap-4 mt-2 mb-5 ">
-                      <div className="bg-blue-500 rounded-full flex justify-center items-center"> Any </div>
-                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center pb-2 pt-2"> 1 </div>
-                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center"> 2 </div>
-                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center"> 3 </div>
-                      <div className="bg-none border border-blue-200 rounded-full flex justify-center items-center"> 4 </div>
+                    <div className="grid w-3/4 grid-cols-5 gap-4 mt-2 mb-5 ">
+                      <div className="flex items-center justify-center bg-blue-500 rounded-full">
+                        Any
+                      </div>
+                      <div className="flex items-center justify-center pt-2 pb-2 border border-blue-200 rounded-full bg-none">
+                        1
+                      </div>
+                      <div className="flex items-center justify-center border border-blue-200 rounded-full bg-none">
+                        2
+                      </div>
+                      <div className="flex items-center justify-center border border-blue-200 rounded-full bg-none">
+                        3
+                      </div>
+                      <div className="flex items-center justify-center border border-blue-200 rounded-full bg-none">
+                        4
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* footer */}
-              <div className="absolute bottom-11 left-0">
-                <div className="fixed bg-red-200 flex justify-center">
-                  <div className="grid grid-cols-2 grid-rows-1">
-                    <div className="flex justify-start items-center">
-                      <p className="text-sm font-bold text-zinc-700">Clear All</p>
-                    </div>
-                    <div className="flex justify-end items-center">
-                      <div className="bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l transition duration-500 text-white p-3 rounded-md">
-                        <p className="text-sm whitespace-nowrap"> Show 200 homes </p>
-                      </div>
-                      <div />
-                    </div>
-                  </div>
+              <div className="sticky bottom-0 left-0 flex flex-row items-center justify-between w-full py-2 bg-white border-t-2 border-gray-200">
+                <p className="text-sm font-bold text-zinc-700 ">
+                  Clear All
+                </p>
+                <div className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l">
+                  <p className="text-sm">Show 200 homes</p>
+                </div>
               </div>
-              </div>
-              
-
             </div>
           </div>
         </div>
-      ) : null}
-
-
+      )}
     </>
   );
-}
-export default ChangeCurrency;
+};
+export default Filter;

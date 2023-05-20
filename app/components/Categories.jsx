@@ -1,10 +1,14 @@
 "use client";
 import CategIcons from "./reusable/CategIcons";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Filter from "../components/modals/Filter";
+
 export default function Categories() {
   const containerRef = useRef(null);
+  const filterRef = useRef(null);
+  const [filterState, setFilterState] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+
   const handleScroll = () => {
     setScrollPosition(containerRef.current.scrollLeft);
   };
@@ -23,6 +27,31 @@ export default function Categories() {
     });
     setScrollPosition(containerRef.current.scrollLeft);
   };
+
+  const filterWasClicked = (e) => {
+    e.preventDefault();
+    setFilterState(true);
+  };
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        filterState &&
+        filterRef.current &&
+        !filterRef.current.contains(e.target)
+      ) {
+        setFilterState(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener(
+        "click",
+        handleClickOutside
+      );
+    };
+  }, [filterState]);
   return (
     <div className="flex flex-row justify-between w-11/12 my-10">
       <div className="flex flex-row items-center justify-center w-full px-4">
@@ -81,7 +110,9 @@ export default function Categories() {
           </svg>
         </div>
       </div>
-      <Filter />
+      <div ref={filterRef} onClick={filterWasClicked}>
+        <Filter active={filterState} />
+      </div>
     </div>
   );
 }
