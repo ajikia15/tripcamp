@@ -70,6 +70,11 @@ export default function Listings(props) {
         limit(6)
       );
       const data = await getDocs(firestoreQuery);
+      if (data.empty) {
+        // No more houses available, stop fetching
+        setLoading(false);
+        return;
+      }
       setHouses(
         data.docs.map((doc) => ({
           ...doc.data(),
