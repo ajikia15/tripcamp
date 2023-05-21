@@ -39,16 +39,46 @@ export default function Gallery(props) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handlePrevImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-          (prevIndex + house.Photo.length - 1) % house.Photo.length
-        );
+        setCurrentImageIndex((prevIndex) => {
+          if (house && house.Photo) {
+            return (prevIndex + house.Photo.length - 1) % house.Photo.length;
+          }
+          return prevIndex;
+        });
       };
       
+      
       const handleNextImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-          (prevIndex + 1) % house.Photo.length
-        );
+        setCurrentImageIndex((prevIndex) => {
+          if (house && house.Photo) {
+            return (prevIndex + 1) % house.Photo.length;
+          }
+          return prevIndex;
+        });
       };
+      
+      useEffect(() => {
+        const handleKeyDown = (event) => {
+          if (event.key === "ArrowLeft") {
+            handlePrevImage();
+          } else if (event.key === "ArrowRight") {
+            handleNextImage();
+          }
+        };
+      
+        window.addEventListener("keydown", handleKeyDown);
+      
+        return () => {
+          window.removeEventListener("keydown", handleKeyDown);
+        };
+      }, [handlePrevImage, handleNextImage]);
+      useEffect(() => {
+        if (house && house.Photo) {
+          setCurrentImageIndex(0);
+          setSelectedImageIndex(null);
+        }
+      }, [house]);
+      
     
     return (
         <>
@@ -86,7 +116,8 @@ export default function Gallery(props) {
                                 onClick={() => {
                                     setIsModalOpen(true);
                                     setCurrentImageIndex(index);
-                                }}
+                                    setSelectedImageIndex(index);
+                                }}                                
                             >
                                 <img className="img cursor-pointer rounded-md" src={house.Photo[index]} style={{width: '100%'}} alt={`Photo ${index}`} />
                             </div>
