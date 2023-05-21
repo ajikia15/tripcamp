@@ -1,7 +1,7 @@
 "use client";
-import CategIcons from "./reusable/CategIcons";
+import CategIcons from "./categIcons";
 import { useRef, useState, useEffect } from "react";
-import Filter from "../components/modals/Filter";
+import Filter from "./Filter";
 
 export default function Categories() {
   const containerRef = useRef(null);
@@ -32,16 +32,23 @@ export default function Categories() {
 
   const handleTouchStart = (e) => {
     const touch = e.touches[0];
-    containerRef.current.dataset.touchStartX = touch.clientX;
-    containerRef.current.dataset.touchStartScrollLeft = containerRef.current.scrollLeft;
+    containerRef.current.dataset.touchStartX =
+      touch.clientX;
+    containerRef.current.dataset.touchStartScrollLeft =
+      containerRef.current.scrollLeft;
   };
 
   const handleTouchMove = (e) => {
     const touch = e.touches[0];
-    const touchStartX = parseInt(containerRef.current.dataset.touchStartX);
-    const touchStartScrollLeft = parseInt(containerRef.current.dataset.touchStartScrollLeft);
+    const touchStartX = parseInt(
+      containerRef.current.dataset.touchStartX
+    );
+    const touchStartScrollLeft = parseInt(
+      containerRef.current.dataset.touchStartScrollLeft
+    );
     const touchOffsetX = touch.clientX - touchStartX;
-    containerRef.current.scrollLeft = touchStartScrollLeft - touchOffsetX;
+    containerRef.current.scrollLeft =
+      touchStartScrollLeft - touchOffsetX;
   };
 
   const handleTouchEnd = () => {
@@ -68,11 +75,14 @@ export default function Categories() {
     document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener(
+        "click",
+        handleClickOutside
+      );
     };
   }, [filterState]);
   return (
-    <div className="flex flex-row justify-between md:w-3/4 my-10 m-auto items-center">
+    <div className="flex flex-row items-center justify-between m-auto my-10 md:w-3/4">
       <div className="flex flex-row items-center w-5/6 mr-6">
         <div
           className="hidden transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer md:block hover:opacity-100"
@@ -132,7 +142,10 @@ export default function Categories() {
           </svg>
         </div>
       </div>
-      <div className="w-1/6 flex justify-center items-center" ref={filterRef} onClick={filterWasClicked}>
+      <div
+        className="flex items-center justify-center w-1/6"
+        ref={filterRef}
+        onClick={filterWasClicked}>
         <Filter active={filterState} />
       </div>
     </div>
