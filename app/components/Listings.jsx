@@ -128,7 +128,7 @@ export default function Listings(props) {
               <div role="status">
                 <svg
                   aria-hidden="true"
-                  class="text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                  class="text-gray-900 animate-spin dark:text-gray-600 fill-white"
                   viewBox="0 0 100 101"
                   width="24"
                   height="24"
@@ -143,7 +143,7 @@ export default function Listings(props) {
                     fill="currentFill"
                   />
                 </svg>
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">Loading... </span>
               </div>
             )}
           </div>
@@ -152,31 +152,3 @@ export default function Listings(props) {
     </>
   );
 }
-
-//   // return (
-//   //   <>
-//   //     {mapState ? (
-//   //       <div className="w-full ">
-//   //         <MainMap houses={houses} />
-//   //       </div>
-//   //     ) : (
-//   //       <>
-//   //         <div className="grid w-full place-items-center">
-//   //           <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
-//   //             {houses.map((house) => (
-//   //               <Link
-//   //                 key={house.id}
-//   //                 href={`/listings/${encodeURIComponent(
-//   //                   house.id
-//   //                 )}`}>
-//   //                 <Card listing={house} />
-//   //               </Link>
-//   //             ))}
-//   //           </div>
-//   //         </div>
-//   //       </>
-//   //     )}
-
-//     </>
-//   );
-// }
