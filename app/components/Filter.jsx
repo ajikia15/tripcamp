@@ -32,9 +32,11 @@ const Filter = ({ active }) => {
             <div className="flex flex-col p-6 gap-y-5">
               {/* header */}
               <div className="sticky top-0 bg-white">
-                <div class="top-0 left-0 right-0 absolute">
-                  <div class="flex justify-center items-center bg-white p-5 border-b-2">
-                    <p class="font-bold text-md">Filters</p>
+                <div className="absolute top-0 left-0 right-0">
+                  <div className="flex items-center justify-center p-5 bg-white border-b-2">
+                    <p className="font-bold text-md">
+                      Filters
+                    </p>
                   </div>
                 </div>
               </div>

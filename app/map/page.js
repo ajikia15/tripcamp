@@ -67,7 +67,7 @@ const MainMap = () => {
                         ]}
                         icon={L.divIcon({
                             className: "custom-icon",
-                            html: `<div class="bg-white rounded-full font-semibold border-gray-500 border text-gray-600 w-12 h-8 grid place-items-center hover:bg-blue-400 hover:text-white transition-all">$${house.Price}</div>`,
+                            html: `<div className="bg-white rounded-full font-semibold border-gray-500 border text-gray-600 w-12 h-8 grid place-items-center hover:bg-blue-400 hover:text-white transition-all">$${house.Price}</div>`,
                         })}>
                         <Popup>
                             <div className="flex flex-col gap-y-2">
