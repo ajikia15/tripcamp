@@ -128,7 +128,7 @@ export default function Listings(props) {
               <div role="status">
                 <svg
                   aria-hidden="true"
-                  class="text-gray-900 animate-spin dark:text-gray-600 fill-white"
+                  className="text-gray-900 animate-spin dark:text-gray-600 fill-white"
                   viewBox="0 0 100 101"
                   width="24"
                   height="24"
@@ -143,7 +143,7 @@ export default function Listings(props) {
                     fill="currentFill"
                   />
                 </svg>
-                <span class="sr-only">Loading... </span>
+                <span className="sr-only">Loading... </span>
               </div>
             )}
           </div>
