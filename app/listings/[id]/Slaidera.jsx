@@ -1,6 +1,6 @@
 import Carousel from "./NewCarousel";
 import Image from "next/image";
-export default function Slidera() {
+export default function Slidera({ listing }) {
   const images = [
     "https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
     "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=876&q=80",
@@ -18,7 +18,21 @@ export default function Slidera() {
           );
         })}
       </Carousel>
+      <ul className="flex flex-col gap-0 ml-1">
+        <li className="text-xl font-semibold">
+          {listing.Name}
+        </li>
+        <li className="text-sm text-gray-600">
+          {listing.Location}
+        </li>
+        <li className="font-semibold">
+          {listing.Price}$
+          <span className="font-[500]">/Night</span>
+        </li>
+      </ul>
     </div>
   );
 };
+
+
 

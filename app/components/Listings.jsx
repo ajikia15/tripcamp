@@ -1,5 +1,6 @@
 "use client";
 import Card from "./Card";
+import Slidera from "../listings/[id]/Slaidera";
 import { db } from "../../firebase-config";
 import {
   collection,
@@ -90,8 +91,10 @@ export default function Listings(props) {
           {houses.map((house) => (
             <Link
               key={house.id}
-              href={`/listings/${house.id}`}>
-              <Card listing={house} />
+              href={`#`}>
+              {/* href={`/listings/${house.id}`}> */}
+                {/* <div><Slidera /></div> */}
+              <Slidera listing={house} />
             </Link>
           ))}
           {loading && (

@@ -27,9 +27,11 @@ const NewCarousel = ({ children, ...options }) => {
     emblaApi.scrollTo(index);
   };
 
-  const onScroll = () => {
+  const onScroll = (event) => {
     setShowPrevArrow(emblaApi.canScrollPrev());
     setShowNextArrow(emblaApi.canScrollNext());
+    event.stopPropagation();
+    event.preventDefault();
   };
 
   return (
