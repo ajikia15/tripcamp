@@ -32,7 +32,7 @@ const Footer = () => {
           />
         </svg>
       </div>
-      {showModal ? (
+      {showModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-black bg-opacity-50 outline-none changeFadeIn focus:outline-none"
           onClick={(e) => {
@@ -100,7 +100,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 };

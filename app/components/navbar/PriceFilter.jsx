@@ -1,61 +1,60 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./style.css";
+
 const PriceFilter = ({
   active,
-  initialMin,
-  initialMax,
   min,
   max,
   step,
   priceCap,
+  minMax,
+  setMinMax,
 }) => {
   const progressRef = useRef(null);
-  const [minValue, setMinValue] = useState(initialMin);
-  const [maxValue, setMaxValue] = useState(initialMax);
 
   const handleMin = (e) => {
+    const newMin = parseInt(e.target.value);
+    const newMinMax = [newMin, minMax[1]];
+
     if (
-      maxValue - minValue >= priceCap &&
-      maxValue <= max
+      newMinMax[1] - newMinMax[0] >= priceCap &&
+      newMinMax[1] <= max
     ) {
-      if (parseInt(e.target.value) > parseInt(maxValue)) {
-      } else {
-        setMinValue(parseInt(e.target.value));
-      }
+      setMinMax(newMinMax);
     } else {
-      if (parseInt(e.target.value) < minValue) {
-        setMinValue(parseInt(e.target.value));
+      if (newMin < minMax[0]) {
+        setMinMax(newMinMax);
       }
     }
   };
 
   const handleMax = (e) => {
+    const newMax = parseInt(e.target.value);
+    const newMinMax = [minMax[0], newMax];
+
     if (
-      maxValue - minValue >= priceCap &&
-      maxValue <= max
+      newMinMax[1] - newMinMax[0] >= priceCap &&
+      newMinMax[1] <= max
     ) {
-      if (parseInt(e.target.value) < parseInt(minValue)) {
-      } else {
-        setMaxValue(parseInt(e.target.value));
-      }
+      setMinMax(newMinMax);
     } else {
-      if (parseInt(e.target.value) > maxValue) {
-        setMaxValue(parseInt(e.target.value));
+      if (newMax > minMax[1]) {
+        setMinMax(newMinMax);
       }
     }
   };
 
-  useEffect(() => {
+  const updateProgressBar = () => {
     if (progressRef.current) {
       const progressBar = progressRef.current;
       const progressBarWidth = progressBar.offsetWidth;
       const containerWidth =
         progressBar.parentNode.offsetWidth;
       const minThumbPosition =
-        (minValue / max) * containerWidth;
+        (minMax[0] / max) * containerWidth;
       const maxThumbPosition =
-        (maxValue / max) * containerWidth;
+        (minMax[1] / max) * containerWidth;
       const progressWidth =
         maxThumbPosition - minThumbPosition;
 
@@ -64,15 +63,19 @@ const PriceFilter = ({
         containerWidth - maxThumbPosition + "px";
       progressBar.style.width = progressWidth + "px";
     }
-  }, [minValue, maxValue]);
+  };
+
+  useEffect(() => {
+    updateProgressBar();
+  }, [minMax, active]);
 
   return (
     <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2 cursor-pointer">
       <h3 className="font-semibold">Price</h3>
       <p className="text-xs text-gray-500">
-        {minValue === min && maxValue === max
+        {minMax[0] === min && minMax[1] === max
           ? "Any amount"
-          : `${minValue} - ${maxValue}`}
+          : `${minMax[0]} - ${minMax[1]}`}
       </p>
       {active && (
         <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] -left-24 -right-24">
@@ -82,12 +85,11 @@ const PriceFilter = ({
                 Minimum price
               </span>
               <input
-                onChange={(e) =>
-                  setMinValue(e.target.value)
-                }
+                onChange={handleMin}
                 type="number"
-                value={minValue}
-                className="w-24 border border-gray-400 border-none rounded-md no-arrows"
+                readOnly
+                value={minMax[0]}
+                className="w-10 border border-gray-400 border-none rounded-md no-arrows"
               />
             </div>
             <p> - </p>
@@ -96,20 +98,18 @@ const PriceFilter = ({
                 Maximum Price
               </span>
               <input
-                onChange={(e) =>
-                  setMaxValue(e.target.value)
-                }
+                onChange={handleMax}
                 type="number"
-                value={maxValue}
-                className="w-24 border border-gray-400 border-none rounded-md no-arrows"
+                readOnly
+                value={minMax[1]}
+                className="w-10 border border-gray-400 border-none rounded-md no-arrows"
               />
             </div>
           </div>
-
           <div className="mb-4">
             <div className="relative h-1 bg-gray-300 rounded-md slider">
               <div
-                className="absolute h-1 bg-black rounded progress"
+                className="absolute h-1 bg-blue-600 rounded progress"
                 ref={progressRef}></div>
             </div>
 
@@ -120,7 +120,7 @@ const PriceFilter = ({
                 min={min}
                 step={step}
                 max={max}
-                value={minValue}
+                value={minMax[0]}
                 className="absolute w-full h-1 bg-transparent appearance-none pointer-events-none range-min -top-1"
               />
 
@@ -130,7 +130,7 @@ const PriceFilter = ({
                 min={min}
                 step={step}
                 max={max}
-                value={maxValue}
+                value={minMax[1]}
                 className="absolute w-full h-1 bg-transparent appearance-none pointer-events-none range-max -top-1"
               />
             </div>
@@ -140,4 +140,5 @@ const PriceFilter = ({
     </li>
   );
 };
+
 export default PriceFilter;
