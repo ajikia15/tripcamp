@@ -71,7 +71,8 @@ const Page = (props) => {
                         <Link
                             key={house.id}
                             href={`/listings/${house.id}`}>
-                            <Card listing={house} />
+                            <Slaidera listing={house} />
+
                         </Link>
                     ))}
 
