@@ -15,7 +15,7 @@ const Page = (props) => {
 
     let guests = 1; // Default value for guests
     let minMax = [0, 400]; // Default values for min and max
-
+    let searchTerm = "";
     // Loop through the parameters to find and assign the specified values
     params.forEach(param => {
         const [key, value] = param.split('=');
@@ -25,12 +25,16 @@ const Page = (props) => {
             minMax[0] = parseInt(value);
         } else if (key === 'max') {
             minMax[1] = parseInt(value);
+        } else if (key == 'searchTerm') {
+            const parts = value.split(", ").slice(0, 3);
+
+            searchTerm = parts.join("~").toLowerCase();
         }
 
     });
-    console.log(guests); // Outputs the specified number of guests
-    console.log(minMax);
-
+    // console.log(guests); 
+    // console.log(minMax);
+    console.log(searchTerm);
     const [houses, setHouses] = useState([]);
     const housesCollectionRef = collection(db, "Houses");
     useEffect(() => {
@@ -41,14 +45,15 @@ const Page = (props) => {
                 id: doc.id,
             }));
 
+
+
             // Apply client-side filtering based on the specified criteria
             const filteredHouses = fetchedHouses.filter(
                 (house) =>
                     house.Price >= minMax[0] &&
                     house.Price <= minMax[1] &&
-                    house.Beds >= guests
+                    house.Beds >= guests && house.Address.toLowerCase().includes(searchTerm)
             );
-
             setHouses(filteredHouses);
         };
 
