@@ -4,14 +4,15 @@ import {
   collection,
   query,
   getDocs,
-  limit,
-  project,
 } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
 
-export default function Search({ active }) {
+export default function Search({
+  active,
+  searchTerm,
+  setSearchTerm,
+}) {
   const [houses, setHouses] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const housesCollectionRef = collection(db, "Houses");
   const fields = ["Name", "Address"];
   const housesQuery = query(housesCollectionRef);
@@ -72,32 +73,7 @@ export default function Search({ active }) {
                     key={house.Id}
                     className="flex flex-col p-2 overflow-x-hidden text-black cursor-pointer group">
                     <div className="flex flex-row pb-2 border-b gap-x-4">
-                      <div className="flex items-center text-gray-400">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 512 512">
-                          <path
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="32"
-                            d="M256 48c-79.5 0-144 61.39-144 137c0 87 96 224.87 131.25 272.49a15.77 15.77 0 0 0 25.5 0C304 409.89 400 272.07 400 185c0-75.61-64.5-137-144-137Z"
-                          />
-                          <circle
-                            cx="256"
-                            cy="192"
-                            r="48"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="32"
-                          />
-                        </svg>
-                      </div>
+                      <div className="flex items-center text-gray-400"></div>
                       <div className="flex flex-col">
                         <span className="">
                           {house.Name}
@@ -119,7 +95,7 @@ export default function Search({ active }) {
                                 return (
                                   <span
                                     key={index}
-                                    className="truncate ">
+                                    className="truncate">
                                     {part.slice(
                                       0,
                                       startIndex
@@ -165,4 +141,30 @@ export default function Search({ active }) {
       )}
     </>
   );
+}
+{
+  /* <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 512 512">
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="32"
+                            d="M256 48c-79.5 0-144 61.39-144 137c0 87 96 224.87 131.25 272.49a15.77 15.77 0 0 0 25.5 0C304 409.89 400 272.07 400 185c0-75.61-64.5-137-144-137Z"
+                          />
+                          <circle
+                            cx="256"
+                            cy="192"
+                            r="48"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="32"
+                          />
+                        </svg> */
 }

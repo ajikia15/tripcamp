@@ -57,23 +57,20 @@ export default function Navbar() {
     }));
   };
 
-  const buttonWasClicked = (e) => {
-    e.preventDefault();
-    if (addGuestsRef.current) {
-      console.log(addGuestsRef.current.value);
-    } else console.log("1");
-  };
   const generatedSearchQuery = () => {
     let query = "";
     query += `guests=${encodeURIComponent(
       guestsAmount
     )}&min=${encodeURIComponent(
       minMax[0]
-    )}&max=${encodeURIComponent(minMax[1])}&`;
+    )}&max=${encodeURIComponent(
+      minMax[1]
+    )}&searchTerm=${encodeURIComponent(searchTerm)}&`;
     return query;
   };
   const [guestsAmount, setGuestsAmount] = useState(1);
   const [minMax, setMinMax] = useState([0, 400]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <>
@@ -89,7 +86,11 @@ export default function Navbar() {
             ref={refMap.search}
             onClick={() => handleChildClick("search")}
             className="w-full">
-            <Search active={activeStates.search} />
+            <Search
+              active={activeStates.search}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
           </div>
           <ul className="justify-between hidden grid-cols-3 mx-3 item-center md:grid">
             <div
