@@ -92,12 +92,16 @@ const NewCarousel = ({ children, ...options }) => {
         {children.map((_, index) => (
           <button
             key={index}
-            className={`dot w-3 h-3 rounded-full mx-1 ${
+            className={`dot aspect-square p-1 rounded-full mx-1 ${
               index === selectedIndex
-                ? "bg-black"
+                ? "bg-gray-600"
                 : "bg-gray-400"
             }`}
-            onClick={() => handleSelect(index)}></button>
+            onClick={(e) => {
+              e.preventDefault(),
+                e.stopPropagation(),
+                handleSelect(index);
+            }}></button>
         ))}
       </div>
     </div>
