@@ -47,11 +47,11 @@ export default function Search({
           )
         )
       : [];
-  const formatAddress = (address) => {
-    const parts = address.split("~").slice(0, 3);
-    let formattedAddress = parts.join(", ");
-    // Remove trailing comma
-    return formattedAddress;
+
+  const formatAddress = (address) =>
+    address.split("~").slice(0, 3).join(", ");
+  const handleHouseClick = (address) => {
+    setSearchTerm(formatAddress(address));
   };
   return (
     <>
@@ -71,7 +71,10 @@ export default function Search({
                 return (
                   <li
                     key={house.Id}
-                    className="flex flex-col p-2 overflow-x-hidden text-black cursor-pointer group">
+                    className="flex flex-col p-2 overflow-x-hidden text-black cursor-pointer group"
+                    onClick={() =>
+                      handleHouseClick(house.Address)
+                    }>
                     <div className="flex flex-row pb-2 border-b gap-x-4">
                       <div className="flex items-center text-gray-400"></div>
                       <div className="flex flex-col">
@@ -80,44 +83,26 @@ export default function Search({
                         </span>
                         <small className="text-sm">
                           {formatAddress(house.Address)
-                            .split(" ")
-                            .map((part, index) => {
-                              const startIndex = part
-                                .toLowerCase()
-                                .indexOf(
-                                  searchTerm.toLowerCase()
-                                );
-                              const endIndex =
-                                startIndex +
-                                searchTerm.length;
-
-                              if (startIndex !== -1) {
-                                return (
-                                  <span
-                                    key={index}
-                                    className="truncate">
-                                    {part.slice(
-                                      0,
-                                      startIndex
-                                    )}
-                                    <span className="text-blue-600">
-                                      {part.slice(
-                                        startIndex,
-                                        endIndex
-                                      )}
-                                    </span>
-                                    {part.slice(endIndex)}
-                                    &nbsp;
-                                  </span>
-                                );
-                              } else {
-                                return (
-                                  <span key={index}>
-                                    {part}&nbsp;
-                                  </span>
-                                );
-                              }
-                            })}
+                            .split(
+                              new RegExp(
+                                `(${searchTerm})`,
+                                "gi"
+                              )
+                            )
+                            .map((part, index) =>
+                              part.toLowerCase() ===
+                              searchTerm.toLowerCase() ? (
+                                <span
+                                  key={index}
+                                  className="text-blue-600">
+                                  {part}
+                                </span>
+                              ) : (
+                                <span key={index}>
+                                  {part}
+                                </span>
+                              )
+                            )}
                         </small>
                       </div>
                     </div>
