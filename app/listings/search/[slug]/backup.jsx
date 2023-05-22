@@ -1,7 +1,6 @@
 "use client";
-import Card from "./Card";
-import Slidera from "../listings/[id]/Slaidera";
-import { db } from "../../firebase-config";
+import Card from "../../../components/Card";
+import { db } from "../../../../firebase-config";
 import {
   collection,
   getDocs,
@@ -9,97 +8,159 @@ import {
   orderBy,
   limit,
   startAfter,
+  where,
 } from "firebase/firestore";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import SkeletonLoad from "./SkeletonLoad";
+import SkeletonLoad from "../../../components/SkeletonLoad";
 
-export default function Listings(props) {
+const Page = (props) => {
   const mapRef = useRef(null);
   const [houses, setHouses] = useState([]);
   const [loading, setLoading] = useState(true);
   const housesCollectionRef = collection(db, "Houses");
   const observerRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      async (entries) => {
-        if (entries[0].isIntersecting) {
-          observerRef.current.disconnect();
-          await fetchMoreData();
-        }
-      },
-      { threshold: 0.5 }
-    );
-    observerRef.current = observer;
-    if (observerRef.current && mapRef.current) {
-      observerRef.current.observe(mapRef.current);
-    }
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, [houses]);
+  const slug = decodeURIComponent(props.params.slug);
+  const params = slug.split("&"); // Splitting the query parameters
 
+  let guests = 1; // Default value for guests
+  let minMax = [0, 400]; // Default values for min and max
+
+  // Loop through the parameters to find and assign the specified values
+  params.forEach((param) => {
+    const [key, value] = param.split("=");
+    if (key === "guests") {
+      guests = parseInt(value);
+    } else if (key === "min") {
+      minMax[0] = parseInt(value);
+    } else if (key === "max") {
+      minMax[1] = parseInt(value);
+    }
+  });
+  console.log(guests); // Outputs the specified number of guests
+  console.log(minMax);
   const fetchMoreData = async () => {
     setLoading(true);
     const lastHouse =
       houses.length > 0 ? houses[houses.length - 1] : null;
     if (lastHouse) {
-      const firestoreQuery = query(
+      const bedsQuery = query(
         housesCollectionRef,
-        orderBy("CreatedAt"),
-        startAfter(lastHouse.CreatedAt),
+        where("Beds", ">", guests),
+        orderBy("Beds"),
+        startAfter(lastHouse.Beds),
         limit(6)
       );
-      const data = await getDocs(firestoreQuery);
-      setHouses([
-        ...houses,
-        ...data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        })),
+      const priceQuery = query(
+        housesCollectionRef,
+        where("Price", ">=", minMax[0]),
+        where("Price", "<=", minMax[1]),
+        orderBy("Beds"),
+        startAfter(lastHouse.Beds),
+        limit(6)
+      );
+
+      const [bedsData, priceData] = await Promise.all([
+        getDocs(bedsQuery),
+        getDocs(priceQuery),
       ]);
-    }
-    setLoading(false);
-  };
-  useEffect(() => {
-    const getHouses = async () => {
-      const firestoreQuery = query(
-        housesCollectionRef,
-        limit(6)
+
+      const mergedData = mergeQueryResults(
+        bedsData,
+        priceData
       );
-      const data = await getDocs(firestoreQuery);
-      if (data.empty) {
-        // No more houses available, stop fetching
+
+      if (mergedData.length === 0) {
+        // no more houses, stop fetching
         setLoading(false);
         return;
       }
-      setHouses(
-        data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
+
+      setHouses([...houses, ...mergedData]);
+    }
+    setLoading(false);
+  };
+
+  const mergeQueryResults = (query1, query2) => {
+    const mergedData = [];
+
+    const query1Data = query1.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    const query2Data = query2.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+
+    let i = 0;
+    let j = 0;
+
+    while (i < query1Data.length && j < query2Data.length) {
+      if (query1Data[i].Beds < query2Data[j].Beds) {
+        mergedData.push(query1Data[i]);
+        i++;
+      } else {
+        mergedData.push(query2Data[j]);
+        j++;
+      }
+    }
+
+    while (i < query1Data.length) {
+      mergedData.push(query1Data[i]);
+      i++;
+    }
+
+    while (j < query2Data.length) {
+      mergedData.push(query2Data[j]);
+      j++;
+    }
+
+    return mergedData;
+  };
+
+  useEffect(() => {
+    const getHouses = async () => {
+      const bedsQuery = query(
+        housesCollectionRef,
+        where("Beds", ">", guests),
+        limit(6)
       );
+      const priceQuery = query(
+        housesCollectionRef,
+        where("Price", ">=", minMax[0]),
+        where("Price", "<=", minMax[1]),
+        limit(6)
+      );
+
+      const [bedsData, priceData] = await Promise.all([
+        getDocs(bedsQuery),
+        getDocs(priceQuery),
+      ]);
+
+      const mergedData = mergeQueryResults(
+        bedsData,
+        priceData
+      );
+      setHouses(mergedData);
       setLoading(false);
     };
+
     getHouses();
   }, []);
-
   const [loadAnimation, setLoadAnimation] = useState(false);
 
   return (
     <>
+      balls {slug}
       <div className="grid w-full place-items-center min-h-[70vh]">
         <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
           {houses.map((house) => (
             <Link
               key={house.id}
-              href={`#`}>
-              {/* href={`/listings/${house.id}`}> */}
-                {/* <div><Slidera /></div> */}
-              <Slidera listing={house} />
+              href={`/listings/${house.id}`}>
+              <Card listing={house} />
             </Link>
           ))}
           {loading && (
@@ -159,4 +220,7 @@ export default function Listings(props) {
       </div>
     </>
   );
-}
+};
+export default Page;
+
+// guests&searchterm&startDate&endDate&pricestart&priceEnd&

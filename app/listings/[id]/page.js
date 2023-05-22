@@ -66,7 +66,7 @@ export default function House(props) {
                 <div className="flex flex-col w-11/12 mx-auto xl:w-4/5">
                     <div><Slaidera /></div>
                     <div className='pl-1 mb-2'>
-                        <p className="text-sm"> {house.Address.split("~").join(" ")} </p>
+                        <p className="text-sm"> {house.Address.split("~").join(" ")} {house.Beds}</p>
                         <h1 className="text-3xl font-bold"> {house.Name} </h1>
                     </div>
                     <div className="relative flex gap-2 overflow-hidden rounded-2xl">
