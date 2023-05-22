@@ -4,6 +4,7 @@ import { db } from "../../../../firebase-config";
 import { collection, getDocs, query, orderBy, limit, startAfter, where } from "firebase/firestore";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import Slaidera from "../../../components/Slaidera";
 
 const Page = (props) => {
 

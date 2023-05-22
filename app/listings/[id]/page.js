@@ -6,7 +6,6 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
 import list from "../../list"
-import Slaidera from "../../components/Slaidera.jsx";
 import StaticFooter from "../../components/footer/StaticFooter"
 import Link from "next/link";
 export default function House(props) {
