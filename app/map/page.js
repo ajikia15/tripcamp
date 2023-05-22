@@ -54,7 +54,6 @@ const MainMap = () => {
                 zoom={13}
                 style={{ height: "60vh" }}>
                 <TileLayer
-                    attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
@@ -71,7 +70,6 @@ const MainMap = () => {
                         })}>
                         <Popup>
                             <div className="flex flex-col gap-y-2">
-                                {/* <img className="object-cover rounded-md aspect-square" src="https://images.unsplash.com/photo-1594495894542-a46cc73e081a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80" alt="Camping" /> */}
                                 <div className="relative w-full rounded-md aspect-square">
                                     <Image src={house.Photo[0]} fill={true} />
                                 </div>

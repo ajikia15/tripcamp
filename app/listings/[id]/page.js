@@ -6,7 +6,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
 import list from "../../list"
-import Slaidera from "./Slaidera.jsx";
+import Slaidera from "../../components/Slaidera.jsx";
 import StaticFooter from "../../components/footer/StaticFooter"
 import Link from "next/link";
 export default function House(props) {
@@ -64,7 +64,6 @@ export default function House(props) {
             }
             {!loading && house && (
                 <div className="flex flex-col w-11/12 mx-auto xl:w-4/5">
-                    <div><Slaidera /></div>
                     <div className='pl-1 mb-2'>
                         <p className="text-sm"> {house.Address.split("~").join(" ")} {house.Beds}</p>
                         <h1 className="text-3xl font-bold"> {house.Name} </h1>

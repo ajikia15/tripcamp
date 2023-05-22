@@ -38,8 +38,8 @@ const Page = (props) => {
       minMax[1] = parseInt(value);
     }
   });
-  console.log(guests); // Outputs the specified number of guests
-  console.log(minMax);
+  // console.log(guests); // Outputs the specified number of guests
+  // console.log(minMax);
   const fetchMoreData = async () => {
     setLoading(true);
     const lastHouse =

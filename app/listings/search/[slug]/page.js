@@ -34,7 +34,7 @@ const Page = (props) => {
     });
     // console.log(guests); 
     // console.log(minMax);
-    console.log(searchTerm);
+    // console.log(searchTerm);
     const [houses, setHouses] = useState([]);
     const housesCollectionRef = collection(db, "Houses");
     useEffect(() => {
