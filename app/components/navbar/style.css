@@ -1,9 +1,12 @@
 input[type="range"]::-webkit-slider-thumb {
   pointer-events: auto;
-  width: 24px;
+  width: 30px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: 40%;
+  background-color: white;
+
   -webkit-appearance: none;
+  border: 1px solid black;
 }
 input[type="range"]::-moz-range-thumb {
   pointer-events: auto;

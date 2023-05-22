@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import React from "react";
 
-const AddGuests = React.forwardRef((props, ref) => {
-  const [guestsAmount, setGuestsAmount] = useState(1);
+const AddGuests = ({
+  active,
+  guestsAmount,
+  setGuestsAmount,
+}) => {
   const minusGuests = () => {
     if (guestsAmount > 1)
       setGuestsAmount((prevAmount) => prevAmount - 1);
@@ -18,9 +20,9 @@ const AddGuests = React.forwardRef((props, ref) => {
     <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2 cursor-pointer">
       <h3 className="font-semibold">Who?</h3>
       <p className="text-xs text-gray-500">
-        {1 == 1 ? "Add Guests" : null}
+        {guestsAmount == 1 ? "Add Guests" : guestsAmount}
       </p>
-      {props.active && (
+      {active && (
         <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] -left-24 -right-24">
           <div className="flex items-center justify-between my-6 ">
             <div>
@@ -38,7 +40,6 @@ const AddGuests = React.forwardRef((props, ref) => {
                 -
               </div>
               <input
-                ref={ref}
                 value={guestsAmount}
                 onChange={handleGuestsChange}
                 type="number"
@@ -55,5 +56,5 @@ const AddGuests = React.forwardRef((props, ref) => {
       )}
     </li>
   );
-});
+};
 export default AddGuests;
