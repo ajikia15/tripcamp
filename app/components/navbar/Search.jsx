@@ -20,10 +20,7 @@ export default function Search({
   useEffect(() => {
     const getHouses = async () => {
       const data = await getDocs(housesQuery, { fields });
-      console.log(
-        "data:",
-        data.docs.map((doc) => doc.data())
-      );
+
       setHouses(
         data.docs.map((doc) => ({
           ...doc.data(),
