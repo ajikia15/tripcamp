@@ -17,3 +17,7 @@
 .leaflet-popup-content p {
   margin: 0;
 }
+
+.custom-icon div {
+  @apply grid w-12 h-8 font-semibold text-gray-600 transition-all bg-white border border-gray-500 rounded-full place-items-center hover:bg-blue-400 hover:text-white;
+}
