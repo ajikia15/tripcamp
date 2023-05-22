@@ -52,7 +52,7 @@ const MainMap = () => {
             <MapContainer
                 center={[42.6556, 44.6433]}
                 zoom={13}
-                style={{ height: "24rem" }}>
+                style={{ height: "60vh" }}>
                 <TileLayer
                     attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -67,7 +67,7 @@ const MainMap = () => {
                         ]}
                         icon={L.divIcon({
                             className: "custom-icon",
-                            html: `<div className="bg-white rounded-full font-semibold border-gray-500 border text-gray-600 w-12 h-8 grid place-items-center hover:bg-blue-400 hover:text-white transition-all">$${house.Price}</div>`,
+                            html: `<div>$${house.Price}</div>`,
                         })}>
                         <Popup>
                             <div className="flex flex-col gap-y-2">
