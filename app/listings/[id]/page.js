@@ -147,10 +147,11 @@ export default function House(props) {
                             <h2 className="mb-4 text-xl"> Location </h2>
                             <div className="z-0 w-full h-full mb-2 overflow-hidden text-white rounded-lg bg-zinc-800">
                                 <MapContainer style={{ height: "24rem" }} scrollWheelZoom={false} center={[house.Position.Latit, house.Position.Longi]} zoom={13}>
-                                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                                    <Marker position={[house.Position.Latit, house.Position.Longi]}>
-                                        <Popup>{`herro`}</Popup>
-                                    </Marker>
+                                    <TileLayer
+                                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                                        attribution='&copy; <a href="https://carto.com/" target="_blank">Carto</a> | Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors'
+                                    />
+                                    <Marker position={[house.Position.Latit, house.Position.Longi]} />
                                 </MapContainer>
                             </div>
                         </div>
