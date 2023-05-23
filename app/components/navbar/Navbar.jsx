@@ -81,11 +81,11 @@ export default function Navbar() {
       </Link>
 
       <div className="grid w-full mt-5 mb-8 place-items-center">
-        <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr] z-40 bg-white">
+        <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr] z-40 bg-white relative">
           <div
             ref={refMap.search}
             onClick={() => handleChildClick("search")}
-            className="w-full">
+            className="w-full pl-4 py-1">
             <Search
               active={activeStates.search}
               searchTerm={searchTerm}
@@ -121,7 +121,7 @@ export default function Navbar() {
             </div>
             <Link
               href={`/listings/search/${generatedSearchQuery()}`}>
-              <button className="grid h-full text-white bg-blue-600 rounded-full shadow-sm aspect-square hover:shadow-md place-items-center">
+              <button className="grid absolute right-4 h-4/5 text-white bg-blue-600 rounded-full shadow-sm aspect-square hover:shadow-md place-items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

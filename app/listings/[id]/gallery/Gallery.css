@@ -39,7 +39,11 @@
     justify-content: center;
     z-index: 9999;
 }
-
+@media (max-width: 480px) {
+    .overlay {
+        background-color: black;
+    }
+}
 .modal {
     max-width: 90%;
     max-height: 90%;
