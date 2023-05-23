@@ -74,7 +74,7 @@ export default function House(props) {
                             </div>
                         </Link>
                         <div className="relative w-1/2 overflow-hidden aspect-square bg-zinc-800">
-                            <Image src={house.Photo[0]} fill={true} />
+                            <Image className="object-cover" src={house.Photo[0]} fill={true} />
                         </div>
                         <div className="grid w-1/2 grid-cols-2 gap-y-2 gap-x-2">
 
@@ -82,7 +82,7 @@ export default function House(props) {
                                 if (index <= 4 && index >= 1) {
                                     return (
                                         <div key={index} className="relative w-full h-full aspect-square bg-zinc-800">
-                                            <Image src={photo ? photo : house.Photo[0]} fill={true} />
+                                            <Image className="object-cover" src={photo ? photo : house.Photo[0]} fill={true} />
                                         </div>
                                     );
                                 }
