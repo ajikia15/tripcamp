@@ -49,9 +49,9 @@ export default function Listings(props) {
     if (lastHouse) {
       const firestoreQuery = query(
         housesCollectionRef,
-        orderBy("CreatedAt"),
-        startAfter(lastHouse.CreatedAt),
-        limit(6)
+        orderBy("Prior", "desc"),
+        startAfter(lastHouse.Prior),
+        limit(8)
       );
       const data = await getDocs(firestoreQuery);
       setHouses([
@@ -68,11 +68,11 @@ export default function Listings(props) {
     const getHouses = async () => {
       const firestoreQuery = query(
         housesCollectionRef,
-        limit(6)
+        orderBy("Prior", "desc"),
+        limit(8)
       );
       const data = await getDocs(firestoreQuery);
       if (data.empty) {
-        // No more houses available, stop fetching
         setLoading(false);
         return;
       }

@@ -40,15 +40,14 @@ const Page = (props) => {
     const housesCollectionRef = collection(db, "Houses");
     useEffect(() => {
         const getHouses = async () => {
-            const data = await getDocs(housesCollectionRef);
+            const querySnapshot = query(housesCollectionRef, orderBy("Prior", 'desc'));
+            const data = await getDocs(querySnapshot);
             const fetchedHouses = data.docs.map((doc) => ({
                 ...doc.data(),
                 id: doc.id,
             }));
 
-
-
-            // Apply client-side filtering based on the specified criteria
+            // Client side filter
             const filteredHouses = fetchedHouses.filter(
                 (house) =>
                     house.Price >= minMax[0] &&
