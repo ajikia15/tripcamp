@@ -42,8 +42,8 @@ const AddGuests = ({
               <input
                 value={guestsAmount}
                 onChange={handleGuestsChange}
-                type="number"
-                className="w-5 border-gray-300 aspect-square"
+                // type="number"
+                className="w-5 text-center border-gray-300 aspect-square"
               />
               <div
                 className="flex items-center justify-center h-10 border border-black rounded-full aspect-square"
