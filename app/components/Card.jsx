@@ -73,24 +73,6 @@ export default function Card({ listing }) {
             </div>
           </button>
         </div>
-        <div className="absolute left-0 right-0 bottom-4">
-          <div className="flex items-center justify-center gap-1">
-            {/* {listing.slides.map((_, i) => (
-              <div
-                key={i}
-                onClick={(event) => setSlider(event, i)}
-                className={`
-                  transition-all aspect-square bg-white rounded-full opacity-100
-                  ${
-                    curr === i
-                      ? "w-2 h-2 "
-                      : "w-1.5 h-1.5 opacity-[0.8] "
-                  }
-              `}
-              />
-            ))} */}
-          </div>
-        </div>
       </div>
       <ul className="flex flex-col gap-0 ml-1">
         <li className="text-xl font-semibold">

@@ -17,6 +17,7 @@ const Page = (props) => {
     let guests = 1; // Default value for guests
     let minMax = [0, 400]; // Default values for min and max
     let searchTerm = "";
+    let filterTerm = "";
     // Loop through the parameters to find and assign the specified values
     params.forEach(param => {
         const [key, value] = param.split('=');
@@ -26,10 +27,12 @@ const Page = (props) => {
             minMax[0] = parseInt(value);
         } else if (key === 'max') {
             minMax[1] = parseInt(value);
-        } else if (key == 'searchTerm') {
+        } else if (key === 'searchTerm') {
             const parts = value.split(", ").slice(0, 3);
-
             searchTerm = parts.join("~").toLowerCase();
+        }
+        else if (key === 'filterTerm') {
+            filterTerm = value;
         }
 
     });
@@ -52,8 +55,9 @@ const Page = (props) => {
                 (house) =>
                     house.Price >= minMax[0] &&
                     house.Price <= minMax[1] &&
-                    house.Beds >= guests && house.Address.toLowerCase().includes(searchTerm)
-            );
+                    house.Beds >= guests && house.Address.toLowerCase().includes(searchTerm) &&
+                    filterTerm.split(",").every((term) => house.Options.split(",").includes(term))
+            )
             setHouses(filteredHouses);
         };
 
@@ -63,7 +67,7 @@ const Page = (props) => {
     return (
 
         <>
-            balls {slug}
+            {slug}
 
             <div className="grid w-full place-items-center min-h-[70vh]">
                 <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
@@ -72,7 +76,6 @@ const Page = (props) => {
                             key={house.id}
                             href={`/listings/${house.id}`}>
                             <Slaidera listing={house} />
-
                         </Link>
                     ))}
 
