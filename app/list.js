@@ -12,8 +12,8 @@ const list = [
     { id: 21, name: "Pods" },
     { id: 22, name: "Composites" },
     { id: 23, name: "RVs" },
-    { id: 25, name: "Wine Cellar" },
-    { id: 26, name: "Art House" },
+    { id: 24, name: "Wine Cellar" },
+    { id: 25, name: "Art House" },
     // Features (30-40)
     { id: 31, name: "Pets allowed" },
     { id: 32, name: "Breakfast" },
