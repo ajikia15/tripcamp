@@ -32,7 +32,7 @@ export default function Slaidera({ listing }) {
             .join(", ")}
         </li>
         <li className="font-semibold">
-          {listing.Price}$
+          {listing.Price}₾
           <span className="font-[500]">/Night</span>
         </li>
       </ul>
