@@ -85,7 +85,7 @@ export default function Navbar() {
           <div
             ref={refMap.search}
             onClick={() => handleChildClick("search")}
-            className="w-full pl-4 py-1">
+            className="w-full pl-4 flex flex-col justify-center">
             <Search
               active={activeStates.search}
               searchTerm={searchTerm}
