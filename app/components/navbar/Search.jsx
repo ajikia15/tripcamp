@@ -53,9 +53,9 @@ export default function Search({
   return (
     <>
       {active ? (
-        <li className="relative flex flex-col ">
+        <li className="relative flex flex-col">
           <input
-            className="w-full outline-none"
+            className="w-full outline-none text-middle"
             type="text"
             autoFocus
             value={searchTerm}
