@@ -1,12 +1,12 @@
 "use client"
 
-import "leaflet/dist/leaflet.css";
 import { useState, useEffect, useRef } from "react";
 import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import "../globals.css"
 import Image from "next/image";
+import "leaflet/dist/leaflet.css";
 
 import {
     MapContainer,

@@ -57,14 +57,11 @@ export default function FooterFixed() {
                 <p> © 2023 TripCamp, Inc.</p>
               </div>
               <div className="flex flex-row">
-                <p> · </p>
-                <p> Terms </p>
-                <p> · </p>
-                <p> Sitemap </p>
-                <p> · </p>
-                <p> Privacy Policy </p>
-                <p> · </p>
-                <p> Security </p>
+                <p> · Terms&nbsp;</p>
+                <p> · Sitemap&nbsp;</p>
+                <p> · Privacy Policy&nbsp;</p>
+                <p> · Security ·</p>
+                <p className="text-white"> Balls</p>
               </div>
             </div>
           </div>

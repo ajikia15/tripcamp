@@ -1,36 +1,8 @@
 "use client";
 import "./style.css";
-import { useState, useEffect } from "react";
-import list from "../list";
-const Filter = ({
-  filterClose,
-  active,
-  filterTerm,
-  setFilterTerm,
-}) => {
-  const [checkedItems, setCheckedItems] = useState([]);
+import React, { useState } from "react";
 
-  useEffect(() => {
-    // Update the checked state when filterTerm prop changes
-    setCheckedItems(filterTerm);
-  }, [filterTerm]);
-
-  const handleCheckboxChange = (event, id) => {
-    const updatedCheckedItems = event.target.checked
-      ? [...checkedItems, id]
-      : checkedItems.filter((item) => item !== id);
-
-    setCheckedItems(updatedCheckedItems);
-    setFilterTerm(updatedCheckedItems);
-  };
-
-  const isCheckboxChecked = (id) => {
-    return checkedItems.includes(id);
-  };
-  const handleClearSelection = () => {
-    setCheckedItems([]);
-    setFilterTerm([]);
-  };
+const Filter = ({ active }) => {
   return (
     <>
       <div className="flex-row items-center hidden gap-2 p-2 font-semibold border-2 border-gray-400 cursor-pointer md:flex rounded-xl">
@@ -55,7 +27,7 @@ const Filter = ({
         <p className="hidden md:block">Filters</p>
       </div>
       {active && (
-        <div className="absolute z-[60] overflow-y-scroll text-lg -translate-x-1/2 -translate-y-1/2 bg-white top-1/2 left-1/2 rounded-2xl h-4/5 p-x-4">
+        <div className="absolute z-50 overflow-y-scroll text-lg -translate-x-1/2 -translate-y-1/2 bg-white top-1/2 left-1/2 rounded-2xl h-4/5 p-x-4">
           <div className="flex flex-col p-6 gap-y-5">
             {/* header */}
             <div className="sticky top-0 bg-white">
@@ -67,15 +39,13 @@ const Filter = ({
                 </div>
               </div>
             </div>
+
             {/* mainpart */}
             <div className="flex-1 overflow-y-auto mt-14">
               <div className="flex flex-col border-b-2 gap-y-5">
                 <div>
                   <p className="text-lg font-bold">
                     Types Of Glamping
-                    <p>
-                      Checked IDs: {filterTerm.join(", ")}
-                    </p>
                   </p>
                   <p className="text-sm text-zinc-400">
                     Choose glamping type what you want
@@ -176,129 +146,117 @@ const Filter = ({
               <div className="flex flex-col border-b-2 gap-y-5">
                 <div>
                   <p className="text-lg font-bold">
-                    Amenities
+                    Types Of Glamping
                   </p>
                   <p className="text-sm text-zinc-400">
-                    Choose the Amenities
+                    Choose glamping type what you want
                   </p>
                 </div>
                 <div className="grid grid-cols-2">
-                  {list
-                    .filter(
-                      (item) => item.id > 50 && item.id < 80
-                    )
-                    .map((item) => (
-                      <div key={item.id}>
-                        <input
-                          type="checkbox"
-                          id={item.id}
-                          onChange={(e) =>
-                            handleCheckboxChange(e, item.id)
-                          }
-                          checked={isCheckboxChecked(
-                            item.id
-                          )}
-                        />
-                        <label htmlFor={item.id}>
-                          {item.name}
-                        </label>
-                      </div>
-                    ))}
+                  <input type="checkbox" className="z-50" />
+
+                  <div className="flex items-center gap-x-4">
+                    <label
+                      htmlFor="exampleCheckbox"
+                      className="ml-1 text-gray-900">
+                      Nini
+                    </label>
+                  </div>
+                  <div className="flex items-center gap-x-4">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-gray-600 border-2 border-gray-400 form-checkbox"
+                      id="exampleCheckbox"
+                    />
+                    <label
+                      htmlFor="exampleCheckbox"
+                      className="ml-1 text-gray-900">
+                      Nini
+                    </label>
+                  </div>
                 </div>
-                <div className="flex flex-col border-b-2 gap-y-5">
-                  <div>
-                    <p className="text-lg font-bold">
-                      Features
-                    </p>
-                    <p className="text-sm text-zinc-400">
-                      Choose the features you want
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    {list
-                      .filter(
-                        (item) =>
-                          item.id > 30 && item.id < 40
-                      )
-                      .map((item) => (
-                        <div key={item.id}>
-                          <input
-                            type="checkbox"
-                            id={item.id}
-                            onChange={(e) =>
-                              handleCheckboxChange(
-                                e,
-                                item.id
-                              )
-                            }
-                            checked={isCheckboxChecked(
-                              item.id
-                            )}
-                          />
-                          <label htmlFor={item.id}>
-                            {item.name}
-                          </label>
-                        </div>
-                      ))}
-                  </div>
-                  <p className="mb-5 text-sm font-bold underline text-zinc-700">
-                    Show More
+                <p className="mb-5 text-sm font-bold underline text-zinc-700">
+                  Show More
+                </p>
+              </div>
+              <div className="flex flex-col border-b-2 gap-y-5">
+                <div>
+                  <p className="text-lg font-bold">
+                    Types Of Glamping
+                  </p>
+                  <p className="text-sm text-zinc-400">
+                    Choose glamping type what you want
                   </p>
                 </div>
-                <div className="flex flex-col border-b-2 gap-y-5">
-                  <div>
-                    <p className="text-lg font-bold">
-                      Features
-                    </p>
-                    <p className="text-sm text-zinc-400">
-                      Choose the views you want
-                    </p>
+                <div className="grid grid-cols-2">
+                  <div className="flex items-center gap-x-4">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-gray-600 border-2 border-gray-400 form-checkbox"
+                      id="exampleCheckbox"
+                    />
+                    <label
+                      htmlFor="exampleCheckbox"
+                      className="ml-1 text-gray-900">
+                      Ani
+                    </label>
                   </div>
-                  <div className="grid grid-cols-2">
-                    {list
-                      .filter(
-                        (item) =>
-                          item.id > 40 && item.id < 50
-                      )
-                      .map((item) => (
-                        <div key={item.id}>
-                          <input
-                            type="checkbox"
-                            id={item.id}
-                            onChange={(e) =>
-                              handleCheckboxChange(
-                                e,
-                                item.id
-                              )
-                            }
-                            checked={isCheckboxChecked(
-                              item.id
-                            )}
-                          />
-                          <label htmlFor={item.id}>
-                            {item.name}
-                          </label>
-                        </div>
-                      ))}
+                  <div className="flex items-center gap-x-4">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 text-gray-600 border-2 border-gray-400 form-checkbox"
+                      id="exampleCheckbox"
+                    />
+                    <label
+                      htmlFor="exampleCheckbox"
+                      className="ml-1 text-gray-900">
+                      Ani
+                    </label>
                   </div>
-                  <p className="mb-5 text-sm font-bold underline text-zinc-700">
-                    Show More
+                </div>
+                <p className="mb-5 text-sm font-bold underline text-zinc-700">
+                  Show More
+                </p>
+              </div>
+              <div className="flex flex-col border-b-2 gap-y-5">
+                <div>
+                  <p className="text-lg font-bold">
+                    Types Of Glamping
                   </p>
+                  <p className="text-sm text-zinc-400">
+                    Choose glamping type what you want
+                  </p>
+                </div>
+                <div>
+                  <p> Number of identical glampings </p>
+                  <div className="grid w-3/4 grid-cols-5 gap-4 mt-2 mb-5 ">
+                    <div className="flex items-center justify-center bg-blue-500 rounded-full">
+                      Any
+                    </div>
+                    <div className="flex items-center justify-center pt-2 pb-2 border border-blue-200 rounded-full bg-none">
+                      1
+                    </div>
+                    <div className="flex items-center justify-center border border-blue-200 rounded-full bg-none">
+                      2
+                    </div>
+                    <div className="flex items-center justify-center border border-blue-200 rounded-full bg-none">
+                      3
+                    </div>
+                    <div className="flex items-center justify-center border border-blue-200 rounded-full bg-none">
+                      4
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
             <div className="sticky bottom-0 left-0 flex flex-row items-center justify-between w-full py-2 bg-white border-t-2 border-gray-200">
-              <button
-                className="text-sm font-bold text-zinc-700 "
-                onClick={handleClearSelection}>
+              <p className="text-sm font-bold text-zinc-700 ">
                 Clear All
-              </button>
-              <button
-                type="button"
-                className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
-                onClick={filterClose}>
-                <p className="text-sm"> Save Filter </p>
-              </button>
+              </p>
+              <div className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l">
+                <p className="text-sm">Show 200 homes</p>
+              </div>
             </div>
           </div>
         </div>
