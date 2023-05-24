@@ -77,14 +77,14 @@ export default function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterTerm, setFilterTerm] = useState([]);
   return (
-    <>
+    <div className="pb-1 bg-white">
       <Link href="/">
         <h1 className="z-0 py-5 text-xl font-semibold text-center border border-b border-gray-200">
           TripCamp
         </h1>
       </Link>
 
-      <div className="grid w-full mt-5 mb-8 place-items-center">
+      <div className="grid w-full my-4 place-items-center">
         <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr] z-40 bg-white relative">
           <div
             ref={refMap.search}
@@ -153,6 +153,6 @@ export default function Navbar() {
         filterTerm={filterTerm}
         setFilterTerm={setFilterTerm}
       />
-    </>
+    </div>
   );
 }

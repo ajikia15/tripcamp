@@ -157,7 +157,7 @@ export default function House(props) {
                             </div>
                         </div>
                         <div className="pb-4 mb-4 border-b-2">
-                            <p className="text-lg">  ${house.Price}/Night </p>
+                            <p className="text-lg">₾{house.Price}/Night </p>
                         </div>
 
                     </div>
