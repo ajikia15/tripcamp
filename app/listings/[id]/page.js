@@ -93,15 +93,16 @@ export default function House(props) {
                             </div>
                         </Link>
                         <div className="relative w-1/2 overflow-hidden aspect-square bg-zinc-800">
-                            <Image className="object-cover" src={house.Photo[0]} fill={true} />
+                            <Image className="object-cover rounded-l-lg" src={house.Photo[0]} fill={true} />
                         </div>
                         <div className="grid w-1/2 grid-cols-2 gap-y-2 gap-x-2">
-
                             {house.Photo.map((photo, index) => {
                                 if (index <= 4 && index >= 1) {
                                     return (
                                         <div key={index} className="relative w-full h-full aspect-square bg-zinc-800">
-                                            <Image className="object-cover" src={photo ? photo : house.Photo[0]} fill={true} />
+                                            {house.Photo[index] ? (
+                                                <Image className="object-cover" src={house.Photo[index]} fill={true} />) : (<div className="w-full h-full bg-white"></div>)
+                                            }
                                         </div>
                                     );
                                 }
@@ -126,25 +127,25 @@ export default function House(props) {
                                 <h2 className="mb-4 text-xl"> Amenities </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 md:grid-cols-2 gap-y-3">
                                     {options.filter((option) => option >= 50 && option < 80).map((option) => (
-                                        <li key={option}>{list[option]}</li>
+                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
                                     ))}
                                 </ul>
                                 <h2 className="text-xl4"> Activities </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 md:grid-cols-2 gap-y-3">
                                     {options.filter((option) => option >= 80 && option < 100).map((option) => (
-                                        <li key={option}>{list[option]}</li>
+                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
                                     ))}
                                 </ul>
                                 <h2 className="text-xl"> Scenic Views </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 gap-y-3">
                                     {options.filter((option) => option >= 41 && option < 50).map((option) => (
-                                        <li key={option}>{list[option]}</li>
+                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
                                     ))}
                                 </ul>
                                 <h2 className="text-xl"> Features </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 gap-y-3">
                                     {options.filter((option) => option >= 31 && option < 40).map((option) => (
-                                        <li key={option}>{list[option]}</li>
+                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -175,7 +176,7 @@ export default function House(props) {
                             </div>
                         </div>
                         <div className="pb-4 mb-4 border-b-2">
-                            <p className="text-lg">  ${house.Price}/Night </p>
+                            <p className="text-lg">₾{house.Price}/Night </p>
                         </div>
 
                     </div>

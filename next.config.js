@@ -5,7 +5,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ["images.unsplash.com", "firebasestorage.googleapis.com"],
+    domains: ["images.unsplash.com", "firebasestorage.googleapis.com", "i0.wp.com", "simlitbangdiklat.kemenag.go.id"],
 
   },
 }

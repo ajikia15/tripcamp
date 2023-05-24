@@ -54,6 +54,10 @@ export default function Listings(props) {
         limit(8)
       );
       const data = await getDocs(firestoreQuery);
+      if (data.docs.length === 0) {
+        setLoading(false);
+        return;
+      }
       setHouses([
         ...houses,
         ...data.docs.map((doc) => ({
@@ -91,8 +95,8 @@ export default function Listings(props) {
 
   return (
     <>
-      <div className="grid w-full place-items-center min-h-[70vh]">
-        <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
+      <div className="grid w-full place-items-center">
+        <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
           {houses.map((house) => (
             <Link
               key={house.id}

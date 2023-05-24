@@ -123,7 +123,6 @@ const PriceFilter = ({
                 value={minMax[0]}
                 className="absolute w-full h-1 bg-transparent appearance-none pointer-events-none range-min -top-1"
               />
-
               <input
                 onChange={handleMax}
                 type="range"

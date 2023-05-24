@@ -5,7 +5,7 @@ import Search from "./Search";
 import PriceFilter from "./PriceFilter";
 import AddGuests from "./AddGuests";
 import Calendar from "./Calendar";
-
+import Categories from "../Categories";
 export default function Navbar() {
   const [activeStates, setActiveStates] = useState({
     search: false,
@@ -65,27 +65,31 @@ export default function Navbar() {
       minMax[0]
     )}&max=${encodeURIComponent(
       minMax[1]
-    )}&searchTerm=${encodeURIComponent(searchTerm)}&`;
+    )}&searchTerm=${encodeURIComponent(
+      searchTerm
+    )}&filterTerm=${encodeURIComponent(
+      filterTerm.join(",")
+    )}&`;
     return query;
   };
   const [guestsAmount, setGuestsAmount] = useState(1);
-  const [minMax, setMinMax] = useState([0, 400]);
+  const [minMax, setMinMax] = useState([0, 1000]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [filterTerm, setFilterTerm] = useState([]);
   return (
-    <>
+    <div className="pb-1 bg-white">
       <Link href="/">
         <h1 className="z-0 py-5 text-xl font-semibold text-center border border-b border-gray-200">
           TripCamp
         </h1>
       </Link>
 
-      <div className="grid w-full mt-5 mb-8 place-items-center">
+      <div className="grid w-full my-4 place-items-center">
         <div className="w-11/12 lg:w-3/5 py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition grid md:grid-cols-[3fr_5fr] z-40 bg-white relative">
           <div
             ref={refMap.search}
             onClick={() => handleChildClick("search")}
-            className="w-full pl-4 flex flex-col justify-center">
+            className="w-full pl-4 py-1">
             <Search
               active={activeStates.search}
               searchTerm={searchTerm}
@@ -102,7 +106,7 @@ export default function Navbar() {
               <PriceFilter
                 active={activeStates.priceFilter}
                 min={0}
-                max={400}
+                max={1000}
                 step={10}
                 priceCap={10}
                 minMax={minMax}
@@ -121,7 +125,7 @@ export default function Navbar() {
             </div>
             <Link
               href={`/listings/search/${generatedSearchQuery()}`}>
-              <button className="grid absolute right-4 h-4/5 text-white bg-blue-600 rounded-full shadow-sm aspect-square hover:shadow-md place-items-center">
+              <button className="absolute grid text-white bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md place-items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -145,6 +149,10 @@ export default function Navbar() {
         activeStates.calendar) && (
         <div className="fixed inset-0 z-30 bg-black opacity-50" />
       )}
-    </>
+      <Categories
+        filterTerm={filterTerm}
+        setFilterTerm={setFilterTerm}
+      />
+    </div>
   );
 }
