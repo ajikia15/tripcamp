@@ -121,6 +121,10 @@ export default function House(props) {
                         <div className="w-4/5">
                             <div className="flex flex-row items-center mt-12 mb-4">
                                 <div className="flex flex-col pb-4 border-b-2 gap-y-4">
+                                        <p className="text-lg">₾{house.Price}/Night </p>
+                                        <p>
+                                            {house.Description}
+                                        </p>
                                     <div>
                                         <p className="font-bold"> Location details </p>
                                         <p>
@@ -180,9 +184,6 @@ export default function House(props) {
                                     <Marker position={[house.Position.Latit, house.Position.Longi]} />
                                 </MapContainer>
                             </div>
-                        </div>
-                        <div className="pb-4 mb-4 border-b-2">
-                            <p className="text-lg">₾{house.Price}/Night </p>
                         </div>
 
                     </div>
