@@ -2,7 +2,7 @@ const list = [
     { id: 11, name: "Cottage" },
     { id: 12, name: "A Frames" },
     { id: 13, name: "Huts" },
-    { id: 14, name: "Wine Cellar" },
+    { id: 14, name: "Tree Houses" },
     { id: 15, name: "Tents" },
     { id: 16, name: "Domes" },
     { id: 17, name: "Floating" },
