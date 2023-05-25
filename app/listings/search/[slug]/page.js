@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import Slaidera from "../../../components/Slaidera";
 import "leaflet/dist/leaflet.css";
-
+import Image from "next/image";
 import {
     MapContainer,
     Marker,
@@ -18,6 +18,7 @@ import L from "leaflet";
 const Page = (props) => {
 
     const [loadAnimation, setLoadAnimation] = useState(false);
+    const [isBrowser, setIsBrowser] = useState(false);
 
     const slug = decodeURIComponent(props.params.slug);
     const params = slug.split('&'); // Splitting the query parameters
@@ -52,7 +53,7 @@ const Page = (props) => {
     const housesCollectionRef = collection(db, "Houses");
     useEffect(() => {
         const getHouses = async () => {
-            const querySnapshot = query(housesCollectionRef, orderBy("Prior", 'desc'));
+            const querySnapshot = query(housesCollectionRef, orderBy("CreatedAt", 'desc'));
             const data = await getDocs(querySnapshot);
             const fetchedHouses = data.docs.map((doc) => ({
                 ...doc.data(),
@@ -67,11 +68,15 @@ const Page = (props) => {
                     house.Beds >= guests && house.Address.toLowerCase().includes(searchTerm) &&
                     (filterTerm === null || filterTerm.split(",").every((term) => house.Options.split(",").includes(term)))
             )
-            setHouses(filteredHouses);
+            const sortedHouses = filteredHouses.sort((a, b) => b.Prior - a.Prior);
+            setHouses(sortedHouses);
+            setIsBrowser(true);
         };
         getHouses();
     }, []);
-
+    if (!isBrowser) {
+        return null;
+    }
     return (
 
         <>

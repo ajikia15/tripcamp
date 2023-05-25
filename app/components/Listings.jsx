@@ -49,8 +49,8 @@ export default function Listings(props) {
     if (lastHouse) {
       const firestoreQuery = query(
         housesCollectionRef,
-        orderBy("Prior", "desc"),
-        startAfter(lastHouse.Prior),
+        orderBy("CreatedAt", "desc"),
+        startAfter(lastHouse.CreatedAt),
         limit(8)
       );
       const data = await getDocs(firestoreQuery);
@@ -72,7 +72,7 @@ export default function Listings(props) {
     const getHouses = async () => {
       const firestoreQuery = query(
         housesCollectionRef,
-        orderBy("Prior", "desc"),
+        orderBy("CreatedAt", "desc"),
         limit(8)
       );
       const data = await getDocs(firestoreQuery);

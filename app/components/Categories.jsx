@@ -123,7 +123,8 @@ export default function Categories({
               )
               .map((item) => (
                 <Link
-                  href={`/listings/search/filterTerm=${item.id}`}>
+                  href={`/listings/search/filterTerm=${item.id}`}
+                  key={item.id}>
                   <CategIcons
                     name={item.name}
                     id={item.id}
