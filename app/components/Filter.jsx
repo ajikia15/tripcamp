@@ -31,6 +31,9 @@ const Filter = ({
     setCheckedItems([]);
     setFilterTerm([]);
   };
+  const [showAll, setShowAll] = useState(false);
+  const displayCount = showAll ? list.length : 4;
+
   return (
     <>
       <div className="flex-row items-center hidden gap-2 p-2 font-semibold border-2 border-gray-400 cursor-pointer md:flex rounded-xl">
@@ -184,27 +187,29 @@ const Filter = ({
                 </div>
                 <div className="grid grid-cols-2">
                   {list
-                    .filter(
-                      (item) => item.id > 50 && item.id < 80
-                    )
+                    .filter((item) => item.id > 50 && item.id < 80)
+                    .slice(0, displayCount) // Use displayCount to limit the number of checkboxes
                     .map((item) => (
                       <div key={item.id}>
                         <input
                           type="checkbox"
                           id={item.id}
-                          onChange={(e) =>
-                            handleCheckboxChange(e, item.id)
-                          }
-                          checked={isCheckboxChecked(
-                            item.id
-                          )}
+                          onChange={(e) => handleCheckboxChange(e, item.id)}
+                          checked={isCheckboxChecked(item.id)}
                         />
-                        <label htmlFor={item.id}>
-                          {item.name}
-                        </label>
+                        <label htmlFor={item.id}>{item.name}</label>
                       </div>
                     ))}
                 </div>
+                {!showAll ? (
+                  <p className="cursor-pointer mb-5 text-sm font-bold underline text-zinc-700" onClick={() => setShowAll(true)}>
+                    Show More
+                  </p>
+                ) : (
+                  <p className="cursor-pointer mb-5 text-sm font-bold underline text-zinc-700" onClick={() => setShowAll(false)}>
+                    Show Less
+                  </p>
+                )}
                 <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
                     <p className="text-lg font-bold">
