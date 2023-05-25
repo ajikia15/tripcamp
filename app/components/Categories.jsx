@@ -12,7 +12,6 @@ export default function Categories({
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [touchStartX, setTouchStartX] = useState(0);
 
   const handleScroll = () => {
     setScrollPosition(containerRef.current.scrollLeft);
@@ -94,7 +93,7 @@ export default function Categories({
 
   return (
     <>
-      <div className="flex flex-row items-center justify-between m-auto my-10 md:w-3/4">
+      <div className="flex flex-row items-center justify-center lg:m-auto lg:justify-between lg:w-3/4">
         <div className="flex flex-row items-center w-5/6 mr-6">
           <div
             className="hidden transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer md:block hover:opacity-100"
@@ -116,7 +115,7 @@ export default function Categories({
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onScroll={handleScroll}
-            className="flex flex-row mx-6 overflow-x-hidden gap-x-3 lg:gap-x-6">
+            className="flex flex-row w-full mx-6 overflow-x-hidden gap-x-3 lg:gap-x-6">
             {list
               .filter(
                 (item) => item.id > 10 && item.id < 30
@@ -150,7 +149,7 @@ export default function Categories({
           </div>
         </div>
         <div
-          className="flex items-center justify-center w-1/6"
+          className="flex items-center justify-center"
           ref={filterRef}
           onClick={filterWasClicked}>
           <Filter

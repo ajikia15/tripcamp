@@ -5,6 +5,9 @@
 .overflow-x-auto::-webkit-scrollbar {
   display: none;
 }
+body {
+  @apply min-h-screen;
+}
 * {
   margin: 0;
   padding: 0;

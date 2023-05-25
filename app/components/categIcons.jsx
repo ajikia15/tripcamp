@@ -7,10 +7,7 @@ export default function CategIcons({ name, id }) {
           <div className="text-gray-500 aspect-square">
             <img src={`${id}.svg`} alt="" />
           </div>
-          <p className="truncate">
-            {name}
-            {id}
-          </p>
+          <p className="truncate">{name}</p>
         </li>
       </ul>
     </div>

@@ -7,6 +7,20 @@ import AddGuests from "./AddGuests";
 import Calendar from "./Calendar";
 import Categories from "../Categories";
 export default function Navbar() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const [activeStates, setActiveStates] = useState({
     search: false,
     priceFilter: false,
@@ -76,33 +90,104 @@ export default function Navbar() {
   const [minMax, setMinMax] = useState([0, 1000]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterTerm, setFilterTerm] = useState([]);
+
+  const [mobnavState, setmobnavState] = useState(false);
+  const mobnavClicked = () => {
+    document.body.style.overflow = "hidden";
+    setmobnavState(true);
+  };
+  const mobnavClosed = () => {
+    setmobnavState(false);
+    document.body.style.overflow = "visible";
+  };
   return (
-    <div className="pb-1 bg-white">
-        <div className="flex justify-center md:w-5/6 mx-auto">
-        <Link href="/" className="hidden md:flex md:justify-center md:items-center">
-          <h1 className="border-none md:block z-0 py-5 mr-5 text-xl font-semibold text-center border border-b border-gray-200">
-            TripCamp
-          </h1>
-        </Link>
-        <div className="my-4 w-full mx-4">
-          <div className="flex first-letter: py-2 px-4 text-lg rounded-full shadow-lg border border-gray-200 hover:shadow-xl transition md:grid md:grid-cols-[3fr_5fr] z-40 bg-white relative">
+    <>
+      {mobnavState && (
+        <div className="fixed inset-0 z-30 bg-gray-100">
+          <div className="relative flex flex-col w-full h-screen p-4">
+            <div
+              className="grid w-10 bg-white border rounded-full cursor-pointer place-items-center boder-gray-400 aspect-square"
+              onClick={mobnavClosed}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 256 256">
+                <path
+                  fill="currentColor"
+                  d="M224 128a8 8 0 0 1-8 8H59.31l58.35 58.34a8 8 0 0 1-11.32 11.32l-72-72a8 8 0 0 1 0-11.32l72-72a8 8 0 0 1 11.32 11.32L59.31 120H216a8 8 0 0 1 8 8Z"
+                />
+              </svg>
+            </div>
             <div
               ref={refMap.search}
               onClick={() => handleChildClick("search")}
-              className="w-full pl-4 flex flex-col justify-center">
+              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer">
               <Search
                 active={activeStates.search}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
               />
             </div>
-            <ul className="justify-between hidden grid-cols-3 item-center md:grid">
+            <div
+              ref={refMap.priceFilter}
+              onClick={() =>
+                handleChildClick("priceFilter")
+              }
+              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer">
+              <PriceFilter
+                active={activeStates.priceFilter}
+                min={0}
+                max={1000}
+                step={10}
+                priceCap={10}
+                minMax={minMax}
+                setMinMax={setMinMax}
+              />
+            </div>
+            <div
+              ref={refMap.guests}
+              onClick={() => handleChildClick("guests")}
+              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer">
+              <AddGuests
+                active={activeStates.guests}
+                guestsAmount={guestsAmount}
+                setGuestsAmount={setGuestsAmount}
+              />
+            </div>
+            <div className="grid py-2 text-white bg-blue-600 rounded-md place-items-center">
+              <p>Search</p>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="sticky top-0 left-0 z-20 w-full bg-white">
+        {/* dont render if < 768  if 768 > then render my shi */}
+        {!isMobile ? (
+          <div className="relative w-full h-28">
+            <div className="absolute z-40 grid w-full h-16 grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl lg:h-20 left-1/2 md:w-11/12 lg:w-5/6 xl:w-4/5 2xl:w-3/5 top-1/2">
+              <div
+                ref={refMap.search}
+                onClick={() => handleChildClick("search")}
+                className="flex flex-col justify-center w-full">
+                <Search
+                  active={activeStates.search}
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                />
+              </div>
+              <div
+                ref={refMap.calendar}
+                onClick={() => handleChildClick("calendar")}
+                className="flex flex-col justify-center w-full ">
+                <Calendar active={activeStates.calendar} />
+              </div>
               <div
                 ref={refMap.priceFilter}
                 onClick={() =>
                   handleChildClick("priceFilter")
                 }
-                className="w-full">
+                className="flex flex-col justify-center w-full">
                 <PriceFilter
                   active={activeStates.priceFilter}
                   min={0}
@@ -116,7 +201,7 @@ export default function Navbar() {
               <div
                 ref={refMap.guests}
                 onClick={() => handleChildClick("guests")}
-                className="w-full">
+                className="flex flex-col justify-center w-full">
                 <AddGuests
                   active={activeStates.guests}
                   guestsAmount={guestsAmount}
@@ -125,7 +210,7 @@ export default function Navbar() {
               </div>
               <Link
                 href={`/listings/search/${generatedSearchQuery()}`}>
-                <button className="absolute grid text-white bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md place-items-center">
+                <button className="absolute flex flex-col items-center justify-center text-white -translate-y-1/2 bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md top-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -138,21 +223,45 @@ export default function Navbar() {
                   </svg>
                 </button>
               </Link>
-            </ul>
-            <ul className=""></ul>
+            </div>
+            <Link
+              href="/"
+              className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2">
+              <h1 className="hidden md:block">A</h1>
+              <h1 className="hidden text-xl font-bold xl:block">
+                TripCamp
+              </h1>
+            </Link>
           </div>
+        ) : (
+          <div className="relative w-full h-28">
+            <div
+              className="absolute z-40 grid w-full h-16 grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl lg:h-20 left-1/2 top-1/2 "
+              onClick={mobnavClicked}>
+              <li className="flex flex-col justify-center w-full h-full cursor-pointer">
+                <h3 className="w-full font-semibold">
+                  Where To?
+                </h3>
+                <p className="text-xs text-gray-500">
+                  Anywhere • Any Week • Add guests
+                </p>
+              </li>
+            </div>
+          </div>
+        )}
+        {(activeStates.search ||
+          activeStates.priceFilter ||
+          activeStates.guests ||
+          activeStates.calendar) && (
+          <div className="fixed inset-0 z-30 bg-black opacity-50" />
+        )}
+        <div className="pb-2 md:py-4">
+          <Categories
+            filterTerm={filterTerm}
+            setFilterTerm={setFilterTerm}
+          />
         </div>
-        </div>
-      {(activeStates.search ||
-        activeStates.priceFilter ||
-        activeStates.guests ||
-        activeStates.calendar) && (
-        <div className="fixed inset-0 z-30 bg-black opacity-50" />
-      )}
-      <Categories
-        filterTerm={filterTerm}
-        setFilterTerm={setFilterTerm}
-      />
-    </div>
+      </div>
+    </>
   );
 }

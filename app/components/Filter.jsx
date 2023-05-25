@@ -187,26 +187,38 @@ const Filter = ({
                 </div>
                 <div className="grid grid-cols-2">
                   {list
-                    .filter((item) => item.id > 50 && item.id < 80)
+                    .filter(
+                      (item) => item.id > 50 && item.id < 80
+                    )
                     .slice(0, displayCount) // Use displayCount to limit the number of checkboxes
                     .map((item) => (
                       <div key={item.id}>
                         <input
                           type="checkbox"
                           id={item.id}
-                          onChange={(e) => handleCheckboxChange(e, item.id)}
-                          checked={isCheckboxChecked(item.id)}
+                          onChange={(e) =>
+                            handleCheckboxChange(e, item.id)
+                          }
+                          checked={isCheckboxChecked(
+                            item.id
+                          )}
                         />
-                        <label htmlFor={item.id}>{item.name}</label>
+                        <label htmlFor={item.id}>
+                          {item.name}
+                        </label>
                       </div>
                     ))}
                 </div>
                 {!showAll ? (
-                  <p className="cursor-pointer mb-5 text-sm font-bold underline text-zinc-700" onClick={() => setShowAll(true)}>
+                  <p
+                    className="mb-5 text-sm font-bold underline cursor-pointer text-zinc-700"
+                    onClick={() => setShowAll(true)}>
                     Show More
                   </p>
                 ) : (
-                  <p className="cursor-pointer mb-5 text-sm font-bold underline text-zinc-700" onClick={() => setShowAll(false)}>
+                  <p
+                    className="mb-5 text-sm font-bold underline cursor-pointer text-zinc-700"
+                    onClick={() => setShowAll(false)}>
                     Show Less
                   </p>
                 )}
