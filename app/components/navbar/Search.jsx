@@ -55,14 +55,14 @@ export default function Search({
       {active ? (
         <li className="relative flex flex-col">
           <input
-            className="w-full outline-none text-middle"
+            className="w-full my-4 bg-gray-100 outline-none md:bg-white md:my-0"
             type="text"
             autoFocus
             value={searchTerm}
             onChange={handleInputChange}
             placeholder="Where to?"
           />
-          <ul className="absolute -left-12 -right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y max-h-[70vh] overflow-y-scroll">
+          <ul className="absolute left-2 right-2 md:-left-12 md:-right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y max-h-[70vh] overflow-y-scroll z-50">
             <div>
               {filteredHouses.map((house) => {
                 return (
@@ -110,8 +110,8 @@ export default function Search({
           </ul>
         </li>
       ) : (
-        <li className="flex flex-col w-full">
-          <h3 className="w-full font-semibold">
+        <li className="flex flex-row justify-between w-full my-4 md:flex-col md:justify-normal">
+          <h3 className="font-semibold md:w-full">
             {searchTerm || "Where to?"}
           </h3>
           {searchTerm ? null : (
@@ -123,30 +123,4 @@ export default function Search({
       )}
     </>
   );
-}
-{
-  /* <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 512 512">
-                          <path
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="32"
-                            d="M256 48c-79.5 0-144 61.39-144 137c0 87 96 224.87 131.25 272.49a15.77 15.77 0 0 0 25.5 0C304 409.89 400 272.07 400 185c0-75.61-64.5-137-144-137Z"
-                          />
-                          <circle
-                            cx="256"
-                            cy="192"
-                            r="48"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="32"
-                          />
-                        </svg> */
 }

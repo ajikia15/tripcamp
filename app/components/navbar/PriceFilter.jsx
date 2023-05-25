@@ -70,7 +70,7 @@ const PriceFilter = ({
   }, [minMax, active]);
 
   return (
-    <li className="flex flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2 cursor-pointer">
+    <li className="flex md:flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-6 before:top-1/2 before:-translate-y-1/2 cursor-pointer flex-row w-full justify-between items-center md:my-0 my-4 md:items-baseline">
       <h3 className="font-semibold">Price</h3>
       <p className="text-xs text-gray-500">
         {minMax[0] === min && minMax[1] === max
@@ -78,7 +78,7 @@ const PriceFilter = ({
           : `${minMax[0]} - ${minMax[1]}`}
       </p>
       {active && (
-        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] -left-24 -right-24">
+        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] left-0 right-0 md:-left-24 md:-right-24 z-50">
           <div className="flex items-center justify-between my-6">
             <div className="flex flex-col justify-start pl-3 pr-8 border-2 border-gray-200 rounded-md">
               <span className="text-sm text-gray-600">

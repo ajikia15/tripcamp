@@ -69,24 +69,7 @@ export default function House(props) {
             }
             {!loading && house && (
                 <div className="flex flex-col w-11/12 mx-auto xl:w-4/5">
-                    <div className="bg-gray-200 p-4">
-                        <div className="grid grid-cols-2 border-b border-zinc-600 py-4">
-                            <div className="flex justify-start text-zinc-600">Where?</div>
-                            <div className="flex justify-end text-zinc-900 font-bold">Batumi, Georgia</div>
-                        </div>
-                        <div className="grid grid-cols-2 border-b border-zinc-600 py-4">
-                            <div className="flex justify-start text-zinc-600">Where?</div>
-                            <div className="flex justify-end text-zinc-900 font-bold">Batumi, Georgia</div>
-                        </div>
-                        <div className="grid grid-cols-2 border-b border-zinc-600 py-4">
-                            <div className="flex justify-start text-zinc-600">Where?</div>
-                            <div className="flex justify-end text-zinc-900 font-bold">Batumi, Georgia</div>
-                        </div>
-                        <div className="grid grid-cols-2 border-b border-zinc-600 py-4">
-                            <div className="flex justify-start text-zinc-600">Where?</div>
-                            <div className="flex justify-end text-zinc-900 font-bold">Batumi, Georgia</div>
-                        </div>
-                    </div>
+
 
                     <div className='pl-1 mb-2'>
                         <p className="text-sm"> {house.Address.split("~").join(" ")} {house.Beds}</p>
