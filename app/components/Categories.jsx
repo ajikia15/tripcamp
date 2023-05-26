@@ -2,8 +2,9 @@
 import CategIcons from "./CategIcons";
 import { useRef, useState, useEffect } from "react";
 import Filter from "./Filter";
-import list from "../list";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import list from "../list";
 export default function Categories({
   filterTerm,
   setFilterTerm,
@@ -12,6 +13,7 @@ export default function Categories({
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const pathname = usePathname();
 
   const handleScroll = () => {
     setScrollPosition(containerRef.current.scrollLeft);
@@ -115,7 +117,7 @@ export default function Categories({
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onScroll={handleScroll}
-            className="flex flex-row w-full mx-6 overflow-x-hidden gap-x-3 lg:gap-x-6">
+            className="grid w-full grid-flow-col-dense mx-6 overflow-x-hidden gap-x-3 lg:gap-x-6">
             {list
               .filter(
                 (item) => item.id > 10 && item.id < 30
@@ -123,7 +125,14 @@ export default function Categories({
               .map((item) => (
                 <Link
                   href={`/listings/search/filterTerm=${item.id}`}
-                  key={item.id}>
+                  key={item.id}
+                  className={`${
+                    pathname.startsWith(
+                      `/listings/search/filterTerm=${item.id}`
+                    )
+                      ? "border-blue-600 border-b-2 "
+                      : ""
+                  }`}>
                   <CategIcons
                     name={item.name}
                     id={item.id}

@@ -78,7 +78,7 @@ const PriceFilter = ({
           : `${minMax[0]} - ${minMax[1]}`}
       </p>
       {active && (
-        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] left-0 right-0 md:-left-24 md:-right-24 z-50">
+        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] left-0 right-0 md:-left-16 w-96 z-50">
           <div className="flex items-center justify-between my-6">
             <div className="flex flex-col justify-start pl-3 pr-8 border-2 border-gray-200 rounded-md">
               <span className="text-sm text-gray-600">
@@ -102,7 +102,7 @@ const PriceFilter = ({
                 type="number"
                 readOnly
                 value={minMax[1]}
-                className="w-10 border border-gray-400 border-none rounded-md no-arrows"
+                className="w-12 border border-gray-400 border-none rounded-md no-arrows"
               />
             </div>
           </div>
@@ -110,10 +110,11 @@ const PriceFilter = ({
             <div className="relative h-1 bg-gray-300 rounded-md slider">
               <div
                 className="absolute h-1 bg-blue-600 rounded progress"
-                ref={progressRef}></div>
+                ref={progressRef}
+              />
             </div>
 
-            <div className="relative range-input ">
+            <div className="relative range-input">
               <input
                 onChange={handleMin}
                 type="range"

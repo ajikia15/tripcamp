@@ -68,11 +68,11 @@ export default function House(props) {
                 </div>
             }
             {!loading && house && (
-                <div className="flex flex-col w-11/12 mx-auto xl:w-4/5">
+                <div className="flex flex-col w-11/12 mx-auto mt-4 xl:w-4/5">
 
 
-                    <div className='pl-1 mb-2'>
-                        <p className="text-sm"> {house.Address.split("~").join(" ")} {house.Beds}</p>
+                    <div className='flex flex-col pl-1 mb-2 gap-y-1'>
+                        <p className="text-sm"> {house.Address.split("~").join(" ")}</p>
                         <h1 className="text-3xl font-bold"> {house.Name} </h1>
                     </div>
                     <div className="relative flex gap-2 overflow-hidden rounded-2xl">
@@ -104,10 +104,10 @@ export default function House(props) {
                         <div className="w-4/5">
                             <div className="flex flex-row items-center mt-12 mb-4">
                                 <div className="flex flex-col pb-4 border-b-2 gap-y-4">
-                                        <p className="text-lg">₾{house.Price}/Night </p>
-                                        <p>
-                                            {house.Description}
-                                        </p>
+                                    <p className="text-lg">₾{house.Price}/Night </p>
+                                    <p>
+                                        {house.Description}
+                                    </p>
                                     <div>
                                         <p className="font-bold"> Location details </p>
                                         <p>
@@ -126,7 +126,10 @@ export default function House(props) {
                                 <h2 className="text-xl4"> Activities </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 md:grid-cols-2 gap-y-3">
                                     {options.filter((option) => option >= 80 && option < 100).map((option) => (
-                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
+                                        <li key={option}>
+                                            {list.find((item) => item.id === option)?.name}
+
+                                        </li>
                                     ))}
                                 </ul>
                                 <h2 className="text-xl"> Scenic Views </h2>

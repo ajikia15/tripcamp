@@ -6,7 +6,6 @@ export default async function Home() {
     <main className="p-0 m-0">
       <Listings />
       <FooterFixed />
-
     </main>
   );
 }
