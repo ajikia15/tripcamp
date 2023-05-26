@@ -18,6 +18,7 @@ const Page = (props) => {
 
     const slug = decodeURIComponent(props.params.slug);
     const params = slug.split('&'); // Splitting the query parameters
+    const [center, setCenter] = useState([42.6556, 44.6433])
 
     let guests = 1; // Default value for guests
     let minMax = [0, 400]; // Default values for min and max
@@ -63,6 +64,7 @@ const Page = (props) => {
             )
             const sortedHouses = filteredHouses.sort((a, b) => b.Prior - a.Prior);
             setHouses(sortedHouses);
+            houses.length > 0 && (setCenter(useState[houses[0].Latit, houses[0].Longit]))
         };
         getHouses();
     }, []);
@@ -85,7 +87,7 @@ const Page = (props) => {
                 <div className="relative hidden w-full h-full sm:block">
                     <div className="sticky top-0 bottom-0 left-0 right-0">
                         <MapContainer
-                            center={[42.6556, 44.6433]}
+                            center={center}
                             zoom={13}
                             style={{ height: "100vh" }}
                             scrollWheelZoom={false}
@@ -108,12 +110,12 @@ const Page = (props) => {
                                     })}>
                                     <Popup>
                                         <Link href={`/listings/${house.id}`}>
-                                            <div className="flex flex-col gap-y-2">
+                                            <div className="flex flex-col">
                                                 <div className="relative w-full rounded-md aspect-square">
-                                                    <Image src={house.Photo[0]} fill={true} />
+                                                    <Image src={house.Photo[0]} fill={true} className="rounded-md" />
                                                 </div>
                                                 <p className="text-lg font-bold">{house.Name}</p>
-                                                <p className="text-md text-zinc-500">{house.Address.split("~").join(" ")}</p>
+                                                <p className="truncate text-md text-zinc-500">{house.Address.split("~").join(" ")}</p>
                                                 <div className="flex items-center gap-x-2">
                                                     <p className="font-bold">{house.Price}₾</p>
                                                     <p className="text-md">Night</p>
