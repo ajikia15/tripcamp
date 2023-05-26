@@ -96,7 +96,7 @@ export default function Categories({
   return (
     <>
       <div className="flex flex-row items-center justify-center lg:m-auto lg:justify-between lg:w-3/4">
-        <div className="flex flex-row items-center w-5/6 mr-6">
+        <div className="flex flex-row items-center w-5/6 md:w-[70%] lg:w-5/6 mr-6">
           <div
             className="hidden transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer md:block hover:opacity-100"
             onClick={handleScrollLeft}>
