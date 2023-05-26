@@ -3,7 +3,6 @@ import ChangeCurrency from "./ChangeCurrency";
 import LangChange from "./ChangeCurrency";
 import Footer from "./Footer";
 import { useState, useEffect, useRef } from "react";
-import firebaseLogin from "../buttons/firebaselogin";
 
 export default function FooterFixed() {
   const [currencyState, setCurrencyState] = useState(false);

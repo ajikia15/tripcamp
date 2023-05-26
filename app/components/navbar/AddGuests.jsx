@@ -22,7 +22,7 @@ const AddGuests = ({
       <p className="text-xs text-gray-500">
         {guestsAmount == 1
           ? "Add Guests"
-          : `${guestsAmount} guests`}
+          : `${guestsAmount} Guests`}
       </p>
       {active && (
         <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] md:-left-24 md:-right-24 right-0 left-0">

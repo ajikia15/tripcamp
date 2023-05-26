@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import list from "../list";
-
+import Image from "next/image";
 const FilterParts = ({
   min,
   max,
@@ -26,13 +26,19 @@ const FilterParts = ({
 
   return (
     <>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-y-2">
         {filteredItems
           .slice(0, displayCount)
           .map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-x-2">
+              className="flex items-center gap-x-2 ">
+              <Image
+                src={`/${item.id}.svg`}
+                width={30}
+                height={30}
+              />
+
               <input
                 type="checkbox"
                 id={item.id}

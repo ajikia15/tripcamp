@@ -59,7 +59,7 @@ const Filter = ({
         <p className="hidden md:block">Filters</p>
       </div>
       {active && (
-        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl left-1/2 -translate-x-1/2 w-screen h-screen md:w-[60vw] md:h-[70vh] top-1/2 -translate-y-1/2">
+        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[15%] lg:inset-x-1/4 inset-0 ">
           <div className="flex flex-col px-6 gap-y-5">
             {/* header */}
             <div className="sticky top-0 ">

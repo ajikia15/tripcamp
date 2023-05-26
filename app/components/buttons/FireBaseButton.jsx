@@ -1,9 +1,7 @@
-import firebaseConfig from "../../../firebase-config";
-
-function MyComponent() {
+import { auth } from "../../../firebase-config";
+export default function FireBaseButton() {
   const handleLogin = () => {
-    firebaseConfig
-      .auth()
+    auth
       .signInAnonymously()
       .then((userCredential) => {
         // Handle successful login
