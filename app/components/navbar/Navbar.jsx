@@ -186,7 +186,7 @@ export default function Navbar() {
                 ref={refMap.calendar}
                 onClick={() => handleChildClick("calendar")}
                 className="flex flex-col justify-center w-full ">
-                <Calendar active={activeStates.calendar} />
+                {/* <Calendar active={activeStates.calendar} /> */}
               </div>
               <div
                 ref={refMap.priceFilter}
@@ -238,21 +238,21 @@ export default function Navbar() {
                 className="hidden xl:block 2xl:hidden"
                 width={120}
                 height={50}
-                alt=""
+                alt="Logo"
               />
               <Image
                 src="/Logo_Horizontal.svg"
                 className="hidden 2xl:block"
                 width={200}
                 height={50}
-                alt=""
+                alt="Logo"
               />
               <Image
                 src="/Logo_Symbol.svg"
                 className="hidden lg:block xl:hidden"
                 width={50}
                 height={50}
-                alt=""
+                alt="Logo"
               />
             </Link>
           </div>
