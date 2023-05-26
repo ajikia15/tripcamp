@@ -1,11 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
-import classNames from 'classnames';
 import { db } from "../../../../firebase-config";
 import { doc, getDoc } from "firebase/firestore"
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import "leaflet/dist/leaflet.css";
-import Image from "next/image";
 import "./Gallery.css"
 export default function Gallery(props) {
   const [house, setHouse] = useState(null);
