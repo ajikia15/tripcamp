@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
 import "./style.css";
 const AddGuests = ({ active }) => {
   return (
