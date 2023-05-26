@@ -16,7 +16,6 @@ import {
 import L from "leaflet";
 
 const Page = (props) => {
-
     const [loadAnimation, setLoadAnimation] = useState(false);
     const [isBrowser, setIsBrowser] = useState(false);
 
@@ -80,9 +79,9 @@ const Page = (props) => {
     return (
 
         <>
-            {slug}
+            {/* {slug} */}
 
-            <div className="grid w-full grid-cols-[3fr_2fr] place-items-center min-h-[70vh]">
+            <div className="grid w-full md:grid-cols-[3fr_2fr] place-items-center min-h-[70vh]">
                 <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
                     {houses.map((house) => (
                         <Link
@@ -92,7 +91,7 @@ const Page = (props) => {
                         </Link>
                     ))}
                 </div>
-                <div className="relative w-full h-full">
+                <div className="relative hidden w-full h-full sm:block">
                     <div className="sticky top-0 bottom-0 left-0 right-0">
                         <MapContainer
                             center={[42.6556, 44.6433]}
