@@ -5,7 +5,7 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function Search({
   active,
@@ -38,13 +38,13 @@ export default function Search({
     setSearchTerm(value);
   };
 
-  const formatAddress = (address) => {
+  const formatAddress = useCallback((address) => {
     const addressParts = address.split("~");
     const formattedAddress = addressParts
       .slice(0, 3)
       .join(", ");
     return formattedAddress;
-  };
+  }, []);
 
   const filteredHouses =
     searchTerm !== ""
