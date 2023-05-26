@@ -1,7 +1,6 @@
 "use client";
 import "./style.css";
 import { useState } from "react";
-import FireBaseButton from "../buttons/FireBaseButton";
 
 const Footer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -75,9 +74,7 @@ const Footer = () => {
                   </li>
                   <li>Disaster relief housing</li>
                   <li>Combating discrimination</li>
-                  <li>
-                    <FireBaseButton />
-                  </li>
+                  <li></li>
                 </ul>
                 <div className="space-y-4 text-xs text-gray-800">
                   <h5 className="font-bold">Hosting</h5>
