@@ -74,7 +74,7 @@ const PriceFilter = ({
       <h3 className="font-semibold">Price</h3>
       <p className="text-xs text-gray-500">
         {minMax[0] === min && minMax[1] === max
-          ? "Any amount"
+          ? "Any"
           : `${minMax[0]} - ${minMax[1]}`}
       </p>
       {active && (
@@ -97,13 +97,16 @@ const PriceFilter = ({
               <span className="text-sm text-gray-600">
                 Maximum Price
               </span>
-              <input
-                onChange={handleMax}
-                type="number"
-                readOnly
-                value={minMax[1]}
-                className="w-12 border border-gray-400 border-none rounded-md no-arrows"
-              />
+              <div className="flex flex-row">
+                <input
+                  onChange={handleMax}
+                  type="number"
+                  readOnly
+                  value={minMax[1]}
+                  className="w-12 border border-gray-400 border-none rounded-md no-arrows"
+                />
+                {minMax[1] === 1000 && "+"}
+              </div>
             </div>
           </div>
           <div className="mb-4">

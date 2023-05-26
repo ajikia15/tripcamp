@@ -9,7 +9,7 @@ import Categories from "../Categories";
 import Image from "next/image";
 import Filter from "../Filter";
 export default function Navbar() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -105,8 +105,8 @@ export default function Navbar() {
   return (
     <>
       {mobnavState && (
-        <div className="fixed inset-0 z-30 bg-gray-100">
-          <div className="relative flex flex-col w-full h-screen p-4">
+        <div className="fixed inset-0 z-40 bg-gray-100">
+          <div className="relative flex flex-col w-full h-full p-4">
             <div
               className="grid w-10 bg-white border rounded-full cursor-pointer place-items-center boder-gray-400 aspect-square"
               onClick={mobnavClosed}>
@@ -166,12 +166,12 @@ export default function Navbar() {
           </div>
         </div>
       )}
-      <div className="sticky top-0 left-0 z-30 w-full pt-6 bg-white">
+      <div className="sticky top-0 left-0 z-30 w-full bg-white sm:pt-2 lg:pt-6">
         {/* dont render if < 768  if 768 > then render my shi */}
 
         {!isMobile ? (
-          <div className="relative w-full h-[5rem]">
-            <div className="absolute z-40 grid w-full h-16 grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl lg:h-20 left-1/2 md:w-11/12 lg:w-5/6 xl:w-4/5 2xl:w-3/5 top-1/2">
+          <div className="relative w-full h-[4.5rem] lg:h-[5rem]">
+            <div className="absolute z-40 grid w-full h-full grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-11/12 lg:w-5/6 xl:w-4/5 2xl:w-3/5 top-1/2">
               <div
                 ref={refMap.search}
                 onClick={() => handleChildClick("search")}
@@ -234,21 +234,21 @@ export default function Navbar() {
               href="/"
               className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2">
               <Image
-                src="Logo_Horizontal.svg"
+                src="/Logo_Horizontal.svg"
                 className="hidden xl:block 2xl:hidden"
                 width={120}
                 height={50}
                 alt=""
               />
               <Image
-                src="Logo_Horizontal.svg"
+                src="/Logo_Horizontal.svg"
                 className="hidden 2xl:block"
                 width={200}
                 height={50}
                 alt=""
               />
               <Image
-                src="Logo_Symbol.svg"
+                src="/Logo_Symbol.svg"
                 className="hidden lg:block xl:hidden"
                 width={50}
                 height={50}
@@ -267,7 +267,7 @@ export default function Navbar() {
                 </h3>
                 <p className="text-xs text-gray-500">
                   {searchTerm ? searchTerm : "Anywhere"} •
-                  Any Week •{" "}
+                  Any Week •
                   {guestsAmount != 1
                     ? `${guestsAmount} guests`
                     : "Any Amount"}

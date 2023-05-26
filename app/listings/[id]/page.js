@@ -2,12 +2,13 @@
 import { useState, useEffect } from "react";
 import { db } from "../../../firebase-config";
 import { doc, getDoc } from "firebase/firestore"
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
 import list from "../../list"
 import StaticFooter from "../../components/footer/StaticFooter"
 import Link from "next/link";
+import L from "leaflet";
 export default function House(props) {
     const [house, setHouse] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -73,7 +74,9 @@ export default function House(props) {
 
                     <div className='flex flex-col pl-1 mb-2 gap-y-1'>
                         <p className="text-sm"> {house.Address.split("~").join(" ")}</p>
-                        <h1 className="text-3xl font-bold"> {house.Name} </h1>
+                        <h1 className="flex justify-between w-full text-3xl font-bold"> {house.Name}
+                            <p className="text-lg">₾{house.Price}/Night </p>
+                        </h1>
                     </div>
                     <div className="relative flex gap-2 overflow-hidden rounded-2xl">
                         <Link href={`/listings/${props.params.id}/gallery/`}>
@@ -104,55 +107,59 @@ export default function House(props) {
                         <div className="w-4/5">
                             <div className="flex flex-row items-center mt-12 mb-4">
                                 <div className="flex flex-col pb-4 border-b-2 gap-y-4">
-                                    <p className="text-lg">₾{house.Price}/Night </p>
+                                    <p className="font-bold"> Location details </p>
                                     <p>
                                         {house.Description}
                                     </p>
-                                    <div>
-                                        <p className="font-bold"> Location details </p>
-                                        <p>
-                                            {house.Description}
-                                        </p>
-                                    </div>
+
                                 </div>
                             </div>
                             <div className="flex flex-col gap-y-4">
                                 <h2 className="mb-4 text-xl"> Amenities </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 md:grid-cols-2 gap-y-3">
                                     {options.filter((option) => option >= 50 && option < 80).map((option) => (
-                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
+                                        <li className="flex flex-row items-center gap-x-2" key={option}>
+                                            <Image src={`/${list.find(item => item.id === option)?.id}.svg`} width={20} height={20} />
+                                            <p>{list.find(item => item.id === option)?.name}</p>
+                                        </li>
                                     ))}
                                 </ul>
                                 <h2 className="text-xl4"> Activities </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 md:grid-cols-2 gap-y-3">
                                     {options.filter((option) => option >= 80 && option < 100).map((option) => (
-                                        <li key={option}>
-                                            {list.find((item) => item.id === option)?.name}
-
+                                        <li className="flex flex-row items-center gap-x-2" key={option}>
+                                            <Image src={`/${list.find(item => item.id === option)?.id}.svg`} width={20} height={20} />
+                                            <p>{list.find(item => item.id === option)?.name}</p>
                                         </li>
                                     ))}
                                 </ul>
                                 <h2 className="text-xl"> Scenic Views </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 gap-y-3">
                                     {options.filter((option) => option >= 41 && option < 50).map((option) => (
-                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
+                                        <li className="flex flex-row items-center gap-x-2" key={option}>
+                                            <Image src={`/${list.find(item => item.id === option)?.id}.svg`} width={20} height={20} />
+                                            <p>{list.find(item => item.id === option)?.name}</p>
+                                        </li>
                                     ))}
                                 </ul>
                                 <h2 className="text-xl"> Features </h2>
                                 <ul className="grid grid-cols-1 pb-4 border-b-2 gap-y-3">
                                     {options.filter((option) => option >= 31 && option < 40).map((option) => (
-                                        <li key={option}>{list.find(item => item.id === option)?.name}</li>
+                                        <li className="flex flex-row items-center gap-x-2" key={option}>
+                                            <Image src={`/${list.find(item => item.id === option)?.id}.svg`} width={20} height={20} />
+                                            <p>{list.find(item => item.id === option)?.name}</p>
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
-                            <div className="pb-4 mb-4 border-b-2">
+                            {/* <div className="pb-4 mb-4 border-b-2">
                                 <div className="flex items-center justify-center w-full text-white rounded-lg bg-zinc-800 h-96">
                                     <p>Calendar</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div>
-                            <div className="mt-4 p-4 sticky top-2 hidden md:w-[284px] md:h-[340px] md:ml-2 md:flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex lg:flex justify-center items-center">
+                            <div className="mt-4 p-4 sticky top-56 hidden md:w-[284px] md:h-[340px] md:ml-2 flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex  justify-center items-center">
                                 <div className="flex items-center justify-center rounded-lg md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 md:flex-row bg-zinc-800">QR</div>
                                 <p className="text-sm w-36 text-zinc-800 md:text-center">Scan code to Download Tripcamp application to make reservation</p>
                             </div>
@@ -167,7 +174,10 @@ export default function House(props) {
                                         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                                         attribution='&copy; <a href="https://carto.com/" target="_blank">Carto</a> | Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors'
                                     />
-                                    <Marker position={[house.Position.Latit, house.Position.Longi]} />
+                                    <Marker position={[house.Position.Latit, house.Position.Longi]} icon={L.divIcon({
+                                        className: "house-icon",
+                                        html: `<div><Image src="/11.svg" /></div>`,
+                                    })} />
                                 </MapContainer>
                             </div>
                         </div>

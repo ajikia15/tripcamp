@@ -16,7 +16,7 @@
     "embla-carousel-react": "^8.0.0-rc04",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
-    "firebase": "^9.21.0",
+    "firebase": "^9.22.1",
     "next": "^13.4.3",
     "postcss": "8.4.23",
     "react": "^18.2.0",

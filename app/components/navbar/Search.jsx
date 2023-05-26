@@ -28,32 +28,44 @@ export default function Search({
         }))
       );
     };
-    getHouses();
-  }, []);
+    if (searchTerm.length >= 2) {
+      getHouses();
+    }
+  }, [searchTerm]);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
   };
 
+  const formatAddress = (address) => {
+    const addressParts = address.split("~");
+    const formattedAddress = addressParts
+      .slice(0, 3)
+      .join(", ");
+    return formattedAddress;
+  };
+
   const filteredHouses =
     searchTerm !== ""
-      ? houses.filter((house) =>
-          house.Address.toLowerCase().includes(
-            searchTerm.toLowerCase()
-          )
-        )
+      ? houses.filter((house) => {
+          const formattedAddress = formatAddress(
+            house.Address
+          );
+          return formattedAddress
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase());
+        })
       : [];
 
-  const formatAddress = (address) =>
-    address.split("~").slice(0, 3).join(", ");
   const handleHouseClick = (address) => {
-    setSearchTerm(formatAddress(address));
+    const formattedAddress = formatAddress(address);
+    setSearchTerm(formattedAddress);
   };
   return (
     <>
       {active ? (
-        <li className="relative flex flex-col">
+        <li className="relative flex flex-col w-full">
           <input
             className="w-full my-4 bg-gray-100 outline-none md:bg-white md:my-0"
             type="text"
