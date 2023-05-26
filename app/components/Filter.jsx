@@ -32,12 +32,10 @@ const Filter = ({
     setCheckedItems([]);
     setFilterTerm([]);
   };
-  const [showAll, setShowAll] = useState(false);
-  const displayCount = showAll ? list.length : 4;
 
   return (
     <>
-      <div className="flex flex-row items-center gap-2 p-2 font-semibold border-2 border-gray-400 cursor-pointer rounded-xl">
+      <div className="flex-row items-center hidden gap-2 p-2 font-semibold border-2 border-gray-400 cursor-pointer md:flex rounded-xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -56,13 +54,34 @@ const Filter = ({
             <circle cx="15" cy="8" r="2" />
           </g>
         </svg>
-        <p className="hidden md:block">Filters</p>
+        <p>Filters</p>
+      </div>
+      <div className="flex items-center justify-center w-full p-3 font-bold bg-white border-2 border-gray-200 rounded-md cursor-pointer ">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24">
+          <g
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 8h9m4 0h3m-9 8h9M4 16h3"
+            />
+            <circle cx="9" cy="16" r="2" />
+            <circle cx="15" cy="8" r="2" />
+          </g>
+        </svg>
+        <p>Filters</p>
       </div>
       {active && (
         <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[15%] lg:inset-x-1/4 inset-0 ">
           <div className="flex flex-col px-6 gap-y-5">
             {/* header */}
-            <div className="sticky top-0 ">
+            <div className="sticky top-0">
               <div className="absolute top-0 left-0 right-0 flex items-center justify-center p-5 bg-white border-b-2">
                 <p className="font-extrabold text-md">
                   Filters

@@ -158,7 +158,7 @@ export default function Categories({
           </div>
         </div>
         <div
-          className="flex items-center justify-center"
+          className="items-center justify-center hidden md:flex"
           ref={filterRef}
           onClick={filterWasClicked}>
           <Filter

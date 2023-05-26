@@ -10,6 +10,10 @@ import Image from "next/image";
 import Filter from "../Filter";
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(true);
+  const containerRef = useRef(null);
+  const filterRef = useRef(null);
+  const [filterState, setFilterState] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -102,6 +106,37 @@ export default function Navbar() {
     setmobnavState(false);
     document.body.style.overflow = "visible";
   };
+  const filterWasClicked = (e) => {
+    setFilterState(true);
+  };
+  const filterClose = (e) => {
+    e.stopPropagation();
+    setFilterState(false);
+  };
+  const handleClearSelection = () => {
+    setFilterTerm([]);
+  };
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        filterState &&
+        filterRef.current &&
+        !filterRef.current.contains(e.target)
+      ) {
+        handleClearSelection();
+        setFilterState(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener(
+        "click",
+        handleClickOutside
+      );
+    };
+  }, [filterState]);
   return (
     <>
       {mobnavState && (
@@ -157,21 +192,30 @@ export default function Navbar() {
                 setGuestsAmount={setGuestsAmount}
               />
             </div>
-            <div className="flex items-center justify-center w-full py-2 font-bold bg-white border-2 border-gray-200 rounded-md">
-              Filter
+            <div className="absolute bottom-0 flex flex-col my-2 gap-y-2 right-2 left-2">
+              <div
+                className="flex items-center justify-center"
+                ref={filterRef}
+                onClick={filterWasClicked}>
+                <Filter
+                  filterClose={filterClose}
+                  active={filterState}
+                  filterTerm={filterTerm}
+                  setFilterTerm={setFilterTerm}
+                />
+              </div>
+              <Link
+                href={`/listings/search/${generatedSearchQuery()}`}
+                onClick={mobnavClosed}
+                className="grid py-3 font-bold text-white bg-blue-600 rounded-md place-items-center">
+                <p>Search</p>
+              </Link>
             </div>
-            <Link
-              href={`/listings/search/${generatedSearchQuery()}`}
-              onClick={mobnavClosed}
-              className="absolute bottom-0 grid py-3 my-2 font-bold text-white bg-blue-600 rounded-md place-items-center right-2 left-2">
-              <p>Search</p>
-            </Link>
           </div>
         </div>
       )}
       <div className="sticky top-0 left-0 z-30 w-full bg-white sm:pt-2 lg:pt-6">
-        {/* dont render if < 768  if 768 > then render my shi */}
-
+        {/* dont render if < 768  if 768 > then yes */}
         {!isMobile ? (
           <div className="relative w-full h-[4.5rem] lg:h-[5rem]">
             <div className="absolute z-40 grid w-full h-full grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 top-1/2">
@@ -275,6 +319,19 @@ export default function Navbar() {
                     ? `${guestsAmount} guests`
                     : "Any Amount"}
                 </p>
+                <div className="absolute right-0 p-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    className="text-gray-900">
+                    <path
+                      fill="currentColor"
+                      d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
+                    />
+                  </svg>
+                </div>
               </li>
             </div>
           </div>
