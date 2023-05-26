@@ -13,7 +13,6 @@ export default function House(props) {
     const [house, setHouse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [options, setOptions] = useState([]);
-    const [isBrowser, setIsBrowser] = useState(false);
 
     useEffect(() => {
         // Function to fetch the document
@@ -34,7 +33,6 @@ export default function House(props) {
             } catch (error) {
                 console.error("Error fetching document:", error);
             } finally {
-                setIsBrowser(true);
                 setLoading(false);
             }
         };

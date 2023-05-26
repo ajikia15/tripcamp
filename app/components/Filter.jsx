@@ -56,7 +56,7 @@ const Filter = ({
         </svg>
         <p>Filters</p>
       </div>
-      <div className="flex items-center justify-center w-full p-3 font-bold bg-white border-2 border-gray-200 rounded-md cursor-pointer ">
+      <div className="flex items-center justify-center w-full p-3 font-bold bg-white border-2 border-gray-200 rounded-md cursor-pointer md:hidden ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

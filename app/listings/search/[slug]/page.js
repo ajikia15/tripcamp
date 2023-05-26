@@ -15,12 +15,9 @@ import {
 import L from "leaflet";
 
 const Page = (props) => {
-    const [loadAnimation, setLoadAnimation] = useState(false);
-    const [isBrowser, setIsBrowser] = useState(false);
 
     const slug = decodeURIComponent(props.params.slug);
     const params = slug.split('&'); // Splitting the query parameters
-
 
     let guests = 1; // Default value for guests
     let minMax = [0, 400]; // Default values for min and max
@@ -44,9 +41,7 @@ const Page = (props) => {
         }
 
     });
-    // console.log(guests); 
-    // console.log(minMax);
-    // console.log(searchTerm);
+
     const [houses, setHouses] = useState([]);
     const housesCollectionRef = collection(db, "Houses");
     useEffect(() => {
@@ -68,13 +63,10 @@ const Page = (props) => {
             )
             const sortedHouses = filteredHouses.sort((a, b) => b.Prior - a.Prior);
             setHouses(sortedHouses);
-            setIsBrowser(true);
         };
         getHouses();
     }, []);
-    if (!isBrowser) {
-        return null;
-    }
+
     return (
 
         <>

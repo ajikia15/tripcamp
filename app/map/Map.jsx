@@ -62,12 +62,16 @@ const Map = () => {
             <Link href={`/listings/${house.id}`}>
               <div className="flex flex-col gap-y-2">
                 <div className="relative w-full rounded-md aspect-square">
-                  <Image src={house.Photo[0]} fill={true} />
+                  <Image
+                    src={house.Photo[0]}
+                    fill={true}
+                    className="rounded-lg"
+                  />
                 </div>
                 <p className="text-lg font-bold">
                   {house.Name}
                 </p>
-                <p className="text-md text-zinc-500">
+                <p className="truncate text-md text-zinc-500">
                   {house.Address.split("~").join(" ")}
                 </p>
                 <div className="flex items-center gap-x-2">
