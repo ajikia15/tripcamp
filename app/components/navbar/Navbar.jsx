@@ -171,7 +171,7 @@ export default function Navbar() {
 
         {!isMobile ? (
           <div className="relative w-full h-[4.5rem] lg:h-[5rem]">
-            <div className="absolute z-40 grid w-full h-full grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-11/12 lg:w-5/6 xl:w-4/5 2xl:w-3/5 top-1/2">
+            <div className="absolute z-40 grid w-full h-full grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 top-1/2">
               <div
                 ref={refMap.search}
                 onClick={() => handleChildClick("search")}
@@ -236,7 +236,7 @@ export default function Navbar() {
               <Image
                 src="/Logo_Horizontal.svg"
                 className="hidden xl:block 2xl:hidden"
-                width={120}
+                width={180}
                 height={50}
                 alt="Logo"
               />

@@ -1,10 +1,9 @@
 "use client";
-import Card from "../../../components/Card";
 import { db } from "../../../../firebase-config";
 import { collection, getDocs, query, orderBy, limit, startAfter, where } from "firebase/firestore";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import Slaidera from "../../../components/Slaidera";
+import Card from "../../../components/Card";
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
 import {
@@ -87,7 +86,7 @@ const Page = (props) => {
                         <Link
                             key={house.id}
                             href={`/listings/${house.id}`}>
-                            <Slaidera listing={house} />
+                            <Card listing={house} />
                         </Link>
                     ))}
                 </div>
