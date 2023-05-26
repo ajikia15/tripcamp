@@ -157,6 +157,9 @@ export default function Navbar() {
                 setGuestsAmount={setGuestsAmount}
               />
             </div>
+            <div className="flex items-center justify-center w-full py-2 font-bold bg-white border-2 border-gray-200 rounded-md">
+              Filter
+            </div>
             <Link
               href={`/listings/search/${generatedSearchQuery()}`}
               onClick={mobnavClosed}
@@ -259,7 +262,7 @@ export default function Navbar() {
         ) : (
           <div className="relative w-full h-28">
             <div
-              className="absolute z-40 grid w-full h-16 grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl lg:h-20 left-1/2 top-1/2 "
+              className="absolute z-40 grid w-full h-16 grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl lg:h-20 left-1/2 top-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 "
               onClick={mobnavClicked}>
               <li className="flex flex-col justify-center w-full h-full cursor-pointer">
                 <h3 className="w-full font-semibold">
