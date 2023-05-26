@@ -4,16 +4,13 @@ import Link from "next/link";
 import Search from "./Search";
 import PriceFilter from "./PriceFilter";
 import AddGuests from "./AddGuests";
-import Calendar from "./Calendar";
 import Categories from "../Categories";
 import Image from "next/image";
 import Filter from "../Filter";
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(true);
-  const containerRef = useRef(null);
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -78,8 +75,7 @@ export default function Navbar() {
   };
 
   const generatedSearchQuery = () => {
-    let query = "";
-    query += `guests=${encodeURIComponent(
+    let query = `guests=${encodeURIComponent(
       guestsAmount
     )}&min=${encodeURIComponent(
       minMax[0]
