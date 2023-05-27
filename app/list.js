@@ -32,7 +32,7 @@ const list = [
     { id: 51, name: "WiFi" },
     { id: 52, name: "Toilets" },
     { id: 53, name: "Campfires" },
-    { id: 54, name: "Water" },
+    { id: 54, name: "Hot Water" },
     { id: 55, name: "Showers" },
     { id: 56, name: "Bathtub" },
     { id: 57, name: "Picnic table" },
