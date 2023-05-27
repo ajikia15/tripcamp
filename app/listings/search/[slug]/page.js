@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import Card from "../../../components/Card";
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
+import Gallery from "../../[id]/gallery/page";
 import {
     MapContainer,
     Marker,
@@ -110,7 +111,7 @@ const Page = (props) => {
                                     })}>
                                     <Popup>
                                         <Link href={`/listings/${house.id}`}>
-                                            <div className="flex flex-col">
+                                            <div className="flex flex-col gap-y-2">
                                                 <div className="relative w-full rounded-md aspect-square">
                                                     <Image src={house.Photo[0]} fill={true} className="rounded-md" />
                                                 </div>
