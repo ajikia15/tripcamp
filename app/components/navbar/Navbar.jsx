@@ -198,7 +198,7 @@ export default function Navbar() {
         {/* pc */}
         {!isMobile ? (
           <div className="relative w-full h-[4.5rem] lg:h-[5rem]">
-            <div className="absolute z-40 grid w-full h-full grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 top-1/2">
+            <div className="absolute z-40 grid w-full h-full grid-cols-3 grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 top-1/2">
               <div
                 ref={refMap.search}
                 onClick={() => handleChildClick("search")}
@@ -210,13 +210,13 @@ export default function Navbar() {
                   setSearchTerm={setSearchTerm}
                 />
               </div>
-              <div
+              {/* <div
                 ref={refMap.calendar}
                 onClick={() => handleChildClick("calendar")}
                 className="flex flex-col justify-center w-full "
               >
-                {/* <Calendar active={activeStates.calendar} /> */}
-              </div>
+                <Calendar active={activeStates.calendar} />
+              </div> */}
               <div
                 ref={refMap.priceFilter}
                 onClick={() => handleChildClick("priceFilter")}
@@ -293,26 +293,12 @@ export default function Navbar() {
               onClick={mobnavClicked}
             >
               <li className="flex flex-col justify-center w-full h-full cursor-pointer">
-                <h3 className="w-full font-semibold">Where To?</h3>
-                <p className="text-xs text-gray-500">
+                <h3 className="w-full font-semibold pl-9">Where To?</h3>
+                <p className="text-xs text-gray-500 pl-9">
                   {searchTerm ? searchTerm : "Anywhere"} • Any Week •
                   {guestsAmount != 1 ? `${guestsAmount} guests` : "Any Amount"}
                 </p>
-                <div className="absolute right-0 p-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    className="text-gray-900"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
-                    />
-                  </svg>
-                </div>
-                <div className="absolute left-0 p-2">
+                <div className="absolute right-1">
                   <div
                     className="flex items-center justify-center"
                     ref={filterRef}
@@ -326,6 +312,20 @@ export default function Navbar() {
                       generatedSearchQuery={generatedSearchQuery}
                     />
                   </div>
+                </div>
+                <div className="absolute left-0 p-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    className="text-gray-900"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
+                    />
+                  </svg>
                 </div>
               </li>
             </div>

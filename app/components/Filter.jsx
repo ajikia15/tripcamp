@@ -55,7 +55,7 @@ const Filter = ({
         </svg>
         <p className="">Filters</p>
       </div>
-      <div className="flex items-center justify-center w-full p-2 font-bold border-r-2 border-gray-200 cursor-pointer md:hidden ">
+      <div className="flex items-center justify-center w-full p-4 font-bold border-gray-200 cursor-pointer md:hidden ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"
@@ -74,7 +74,7 @@ const Filter = ({
         </svg>
       </div>
       {active && (
-        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[15%] lg:inset-x-1/4 inset-0 ">
+        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[15%] lg:inset-x-1/4 inset-0 min-h-screen md:min-h-0">
           <div className="flex flex-col px-6 gap-y-5">
             {/* header */}
             <div className="sticky top-0">
@@ -157,7 +157,7 @@ const Filter = ({
                 href={`/listings/search/${generatedSearchQuery()}`}
                 className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
               >
-                <p className="text-sm"> Show Homes </p>
+                <p className="text-sm"> Apply Filter </p>
               </Link>
             </div>
           </div>
