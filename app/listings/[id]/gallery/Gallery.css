@@ -83,3 +83,6 @@
     right: 10px;
   }
   
+.leaflet-popup-content p {
+    margin: 0;
+  }
