@@ -39,9 +39,6 @@ export default function House(props) {
 
         fetchHouse();
     }, []);
-    if (!isBrowser) {
-        return null;
-    }
     return (
         <>
             {/* Render the house data */}

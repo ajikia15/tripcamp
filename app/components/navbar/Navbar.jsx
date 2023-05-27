@@ -56,10 +56,7 @@ export default function Navbar() {
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener(
-        "click",
-        handleClickOutside
-      );
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [activeStates]);
 
@@ -77,15 +74,11 @@ export default function Navbar() {
   const generatedSearchQuery = () => {
     let query = `guests=${encodeURIComponent(
       guestsAmount
-    )}&min=${encodeURIComponent(
-      minMax[0]
-    )}&max=${encodeURIComponent(
+    )}&min=${encodeURIComponent(minMax[0])}&max=${encodeURIComponent(
       minMax[1]
     )}&searchTerm=${encodeURIComponent(
       searchTerm
-    )}&filterTerm=${encodeURIComponent(
-      filterTerm.join(",")
-    )}&`;
+    )}&filterTerm=${encodeURIComponent(filterTerm.join(","))}&`;
     return query;
   };
   const [guestsAmount, setGuestsAmount] = useState(1);
@@ -103,6 +96,7 @@ export default function Navbar() {
     document.body.style.overflow = "visible";
   };
   const filterWasClicked = (e) => {
+    e.stopPropagation();
     setFilterState(true);
   };
   const filterClose = (e) => {
@@ -127,10 +121,7 @@ export default function Navbar() {
     document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener(
-        "click",
-        handleClickOutside
-      );
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [filterState]);
   return (
@@ -140,12 +131,14 @@ export default function Navbar() {
           <div className="relative flex flex-col w-full h-full p-4">
             <div
               className="grid w-10 bg-white border rounded-full cursor-pointer place-items-center boder-gray-400 aspect-square"
-              onClick={mobnavClosed}>
+              onClick={mobnavClosed}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                viewBox="0 0 256 256">
+                viewBox="0 0 256 256"
+              >
                 <path
                   fill="currentColor"
                   d="M224 128a8 8 0 0 1-8 8H59.31l58.35 58.34a8 8 0 0 1-11.32 11.32l-72-72a8 8 0 0 1 0-11.32l72-72a8 8 0 0 1 11.32 11.32L59.31 120H216a8 8 0 0 1 8 8Z"
@@ -155,7 +148,8 @@ export default function Navbar() {
             <div
               ref={refMap.search}
               onClick={() => handleChildClick("search")}
-              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer">
+              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer"
+            >
               <Search
                 active={activeStates.search}
                 searchTerm={searchTerm}
@@ -164,10 +158,9 @@ export default function Navbar() {
             </div>
             <div
               ref={refMap.priceFilter}
-              onClick={() =>
-                handleChildClick("priceFilter")
-              }
-              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer">
+              onClick={() => handleChildClick("priceFilter")}
+              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer"
+            >
               <PriceFilter
                 active={activeStates.priceFilter}
                 min={0}
@@ -181,7 +174,8 @@ export default function Navbar() {
             <div
               ref={refMap.guests}
               onClick={() => handleChildClick("guests")}
-              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer">
+              className="flex flex-col justify-center w-full border-b border-gray-400 cursor-pointer"
+            >
               <AddGuests
                 active={activeStates.guests}
                 guestsAmount={guestsAmount}
@@ -189,21 +183,11 @@ export default function Navbar() {
               />
             </div>
             <div className="absolute bottom-0 flex flex-col my-2 gap-y-2 right-2 left-2">
-              <div
-                className="flex items-center justify-center"
-                ref={filterRef}
-                onClick={filterWasClicked}>
-                <Filter
-                  filterClose={filterClose}
-                  active={filterState}
-                  filterTerm={filterTerm}
-                  setFilterTerm={setFilterTerm}
-                />
-              </div>
               <Link
                 href={`/listings/search/${generatedSearchQuery()}`}
                 onClick={mobnavClosed}
-                className="grid py-3 font-bold text-white bg-blue-600 rounded-md place-items-center">
+                className="grid py-3 font-bold text-white bg-blue-600 rounded-md place-items-center"
+              >
                 <p>Search</p>
               </Link>
             </div>
@@ -211,14 +195,15 @@ export default function Navbar() {
         </div>
       )}
       <div className="sticky top-0 left-0 z-30 w-full bg-white sm:pt-2 lg:pt-6">
-        {/* dont render if < 768  if 768 > then yes */}
+        {/* pc */}
         {!isMobile ? (
           <div className="relative w-full h-[4.5rem] lg:h-[5rem]">
             <div className="absolute z-40 grid w-full h-full grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 top-1/2">
               <div
                 ref={refMap.search}
                 onClick={() => handleChildClick("search")}
-                className="flex flex-col justify-center w-full">
+                className="flex flex-col justify-center w-full"
+              >
                 <Search
                   active={activeStates.search}
                   searchTerm={searchTerm}
@@ -228,15 +213,15 @@ export default function Navbar() {
               <div
                 ref={refMap.calendar}
                 onClick={() => handleChildClick("calendar")}
-                className="flex flex-col justify-center w-full ">
+                className="flex flex-col justify-center w-full "
+              >
                 {/* <Calendar active={activeStates.calendar} /> */}
               </div>
               <div
                 ref={refMap.priceFilter}
-                onClick={() =>
-                  handleChildClick("priceFilter")
-                }
-                className="flex flex-col justify-center w-full">
+                onClick={() => handleChildClick("priceFilter")}
+                className="flex flex-col justify-center w-full"
+              >
                 <PriceFilter
                   active={activeStates.priceFilter}
                   min={0}
@@ -250,21 +235,22 @@ export default function Navbar() {
               <div
                 ref={refMap.guests}
                 onClick={() => handleChildClick("guests")}
-                className="flex flex-col justify-center w-full">
+                className="flex flex-col justify-center w-full"
+              >
                 <AddGuests
                   active={activeStates.guests}
                   guestsAmount={guestsAmount}
                   setGuestsAmount={setGuestsAmount}
                 />
               </div>
-              <Link
-                href={`/listings/search/${generatedSearchQuery()}`}>
+              <Link href={`/listings/search/${generatedSearchQuery()}`}>
                 <button className="absolute flex flex-col items-center justify-center text-white -translate-y-1/2 bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md top-1/2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
                     height="32"
-                    viewBox="0 0 24 24">
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       fill="currentColor"
                       d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
@@ -275,7 +261,8 @@ export default function Navbar() {
             </div>
             <Link
               href="/"
-              className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2">
+              className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2"
+            >
               <Image
                 src="/Logo_Horizontal.svg"
                 className="hidden xl:block 2xl:hidden"
@@ -303,17 +290,13 @@ export default function Navbar() {
           <div className="relative w-full h-28">
             <div
               className="absolute z-40 grid w-full h-16 grid-flow-col pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl lg:h-20 left-1/2 top-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 "
-              onClick={mobnavClicked}>
+              onClick={mobnavClicked}
+            >
               <li className="flex flex-col justify-center w-full h-full cursor-pointer">
-                <h3 className="w-full font-semibold">
-                  Where To?
-                </h3>
+                <h3 className="w-full font-semibold">Where To?</h3>
                 <p className="text-xs text-gray-500">
-                  {searchTerm ? searchTerm : "Anywhere"} •
-                  Any Week •
-                  {guestsAmount != 1
-                    ? `${guestsAmount} guests`
-                    : "Any Amount"}
+                  {searchTerm ? searchTerm : "Anywhere"} • Any Week •
+                  {guestsAmount != 1 ? `${guestsAmount} guests` : "Any Amount"}
                 </p>
                 <div className="absolute right-0 p-4">
                   <svg
@@ -321,12 +304,28 @@ export default function Navbar() {
                     width="32"
                     height="32"
                     viewBox="0 0 24 24"
-                    className="text-gray-900">
+                    className="text-gray-900"
+                  >
                     <path
                       fill="currentColor"
                       d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
                     />
                   </svg>
+                </div>
+                <div className="absolute left-0 p-2">
+                  <div
+                    className="flex items-center justify-center"
+                    ref={filterRef}
+                    onClick={filterWasClicked}
+                  >
+                    <Filter
+                      filterClose={filterClose}
+                      active={filterState}
+                      filterTerm={filterTerm}
+                      setFilterTerm={setFilterTerm}
+                      generatedSearchQuery={generatedSearchQuery}
+                    />
+                  </div>
                 </div>
               </li>
             </div>
@@ -342,6 +341,7 @@ export default function Navbar() {
           <Categories
             filterTerm={filterTerm}
             setFilterTerm={setFilterTerm}
+            generatedSearchQuery={generatedSearchQuery}
           />
         </div>
       </div>
