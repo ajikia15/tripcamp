@@ -90,7 +90,10 @@ const Page = (props) => {
 
       <div
         className={`grid w-full place-items-center ${
-          searchTerm !== "" && !mapState && "md:grid-cols-[3fr_2fr]"
+          searchTerm !== null &&
+          searchTerm !== "" &&
+          !mapState &&
+          "md:grid-cols-[3fr_2fr]"
         } `}
       >
         <div
@@ -104,7 +107,7 @@ const Page = (props) => {
             </Link>
           ))}
         </div>
-        {searchTerm !== "" && (
+        {searchTerm !== null && (
           <div className="relative w-full h-full lg:block">
             {!mapState ? (
               <button

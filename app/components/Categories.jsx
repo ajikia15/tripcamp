@@ -115,15 +115,23 @@ export default function Categories({
             onScroll={handleScroll}
             className="grid w-full grid-flow-col-dense mx-6 overflow-x-hidden gap-x-3 lg:gap-x-6"
           >
+            <Link
+              href="/"
+              className={`${
+                pathname === "/" ? " border-b-2 border-blue-500" : ""
+              }`}
+            >
+              <CategIcons name={"All"} id={400} />
+            </Link>
             {list
               .filter((item) => item.id > 10 && item.id < 30)
               .map((item) => (
                 <Link
-                  href={`/listings/search/filterTerm=${item.id}`}
+                  href={`/listings/search/guests=1&min=0&max=1000&searchTerm=&filterTerm=${item.id}&`}
                   key={item.id}
                   className={`${
                     pathname.startsWith(
-                      `/listings/search/filterTerm=${item.id}`
+                      `/listings/search/guests=1&min=0&max=1000&searchTerm=&filterTerm=${item.id}&`
                     )
                       ? "border-blue-600 border-b-2 "
                       : ""
