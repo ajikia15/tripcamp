@@ -66,8 +66,10 @@ const Page = (props) => {
       );
       const sortedHouses = filteredHouses.sort((a, b) => b.Prior - a.Prior);
       setHouses(sortedHouses);
-      setLatid(sortedHouses[0].Position.Latit);
-      setLongit(sortedHouses[0].Position.Longi);
+      if (sortedHouses[0].Position.Latit != null) {
+        setLatid(sortedHouses[0].Position.Latit);
+        setLongit(sortedHouses[0].Position.Longi);
+      }
     };
     getHouses();
   }, []);
