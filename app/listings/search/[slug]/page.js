@@ -16,7 +16,7 @@ const Page = (props) => {
 
   let guests = 1; // Default value for guests
   let minMax = [0, 1000]; // Default values for min and max
-  let searchTerm = "";
+  let searchTerm = null;
   let filterTerm = "";
   // Loop through the parameters to find and assign the specified values
   params.forEach((param) => {
@@ -64,8 +64,8 @@ const Page = (props) => {
       );
       const sortedHouses = filteredHouses.sort((a, b) => b.Prior - a.Prior);
       setHouses(sortedHouses);
-      houses.length > 0 &&
-        setCenter(useState[(houses[0].Latit, houses[0].Longit)]);
+
+      setCenter([sortedHouses[0].Latit, sortedHouses[0].Longit]);
     };
     getHouses();
   }, []);
@@ -75,69 +75,91 @@ const Page = (props) => {
       {/* {slug} */}
 
       <div
-        className={`grid w-full ${
+        className={`grid w-full place-items-center ${
           searchTerm !== "" && "md:grid-cols-[3fr_2fr]"
-        } place-items-center min-h-[65vh]`}
+        } `}
       >
-        <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
+        <div className="grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh]">
           {houses.map((house) => (
             <Link key={house.id} href={`/listings/${house.id}`}>
               <Card listing={house} />
             </Link>
           ))}
         </div>
-        {searchTerm !== "" && (
-          <div className="relative hidden w-full h-full sm:block">
-            <div className="sticky top-0 bottom-0 left-0 right-0">
-              <MapContainer
-                center={center}
-                zoom={13}
-                style={{ height: "100vh" }}
-                scrollWheelZoom={false}
-              >
-                <TileLayer
-                  url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                  attribution='&copy; <a href="https://carto.com/" target="_blank">Carto</a> | Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors'
-                />
+        <div className="relative hidden w-full h-full lg:block">
+          <div className="sticky w-full">
+            <MapContainer
+              zoomControl={false}
+              center={center}
+              zoom={13}
+              style={{ height: "77vh" }}
+              scrollWheelZoom={true}
+              className=""
+            >
+              <TileLayer
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://carto.com/" target="_blank">Carto</a> | Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors'
+              />
 
-                {houses.map((house) => (
-                  <Marker
-                    key={house.id}
-                    position={[house.Position.Latit, house.Position.Longi]}
-                    icon={L.divIcon({
-                      className: "custom-icon",
-                      html: `<div>$${house.Price}</div>`,
-                    })}
-                  >
-                    <Popup>
-                      <Link href={`/listings/${house.id}`}>
-                        <div className="flex flex-col">
-                          <div className="relative w-full rounded-md aspect-square">
-                            <Image
-                              src={house.Photo[0]}
-                              fill={true}
-                              className="rounded-md"
-                            />
-                          </div>
-                          <p className="text-lg font-bold">{house.Name}</p>
-                          <p className="truncate text-md text-zinc-500">
-                            {house.Address.split("~").join(" ")}
-                          </p>
-                          <div className="flex items-center gap-x-2">
-                            <p className="font-bold">{house.Price}₾</p>
-                            <p className="text-md">Night</p>
-                          </div>
+              {houses.map((house) => (
+                <Marker
+                  key={house.id}
+                  position={[house.Position.Latit, house.Position.Longi]}
+                  icon={L.divIcon({
+                    className: "custom-icon",
+                    html: `<div>$${house.Price}</div>`,
+                  })}
+                >
+                  <Popup>
+                    <Link href={`/listings/${house.id}`}>
+                      <div className="flex flex-col">
+                        <div className="relative w-full rounded-md aspect-square">
+                          <Image
+                            src={house.Photo[0]}
+                            fill={true}
+                            className="rounded-md"
+                          />
                         </div>
-                      </Link>
-                    </Popup>
-                  </Marker>
-                ))}
-              </MapContainer>
-            </div>
+                        <p className="text-lg font-bold">{house.Name}</p>
+                        <p className="truncate text-md text-zinc-500">
+                          {house.Address.split("~").join(" ")}
+                        </p>
+                        <div className="flex items-center gap-x-2">
+                          <p className="font-bold">{house.Price}₾</p>
+                          <p className="text-md">Night</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </Popup>
+                </Marker>
+              ))}
+            </MapContainer>
           </div>
-        )}
+        </div>
       </div>
     </>
   );
 };
 export default Page;
+{
+  /* <button
+type="button"
+className="absolute grid p-5 bg-white border-2 border-gray-300 right-5 top-5 place-items-center"
+>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+>
+  <path
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    d="m10 17l5-5l-5-5"
+  />
+</svg>
+</button> */
+}
