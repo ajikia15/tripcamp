@@ -218,9 +218,9 @@ export default function House(props) {
                             </div> */}
             </div>
             <div>
-              <div className="mt-4 p-4 sticky top-56 hidden md:w-[284px] md:h-[340px] md:ml-2 flex-col lg:flex-row lg:justify-around lg:w-[360px] lg:h-64 bg-white shadow-lg rounded-lg text-white md:flex  justify-center items-center">
-                <div className="flex items-center justify-center rounded-lg md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 md:flex-row bg-zinc-800">
-                  QR
+              <div className="mt-4 p-4 sticky top-56 hidden  md:ml-2 h-64 flex-col lg:flex-row lg:justify-around lg:w-[360px]  bg-white shadow-lg rounded-lg text-white md:flex  justify-center items-center">
+                <div className="relative flex items-center justify-center rounded-lg md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 md:flex-row ">
+                  <Image src="/qr-code.svg" fill={true} />
                 </div>
                 <p className="text-sm w-36 text-zinc-800 md:text-center">
                   Scan code to Download Tripcamp application to make reservation
