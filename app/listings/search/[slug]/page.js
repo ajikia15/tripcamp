@@ -107,7 +107,7 @@ const Page = (props) => {
             </Link>
           ))}
         </div>
-        {searchTerm !== null && (
+        {searchTerm !== null && searchTerm != "" && (
           <div className="relative w-full h-full lg:block">
             {!mapState ? (
               <button
