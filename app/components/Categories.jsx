@@ -121,7 +121,7 @@ export default function Categories({
                 pathname === "/" ? " border-b-2 border-blue-500" : ""
               }`}
             >
-              <CategIcons name={"All"} id={400} />
+              <CategIcons name={"All houses"} id={400} />
             </Link>
             {list
               .filter((item) => item.id > 10 && item.id < 30)
