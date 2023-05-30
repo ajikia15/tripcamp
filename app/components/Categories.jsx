@@ -1,5 +1,5 @@
 "use client";
-import CategIcons from "./CategIcons";
+import IconCategs from "./IconCategs";
 import { useRef, useState, useEffect } from "react";
 import Filter from "./Filter";
 import Link from "next/link";
@@ -121,7 +121,7 @@ export default function Categories({
                 pathname === "/" ? " border-b-2 border-blue-500" : ""
               }`}
             >
-              <CategIcons name={"All houses"} id={400} />
+              <IconCategs name={"All houses"} id={400} />
             </Link>
             {list
               .filter((item) => item.id > 10 && item.id < 30)
@@ -137,7 +137,7 @@ export default function Categories({
                       : ""
                   }`}
                 >
-                  <CategIcons name={item.name} id={item.id} />
+                  <IconCategs name={item.name} id={item.id} />
                 </Link>
               ))}
           </div>
