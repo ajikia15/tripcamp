@@ -1,5 +1,5 @@
 import Image from "next/image";
-export default function CategIcons({ name, id }) {
+export default function IconCategs({ name, id }) {
   return (
     <div>
       <ul className="flex flex-row flex-wrap nowrap">
