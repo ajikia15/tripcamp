@@ -53,7 +53,7 @@ const Filter = ({
             <circle cx="15" cy="8" r="2" />
           </g>
         </svg>
-        <p className="">Filters</p>
+        <p>Filters</p>
       </div>
       <div className="flex items-center justify-center w-full p-4 font-bold border-gray-200 cursor-pointer md:hidden ">
         <svg
@@ -74,8 +74,8 @@ const Filter = ({
         </svg>
       </div>
       {active && (
-        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[15%] lg:inset-x-1/4 inset-0 min-h-screen md:min-h-0">
-          <div className="flex flex-col px-6 gap-y-5">
+        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[10 %] lg:inset-x-[15%] inset-0 min-h-[100vh] md:min-h-0">
+          <div className="relative flex flex-col px-6 gap-y-5">
             {/* header */}
             <div className="sticky top-0">
               <div className="absolute top-0 left-0 right-0 flex items-center justify-center p-5 bg-white border-b-2">

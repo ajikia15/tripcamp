@@ -6,7 +6,7 @@
   display: none;
 }
 body {
-  @apply min-h-screen;
+  height: -webkit-fill-available;
 }
 * {
   margin: 0;
@@ -19,6 +19,9 @@ body {
 /* style cards on the map */
 .leaflet-popup-content p {
   margin: 0;
+}
+html{
+  height: -webkit-fill-available;
 }
 
 .custom-icon div {
