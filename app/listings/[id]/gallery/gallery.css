@@ -6,6 +6,7 @@
         -webkit-column-width: 33%;
         -moz-column-width: 33%;
         column-width: 33%;
+        background-color: yellow;
     }
 }
 @media (max-width: 991px) {
