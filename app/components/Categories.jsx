@@ -141,7 +141,7 @@ export default function Categories({
                     pathname.startsWith(
                       `/listings/search/guests=1&min=0&max=1000&searchTerm=&filterTerm=${item.id}&`
                     )
-                      ? "border-blue-600 border-b-4 "
+                      ? "border-blue-600 border-b-4"
                       : ""
                   }`}
                 >
