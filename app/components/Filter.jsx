@@ -74,7 +74,7 @@ const Filter = ({
         </svg>
       </div>
       {active && (
-        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[10 %] lg:inset-x-[15%] inset-0 min-h-[100vh] md:min-h-0">
+        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[10%] lg:inset-x-[15%] inset-0 min-h-[100vh] md:min-h-0">
           <div className="relative flex flex-col px-6 gap-y-5">
             {/* header */}
             <div className="sticky top-0">
