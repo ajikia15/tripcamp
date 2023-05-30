@@ -177,7 +177,7 @@ export default function Gallery(props) {
       {loading && <p>Loading...</p>}
       {!loading && house && (
         <>
-          <div className="px-4 gallery">
+          <div className="w-11/12 mx-auto xl:w-4/5 columns-2 md:columns-3 lg:columns-4">
             {house.Photo.map((item, index) => (
               <div
                 className={`pics transition-all duration-350 ease mb-3 hover:opacity-80 ${
