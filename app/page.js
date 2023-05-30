@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import Listings from "./components/Listings";
 import FooterFixed from "./components/footer/FooterFixed";
 export default async function Home() {
