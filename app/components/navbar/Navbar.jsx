@@ -335,7 +335,7 @@ export default function Navbar() {
           activeStates.priceFilter ||
           activeStates.guests ||
           activeStates.calendar) && (
-          <div className="fixed inset-0 z-30 bg-black opacity-50" />
+          <div className="fixed z-30 bg-black opacity-50 md:inset-0" />
         )}
         <div className="pb-2 md:py-6">
           <Categories

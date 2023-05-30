@@ -3,7 +3,6 @@ import Card from "./Card";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import SkeletonLoad from "./SkeletonLoad";
-const LIMIT = 8;
 
 export default function Listings({ houseList }) {
   const [loadAnimation, setLoadAnimation] = useState(false);
