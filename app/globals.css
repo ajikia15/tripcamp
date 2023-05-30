@@ -25,5 +25,93 @@ body {
   @apply grid w-12 h-8 font-semibold text-gray-600 transition-all bg-white border border-gray-500 rounded-full place-items-center hover:bg-blue-400 hover:text-white;
 }
 .house-icon div {
-  @apply grid place-items-center w-14 aspect-square rounded-full   ring-8 ring-gray-200 bg-white ring-opacity-50;
+  @apply grid bg-white rounded-full place-items-center w-14 aspect-square ring-8 ring-gray-200 ring-opacity-50;
+}
+.gallery {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-width: 33%;
+  -moz-column-width: 33%;
+ column-width: 33%;
+}
+@media (max-width: 991px) {
+  .gallery {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2; 
+  }
+} 
+@media (max-width: 480px) {
+  .gallery {
+      -webkit-column-count: 1;
+      -moz-column-count: 1;
+      column-count: 1; 
+      -webkit-column-width: 100%;
+      -moz-column-width: 100%;
+      column-width: 100%;
+  }
+}
+
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+@media (max-width: 480px) {
+  .overlay {
+      background-color: black;
+  }
+}
+.modal {
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+}
+
+.modal-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+.leaflet-popup-content p {
+  margin: 0;
 }

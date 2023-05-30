@@ -4,7 +4,7 @@
     column-count: 3;
     -webkit-column-width: 33%;
     -moz-column-width: 33%;
-    column-width: 33%;
+   column-width: 33%;
 }
 @media (max-width: 991px) {
     .gallery {
@@ -50,13 +50,13 @@
     display: flex;
 }
 
-.modalimg {
+.modal-img {
     width: 100%;
     height: auto;
     object-fit: contain;
 }
 
-.closebtn {
+.close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -65,7 +65,7 @@
     border: none;
     cursor: pointer;
 }
-.arrowbtn {
+.arrow-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -83,3 +83,6 @@
     right: 10px;
   }
   
+.leaflet-popup-content p {
+    margin: 0;
+  }
