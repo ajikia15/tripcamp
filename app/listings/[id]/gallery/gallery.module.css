@@ -50,13 +50,13 @@
     display: flex;
 }
 
-.modal-img {
+.modalimg {
     width: 100%;
     height: auto;
     object-fit: contain;
 }
 
-.close-btn {
+.closebtn {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -65,7 +65,7 @@
     border: none;
     cursor: pointer;
 }
-.arrow-btn {
+.arrowbtn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -83,6 +83,3 @@
     right: 10px;
   }
   
-.leaflet-popup-content p {
-    margin: 0;
-  }

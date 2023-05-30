@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { db } from "../../../../firebase-config";
 import { doc, getDoc } from "firebase/firestore";
-import "./Gallery.css";
+import styles from "./gallery.module.css";
 export default function Gallery(props) {
   const [house, setHouse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -94,12 +94,12 @@ export default function Gallery(props) {
     <>
       {isModalOpen && (
         <div
-          className="overlay"
+          className={`${styles.overlay}`}
           onClick={(e) => e.target === e.currentTarget && setIsModalOpen(false)}
         >
-          <div className="modal">
+          <div className={styles.modal}>
             <button
-              className="hidden md:block arrow-btn left"
+              className={`hidden md:block ${styles.arrowbtn}  ${styles.left}`}
               onClick={() =>
                 setCurrentImageIndex(
                   (prevIndex) =>
@@ -123,14 +123,14 @@ export default function Gallery(props) {
               </svg>
             </button>
             <img
-              className="modal-img"
+              className={styles.modalimg}
               src={house.Photo[currentImageIndex]}
               alt={`Photo ${currentImageIndex}`}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             />
             <button
-              className="hidden md:block arrow-btn right"
+              className={`hidden md:block ${styles.arrowbtn} ${styles.right}`}
               onClick={() =>
                 setCurrentImageIndex(
                   (prevIndex) => (prevIndex + 1) % house.Photo.length
@@ -154,7 +154,10 @@ export default function Gallery(props) {
                 </g>
               </svg>
             </button>
-            <button className="close-btn" onClick={() => setIsModalOpen(false)}>
+            <button
+              className={styles.closebtn}
+              onClick={() => setIsModalOpen(false)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -177,7 +180,7 @@ export default function Gallery(props) {
       {loading && <p>Loading...</p>}
       {!loading && house && (
         <>
-          <div className="px-4 gallery">
+          <div className={`px-4 ${styles.gallery}`}>
             {house.Photo.map((item, index) => (
               <div
                 className={`pics transition-all duration-350 ease mb-3 hover:opacity-80 ${
