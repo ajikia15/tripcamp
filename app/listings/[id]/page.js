@@ -136,8 +136,7 @@ export default function House(props) {
           <div className="relative flex flex-row">
             <div className="w-4/5">
               <div className="flex flex-row items-center mt-12 mb-4">
-                <div className="flex flex-col pb-4 border-b-2 gap-y-4">
-                  <p className="font-bold"> Location details </p>
+                <div className="flex flex-col py-4 border-b-2">
                   <p>{house.Description}</p>
                 </div>
               </div>
