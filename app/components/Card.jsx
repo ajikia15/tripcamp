@@ -10,7 +10,8 @@ export default function Card({ listing }) {
             return (
               <div
                 className="relative aspect-square flex-[0_0_100%] rounded-xl "
-                key={i}>
+                key={i}
+              >
                 <Image
                   src={src}
                   fill
@@ -22,18 +23,13 @@ export default function Card({ listing }) {
           })}
         </Carousel>
       )}
-      <ul className="flex flex-col gap-0 ml-1">
-        <li className="text-xl font-semibold">
-          {listing.Name}
-        </li>
+      <ul className="flex flex-col gap-0 pt-2 ml-1">
+        <li className="text-xl font-semibold">{listing.Name}</li>
         <li className="text-sm text-gray-600">
-          {listing.Address.split("~")
-            .slice(0, 3)
-            .join(", ")}
+          {listing.Address.split("~").slice(0, 3).join(", ")}
         </li>
         <li className="font-semibold">
-          {listing.Price}₾
-          <span className="font-[500]">/Night</span>
+          {listing.Price}₾<span className="font-[500]">/Night</span>
         </li>
       </ul>
     </div>
