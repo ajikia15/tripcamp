@@ -76,7 +76,7 @@ export default function House(props) {
       )}
       {!loading && house && (
         <div className="flex flex-col w-11/12 mx-auto mt-4 xl:w-4/5">
-          <div className="flex flex-col pl-1 mb-2 gap-y-1">
+          <div className="flex flex-col gap-y-1">
             <p className="text-sm"> {house.Address.split("~").join(" ")}</p>
             <h1 className="flex justify-between w-full text-3xl font-bold">
               {" "}
@@ -84,15 +84,15 @@ export default function House(props) {
               <p className="text-lg">₾{house.Price}/Night </p>
             </h1>
           </div>
-          <div className="relative flex gap-2 overflow-hidden rounded-2xl">
+          <div className="relative flex overflow-hidden rounded-2xl">
             <Link href={`/listings/${props.params.id}/gallery/`}>
               <div className="absolute z-10 p-2 px-4 font-semibold bg-white rounded-lg cursor-pointer bottom-3 right-3">
                 All Photos
               </div>
             </Link>
-            <div className="relative w-1/2 overflow-hidden aspect-square bg-zinc-800">
+            <div className="relative w-1/2 mr-2 overflow-hidden aspect-square bg-zinc-800 rounded-l-2xl">
               <Image
-                className="object-cover rounded-l-lg"
+                className="object-cover rounded-l-2xl"
                 src={house.Photo[0]}
                 fill={true}
               />
@@ -135,8 +135,8 @@ export default function House(props) {
           </div>
           <div className="relative flex flex-row">
             <div className="w-4/5">
-              <div className="flex flex-row items-center mt-12 mb-4">
-                <div className="flex flex-col py-4 border-b-2">
+              <div className="flex flex-row items-center ">
+                <div className="flex flex-col py-5 border-b-2">
                   <p>{house.Description}</p>
                 </div>
               </div>
@@ -151,9 +151,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
@@ -171,9 +170,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
@@ -191,9 +189,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
@@ -211,9 +208,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
@@ -246,6 +242,9 @@ export default function House(props) {
                 <MapContainer
                   style={{ height: "24rem" }}
                   scrollWheelZoom={false}
+                  zoomControl={false}
+                  doubleClickZoom={false}
+                  touchZoom={false}
                   center={[house.Position.Latit, house.Position.Longi]}
                   zoom={13}
                 >
