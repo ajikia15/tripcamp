@@ -100,22 +100,34 @@ export default function House(props) {
             <div className="grid w-1/2 grid-cols-2 gap-y-2 gap-x-2">
               {house.Photo.map((photo, index) => {
                 if (index <= 4 && index >= 1) {
-                  return (
-                    <div
-                      key={index}
-                      className="relative w-full h-full aspect-square bg-zinc-800"
-                    >
-                      {house.Photo[index] ? (
+                  if (photo != null) {
+                    return (
+                      <div
+                        key={index}
+                        className="relative w-full h-full aspect-square bg-zinc-800"
+                      >
                         <Image
                           className="object-cover"
+                          alt={`Photo of ${house.Name} House`}
                           src={house.Photo[index]}
                           fill={true}
                         />
-                      ) : (
-                        <div className="w-full h-full bg-white"></div>
-                      )}
-                    </div>
-                  );
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        className="relative w-full h-full aspect-square bg-zinc-800"
+                        key={index}
+                      >
+                        <Image
+                          src="/placeholder.png"
+                          className="object-cover"
+                          fill={true}
+                        />
+                      </div>
+                    );
+                  }
                 }
                 return null;
               })}

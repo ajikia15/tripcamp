@@ -194,11 +194,11 @@ export default function Navbar() {
           </div>
         </div>
       )}
-      <div className="sticky top-0 left-0 z-30 w-full bg-white sm:pt-2 lg:pt-6">
+      <div className="sticky top-0 left-0 z-20 w-full bg-white">
         {/* pc */}
         {!isMobile ? (
-          <div className="relative w-full h-[4.5rem] lg:h-[5rem]">
-            <div className="absolute z-40 grid w-full h-full grid-cols-5 grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-5/6 lg:w-4/5 xl:w-3/5 top-1/2">
+          <div className="relative w-full h-[6rem] bg-white z-40">
+            <div className="absolute z-40 grid w-full h-4/6 grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
               <div
                 ref={refMap.search}
                 onClick={() => handleChildClick("search")}
@@ -343,7 +343,7 @@ export default function Navbar() {
           activeStates.calendar) && (
           <div className="fixed z-30 bg-black opacity-50 md:inset-0" />
         )}
-        <div className="pb-2 md:py-6">
+        <div className="pb-2">
           <Categories
             filterTerm={filterTerm}
             setFilterTerm={setFilterTerm}

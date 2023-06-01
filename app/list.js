@@ -10,7 +10,7 @@ const list = [
   { id: 19, name: "Castles" },
   { id: 20, name: "Yurts" },
   { id: 21, name: "Pods" },
-  { id: 22, name: "Composites" },
+  { id: 22, name: "Campsites" },
   { id: 23, name: "RVs" },
   { id: 24, name: "Wine Cellar" },
   { id: 25, name: "Art House" },

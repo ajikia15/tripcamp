@@ -92,7 +92,7 @@ export default function Categories({
       <div className="flex flex-row items-center justify-center w-11/12 m-auto lg:justify-between lg:w-3/4">
         <div className="relative flex flex-row items-center w-11/12 md:mr-6">
           <div
-            className="z-30 hidden transition-all cursor-pointer -translate-x-1/4 md:grid place-items-center"
+            className="z-20 hidden transition-all cursor-pointer -translate-x-1/4 md:grid place-items-center"
             onClick={handleScrollLeft}
           >
             <svg
@@ -121,7 +121,7 @@ export default function Categories({
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onScroll={handleScroll}
-            className="relative grid w-full grid-flow-col-dense overflow-x-hidden pr-14 gap-x-3 lg:gap-x-6"
+            className="relative grid w-full grid-flow-col-dense overflow-x-hidden gap-x-2 lg:gap-x-12"
           >
             <Link
               href="/"
@@ -151,7 +151,7 @@ export default function Categories({
           </div>
           <div className="absolute w-16 h-full bg-gradient-to-l from-white from-75% right-0 "></div>
           <div
-            className="absolute right-0 z-30 hidden transition-all cursor-pointer md:grid place-items-center"
+            className="absolute right-0 z-20 hidden transition-all cursor-pointer md:grid place-items-center"
             onClick={handleScrollRight}
           >
             <svg
