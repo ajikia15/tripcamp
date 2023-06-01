@@ -8,7 +8,7 @@ export default function Listings({ houseList }) {
   const [loadAnimation, setLoadAnimation] = useState(false);
   return (
     <>
-      <div className="grid w-full place-items-center">
+      <div className="grid w-full place-items-center min-h-[80vh]">
         <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 xl:w-11/12">
           {houseList.map((house) => (
             <Link key={house.id} href={`/listings/${house.id}`}>

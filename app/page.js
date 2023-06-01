@@ -88,7 +88,7 @@ export default function Home() {
       const firestoreQuery = query(
         housesCollectionRef,
         orderBy("CreatedAt", "desc"),
-        limit(16)
+        limit(8)
       );
       const data = await getDocs(firestoreQuery);
       if (data.empty) {
@@ -107,7 +107,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="p-0 m-0 ">
+    <main className="p-0 m-0">
       <Listings houseList={houses} />
       <div ref={mapRef} className="bg-yellow-400"></div>
       <FooterFixed />
