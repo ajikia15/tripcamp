@@ -3,19 +3,77 @@ import Card from "./Card";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import SkeletonLoad from "./SkeletonLoad";
-
+import { db } from "../../firebase-config";
+import {
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  startAfter,
+} from "firebase/firestore";
 export default function Listings({
-  houseList,
+  houses,
   loading,
+  setLoading,
   initialLoad,
+  setHouses,
+  housesCollectionRef,
 }) {
   const [loadAnimation, setLoadAnimation] = useState(false);
 
+  const mapRef = useRef(null);
+  const observerRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        if (entries[0].isIntersecting) {
+          observerRef.current.disconnect();
+          await fetchMoreData();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observerRef.current = observer;
+    if (observerRef.current && mapRef.current) {
+      observerRef.current.observe(mapRef.current);
+    }
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [houses]);
+  const fetchMoreData = async () => {
+    setLoading(true);
+    const lastHouse =
+      houses.length > 0 ? houses[houses.length - 1] : null;
+    if (lastHouse) {
+      const firestoreQuery = query(
+        housesCollectionRef,
+        orderBy("CreatedAt", "desc"),
+        startAfter(lastHouse.CreatedAt),
+        limit(7)
+      );
+      const data = await getDocs(firestoreQuery);
+      if (data.docs.length === 0) {
+        setLoading(false);
+        return;
+      }
+      setHouses([
+        ...houses,
+        ...data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      ]);
+    }
+    setLoading(false);
+  };
   return (
     <>
       <div className="grid w-full place-items-center min-h-[80vh] pb-24">
         <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12">
-          {houseList.map((house) => (
+          {houses.map((house) => (
             <Link
               key={house.id}
               href={`/listings/${house.id}`}
@@ -23,7 +81,9 @@ export default function Listings({
               <Card listing={house} />
             </Link>
           ))}
-          {/* <div className="" ref={mapRef}></div> */}
+          <div className="" ref={mapRef}>
+            <SkeletonLoad />
+          </div>
           {loading &&
             Array(initialLoad)
               .fill()

@@ -18,54 +18,6 @@ export default function Home() {
 
   const [houses, setHouses] = useState([]);
 
-  const mapRef = useRef(null);
-  const observerRef = useRef(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      async (entries) => {
-        if (entries[0].isIntersecting) {
-          observerRef.current.disconnect();
-          await fetchMoreData();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    observerRef.current = observer;
-    if (observerRef.current && mapRef.current) {
-      observerRef.current.observe(mapRef.current);
-    }
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, [houses]);
-  const fetchMoreData = async () => {
-    setLoading(true);
-    const lastHouse =
-      houses.length > 0 ? houses[houses.length - 1] : null;
-    if (lastHouse) {
-      const firestoreQuery = query(
-        housesCollectionRef,
-        orderBy("CreatedAt", "desc"),
-        startAfter(lastHouse.CreatedAt),
-        limit(7)
-      );
-      const data = await getDocs(firestoreQuery);
-      if (data.docs.length === 0) {
-        setLoading(false);
-        return;
-      }
-      setHouses([
-        ...houses,
-        ...data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        })),
-      ]);
-    }
-    setLoading(false);
-  };
 
   useEffect(() => {
     const getHouses = async () => {
@@ -93,11 +45,13 @@ export default function Home() {
   return (
     <main className="p-0 m-0">
       <Listings
-        houseList={houses}
+        houses={houses}
+        setHouses={setHouses}
         loading={loading}
+        setLoading={setLoading}
         initialLoad={initialLoad}
+        housesCollectionRef={housesCollectionRef}
       />
-      <div ref={mapRef} className="bg-yellow-400"></div>
       <FooterFixed />
     </main>
   );
