@@ -23,9 +23,9 @@ export default function Card({ listing }) {
           })}
         </Carousel>
       )}
-      <ul className="flex flex-col gap-0 pt-2 ml-1">
-        <li className="text-xl font-semibold">{listing.Name}</li>
-        <li className="text-sm text-gray-600">
+      <ul className="flex flex-col pt-2 ml-1 gap-y-0.5">
+        <li className="text-xl font-semibold capitalize">{listing.Name}</li>
+        <li className="text-sm text-gray-600 truncate">
           {listing.Address.split("~").slice(0, 3).join(", ")}
         </li>
         <li className="font-semibold">
