@@ -39,7 +39,7 @@ const Footer = () => {
             e.stopPropagation();
             closeModal();
           }}>
-          <div className="absolute bottom-0 w-full p-4 text-lg bg-white rounded-t-2xl footerFloatIn">
+          <footer className="absolute bottom-0 w-full p-4 text-lg bg-white rounded-t-2xl footerFloatIn">
             <div className="relative w-full">
               <div
                 className="absolute p-3 cursor-pointer top-3 right-3"
@@ -98,7 +98,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </footer>
         </div>
       )}
     </>
