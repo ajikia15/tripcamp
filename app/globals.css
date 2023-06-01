@@ -32,4 +32,22 @@ html{
 }
 
 
+.fade-in-out {
+  opacity: 0;
+  animation: fade-in 2s ease-in forwards, fade-out 4s 1s ease-out forwards;
+}
 
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

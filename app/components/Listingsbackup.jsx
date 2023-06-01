@@ -94,7 +94,7 @@ export default function Listings() {
   return (
     <>
       <div className="grid w-full place-items-center">
-        <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
+        <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:w-5/6 2xl:w-4/5 ">
           {houses.map((house) => (
             <Link key={house.id} href={`/listings/${house.id}`}>
               <Card listing={house} />

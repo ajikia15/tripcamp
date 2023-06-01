@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
 export default function Home() {
+  const initialLoad = 16;
   const housesCollectionRef = collection(db, "Houses");
   const [loading, setLoading] = useState(true);
   const mapRef = useRef(null);
@@ -88,7 +89,7 @@ export default function Home() {
       const firestoreQuery = query(
         housesCollectionRef,
         orderBy("CreatedAt", "desc"),
-        limit(8)
+        limit(initialLoad)
       );
       const data = await getDocs(firestoreQuery);
       if (data.empty) {
@@ -108,7 +109,11 @@ export default function Home() {
 
   return (
     <main className="p-0 m-0">
-      <Listings houseList={houses} />
+      <Listings
+        houseList={houses}
+        loading={loading}
+        initialLoad={initialLoad}
+      />
       <div ref={mapRef} className="bg-yellow-400"></div>
       <FooterFixed />
     </main>

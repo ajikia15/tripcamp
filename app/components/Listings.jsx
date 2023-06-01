@@ -1,20 +1,35 @@
 "use client";
 import Card from "./Card";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import SkeletonLoad from "./SkeletonLoad";
 
-export default function Listings({ houseList }) {
+export default function Listings({ houseList, loading, initialLoad }) {
   const [loadAnimation, setLoadAnimation] = useState(false);
   return (
     <>
       <div className="grid w-full place-items-center min-h-[80vh]">
-        <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 xl:w-11/12">
+        <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12">
           {houseList.map((house) => (
-            <Link key={house.id} href={`/listings/${house.id}`}>
+            <Link
+              key={house.id}
+              href={`/listings/${house.id}`}
+              className="fade-in"
+            >
               <Card listing={house} />
             </Link>
           ))}
+          {!houseList.length ? (
+            Array(initialLoad)
+              .fill()
+              .map((_, index) => (
+                <div key={index}>
+                  <SkeletonLoad />
+                </div>
+              ))
+          ) : loading ? (
+            <SkeletonLoad />
+          ) : null}
         </div>
       </div>
       <div

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Card({ listing }) {
   return (
-    <div className="w-full h-full bg-white">
+    <div className="w-full h-full bg-white ">
       {listing.Photo[0] && (
         <Carousel loop>
           {listing.Photo.slice(0, 5).map((src, i) => {
