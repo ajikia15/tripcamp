@@ -1,5 +1,5 @@
 "use client";
-import CategIcons from "./CategIcons";
+import IconCategs from "./IconCategs";
 import { useRef, useState, useEffect } from "react";
 import Filter from "./Filter";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import list from "../list";
 export default function Categories({
   filterTerm,
   setFilterTerm,
+  generatedSearchQuery,
 }) {
   const containerRef = useRef(null);
   const filterRef = useRef(null);
@@ -37,23 +38,19 @@ export default function Categories({
 
   const handleTouchStart = (e) => {
     const touch = e.touches[0];
-    containerRef.current.dataset.touchStartX =
-      touch.clientX;
+    containerRef.current.dataset.touchStartX = touch.clientX;
     containerRef.current.dataset.touchStartScrollLeft =
       containerRef.current.scrollLeft;
   };
 
   const handleTouchMove = (e) => {
     const touch = e.touches[0];
-    const touchStartX = parseInt(
-      containerRef.current.dataset.touchStartX
-    );
+    const touchStartX = parseInt(containerRef.current.dataset.touchStartX);
     const touchStartScrollLeft = parseInt(
       containerRef.current.dataset.touchStartScrollLeft
     );
     const touchOffsetX = touch.clientX - touchStartX;
-    containerRef.current.scrollLeft =
-      touchStartScrollLeft - touchOffsetX;
+    containerRef.current.scrollLeft = touchStartScrollLeft - touchOffsetX;
   };
 
   const handleTouchEnd = () => {
@@ -86,73 +83,92 @@ export default function Categories({
     document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener(
-        "click",
-        handleClickOutside
-      );
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [filterState]);
 
   return (
     <>
-      <div className="flex flex-row items-center justify-center lg:m-auto lg:justify-between lg:w-3/4">
-        <div className="flex flex-row items-center w-5/6 md:w-[70%] lg:w-5/6 mr-6">
+      <div className="flex flex-row items-center justify-center w-11/12 m-auto lg:justify-between lg:w-3/4">
+        <div className="relative flex flex-row items-center w-11/12 md:mr-6">
           <div
-            className="hidden transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer md:block hover:opacity-100"
-            onClick={handleScrollLeft}>
+            className="z-30 hidden transition-all cursor-pointer -translate-x-1/4 md:grid place-items-center"
+            onClick={handleScrollLeft}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.41z"
-              />
+              width="38"
+              height="38"
+              viewBox="0 0 48 48"
+              className="text-gray-500 rounded-full shadow-md hover:shadow-xl"
+            >
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+              >
+                <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z" />
+                <path stroke-linecap="round" d="m27 33l-9-9l9-9" />
+              </g>
             </svg>
           </div>
+          <div className="absolute w-8 h-full bg-gradient-to-l from-white to-35%  left-0 "></div>
+
           <div
             ref={containerRef}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onScroll={handleScroll}
-            className="grid w-full grid-flow-col-dense mx-6 overflow-x-hidden gap-x-3 lg:gap-x-6">
+            className="relative grid w-full grid-flow-col-dense overflow-x-hidden pr-14 gap-x-3 lg:gap-x-6"
+          >
+            <Link
+              href="/"
+              className={`${
+                pathname === "/" ? " border-b-4 border-blue-500" : ""
+              }`}
+            >
+              <IconCategs name={"All houses"} id={400} />
+            </Link>
             {list
-              .filter(
-                (item) => item.id > 10 && item.id < 30
-              )
+              .filter((item) => item.id > 10 && item.id < 30)
               .map((item) => (
                 <Link
-                  href={`/listings/search/filterTerm=${item.id}`}
+                  href={`/listings/search/guests=1&min=0&max=1000&searchTerm=&filterTerm=${item.id}&`}
                   key={item.id}
                   className={`${
                     pathname.startsWith(
-                      `/listings/search/filterTerm=${item.id}`
+                      `/listings/search/guests=1&min=0&max=1000&searchTerm=&filterTerm=${item.id}&`
                     )
-                      ? "border-blue-600 border-b-2 "
+                      ? "border-blue-600 border-b-4"
                       : ""
-                  }`}>
-                  <CategIcons
-                    name={item.name}
-                    id={item.id}
-                  />
+                  }`}
+                >
+                  <IconCategs name={item.name} id={item.id} />
                 </Link>
               ))}
           </div>
+          <div className="absolute w-16 h-full bg-gradient-to-l from-white from-75% right-0 "></div>
           <div
-            className="hidden transition-all border-2 border-black border-solid rounded-full opacity-50 cursor-pointer md:block hover:opacity-100"
-            onClick={handleScrollRight}>
+            className="absolute right-0 z-30 hidden transition-all cursor-pointer md:grid place-items-center"
+            onClick={handleScrollRight}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24">
-              <g transform="rotate(180 12 12)">
-                <path
-                  fill="currentColor"
-                  d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6l6 6l1.41-1.41z"
-                />
+              width="38"
+              height="38"
+              viewBox="0 0 48 48"
+              className="text-gray-500 rounded-full shadow-md hover:shadow-xl"
+            >
+              <g
+                fill="white"
+                stroke="currentColor"
+                strokeLinejoin="round"
+                strokeWidth="2.5"
+              >
+                <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z" />
+                <path stroke-linecap="round" d="m21 33l9-9l-9-9" />
               </g>
             </svg>
           </div>
@@ -160,12 +176,14 @@ export default function Categories({
         <div
           className="items-center justify-center hidden md:flex"
           ref={filterRef}
-          onClick={filterWasClicked}>
+          onClick={filterWasClicked}
+        >
           <Filter
             filterClose={filterClose}
             active={filterState}
             filterTerm={filterTerm}
             setFilterTerm={setFilterTerm}
+            generatedSearchQuery={generatedSearchQuery}
           />
         </div>
       </div>

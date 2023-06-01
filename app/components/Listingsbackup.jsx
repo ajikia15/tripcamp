@@ -1,20 +1,114 @@
 "use client";
 import Card from "./Card";
+import { db } from "../../firebase-config";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  startAfter,
+} from "firebase/firestore";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import SkeletonLoad from "./SkeletonLoad";
 
-export default function Listings({ houseList }) {
+export default function Listings() {
+  const mapRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+  const [houses, setHouses] = useState([]);
+  const housesCollectionRef = collection(db, "Houses");
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        if (entries[0].isIntersecting) {
+          observerRef.current.disconnect();
+          await fetchMoreData();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observerRef.current = observer;
+    if (observerRef.current && mapRef.current) {
+      observerRef.current.observe(mapRef.current);
+    }
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [houses]);
+
+  const fetchMoreData = async () => {
+    setLoading(true);
+    const lastHouse = houses.length > 0 ? houses[houses.length - 1] : null;
+    if (lastHouse) {
+      const firestoreQuery = query(
+        housesCollectionRef,
+        orderBy("CreatedAt", "desc"),
+        startAfter(lastHouse.CreatedAt),
+        limit(8)
+      );
+      const data = await getDocs(firestoreQuery);
+      if (data.docs.length === 0) {
+        setLoading(false);
+        return;
+      }
+      setHouses([
+        ...houses,
+        ...data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        })),
+      ]);
+    }
+    setLoading(false);
+  };
+  useEffect(() => {
+    const getHouses = async () => {
+      const firestoreQuery = query(
+        housesCollectionRef,
+        orderBy("CreatedAt", "desc"),
+        limit(8)
+      );
+      const data = await getDocs(firestoreQuery);
+      if (data.empty) {
+        setLoading(false);
+        return;
+      }
+      setHouses(
+        data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+      setLoading(false);
+    };
+    getHouses();
+  }, []);
+
   const [loadAnimation, setLoadAnimation] = useState(false);
+
   return (
     <>
       <div className="grid w-full place-items-center">
         <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 xl:w-5/6">
-          {houseList.map((house) => (
+          {houses.map((house) => (
             <Link key={house.id} href={`/listings/${house.id}`}>
               <Card listing={house} />
             </Link>
           ))}
+          {loading && (
+            <>
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+              <SkeletonLoad />
+            </>
+          )}
+          <div ref={mapRef}></div>
         </div>
       </div>
       <div

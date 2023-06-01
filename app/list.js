@@ -64,6 +64,8 @@ const list = [
     { id: 89, name: "Board Games" },
     { id: 90, name: "Outdoor Activities" },
     { id: 91, name: "Walking Tours" },
+    { id: 400, name: "All" },
+
 ];
 
 export default list;
