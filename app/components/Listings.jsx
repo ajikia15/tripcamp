@@ -18,7 +18,7 @@ export default function Listings({ houseList }) {
         </div>
       </div>
       <div
-        className="fixed z-20 -translate-x-1/2 cursor-pointer bottom-12 left-1/2"
+        className="fixed z-20 -translate-x-1/2 cursor-pointer bottom-12 md:bottom-20 lg:bottom-12 left-1/2"
         onClick={() => {
           setLoadAnimation(true);
         }}
