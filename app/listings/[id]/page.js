@@ -83,7 +83,7 @@ export default function House(props) {
               {house.Name}
             </h1>
           </div>
-          <div className="relative flex overflow-hidden rounded-2xl">
+          <div className="relative flex overflow-hidden rounded-2xl mt-6">
             <Link href={`/listings/${props.params.id}/gallery/`}>
               <div className="absolute z-10 p-2 px-4 font-semibold bg-white rounded-lg cursor-pointer bottom-3 right-3">
                 All Photos
@@ -132,7 +132,7 @@ export default function House(props) {
               })}
             </div>
           </div>
-          <p className="text-lg mt-4">₾{house.Price}/Night </p>
+          <p className="text-lg mt-6 font-bold">₾{house.Price}/Night </p>
           <div className="relative flex flex-row">
             <div className="w-4/5">
               <div className="flex flex-row items-center ">
