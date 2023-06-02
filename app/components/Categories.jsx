@@ -92,29 +92,22 @@ export default function Categories({
       <div className="flex flex-row items-center justify-center w-11/12 m-auto lg:justify-between lg:w-3/4">
         <div className="relative flex flex-row items-center w-11/12 md:mr-6">
           <div
-            className="z-20 hidden transition-all cursor-pointer -translate-x-1/4 md:grid place-items-center"
+            className="z-20 hidden w-8 transition-all border border-gray-400 rounded-full cursor-pointer -translate-x-1/4 md:grid place-items-center aspect-square"
             onClick={handleScrollLeft}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="38"
-              height="38"
-              viewBox="0 0 48 48"
-              className="text-gray-500 rounded-full shadow-md hover:shadow-xl"
+              width="16"
+              height="16"
+              viewBox="0 0 1024 1024"
             >
-              <g
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="round"
-                stroke-width="2.5"
-              >
-                <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z" />
-                <path stroke-linecap="round" d="m27 33l-9-9l9-9" />
-              </g>
+              <path
+                fill="currentColor"
+                d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0z"
+              />
             </svg>
           </div>
           <div className="absolute w-8 h-full bg-gradient-to-l from-white to-35%  left-0 "></div>
-
           <div
             ref={containerRef}
             onTouchStart={handleTouchStart}
@@ -151,25 +144,19 @@ export default function Categories({
           </div>
           <div className="absolute w-16 h-full bg-gradient-to-l from-white from-75% right-0 "></div>
           <div
-            className="absolute right-0 z-20 hidden transition-all cursor-pointer md:grid place-items-center"
+            className="z-20 hidden w-8 transition-all border border-gray-400 rounded-full cursor-pointer -translate-x-1/4 md:grid place-items-center aspect-square"
             onClick={handleScrollRight}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="38"
-              height="38"
-              viewBox="0 0 48 48"
-              className="text-gray-500 rounded-full shadow-md hover:shadow-xl"
+              width="16"
+              height="16"
+              viewBox="0 0 1024 1024"
             >
-              <g
-                fill="white"
-                stroke="currentColor"
-                strokeLinejoin="round"
-                strokeWidth="2.5"
-              >
-                <path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z" />
-                <path stroke-linecap="round" d="m21 33l9-9l-9-9" />
-              </g>
+              <path
+                fill="currentColor"
+                d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z"
+              />
             </svg>
           </div>
         </div>

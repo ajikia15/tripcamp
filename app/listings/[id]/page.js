@@ -151,8 +151,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
@@ -170,8 +171,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
@@ -189,8 +191,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
@@ -208,8 +211,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
