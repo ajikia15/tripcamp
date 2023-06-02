@@ -81,7 +81,6 @@ export default function House(props) {
             <h1 className="flex justify-between w-full text-3xl font-bold">
               {" "}
               {house.Name}
-              <p className="text-lg">₾{house.Price}/Night </p>
             </h1>
           </div>
           <div className="relative flex overflow-hidden rounded-2xl">
@@ -133,6 +132,7 @@ export default function House(props) {
               })}
             </div>
           </div>
+          <p className="text-lg mt-4">₾{house.Price}/Night </p>
           <div className="relative flex flex-row">
             <div className="w-4/5">
               <div className="flex flex-row items-center ">
