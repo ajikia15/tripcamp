@@ -194,11 +194,11 @@ export default function Navbar() {
           </div>
         </div>
       )}
-      <div className="sticky top-0 left-0 z-20 w-full bg-white">
+      <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {!isMobile ? (
           <div className="relative w-full h-[6rem] bg-white z-40">
-            <div className="absolute z-40 grid w-full h-4/6 grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-xl left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
+            <div className="absolute z-40 grid w-full h-4/6 grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
               <div
                 ref={refMap.search}
                 onClick={() => handleChildClick("search")}

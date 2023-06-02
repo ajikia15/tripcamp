@@ -3,7 +3,7 @@ import { db } from "../../../../firebase-config";
 import Card from "../../../components/Card";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
@@ -97,9 +97,13 @@ const Page = (props) => {
         } `}
       >
         <div
-          className={`${
+          className={`grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh] ${
             mapState && "hidden"
-          } grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh]`}
+          } ${
+            searchTerm == null ||
+            (searchTerm == "" &&
+              "sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12")
+          }`}
         >
           {houses.map((house) => (
             <Link key={house.id} href={`/listings/${house.id}`}>
