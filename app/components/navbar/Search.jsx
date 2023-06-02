@@ -57,8 +57,9 @@ export default function Search({ active, searchTerm, setSearchTerm }) {
     <>
       {active ? (
         <li className="relative flex flex-col w-full">
+          {/* temporary fix with the w- limitation on the input, replace with removing before elements later */}
           <input
-            className="w-full my-4 bg-gray-100 outline-none md:bg-white md:my-0"
+            className="w-4/5 my-4 bg-gray-100 outline-none md:bg-white md:my-0"
             type="text"
             autoFocus
             value={searchTerm}
@@ -122,7 +123,7 @@ export default function Search({ active, searchTerm, setSearchTerm }) {
         </li>
       ) : (
         <li className="flex flex-row justify-between w-full my-4 md:flex-col md:justify-normal">
-          <h3 className="font-semibold md:w-full">
+          <h3 className="font-semibold truncate md:w-4/5">
             {searchTerm || "Where to?"}
           </h3>
           {searchTerm ? null : (
