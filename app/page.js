@@ -2,22 +2,14 @@
 import Listings from "./components/Listings";
 import FooterFixed from "./components/footer/FooterFixed";
 import { db } from "../firebase-config";
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  limit,
-  startAfter,
-} from "firebase/firestore";
-import { useState, useEffect, useRef } from "react";
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { useState, useEffect } from "react";
 export default function Home() {
   const initialLoad = 17;
   const housesCollectionRef = collection(db, "Houses");
   const [loading, setLoading] = useState(true);
 
   const [houses, setHouses] = useState([]);
-
 
   useEffect(() => {
     const getHouses = async () => {

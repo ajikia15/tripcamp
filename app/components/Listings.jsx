@@ -3,14 +3,7 @@ import Card from "./Card";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import SkeletonLoad from "./SkeletonLoad";
-import { db } from "../../firebase-config";
-import {
-  getDocs,
-  query,
-  orderBy,
-  limit,
-  startAfter,
-} from "firebase/firestore";
+import { getDocs, query, orderBy, limit, startAfter } from "firebase/firestore";
 export default function Listings({
   houses,
   loading,
@@ -45,8 +38,7 @@ export default function Listings({
   }, [houses]);
   const fetchMoreData = async () => {
     setLoading(true);
-    const lastHouse =
-      houses.length > 0 ? houses[houses.length - 1] : null;
+    const lastHouse = houses.length > 0 ? houses[houses.length - 1] : null;
     if (lastHouse) {
       const firestoreQuery = query(
         housesCollectionRef,
@@ -77,7 +69,8 @@ export default function Listings({
             <Link
               key={house.id}
               href={`/listings/${house.id}`}
-              className="fade-in">
+              className="fade-in"
+            >
               <Card listing={house} />
             </Link>
           ))}
@@ -98,7 +91,8 @@ export default function Listings({
         className="fixed z-20 -translate-x-1/2 cursor-pointer bottom-12 md:bottom-20 lg:bottom-12 left-1/2"
         onClick={() => {
           setLoadAnimation(true);
-        }}>
+        }}
+      >
         <Link href={`/map/`}>
           <div className="flex flex-row items-center p-2 px-3 font-semibold text-white bg-gray-900 rounded-full gap-x-2">
             <p>Map</p>
@@ -107,7 +101,8 @@ export default function Listings({
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                viewBox="0 0 24 24">
+                viewBox="0 0 24 24"
+              >
                 <g fill="currentColor">
                   <path d="M17 2a3 3 0 0 0-.75 5.905V13a.75.75 0 0 0 1.5 0V7.905A3.001 3.001 0 0 0 17 2ZM8 22h8c2.482 0 3.875 0 4.773-.594l-8.514-4.683l-8.043 5.08C5.087 22 6.283 22 8 22Zm2.758-6.102L2.51 11.362C2 12.263 2 13.64 2 16c0 2.666 0 4.075.736 4.964l8.022-5.066Z" />
                   <path d="M22 16c0-2.828 0-4.243-.879-5.121c-.49-.49-1.146-.707-2.121-.803V13a2 2 0 1 1-4 0v-3H8c-2.045 0-3.35 0-4.25.332l17.937 9.865C22 19.3 22 18.006 22 16Z" />
@@ -122,7 +117,8 @@ export default function Listings({
                   width="24"
                   height="24"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                     fill="currentColor"
