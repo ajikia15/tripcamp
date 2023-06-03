@@ -3,7 +3,13 @@ import { db } from "../../../firebase-config";
 import { collection, query, getDocs } from "firebase/firestore";
 import { useState, useEffect, useCallback } from "react";
 
-export default function Search({ active, searchTerm, setSearchTerm }) {
+export default function Search({
+  active,
+  searchTerm,
+  setSearchTerm,
+  filteredHouses,
+  setFilteredHouses,
+}) {
   const [houses, setHouses] = useState([]);
   const housesCollectionRef = collection(db, "Houses");
   const fields = ["Name", "Address"];
@@ -12,7 +18,6 @@ export default function Search({ active, searchTerm, setSearchTerm }) {
   useEffect(() => {
     const getHouses = async () => {
       const data = await getDocs(housesQuery, { fields });
-
       setHouses(
         data.docs.map((doc) => ({
           ...doc.data(),
@@ -20,6 +25,7 @@ export default function Search({ active, searchTerm, setSearchTerm }) {
         }))
       );
     };
+
     if (searchTerm.length >= 2) {
       getHouses();
     }
@@ -36,20 +42,24 @@ export default function Search({ active, searchTerm, setSearchTerm }) {
     return formattedAddress;
   }, []);
 
-  const filteredHouses =
-    searchTerm !== ""
-      ? houses.filter((house) => {
-          const formattedAddress = formatAddress(house.Address);
-          return formattedAddress
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase());
-        })
-      : [];
+  useEffect(() => {
+    const filtered =
+      searchTerm !== ""
+        ? houses.filter((house) => {
+            const formattedAddress = formatAddress(house.Address);
+            return formattedAddress
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase());
+          })
+        : [];
+    setFilteredHouses(filtered);
+  }, [houses, searchTerm, formatAddress]);
 
   const handleHouseClick = (address) => {
     const formattedAddress = formatAddress(address);
     setSearchTerm(formattedAddress);
   };
+
   const clearSearch = (e) => {
     setSearchTerm("");
   };

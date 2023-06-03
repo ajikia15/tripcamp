@@ -11,6 +11,7 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(true);
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -124,6 +125,8 @@ export default function Navbar() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [filterState]);
+  const [filteredHouses, setFilteredHouses] = useState([]);
+
   return (
     <>
       {mobnavState && (
@@ -154,6 +157,8 @@ export default function Navbar() {
                 active={activeStates.search}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
+                filteredHouses={filteredHouses}
+                setFilteredHouses={setFilteredHouses}
               />
             </div>
             <div
@@ -208,6 +213,8 @@ export default function Navbar() {
                   active={activeStates.search}
                   searchTerm={searchTerm}
                   setSearchTerm={setSearchTerm}
+                  filteredHouses={filteredHouses}
+                  setFilteredHouses={setFilteredHouses}
                 />
               </div>
               {/* <div
