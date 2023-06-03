@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Search from "./Search";
 import PriceFilter from "./PriceFilter";
@@ -93,6 +93,12 @@ export default function Navbar() {
     setmobnavState(true);
   };
   const mobnavClosed = () => {
+    setActiveStates(() => ({
+      search: false,
+      priceFilter: false,
+      guests: false,
+      calendar: false,
+    }));
     setmobnavState(false);
     document.body.style.overflow = "visible";
   };
@@ -126,7 +132,21 @@ export default function Navbar() {
     };
   }, [filterState]);
   const [filteredHouses, setFilteredHouses] = useState([]);
-
+  const formatAddress = useCallback((address) => {
+    const addressParts = address.split("~");
+    const formattedAddress = addressParts.slice(0, 3).join(", ");
+    return formattedAddress;
+  }, []);
+  const handleHouseClick = (address) => {
+    const formattedAddress = formatAddress(address);
+    setSearchTerm(formattedAddress);
+    setActiveStates(() => ({
+      search: false,
+      priceFilter: true,
+      guests: false,
+      calendar: false,
+    }));
+  };
   return (
     <>
       {mobnavState && (
@@ -159,6 +179,7 @@ export default function Navbar() {
                 setSearchTerm={setSearchTerm}
                 filteredHouses={filteredHouses}
                 setFilteredHouses={setFilteredHouses}
+                formatAddress={formatAddress}
               />
             </div>
             <div
@@ -199,6 +220,51 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      {/* search suggestions */}
+      <ul className="fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1 top-[6.4rem]  shadow-xl rounded-xl bg-white divide-y max-h-[70vh] overflow-y-scroll z-50">
+        {activeStates.search &&
+          filteredHouses.map((house) => {
+            return (
+              <li
+                key={house.Id}
+                className="flex flex-col p-3 overflow-x-hidden text-black cursor-pointer group"
+                onClick={() => handleHouseClick(house.Address)}
+              >
+                <div className="flex flex-row gap-x-3">
+                  <div className="flex items-center text-gray-400">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M128 64a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm0-112a88.1 88.1 0 0 0-88 88c0 31.4 14.51 64.68 42 96.25a254.19 254.19 0 0 0 41.45 38.3a8 8 0 0 0 9.18 0a254.19 254.19 0 0 0 41.37-38.3c27.45-31.57 42-64.85 42-96.25a88.1 88.1 0 0 0-88-88Zm0 206c-16.53-13-72-60.75-72-118a72 72 0 0 1 144 0c0 57.23-55.47 105-72 118Z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="">{house.Name}</span>
+                    <small className="text-sm">
+                      {formatAddress(house.Address)
+                        .split(new RegExp(`(${searchTerm})`, "gi"))
+                        .map((part, index) =>
+                          part.toLowerCase() === searchTerm.toLowerCase() ? (
+                            <span key={index} className="text-blue-600">
+                              {part}
+                            </span>
+                          ) : (
+                            <span key={index}>{part}</span>
+                          )
+                        )}
+                    </small>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+      </ul>
       <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {!isMobile ? (
@@ -215,8 +281,10 @@ export default function Navbar() {
                   setSearchTerm={setSearchTerm}
                   filteredHouses={filteredHouses}
                   setFilteredHouses={setFilteredHouses}
+                  formatAddress={formatAddress}
                 />
               </div>
+
               {/* <div
                 ref={refMap.calendar}
                 onClick={() => handleChildClick("calendar")}

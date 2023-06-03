@@ -1,7 +1,7 @@
 "use client";
 import { db } from "../../../firebase-config";
 import { collection, query, getDocs } from "firebase/firestore";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 export default function Search({
   active,
@@ -9,6 +9,7 @@ export default function Search({
   setSearchTerm,
   filteredHouses,
   setFilteredHouses,
+  formatAddress,
 }) {
   const [houses, setHouses] = useState([]);
   const housesCollectionRef = collection(db, "Houses");
@@ -35,12 +36,6 @@ export default function Search({
     const value = event.target.value;
     setSearchTerm(value);
   };
-
-  const formatAddress = useCallback((address) => {
-    const addressParts = address.split("~");
-    const formattedAddress = addressParts.slice(0, 3).join(", ");
-    return formattedAddress;
-  }, []);
 
   useEffect(() => {
     const filtered =
@@ -95,41 +90,6 @@ export default function Search({
               </svg>
             </button>
           )}
-
-          <ul className="absolute left-2 right-2 md:-left-12 md:-right-12 grid grid-cols-1 top-[calc(100%+2rem)] bg-white shadow-xl rounded-xl divide-y max-h-[70vh] overflow-y-scroll z-50">
-            <div>
-              {filteredHouses.map((house) => {
-                return (
-                  <li
-                    key={house.Id}
-                    className="flex flex-col p-2 overflow-x-hidden text-black cursor-pointer group"
-                    onClick={() => handleHouseClick(house.Address)}
-                  >
-                    <div className="flex flex-row pb-2 border-b gap-x-4">
-                      <div className="flex items-center text-gray-400"></div>
-                      <div className="flex flex-col">
-                        <span className="">{house.Name}</span>
-                        <small className="text-sm">
-                          {formatAddress(house.Address)
-                            .split(new RegExp(`(${searchTerm})`, "gi"))
-                            .map((part, index) =>
-                              part.toLowerCase() ===
-                              searchTerm.toLowerCase() ? (
-                                <span key={index} className="text-blue-600">
-                                  {part}
-                                </span>
-                              ) : (
-                                <span key={index}>{part}</span>
-                              )
-                            )}
-                        </small>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </div>
-          </ul>
         </li>
       ) : (
         <li className="flex flex-row justify-between w-full my-4 md:flex-col md:justify-normal">
