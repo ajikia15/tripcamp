@@ -7,7 +7,6 @@ export default function Search({
   active,
   searchTerm,
   setSearchTerm,
-  filteredHouses,
   setFilteredHouses,
   formatAddress,
 }) {

@@ -268,98 +268,105 @@ export default function Navbar() {
       <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {!isMobile ? (
-          <div className="relative w-full h-[6rem] bg-white z-40">
-            <div className="absolute z-40 grid w-full h-4/6 grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
-              <div
-                ref={refMap.search}
-                onClick={() => handleChildClick("search")}
-                className="flex flex-col justify-center w-full col-span-2"
-              >
-                <Search
-                  active={activeStates.search}
-                  searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
-                  filteredHouses={filteredHouses}
-                  setFilteredHouses={setFilteredHouses}
-                  formatAddress={formatAddress}
+          <div className="w-full h-[6rem] 2xl:h-[10rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2">
+            <div className="z-50 hidden w-full bg-white 2xl:grid place-items-center">
+              <Link href="/">
+                <Image
+                  src="/Logo_Horizontal.svg"
+                  className="hidden 2xl:block"
+                  width={200}
+                  height={50}
+                  alt="Logo"
                 />
-              </div>
+              </Link>
+            </div>
+            <div className="relative">
+              <div className="absolute z-40 xl:h-4/6 2xl:h-5/6 grid w-full grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2 ">
+                <div
+                  ref={refMap.search}
+                  onClick={() => handleChildClick("search")}
+                  className="flex flex-col justify-center w-full col-span-2"
+                >
+                  <Search
+                    active={activeStates.search}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    filteredHouses={filteredHouses}
+                    setFilteredHouses={setFilteredHouses}
+                    formatAddress={formatAddress}
+                  />
+                </div>
 
-              {/* <div
+                {/* <div
                 ref={refMap.calendar}
                 onClick={() => handleChildClick("calendar")}
                 className="flex flex-col justify-center w-full "
               >
                 <Calendar active={activeStates.calendar} />
               </div> */}
-              <div
-                ref={refMap.priceFilter}
-                onClick={() => handleChildClick("priceFilter")}
-                className="flex flex-col justify-center w-full"
-              >
-                <PriceFilter
-                  active={activeStates.priceFilter}
-                  min={0}
-                  max={1000}
-                  step={10}
-                  priceCap={10}
-                  minMax={minMax}
-                  setMinMax={setMinMax}
-                />
+                <div
+                  ref={refMap.priceFilter}
+                  onClick={() => handleChildClick("priceFilter")}
+                  className="flex flex-col justify-center w-full"
+                >
+                  <PriceFilter
+                    active={activeStates.priceFilter}
+                    min={0}
+                    max={1000}
+                    step={10}
+                    priceCap={10}
+                    minMax={minMax}
+                    setMinMax={setMinMax}
+                  />
+                </div>
+                <div
+                  ref={refMap.guests}
+                  onClick={() => handleChildClick("guests")}
+                  className="flex flex-col justify-center w-full"
+                >
+                  <AddGuests
+                    active={activeStates.guests}
+                    guestsAmount={guestsAmount}
+                    setGuestsAmount={setGuestsAmount}
+                  />
+                </div>
+                <Link href={`/listings/search/${generatedSearchQuery()}`}>
+                  <button className="absolute flex flex-col items-center justify-center text-white -translate-y-1/2 bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md top-1/2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
+                      />
+                    </svg>
+                  </button>
+                </Link>
               </div>
-              <div
-                ref={refMap.guests}
-                onClick={() => handleChildClick("guests")}
-                className="flex flex-col justify-center w-full"
+              <Link
+                href="/"
+                className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2"
               >
-                <AddGuests
-                  active={activeStates.guests}
-                  guestsAmount={guestsAmount}
-                  setGuestsAmount={setGuestsAmount}
+                <Image
+                  src="/Logo_Horizontal.svg"
+                  className="hidden xl:block 2xl:hidden"
+                  width={180}
+                  height={50}
+                  alt="Logo"
                 />
-              </div>
-              <Link href={`/listings/search/${generatedSearchQuery()}`}>
-                <button className="absolute flex flex-col items-center justify-center text-white -translate-y-1/2 bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md top-1/2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
-                    />
-                  </svg>
-                </button>
+
+                <Image
+                  src="/Logo_Symbol.svg"
+                  className="hidden lg:block xl:hidden"
+                  width={50}
+                  height={50}
+                  alt="Logo"
+                />
               </Link>
             </div>
-            <Link
-              href="/"
-              className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2"
-            >
-              <Image
-                src="/Logo_Horizontal.svg"
-                className="hidden xl:block 2xl:hidden"
-                width={180}
-                height={50}
-                alt="Logo"
-              />
-              <Image
-                src="/Logo_Horizontal.svg"
-                className="hidden 2xl:block"
-                width={200}
-                height={50}
-                alt="Logo"
-              />
-              <Image
-                src="/Logo_Symbol.svg"
-                className="hidden lg:block xl:hidden"
-                width={50}
-                height={50}
-                alt="Logo"
-              />
-            </Link>
           </div>
         ) : (
           // mobile
