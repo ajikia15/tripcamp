@@ -221,7 +221,7 @@ export default function Navbar() {
         </div>
       )}
       {/* search suggestions */}
-      <ul className="fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1 top-[6.4rem]  shadow-xl rounded-xl bg-white divide-y max-h-[70vh] overflow-y-scroll z-50">
+      <ul className="fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1 top-[6.4rem] 2xl:top-[10rem]  shadow-xl rounded-xl bg-white divide-y max-h-[70vh] overflow-y-scroll z-50">
         {activeStates.search &&
           filteredHouses.map((house) => {
             return (
@@ -268,7 +268,7 @@ export default function Navbar() {
       <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {!isMobile ? (
-          <div className="w-full h-[6rem] 2xl:h-[10rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2">
+          <div className="w-full h-[6rem] 2xl:h-[9rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2 mb-4">
             <div className="z-50 hidden w-full bg-white 2xl:grid place-items-center">
               <Link href="/">
                 <Image
@@ -280,8 +280,8 @@ export default function Navbar() {
                 />
               </Link>
             </div>
-            <div className="relative">
-              <div className="absolute z-40 xl:h-4/6 2xl:h-5/6 grid w-full grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2 ">
+            <div className="relative z-40 bg-white">
+              <div className="absolute  xl:h-[4/6] 2xl:h-[90%] grid w-full grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
                 <div
                   ref={refMap.search}
                   onClick={() => handleChildClick("search")}
