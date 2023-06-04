@@ -385,7 +385,7 @@ export default function Navbar() {
                       : "Any Amount"}
                   </p>
 
-                  <div className="absolute left-0 p-4">
+                  <div className="absolute left-0 p-4 ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="32"
