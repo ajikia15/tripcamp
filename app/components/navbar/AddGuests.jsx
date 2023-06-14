@@ -19,8 +19,10 @@ const AddGuests = ({ active, guestsAmount, setGuestsAmount }) => {
       {guestsAmount == 1 ? (
         <p className="text-xs text-gray-500"> Add Guests </p>
       ) : (
+        <p className="text-xs text-gray-500">{guestsAmount} Guests</p>
+      )}
+      {guestsAmount > 1 && active && (
         <>
-          <p className="text-xs text-gray-500">{guestsAmount} Guests</p>
           <button
             type="button"
             className="absolute text-gray-400 -translate-y-1/2 top-1/2 left-20"
@@ -40,7 +42,6 @@ const AddGuests = ({ active, guestsAmount, setGuestsAmount }) => {
           </button>
         </>
       )}
-
       {active && (
         <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] md:-left-24 md:-right-24 right-0 left-0">
           <div className="flex items-center justify-between my-6 ">

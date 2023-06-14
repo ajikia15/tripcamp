@@ -67,10 +67,12 @@ const PriceFilter = ({
       {minMax[0] === min && minMax[1] === max ? (
         <p className="text-xs text-gray-500">Any</p>
       ) : (
+        <p className="text-xs text-gray-500">
+          {minMax[0]} - {minMax[1]}
+        </p>
+      )}
+      {(minMax[1] != max || minMax[0] != min) && active && (
         <>
-          <p className="text-xs text-gray-500">
-            {minMax[0]} - {minMax[1]}
-          </p>
           <button
             type="button"
             className="absolute text-gray-400 -translate-y-1/2 top-1/2 left-16"
