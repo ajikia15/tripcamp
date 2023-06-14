@@ -268,7 +268,7 @@ export default function Navbar() {
       <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {!isMobile ? (
-          <div className="w-full h-[6rem] 2xl:h-[9rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2 mb-4">
+          <div className="w-full h-[6rem] 2xl:h-[9rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2 mb-4 divide-x">
             <div className="z-50 hidden w-full bg-white 2xl:grid place-items-center">
               <Link href="/">
                 <Image
