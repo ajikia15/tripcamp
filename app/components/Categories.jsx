@@ -126,7 +126,7 @@ export default function Categories({
               onClick={(e) => {
                 e.preventDefault(), handleHouseClick(null);
               }}
-              className={400 == houseId && "border-b-2 border-blue-400"}
+              className={null == houseId && "border-b-2 border-blue-400"}
             >
               <IconCategs name={"All houses"} id={400} />
             </div>
