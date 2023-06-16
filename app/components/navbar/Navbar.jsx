@@ -13,7 +13,16 @@ export default function Navbar() {
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
 
-  const { filterTerm, setFilterTerm } = useGlobalContext();
+  const {
+    filterTerm,
+    setFilterTerm,
+    minMax,
+    setMinMax,
+    searchTerm,
+    setSearchTerm,
+    guestsAmount,
+    setGuestsAmount,
+  } = useGlobalContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -85,9 +94,6 @@ export default function Navbar() {
     )}&filterTerm=${encodeURIComponent(filterTerm.join(","))}&`;
     return query;
   };
-  const [guestsAmount, setGuestsAmount] = useState(1);
-  const [minMax, setMinMax] = useState([0, 1000]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const [mobnavState, setmobnavState] = useState(false);
   const mobnavClicked = () => {

@@ -101,7 +101,6 @@ const PriceFilter = ({
               <input
                 onChange={handleMin}
                 type="number"
-                readOnly
                 value={minMax[0]}
                 className="w-10 border border-gray-400 border-none rounded-md no-arrows"
               />
@@ -113,7 +112,6 @@ const PriceFilter = ({
                 <input
                   onChange={handleMax}
                   type="number"
-                  readOnly
                   value={minMax[1]}
                   className="w-12 border border-gray-400 border-none rounded-md no-arrows"
                 />

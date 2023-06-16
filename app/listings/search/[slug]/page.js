@@ -18,7 +18,7 @@ const Page = (props) => {
 
   let guests = 1; // Default value for guests
   let minMax = [0, 1000]; // Default values for min and max
-  let searchTerm = null;
+  let searchTerm = "";
   let filterTerm = "";
   // Loop through the parameters to find and assign the specified values
   params.forEach((param) => {

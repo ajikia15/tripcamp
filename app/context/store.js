@@ -9,12 +9,21 @@ const GlobalContext = createContext({
   setHouses: () => [],
   filterTerm: [],
   setFilterTerm: () => [],
+  minMax: [],
+  setMinMax: () => [],
+  searchTerm: "",
+  setSearchTerm: () => "",
+  guestsAmount: "",
+  setGuestsAmount: () => "",
 });
 
 export const GlobalContextProvider = ({ children }) => {
   const [houseId, setHouseId] = useState(null);
   const [houses, setHouses] = useState([]);
   const [filterTerm, setFilterTerm] = useState([]);
+  const [minMax, setMinMax] = useState([0, 1000]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [guestsAmount, setGuestsAmount] = useState(1);
   houses.sort((a, b) => {
     if (a.Prior === b.Prior) {
       if (a.Name < b.Name) return -1;
@@ -32,6 +41,12 @@ export const GlobalContextProvider = ({ children }) => {
         setHouses,
         filterTerm,
         setFilterTerm,
+        minMax,
+        setMinMax,
+        searchTerm,
+        setSearchTerm,
+        guestsAmount,
+        setGuestsAmount,
       }}
     >
       {children}

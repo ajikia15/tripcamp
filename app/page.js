@@ -2,7 +2,7 @@
 import Listings from "./components/Listings";
 import FooterFixed from "./components/footer/FooterFixed";
 import { db } from "../firebase-config";
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "./context/store";
 export default function Page() {
