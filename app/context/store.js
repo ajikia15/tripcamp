@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
+import { db } from "@/firebase-config";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 const GlobalContext = createContext({
   houseId: "", // because we can only mark 1 house on navbar,
@@ -15,23 +17,20 @@ const GlobalContext = createContext({
   setSearchTerm: () => "",
   guestsAmount: "",
   setGuestsAmount: () => "",
+  filteredHouses: [],
+  setFilteredHouses: () => [],
 });
 
 export const GlobalContextProvider = ({ children }) => {
   const [houseId, setHouseId] = useState(null);
+
+  const housesCollectionRef = collection(db, "Houses");
   const [houses, setHouses] = useState([]);
   const [filterTerm, setFilterTerm] = useState([]);
   const [minMax, setMinMax] = useState([0, 1000]);
   const [searchTerm, setSearchTerm] = useState("");
   const [guestsAmount, setGuestsAmount] = useState(1);
-  houses.sort((a, b) => {
-    if (a.Prior === b.Prior) {
-      if (a.Name < b.Name) return -1;
-      if (a.Name > b.Name) return 1;
-      return 0;
-    }
-    return a.Prior - b.Prior;
-  });
+
   return (
     <GlobalContext.Provider
       value={{

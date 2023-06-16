@@ -1,37 +1,13 @@
 import "leaflet/dist/leaflet.css";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import { db } from "../../firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+
 import "../globals.css";
 import Link from "next/link";
 
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
 
-const Map = () => {
-  const [houses, setHouses] = useState([]);
-  const housesCollectionRef = collection(db, "Houses");
-  const [position, setPosition] = useState([]);
-  useEffect(() => {
-    const getHouses = async () => {
-      const data = await getDocs(housesCollectionRef);
-      setHouses(
-        data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
-    };
-    getHouses();
-  }, []);
-
-  useEffect(() => {
-    if (houses.length > 0 && houses[0].Position) {
-      const { Latit, Longi } = houses[0].Position;
-      setPosition([Latit, Longi]);
-    }
-  }, [houses]);
+const Map = ({ filteredHouses }) => {
   return (
     <MapContainer
       center={[42.3, 43.6433]}
@@ -43,7 +19,7 @@ const Map = () => {
         attribution='&copy; <a href="https://carto.com/" target="_blank">Carto</a> | Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors'
       />
 
-      {houses.map((house) => (
+      {filteredHouses.map((house) => (
         <Marker
           key={house.id}
           position={[house.Position.Latit, house.Position.Longi]}

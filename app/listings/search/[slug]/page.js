@@ -76,6 +76,7 @@ const Page = (props) => {
 
   const [mapKey, setMapKey] = useState(0);
   const enlargeMap = () => {
+    // this is to force update of the map after resizing, because of the leaflet limitation
     setMapState(true);
     setMapKey((prevMapKey) => prevMapKey + 1);
   };

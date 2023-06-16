@@ -2,10 +2,29 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useGlobalContext } from "../context/store";
 const MainMap = () => {
+  const { houseId, guestsAmount, minMax, filterTerm, searchTerm, houses } =
+    useGlobalContext();
+
+  const filteredHouses = houses.filter(
+    (house) =>
+      (houseId == null || house.Options.includes(houseId)) &&
+      house.Beds >= guestsAmount &&
+      house.Price >= minMax[0] &&
+      house.Price <= minMax[1] &&
+      (filterTerm.length < 1 ||
+        filterTerm.every(
+          (term) => house.Options.split(",").includes(`${term}`) // stringify
+        )) &&
+      house.Address.toLowerCase()
+        .replace(/[^\w\s]/gi, "") // :(
+        .includes(searchTerm.toLowerCase().replace(/[^\w]/gi, ""))
+  );
   const Map = dynamic(() => import("./Map"), {
     ssr: false,
   });
+
   return (
     <>
       <div className="fixed z-20 -translate-x-1/2 cursor-pointer bottom-12 left-1/2">
@@ -26,7 +45,7 @@ const MainMap = () => {
           </div>
         </Link>
       </div>
-      <Map />
+      <Map filteredHouses={filteredHouses} />
     </>
   );
 };

@@ -9,6 +9,7 @@ export default function Listings({ houses }) {
   const [loadAnimation, setLoadAnimation] = useState(false);
   const { houseId, filterTerm, minMax, searchTerm, guestsAmount } =
     useGlobalContext();
+
   const filteredHouses = houses.filter(
     (house) =>
       (houseId == null || house.Options.includes(houseId)) &&
@@ -56,12 +57,8 @@ export default function Listings({ houses }) {
           {filteredHouses.slice(0, housesToDisplay).map((house, index) => {
             if (index == housesToDisplay - 1) {
               return (
-                <div ref={lastHouseRef}>
-                  <Link
-                    key={house.id}
-                    href={`/listings/${house.id}`}
-                    className=""
-                  >
+                <div ref={lastHouseRef} key={house.id}>
+                  <Link href={`/listings/${house.id}`} className="">
                     <Card listing={house} />
                   </Link>
                 </div>
