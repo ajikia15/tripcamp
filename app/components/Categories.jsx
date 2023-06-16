@@ -135,7 +135,9 @@ export default function Categories({
               .map((item) => (
                 <div
                   key={item.id}
-                  className={item.id == houseId && "border-b-2 border-blue-400"}
+                  className={
+                    item.id == houseId ? "border-b-2 border-blue-400" : ""
+                  }
                   onClick={(e) => {
                     e.preventDefault(), handleHouseClick(item.id);
                   }}
