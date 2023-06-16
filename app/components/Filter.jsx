@@ -3,6 +3,8 @@ import "./style.css";
 import { useState, useEffect } from "react";
 import FilterParts from "./FilterParts";
 import Link from "next/link";
+import { useGlobalContext } from "../context/store";
+import { useRouter } from "next/navigation";
 const Filter = ({
   filterClose,
   active,
@@ -10,8 +12,25 @@ const Filter = ({
   setFilterTerm,
   generatedSearchQuery,
 }) => {
+  const router = useRouter();
   const [checkedItems, setCheckedItems] = useState([]);
+  const { houses, houseId, guestsAmount, minMax, searchTerm } =
+    useGlobalContext();
 
+  const filteredHouses = houses.filter(
+    (house) =>
+      (houseId == null || house.Options.includes(houseId)) &&
+      house.Beds >= guestsAmount &&
+      house.Price >= minMax[0] &&
+      house.Price <= minMax[1] &&
+      (filterTerm.length < 1 ||
+        filterTerm.every(
+          (term) => house.Options.split(",").includes(`${term}`) // stringify
+        )) &&
+      house.Address.toLowerCase()
+        .replace(/[^\w\s]/gi, "") // :(
+        .includes(searchTerm.toLowerCase().replace(/[^\w]/gi, ""))
+  ); // this is slow. change later. if paid.
   useEffect(() => {
     // Update the checked state when filterTerm prop changes
     setCheckedItems(filterTerm);
@@ -154,10 +173,17 @@ const Filter = ({
               </button>
               <Link
                 onClick={filterClose}
-                href={`/listings/search/${generatedSearchQuery()}`}
+                href={
+                  router.pathname === "/"
+                    ? `/listings/search/${generatedSearchQuery()}`
+                    : `/`
+                }
                 className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
               >
-                <p className="text-sm"> Apply Filter </p>
+                <p className="text-sm">
+                  {" "}
+                  Show {filteredHouses.length} Glampings
+                </p>
               </Link>
             </div>
           </div>

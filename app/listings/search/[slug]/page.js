@@ -179,7 +179,7 @@ const Page = (props) => {
                       position={[house.Position.Latit, house.Position.Longi]}
                       icon={L.divIcon({
                         className: "custom-icon",
-                        html: `<div>$${house.Price}</div>`,
+                        html: `<div>₾${house.Price}</div>`,
                       })}
                     >
                       <Popup>
