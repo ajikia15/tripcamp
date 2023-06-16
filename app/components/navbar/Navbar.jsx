@@ -274,7 +274,12 @@ export default function Navbar() {
         {!isMobile ? (
           <div className="w-full h-[6rem] 2xl:h-[9rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2 mb-4 divide-x">
             <div className="z-50 hidden w-full bg-white 2xl:grid place-items-center">
-              <Link href="/">
+              <Link
+                href="/"
+                onClick={() => {
+                  setFilterTerm([]);
+                }}
+              >
                 <Image
                   src="/Logo_Horizontal.svg"
                   className="hidden 2xl:block"

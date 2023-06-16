@@ -7,9 +7,14 @@ import { useGlobalContext } from "../context/store";
 export default function Listings({ houses }) {
   const limit = 8;
   const [loadAnimation, setLoadAnimation] = useState(false);
-  const { houseId } = useGlobalContext();
+  const { houseId, filterTerm } = useGlobalContext();
   const filteredHouses = houses.filter(
-    (house) => houseId == null || house.Options.includes(houseId)
+    (house) =>
+      (houseId == null || house.Options.includes(houseId)) &&
+      (filterTerm.length < 1 ||
+        filterTerm.every(
+          (term) => house.Options.split(",").includes(`${term}`) // stringify
+        ))
   );
 
   const lastHouseRef = useRef(null);
@@ -37,6 +42,7 @@ export default function Listings({ houses }) {
   }, [filteredHouses, houseId]);
   return (
     <>
+      {console.log(filterTerm)}
       <div className="grid w-full place-items-center min-h-[80vh] pb-24 pt-3">
         {houseId}
         <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12">
