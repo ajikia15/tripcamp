@@ -23,7 +23,7 @@ export default function Listings({ houses }) {
           setHousesToDisplay((prev) => prev + limit);
         }
       },
-      { threshold: 1 }
+      { threshold: 0.5 }
     );
 
     if (lastHouseRef.current) {

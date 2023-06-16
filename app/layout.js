@@ -2,7 +2,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
-import React, { useState } from "react";
 import { GlobalContextProvider } from "./context/store";
 const inter = Inter({ subsets: ["latin"] });
 
