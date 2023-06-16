@@ -4,19 +4,19 @@ import FooterFixed from "./components/footer/FooterFixed";
 import { db } from "../firebase-config";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { useState, useEffect } from "react";
-export default function Home() {
+import { useGlobalContext } from "./context/store";
+export default function Page(props) {
   const initialLoad = 17;
   const housesCollectionRef = collection(db, "Houses");
   const [loading, setLoading] = useState(true);
 
-  const [houses, setHouses] = useState([]);
+  const { houses, setHouses } = useGlobalContext();
 
   useEffect(() => {
     const getHouses = async () => {
       const firestoreQuery = query(
         housesCollectionRef,
-        orderBy("CreatedAt", "desc"),
-        limit(initialLoad)
+        orderBy("CreatedAt", "desc")
       );
       const data = await getDocs(firestoreQuery);
       if (data.empty) {
@@ -33,7 +33,6 @@ export default function Home() {
     };
     getHouses();
   }, []);
-
   return (
     <main className="p-0 m-0">
       <Listings

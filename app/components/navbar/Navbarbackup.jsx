@@ -1,11 +1,14 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Search from "./Search";
 import PriceFilter from "./PriceFilter";
 import AddGuests from "./AddGuests";
 import Categories from "../Categories";
 import Image from "next/image";
+// import IconCategs from "./IconCategs";
+import { usePathname } from "next/navigation";
+// import list from "../list";
 import Filter from "../Filter";
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(true);
@@ -93,6 +96,12 @@ export default function Navbar() {
     setmobnavState(true);
   };
   const mobnavClosed = () => {
+    setActiveStates(() => ({
+      search: false,
+      priceFilter: false,
+      guests: false,
+      calendar: false,
+    }));
     setmobnavState(false);
     document.body.style.overflow = "visible";
   };
@@ -126,6 +135,21 @@ export default function Navbar() {
     };
   }, [filterState]);
   const [filteredHouses, setFilteredHouses] = useState([]);
+  const formatAddress = useCallback((address) => {
+    const addressParts = address.split("~");
+    const formattedAddress = addressParts.slice(0, 3).join(", ");
+    return formattedAddress;
+  }, []);
+  const handleHouseClick = (address) => {
+    const formattedAddress = formatAddress(address);
+    setSearchTerm(formattedAddress);
+    setActiveStates(() => ({
+      search: false,
+      priceFilter: true,
+      guests: false,
+      calendar: false,
+    }));
+  };
 
   return (
     <>
@@ -159,6 +183,7 @@ export default function Navbar() {
                 setSearchTerm={setSearchTerm}
                 filteredHouses={filteredHouses}
                 setFilteredHouses={setFilteredHouses}
+                formatAddress={formatAddress}
               />
             </div>
             <div
@@ -199,99 +224,153 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      {/* search suggestions */}
+      <ul className="fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1 top-[6.4rem] 2xl:top-[10rem]  shadow-xl rounded-xl bg-white divide-y max-h-[70vh] overflow-y-scroll z-50">
+        {activeStates.search &&
+          filteredHouses.map((house) => {
+            return (
+              <li
+                key={house.Id}
+                className="flex flex-col p-3 overflow-x-hidden text-black cursor-pointer group"
+                onClick={() => handleHouseClick(house.Address)}
+              >
+                <div className="flex flex-row gap-x-3">
+                  <div className="flex items-center text-gray-400">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M128 64a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm0-112a88.1 88.1 0 0 0-88 88c0 31.4 14.51 64.68 42 96.25a254.19 254.19 0 0 0 41.45 38.3a8 8 0 0 0 9.18 0a254.19 254.19 0 0 0 41.37-38.3c27.45-31.57 42-64.85 42-96.25a88.1 88.1 0 0 0-88-88Zm0 206c-16.53-13-72-60.75-72-118a72 72 0 0 1 144 0c0 57.23-55.47 105-72 118Z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="">{house.Name}</span>
+                    <small className="text-sm">
+                      {formatAddress(house.Address)
+                        .split(new RegExp(`(${searchTerm})`, "gi"))
+                        .map((part, index) =>
+                          part.toLowerCase() === searchTerm.toLowerCase() ? (
+                            <span key={index} className="text-blue-600">
+                              {part}
+                            </span>
+                          ) : (
+                            <span key={index}>{part}</span>
+                          )
+                        )}
+                    </small>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+      </ul>
       <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {!isMobile ? (
-          <div className="relative w-full h-[6rem] bg-white z-40">
-            <div className="absolute z-40 grid w-full h-4/6 grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
-              <div
-                ref={refMap.search}
-                onClick={() => handleChildClick("search")}
-                className="flex flex-col justify-center w-full col-span-2"
-              >
-                <Search
-                  active={activeStates.search}
-                  searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
-                  filteredHouses={filteredHouses}
-                  setFilteredHouses={setFilteredHouses}
+          <div className="w-full h-[6rem] 2xl:h-[9rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2 mb-4 divide-x">
+            <div className="z-50 hidden w-full bg-white 2xl:grid place-items-center">
+              <Link href="/">
+                <Image
+                  src="/Logo_Horizontal.svg"
+                  className="hidden 2xl:block"
+                  width={200}
+                  height={50}
+                  alt="Logo"
                 />
-              </div>
-              {/* <div
+              </Link>
+            </div>
+            <div className="relative z-40 bg-white">
+              <div className="absolute  xl:h-[4/6] 2xl:h-[90%] grid w-full grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
+                <div
+                  ref={refMap.search}
+                  onClick={() => handleChildClick("search")}
+                  className="flex flex-col justify-center w-full col-span-2"
+                >
+                  <Search
+                    active={activeStates.search}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    filteredHouses={filteredHouses}
+                    setFilteredHouses={setFilteredHouses}
+                    formatAddress={formatAddress}
+                  />
+                </div>
+
+                {/* <div
                 ref={refMap.calendar}
                 onClick={() => handleChildClick("calendar")}
                 className="flex flex-col justify-center w-full "
               >
                 <Calendar active={activeStates.calendar} />
               </div> */}
-              <div
-                ref={refMap.priceFilter}
-                onClick={() => handleChildClick("priceFilter")}
-                className="flex flex-col justify-center w-full"
-              >
-                <PriceFilter
-                  active={activeStates.priceFilter}
-                  min={0}
-                  max={1000}
-                  step={10}
-                  priceCap={10}
-                  minMax={minMax}
-                  setMinMax={setMinMax}
-                />
+                <div
+                  ref={refMap.priceFilter}
+                  onClick={() => handleChildClick("priceFilter")}
+                  className="flex flex-col justify-center w-full"
+                >
+                  <PriceFilter
+                    active={activeStates.priceFilter}
+                    min={0}
+                    max={1000}
+                    step={10}
+                    priceCap={10}
+                    minMax={minMax}
+                    setMinMax={setMinMax}
+                  />
+                </div>
+                <div
+                  ref={refMap.guests}
+                  onClick={() => handleChildClick("guests")}
+                  className="flex flex-col justify-center w-full"
+                >
+                  <AddGuests
+                    active={activeStates.guests}
+                    guestsAmount={guestsAmount}
+                    setGuestsAmount={setGuestsAmount}
+                  />
+                </div>
+                <Link href={`/listings/search/${generatedSearchQuery()}`}>
+                  <button className="absolute flex flex-col items-center justify-center text-white -translate-y-1/2 bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md top-1/2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
+                      />
+                    </svg>
+                  </button>
+                </Link>
               </div>
-              <div
-                ref={refMap.guests}
-                onClick={() => handleChildClick("guests")}
-                className="flex flex-col justify-center w-full"
+              <Link
+                href="/"
+                className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2"
               >
-                <AddGuests
-                  active={activeStates.guests}
-                  guestsAmount={guestsAmount}
-                  setGuestsAmount={setGuestsAmount}
+                <Image
+                  src="/Logo_Horizontal.svg"
+                  className="hidden xl:block 2xl:hidden"
+                  width={180}
+                  height={50}
+                  alt="Logo"
                 />
-              </div>
-              <Link href={`/listings/search/${generatedSearchQuery()}`}>
-                <button className="absolute flex flex-col items-center justify-center text-white -translate-y-1/2 bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md top-1/2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
-                    />
-                  </svg>
-                </button>
+
+                <Image
+                  src="/Logo_Symbol.svg"
+                  className="hidden lg:block xl:hidden"
+                  width={50}
+                  height={50}
+                  alt="Logo"
+                />
               </Link>
             </div>
-            <Link
-              href="/"
-              className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2"
-            >
-              <Image
-                src="/Logo_Horizontal.svg"
-                className="hidden xl:block 2xl:hidden"
-                width={180}
-                height={50}
-                alt="Logo"
-              />
-              <Image
-                src="/Logo_Horizontal.svg"
-                className="hidden 2xl:block"
-                width={200}
-                height={50}
-                alt="Logo"
-              />
-              <Image
-                src="/Logo_Symbol.svg"
-                className="hidden lg:block xl:hidden"
-                width={50}
-                height={50}
-                alt="Logo"
-              />
-            </Link>
           </div>
         ) : (
           // mobile
@@ -310,7 +389,7 @@ export default function Navbar() {
                       : "Any Amount"}
                   </p>
 
-                  <div className="absolute left-0 p-4">
+                  <div className="absolute left-0 p-4 ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="32"
@@ -351,11 +430,11 @@ export default function Navbar() {
           <div className="fixed z-30 bg-black opacity-50 md:inset-0" />
         )}
         <div className="pb-2">
-          <Categories
+          {/* <Categories
             filterTerm={filterTerm}
             setFilterTerm={setFilterTerm}
             generatedSearchQuery={generatedSearchQuery}
-          />
+          /> */}
         </div>
       </div>
     </>

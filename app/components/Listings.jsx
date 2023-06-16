@@ -3,82 +3,68 @@ import Card from "./Card";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import SkeletonLoad from "./SkeletonLoad";
-import { getDocs, query, orderBy, limit, startAfter } from "firebase/firestore";
-export default function Listings({
-  houses,
-  loading,
-  setLoading,
-  initialLoad,
-  setHouses,
-  housesCollectionRef,
-}) {
+import { useGlobalContext } from "../context/store";
+export default function Listings({ houses }) {
+  const limit = 8;
   const [loadAnimation, setLoadAnimation] = useState(false);
+  const { houseId } = useGlobalContext();
+  const filteredHouses = houses.filter(
+    (house) =>
+      houseId == 400 || houseId == null || house.Options.includes(houseId)
+  );
 
-  const mapRef = useRef(null);
-  const observerRef = useRef(null);
+  const lastHouseRef = useRef(null);
+  const [housesToDisplay, setHousesToDisplay] = useState(limit);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
-      async (entries) => {
-        if (entries[0].isIntersecting) {
-          observerRef.current.disconnect();
-          await fetchMoreData();
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHousesToDisplay((prev) => prev + limit);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 1 }
     );
-    observerRef.current = observer;
-    if (observerRef.current && mapRef.current) {
-      observerRef.current.observe(mapRef.current);
+
+    if (lastHouseRef.current) {
+      observer.observe(lastHouseRef.current);
     }
+
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+      if (lastHouseRef.current) {
+        observer.unobserve(lastHouseRef.current);
       }
     };
-  }, [houses]);
-  const fetchMoreData = async () => {
-    setLoading(true);
-    const lastHouse = houses.length > 0 ? houses[houses.length - 1] : null;
-    if (lastHouse) {
-      const firestoreQuery = query(
-        housesCollectionRef,
-        orderBy("CreatedAt", "desc"),
-        startAfter(lastHouse.CreatedAt),
-        limit(7)
-      );
-      const data = await getDocs(firestoreQuery);
-      if (data.docs.length === 0) {
-        setLoading(false);
-        return;
-      }
-      setHouses([
-        ...houses,
-        ...data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        })),
-      ]);
-    }
-    setLoading(false);
-  };
+  }, [filteredHouses, houseId]);
   return (
     <>
       <div className="grid w-full place-items-center min-h-[80vh] pb-24 pt-3">
+        {houseId}
         <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12">
-          {houses.map((house) => (
-            <Link
-              key={house.id}
-              href={`/listings/${house.id}`}
-              className="fade-in"
-            >
-              <Card listing={house} />
-            </Link>
-          ))}
-          <div className="" ref={mapRef}>
-            <SkeletonLoad />
-          </div>
-          {loading &&
-            Array(initialLoad)
+          {filteredHouses.slice(0, housesToDisplay).map((house, index) => {
+            if (index == housesToDisplay - 1) {
+              return (
+                <div ref={lastHouseRef}>
+                  <Link
+                    key={house.id}
+                    href={`/listings/${house.id}`}
+                    className=""
+                  >
+                    <Card listing={house} />
+                  </Link>
+                </div>
+              );
+            }
+            return (
+              <Link key={house.id} href={`/listings/${house.id}`} className="">
+                <Card listing={house} />
+              </Link>
+            ); // Return null or render other elements for non-last houses
+          })}
+
+          {/* this is disabled */}
+          {housesToDisplay <= filteredHouses.length &&
+            Array(limit)
               .fill()
               .map((_, index) => (
                 <div key={index}>

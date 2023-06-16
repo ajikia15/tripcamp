@@ -2,8 +2,9 @@
 import IconCategs from "./IconCategs";
 import { useRef, useState, useEffect } from "react";
 import Filter from "./Filter";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import list from "../list";
-import { useGlobalContext } from "../context/store";
 export default function Categories({
   filterTerm,
   setFilterTerm,
@@ -13,11 +14,8 @@ export default function Categories({
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const { houseId, setHouseId } = useGlobalContext();
+  const pathname = usePathname();
 
-  const handleHouseClick = (id) => {
-    setHouseId(id);
-  };
   const handleScroll = () => {
     setScrollPosition(containerRef.current.scrollLeft);
   };
@@ -89,11 +87,8 @@ export default function Categories({
     };
   }, [filterState]);
 
-  // useGlobalContext();
-
   return (
     <>
-      {houseId}
       <div className="flex flex-row items-center justify-center w-11/12 m-auto lg:justify-between lg:w-3/4">
         <div className="relative flex flex-row items-center w-11/12 md:mr-6">
           <div
@@ -121,26 +116,30 @@ export default function Categories({
             onScroll={handleScroll}
             className="relative grid w-full grid-flow-col-dense overflow-x-hidden gap-x-2 lg:gap-x-12"
           >
-            <div
-              onClick={(e) => {
-                e.preventDefault(), handleHouseClick(400);
-              }}
-              className={400 == houseId && "border-b-2 border-blue-400"}
+            <Link
+              href="/"
+              className={`${
+                pathname === "/" ? " border-b-4 border-blue-500" : ""
+              }`}
             >
               <IconCategs name={"All houses"} id={400} />
-            </div>
+            </Link>
             {list
               .filter((item) => item.id > 10 && item.id < 30)
               .map((item) => (
-                <div
+                <Link
+                  href={`/listings/search/guests=1&min=0&max=1000&searchTerm=&filterTerm=${item.id}&`}
                   key={item.id}
-                  className={item.id == houseId && "border-b-2 border-blue-400"}
-                  onClick={(e) => {
-                    e.preventDefault(), handleHouseClick(item.id);
-                  }}
+                  className={`${
+                    pathname.startsWith(
+                      `/listings/search/guests=1&min=0&max=1000&searchTerm=&filterTerm=${item.id}&`
+                    )
+                      ? "border-blue-600 border-b-4"
+                      : ""
+                  }`}
                 >
                   <IconCategs name={item.name} id={item.id} />
-                </div>
+                </Link>
               ))}
           </div>
           <div className="absolute w-16 h-full bg-gradient-to-l from-white from-75% right-0 "></div>

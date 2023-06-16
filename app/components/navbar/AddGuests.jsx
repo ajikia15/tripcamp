@@ -8,6 +8,7 @@ const AddGuests = ({ active, guestsAmount, setGuestsAmount }) => {
     setGuestsAmount((prevAmount) => prevAmount + 1);
   };
   const handleGuestsChange = (event) => {
+    event.preventDefault();
     setGuestsAmount(parseInt(event.target.value, 10));
   };
   const clearGuests = () => {

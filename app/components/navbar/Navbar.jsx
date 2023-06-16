@@ -11,6 +11,7 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(true);
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
+  const [filterTerm, setFilterTerm] = useState([400]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -85,7 +86,6 @@ export default function Navbar() {
   const [guestsAmount, setGuestsAmount] = useState(1);
   const [minMax, setMinMax] = useState([0, 1000]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterTerm, setFilterTerm] = useState([]);
 
   const [mobnavState, setmobnavState] = useState(false);
   const mobnavClicked = () => {
@@ -111,6 +111,7 @@ export default function Navbar() {
     setFilterState(false);
   };
   const handleClearSelection = () => {
+    e.preventDefault();
     setFilterTerm([]);
   };
   useEffect(() => {
@@ -137,6 +138,7 @@ export default function Navbar() {
     const formattedAddress = addressParts.slice(0, 3).join(", ");
     return formattedAddress;
   }, []);
+  // autocomplete for search
   const handleHouseClick = (address) => {
     const formattedAddress = formatAddress(address);
     setSearchTerm(formattedAddress);
