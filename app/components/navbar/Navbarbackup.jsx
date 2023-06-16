@@ -6,14 +6,12 @@ import PriceFilter from "./PriceFilter";
 import AddGuests from "./AddGuests";
 import Categories from "../Categories";
 import Image from "next/image";
-// import IconCategs from "./IconCategs";
-import { usePathname } from "next/navigation";
-// import list from "../list";
 import Filter from "../Filter";
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(true);
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
+  const [filterTerm, setFilterTerm] = useState([400]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -88,7 +86,6 @@ export default function Navbar() {
   const [guestsAmount, setGuestsAmount] = useState(1);
   const [minMax, setMinMax] = useState([0, 1000]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterTerm, setFilterTerm] = useState([]);
 
   const [mobnavState, setmobnavState] = useState(false);
   const mobnavClicked = () => {
@@ -114,6 +111,7 @@ export default function Navbar() {
     setFilterState(false);
   };
   const handleClearSelection = () => {
+    e.preventDefault();
     setFilterTerm([]);
   };
   useEffect(() => {
@@ -140,6 +138,7 @@ export default function Navbar() {
     const formattedAddress = addressParts.slice(0, 3).join(", ");
     return formattedAddress;
   }, []);
+  // autocomplete for search
   const handleHouseClick = (address) => {
     const formattedAddress = formatAddress(address);
     setSearchTerm(formattedAddress);
@@ -150,7 +149,6 @@ export default function Navbar() {
       calendar: false,
     }));
   };
-
   return (
     <>
       {mobnavState && (
@@ -430,11 +428,11 @@ export default function Navbar() {
           <div className="fixed z-30 bg-black opacity-50 md:inset-0" />
         )}
         <div className="pb-2">
-          {/* <Categories
+          <Categories
             filterTerm={filterTerm}
             setFilterTerm={setFilterTerm}
             generatedSearchQuery={generatedSearchQuery}
-          /> */}
+          />
         </div>
       </div>
     </>

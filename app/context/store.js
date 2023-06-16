@@ -1,15 +1,20 @@
 import React, { createContext, useContext, useState } from "react";
 
 const GlobalContext = createContext({
-  houseId: "",
+  houseId: "", // because we can only mark 1 house on navbar,
+  // filterTerm and houseId may have same values, but
+  // depending on the conditions, only one of them will be used
   setHouseId: () => "",
   houses: [],
   setHouses: () => [],
+  filterTerm: [],
+  setFilterTerm: () => [],
 });
 
 export const GlobalContextProvider = ({ children }) => {
-  const [houseId, setHouseId] = useState("400");
+  const [houseId, setHouseId] = useState(null);
   const [houses, setHouses] = useState([]);
+  const [filterTerm, setFilterTerm] = useState([]);
   houses.sort((a, b) => {
     if (a.Prior === b.Prior) {
       if (a.Name < b.Name) return -1;
@@ -19,7 +24,16 @@ export const GlobalContextProvider = ({ children }) => {
     return a.Prior - b.Prior;
   });
   return (
-    <GlobalContext.Provider value={{ houseId, setHouseId, houses, setHouses }}>
+    <GlobalContext.Provider
+      value={{
+        houseId,
+        setHouseId,
+        houses,
+        setHouses,
+        filterTerm,
+        setFilterTerm,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

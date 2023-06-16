@@ -7,11 +7,13 @@ import AddGuests from "./AddGuests";
 import Categories from "../Categories";
 import Image from "next/image";
 import Filter from "../Filter";
+import { useGlobalContext } from "@/app/context/store";
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(true);
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
-  const [filterTerm, setFilterTerm] = useState([400]);
+
+  const { filterTerm, setFilterTerm } = useGlobalContext();
 
   useEffect(() => {
     const handleResize = () => {

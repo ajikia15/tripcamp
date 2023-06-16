@@ -69,6 +69,7 @@ export default function Categories({
   };
   const handleClearSelection = () => {
     setFilterTerm([]);
+    setHouseId(null);
   };
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -123,7 +124,7 @@ export default function Categories({
           >
             <div
               onClick={(e) => {
-                e.preventDefault(), handleHouseClick(400);
+                e.preventDefault(), handleHouseClick(null);
               }}
               className={400 == houseId && "border-b-2 border-blue-400"}
             >

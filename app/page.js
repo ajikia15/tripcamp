@@ -5,8 +5,7 @@ import { db } from "../firebase-config";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "./context/store";
-export default function Page(props) {
-  const initialLoad = 17;
+export default function Page() {
   const housesCollectionRef = collection(db, "Houses");
   const [loading, setLoading] = useState(true);
 
@@ -38,9 +37,6 @@ export default function Page(props) {
       <Listings
         houses={houses}
         setHouses={setHouses}
-        loading={loading}
-        setLoading={setLoading}
-        initialLoad={initialLoad}
         housesCollectionRef={housesCollectionRef}
       />
       <FooterFixed />

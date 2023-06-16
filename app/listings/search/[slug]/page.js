@@ -60,7 +60,6 @@ const Page = (props) => {
           house.Beds >= guests &&
           house.Address.toLowerCase().includes(searchTerm) &&
           (filterTerm === null ||
-            filterTerm == 400 ||
             filterTerm
               .split(",")
               .every((term) => house.Options.split(",").includes(term)))
@@ -87,7 +86,7 @@ const Page = (props) => {
 
   return (
     <>
-      {/* {slug} */}
+      {slug}
 
       <div
         className={`grid w-full place-items-center ${

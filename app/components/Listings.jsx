@@ -9,8 +9,7 @@ export default function Listings({ houses }) {
   const [loadAnimation, setLoadAnimation] = useState(false);
   const { houseId } = useGlobalContext();
   const filteredHouses = houses.filter(
-    (house) =>
-      houseId == 400 || houseId == null || house.Options.includes(houseId)
+    (house) => houseId == null || house.Options.includes(houseId)
   );
 
   const lastHouseRef = useRef(null);
