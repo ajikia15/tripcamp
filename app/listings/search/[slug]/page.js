@@ -136,7 +136,10 @@ const Page = (props) => {
           ))}
           {dummyDivsCount > 0 &&
             Array.from({ length: dummyDivsCount }).map((_, index) => (
-              <div key={index} className="opacity-0 pointer-events-none">
+              <div
+                key={index}
+                className="hidden opacity-0 pointer-events-none lg:block"
+              >
                 <Card listing={currentPosts[0]} />
               </div>
             ))}
