@@ -179,13 +179,13 @@ const Page = (props) => {
                 </svg>
               </button>
             )}
-            <div className="sticky right-0 w-full lg:top-[12rem]">
+            <div className="sticky right-0 w-full lg:top-[9.5rem]">
               {longit !== 0 && latid !== 0 ? (
                 <MapContainer
                   key={mapKey}
                   center={[latid, longit]}
                   zoom={13}
-                  style={{ height: "75vh" }}
+                  style={{ height: "83.5vh" }}
                   scrollWheelZoom={false}
                 >
                   <TileLayer
