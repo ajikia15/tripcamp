@@ -9,6 +9,7 @@ import Image from "next/image";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import Pagination from "./Pagination";
+import StaticFooter from "@/app/components/footer/StaticFooter";
 const Page = (props) => {
   const [mapState, setMapState] = useState(false);
   const [longit, setLongit] = useState(0);
@@ -98,6 +99,14 @@ const Page = (props) => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  const remainingCards = houses.length - postsPerPage * (currentPage - 1);
+
+  // Check if the remaining number of cards is less than 4
+  const shouldFillRemainingSpace = remainingCards < 8;
+
+  // Calculate the number of dummy divs needed to fill the remaining space
+  const dummyDivsCount =
+    shouldFillRemainingSpace && remainingCards > 0 ? 8 - remainingCards : 0;
 
   return (
     <>
@@ -125,6 +134,12 @@ const Page = (props) => {
               <Card listing={house} />
             </Link>
           ))}
+          {dummyDivsCount > 0 &&
+            Array.from({ length: dummyDivsCount }).map((_, index) => (
+              <div key={index} className="opacity-0 pointer-events-none">
+                <Card listing={currentPosts[0]} />
+              </div>
+            ))}
           <Pagination
             totalPosts={houses.length}
             postsPerPage={postsPerPage}
@@ -193,7 +208,7 @@ const Page = (props) => {
                     attribution='&copy; <a href="https://carto.com/" target="_blank">Carto</a> | Map data &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors'
                   />
 
-                  {houses.map((house) => (
+                  {currentPosts.map((house) => (
                     <Marker
                       key={house.id}
                       position={[house.Position.Latit, house.Position.Longi]}
@@ -233,6 +248,7 @@ const Page = (props) => {
           </div>
         )}
       </div>
+      <StaticFooter />
     </>
   );
 };

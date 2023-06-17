@@ -24,11 +24,13 @@ const Pagination = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
   return (
-    <div className="sticky bottom-0 left-0 right-0 grid col-span-1 py-2 bg-white sm:col-span-2 lg:col-span-3 xl:col-span-4">
+    <div
+      className={`sticky bottom-0 left-0 right-0 grid col-span-1 py-2 bg-white sm:col-span-2 lg:col-span-3 xl:col-span-4`}
+    >
       <div className="flex items-center justify-center w-full gap-2 md:gap-4">
         {currentPage > 1 ? (
           <button
-            className="grid w-10 text-gray-600 aspect-square place-items-center"
+            className="grid h-10 text-gray-600 aspect-square place-items-center"
             onClick={() => setCurrentPage(currentPage - 1)}
           >
             <svg
@@ -47,7 +49,7 @@ const Pagination = ({
             </svg>
           </button>
         ) : (
-          <div className="grid w-10 text-gray-600 opacity-0 aspect-square place-items-center">
+          <div className="grid h-10 text-gray-600 opacity-0 aspect-square place-items-center">
             a
           </div>
         )}
@@ -56,7 +58,7 @@ const Pagination = ({
           <>
             <button
               onClick={() => setCurrentPage(1)}
-              className="grid w-10 text-gray-900 aspect-square place-items-center"
+              className="grid h-10 text-gray-900 aspect-square place-items-center"
             >
               1
             </button>
@@ -69,7 +71,7 @@ const Pagination = ({
             <button
               key={index}
               onClick={() => setCurrentPage(page)}
-              className={`grid w-10 text-gray-900 aspect-square place-items-center ${
+              className={`grid h-10 text-gray-900 aspect-square place-items-center ${
                 page === currentPage ? "text-white bg-blue-600 rounded-md" : ""
               }`}
             >
@@ -83,7 +85,7 @@ const Pagination = ({
             {endPage < totalPages - 1 && <span className="ellipsis">...</span>}
             <button
               onClick={() => setCurrentPage(totalPages)}
-              className="grid w-10 text-gray-900 aspect-square place-items-center"
+              className="grid h-10 text-gray-900 aspect-square place-items-center"
             >
               {totalPages}
             </button>
@@ -93,7 +95,7 @@ const Pagination = ({
         {currentPage < totalPages ? (
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
-            className="grid w-12 text-gray-600 aspect-square place-items-center"
+            className="grid h-10 text-gray-600 aspect-square place-items-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +113,7 @@ const Pagination = ({
             </svg>
           </button>
         ) : (
-          <div className="grid w-10 text-gray-600 opacity-0 aspect-square place-items-center">
+          <div className="grid h-10 text-gray-600 opacity-0 aspect-square place-items-center">
             b
           </div>
         )}
