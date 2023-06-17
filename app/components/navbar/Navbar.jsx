@@ -8,11 +8,12 @@ import Categories from "../Categories";
 import Image from "next/image";
 import Filter from "../Filter";
 import { useGlobalContext } from "@/app/context/store";
+import { usePathname } from "next/navigation";
 export default function Navbar() {
+  const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(true);
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
-
   const {
     filterTerm,
     setFilterTerm,
@@ -23,7 +24,8 @@ export default function Navbar() {
     guestsAmount,
     setGuestsAmount,
   } = useGlobalContext();
-
+  let path;
+  path = window.location.pathname;
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -278,8 +280,18 @@ export default function Navbar() {
       <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {!isMobile ? (
-          <div className="w-full h-[6rem] 2xl:h-[9rem] bg-white z-40 grid grid-cols-1 2xl:grid-rows-2 mb-4 divide-x">
-            <div className="z-50 hidden w-full bg-white 2xl:grid place-items-center">
+          <div
+            className={`w-full  ${
+              pathname == "/"
+                ? "h-[6rem] 2xl:h-[9rem] 2xl:grid-rows-2"
+                : "h-[3rem] 2xl:h-[4.5rem]"
+            }  bg-white z-40 grid grid-cols-1  mb-4 divide-x`}
+          >
+            <div
+              className={`z-50 hidden w-full bg-white place-items-center ${
+                pathname == "/" && "2xl:grid"
+              }`}
+            >
               <Link
                 href="/"
                 onClick={() => {
@@ -296,7 +308,11 @@ export default function Navbar() {
               </Link>
             </div>
             <div className="relative z-40 bg-white">
-              <div className="absolute  xl:h-[4/6] 2xl:h-[90%] grid w-full grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2">
+              {/* check this later  */}
+              <div
+                className="absolute
+                xl:h-[4/6] 2xl:h-[90%] grid w-full grid-cols-[2fr_1fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2"
+              >
                 <div
                   ref={refMap.search}
                   onClick={() => handleChildClick("search")}

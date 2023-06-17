@@ -9,7 +9,6 @@ export default function Listings({ houses }) {
   const [loadAnimation, setLoadAnimation] = useState(false);
   const { houseId, filterTerm, minMax, searchTerm, guestsAmount } =
     useGlobalContext();
-
   const filteredHouses = houses.filter(
     (house) =>
       (houseId == null || house.Options.includes(houseId)) &&
@@ -20,9 +19,9 @@ export default function Listings({ houses }) {
         filterTerm.every(
           (term) => house.Options.split(",").includes(`${term}`) // stringify
         )) &&
-      house.Address.toLowerCase()
-        .replace(/[^\w\s]/gi, "") // :(
-        .includes(searchTerm.toLowerCase().replace(/[^\w]/gi, ""))
+      house.Address.toLowerCase().includes(
+        searchTerm.split(", ").slice(0, 3).join("~").toLowerCase()
+      )
   );
 
   const lastHouseRef = useRef(null);
@@ -50,7 +49,7 @@ export default function Listings({ houses }) {
   }, [filteredHouses, houseId]);
   return (
     <>
-      {console.log(searchTerm)}
+      {/* {console.log(searchTerm)} */}
       <div className="grid w-full place-items-center min-h-[80vh] pb-24 pt-3">
         {houseId}
         <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12">

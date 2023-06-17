@@ -8,19 +8,20 @@ import "leaflet/dist/leaflet.css";
 import Image from "next/image";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
-
+import Pagination from "./Pagination";
 const Page = (props) => {
   const [mapState, setMapState] = useState(false);
   const [longit, setLongit] = useState(0);
   const [latid, setLatid] = useState(0);
-  const slug = decodeURIComponent(props.params.slug);
-  const params = slug.split("&"); // Splitting the query parameters
 
-  let guests = 1; // Default value for guests
-  let minMax = [0, 1000]; // Default values for min and max
+  const slug = decodeURIComponent(props.params.slug);
+  const params = slug.split("&"); // splitting the query parameters
+
+  let guests = 1;
+  let minMax = [0, 1000];
   let searchTerm = "";
   let filterTerm = "";
-  // Loop through the parameters to find and assign the specified values
+  // loop through the parameters to find and assign the specified values
   params.forEach((param) => {
     const [key, value] = param.split("=");
     if (key === "guests") {
@@ -74,9 +75,9 @@ const Page = (props) => {
     getHouses();
   }, []);
 
+  // these are used to force update of the map after resizing, because of the leaflet limitation
   const [mapKey, setMapKey] = useState(0);
   const enlargeMap = () => {
-    // this is to force update of the map after resizing, because of the leaflet limitation
     setMapState(true);
     setMapKey((prevMapKey) => prevMapKey + 1);
   };
@@ -85,9 +86,22 @@ const Page = (props) => {
     setMapKey((prevMapKey) => prevMapKey - 1);
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 12; // Number of houses to display per page
+
+  // Calculate the index of the first and last house on the current page
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = houses.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Function to handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <>
-      {slug}
+      {/* {slug} */}
 
       <div
         className={`grid w-full place-items-center ${
@@ -98,7 +112,7 @@ const Page = (props) => {
         } `}
       >
         <div
-          className={`grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh] ${
+          className={`grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh] relative ${
             mapState && "hidden"
           } ${
             searchTerm == null ||
@@ -106,14 +120,20 @@ const Page = (props) => {
               "sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12")
           }`}
         >
-          {houses.map((house) => (
+          {currentPosts.map((house) => (
             <Link key={house.id} href={`/listings/${house.id}`}>
               <Card listing={house} />
             </Link>
           ))}
+          <Pagination
+            totalPosts={houses.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={handlePageChange}
+            currentPage={currentPage}
+          />
         </div>
         {searchTerm !== null && searchTerm != "" && (
-          <div className="relative w-full h-full lg:block">
+          <div className="relative hidden w-full h-full lg:block">
             {!mapState ? (
               <button
                 type="button"
@@ -159,13 +179,13 @@ const Page = (props) => {
                 </svg>
               </button>
             )}
-            <div className="sticky right-0 w-full top-[12rem] lg:top-[13.5rem]">
+            <div className="sticky right-0 w-full lg:top-[12rem]">
               {longit !== 0 && latid !== 0 ? (
                 <MapContainer
                   key={mapKey}
                   center={[latid, longit]}
                   zoom={13}
-                  style={{ height: "77vh" }}
+                  style={{ height: "75vh" }}
                   scrollWheelZoom={false}
                 >
                   <TileLayer

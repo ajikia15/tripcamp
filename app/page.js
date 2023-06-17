@@ -22,23 +22,19 @@ export default function Page() {
         setLoading(false);
         return;
       }
-      setHouses(
-        data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
+      const housesData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
+      setHouses(housesData);
       setLoading(false);
     };
     getHouses();
   }, []);
   return (
     <main className="p-0 m-0">
-      <Listings
-        houses={houses}
-        setHouses={setHouses}
-        housesCollectionRef={housesCollectionRef}
-      />
+      <Listings houses={houses} />
       <FooterFixed />
     </main>
   );

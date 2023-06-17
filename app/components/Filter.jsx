@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import FilterParts from "./FilterParts";
 import Link from "next/link";
 import { useGlobalContext } from "../context/store";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 const Filter = ({
   filterClose,
   active,
@@ -12,7 +12,8 @@ const Filter = ({
   setFilterTerm,
   generatedSearchQuery,
 }) => {
-  const router = useRouter();
+  const pathname = usePathname();
+
   const [checkedItems, setCheckedItems] = useState([]);
   const { houses, houseId, guestsAmount, minMax, searchTerm } =
     useGlobalContext();
@@ -174,7 +175,7 @@ const Filter = ({
               <Link
                 onClick={filterClose}
                 href={
-                  router.pathname === "/"
+                  pathname != "/"
                     ? `/listings/search/${generatedSearchQuery()}`
                     : `/`
                 }
