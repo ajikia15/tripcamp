@@ -1,7 +1,7 @@
 "use client";
 import Card from "./Card";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import SkeletonLoad from "./SkeletonLoad";
 import { useGlobalContext } from "../context/store";
 import autoAnimate from "@formkit/auto-animate";
@@ -9,8 +9,10 @@ import autoAnimate from "@formkit/auto-animate";
 export default function Listings({ houses }) {
   const limit = 8;
   const [loadAnimation, setLoadAnimation] = useState(false);
-  const { houseId, filterTerm, minMax, searchTerm, guestsAmount } =
-    useGlobalContext();
+  const [loading, setLoading] = useState(false);
+  const { houseId } = useGlobalContext();
+  // const { houseId, filterTerm, minMax, searchTerm, guestsAmount } =
+  // useGlobalContext();
   const filteredHouses = houses.filter(
     (house) => houseId == null || house.Options.includes(houseId)
     // && // activate if you need native filtering
@@ -29,7 +31,6 @@ export default function Listings({ houses }) {
 
   const lastHouseRef = useRef(null);
   const [housesToDisplay, setHousesToDisplay] = useState(limit);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -63,13 +64,19 @@ export default function Listings({ houses }) {
           className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12"
           ref={listingsRef}
         >
+          {loading &&
+            Array(limit * 4)
+              .fill()
+              .map((_, index) => (
+                <div key={index}>
+                  <SkeletonLoad />
+                </div>
+              ))}
           {filteredHouses.slice(0, housesToDisplay).map((house, index) => {
             if (index == housesToDisplay - 1) {
               return (
                 <div ref={lastHouseRef} key={house.id}>
-                  <Link href={`/listings/${house.id}`} className="">
-                    <Card listing={house} />
-                  </Link>
+                  <SkeletonLoad />
                 </div>
               );
             }
