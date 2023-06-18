@@ -9,6 +9,8 @@ import Image from "next/image";
 import Filter from "../Filter";
 import { useGlobalContext } from "@/app/context/store";
 import { usePathname } from "next/navigation";
+import autoAnimate from "@formkit/auto-animate";
+
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(true);
@@ -159,6 +161,12 @@ export default function Navbar() {
       calendar: false,
     }));
   };
+  const suggestionsRef = useRef(null);
+  const navbarRef = useRef(null);
+  useEffect(() => {
+    suggestionsRef.current && autoAnimate(suggestionsRef.current);
+  }, [suggestionsRef]);
+
   return (
     <>
       {mobnavState && (
@@ -234,6 +242,7 @@ export default function Navbar() {
       )}
       {/* search suggestions/autocomplete */}
       <ul
+        ref={suggestionsRef}
         className={`fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1  ${
           pathname == "/"
             ? "top-[6rem] 2xl:top-[9rem]"
@@ -248,7 +257,7 @@ export default function Navbar() {
               return (
                 <li
                   key={index}
-                  className="flex flex-col p-3 overflow-x-hidden text-black cursor-pointer group"
+                  className="flex flex-col p-3 overflow-hidden text-black cursor-pointer group"
                   onClick={() => handleHouseClick(house.Address)}
                 >
                   <div className="flex flex-row gap-x-3">
@@ -286,7 +295,9 @@ export default function Navbar() {
               );
           })}
       </ul>
-      <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
+      {/* use this for padding */}
+      <div className="w-full h-[20vh] 2xl:h-[25vh]"></div>
+      <div className="fixed top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {(activeStates.search ||
           activeStates.priceFilter ||
@@ -448,7 +459,7 @@ export default function Navbar() {
                 </li>
               </div>
             </div>
-            <div className="absolute z-40 sm:top-[2.15rem] top-[1.65rem] right-1">
+            <div className="absolute z-40  top-[1.65rem] right-1">
               <div
                 className="flex items-center justify-center"
                 ref={filterRef}
