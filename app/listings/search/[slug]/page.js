@@ -148,6 +148,7 @@ const Page = (props) => {
             postsPerPage={postsPerPage}
             setCurrentPage={handlePageChange}
             currentPage={currentPage}
+            mapState={mapState}
           />
         </div>
         {searchTerm !== null && searchTerm != "" && (

@@ -1,9 +1,11 @@
-import { use, useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 const Pagination = ({
   totalPosts,
   postsPerPage,
   setCurrentPage,
   currentPage,
+  mapState,
 }) => {
   const pageRangeDisplayed = 5; // Number of visible page buttons
   const totalPages = Math.ceil(totalPosts / postsPerPage);
@@ -23,9 +25,11 @@ const Pagination = ({
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
+  const paginationRef = useRef(null);
   return (
     <div
-      className={`sticky bottom-0 left-0 right-0 grid col-span-1 py-2 bg-white sm:col-span-2 lg:col-span-3 xl:col-span-4`}
+      className="sticky bottom-0 left-0 right-0 grid py-2 bg-white col-span-full"
+      ref={paginationRef}
     >
       <div className="flex items-center justify-center w-full gap-2 md:gap-4">
         {currentPage > 1 ? (
