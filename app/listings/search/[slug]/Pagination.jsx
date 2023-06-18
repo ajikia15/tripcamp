@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
+import autoAnimate from "@formkit/auto-animate";
 const Pagination = ({
   totalPosts,
   postsPerPage,
@@ -26,12 +26,15 @@ const Pagination = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
   const paginationRef = useRef(null);
+  useEffect(() => {
+    paginationRef.current && autoAnimate(paginationRef.current);
+  }, [paginationRef]);
   return (
-    <div
-      className="sticky bottom-0 left-0 right-0 grid py-2 bg-white col-span-full"
-      ref={paginationRef}
-    >
-      <div className="flex items-center justify-center w-full gap-2 md:gap-4">
+    <div className="sticky bottom-0 left-0 right-0 grid py-2 bg-white col-span-full">
+      <div
+        ref={paginationRef}
+        className="flex items-center justify-center w-full gap-2 md:gap-4"
+      >
         {currentPage > 1 ? (
           <button
             className="grid h-10 text-gray-600 aspect-square place-items-center"
@@ -53,9 +56,7 @@ const Pagination = ({
             </svg>
           </button>
         ) : (
-          <div className="grid h-10 text-gray-600 opacity-0 aspect-square place-items-center">
-            a
-          </div>
+          <div className="grid h-10 text-gray-600 opacity-0 aspect-square place-items-center"></div>
         )}
 
         {startPage > 1 && (
@@ -117,9 +118,7 @@ const Pagination = ({
             </svg>
           </button>
         ) : (
-          <div className="grid h-10 text-gray-600 opacity-0 aspect-square place-items-center">
-            b
-          </div>
+          <div className="grid h-10 text-gray-600 opacity-0 aspect-square place-items-center"></div>
         )}
       </div>
     </div>
