@@ -13,28 +13,13 @@ export default function Categories({
   const filterRef = useRef(null);
   const [filterState, setFilterState] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollState, setScrollState] = useState(false);
   const { houseId, setHouseId } = useGlobalContext();
 
   const handleHouseClick = (id) => {
     setHouseId(id);
   };
   const handleScroll = () => {
-    setScrollPosition(containerRef.current.scrollLeft);
-  };
-
-  const handleScrollLeft = () => {
-    containerRef.current.scrollBy({
-      left: -300,
-      behavior: "smooth",
-    });
-    setScrollPosition(containerRef.current.scrollLeft);
-  };
-
-  const handleScrollRight = () => {
-    containerRef.current.scrollBy({
-      left: 300,
-      behavior: "smooth",
-    });
     setScrollPosition(containerRef.current.scrollLeft);
   };
 
@@ -90,15 +75,41 @@ export default function Categories({
     };
   }, [filterState]);
 
-  // useGlobalContext();
+  const handleScrollLeft = () => {
+    containerRef.current.scrollBy({
+      left: -300,
+      behavior: "smooth",
+    });
+    setScrollPosition(containerRef.current.scrollLeft);
+  };
 
+  const handleScrollRight = () => {
+    containerRef.current.scrollBy({
+      left: 300,
+      behavior: "smooth",
+    });
+    setScrollPosition(containerRef.current.scrollLeft);
+
+    // user has scrolled to the end
+  };
+  useEffect(() => {
+    if (
+      containerRef.current.scrollLeft + containerRef.current.offsetWidth >=
+      containerRef.current.scrollWidth
+    )
+      setScrollState(true);
+    else setScrollState(false);
+  }, [scrollPosition]);
+  // useGlobalContext();
   return (
     <>
       {/* {houseId} */}
       <div className="flex flex-row items-center justify-center w-11/12 m-auto lg:justify-between lg:w-3/4">
         <div className="relative flex flex-row items-center w-11/12 md:mr-6">
           <div
-            className="z-20 hidden w-8 transition-all border border-gray-400 rounded-full cursor-pointer -translate-x-1/4 md:grid place-items-center aspect-square"
+            className={`z-20 hidden w-8 ${
+              scrollPosition === 0 ? `opacity-0 cursor-default` : "opacity-100"
+            } transition-all border border-gray-400 rounded-full cursor-pointer -translate-x-1/4 md:grid place-items-center aspect-square`}
             onClick={handleScrollLeft}
           >
             <svg
@@ -146,9 +157,11 @@ export default function Categories({
                 </div>
               ))}
           </div>
-          <div className="absolute w-16 h-full bg-gradient-to-l from-white from-75% right-0 "></div>
+          {/* <div className="absolute w-16 h-full bg-gradient-to-l from-white from-75% right-0 "></div> */}
           <div
-            className="z-20 hidden w-8 transition-all border border-gray-400 rounded-full cursor-pointer -translate-x-1/4 md:grid place-items-center aspect-square"
+            className={`z-20 hidden  ${
+              scrollState ? "opacity-0 cursor-default" : "opacity-100"
+            } w-8 transition-all border border-gray-400 rounded-full cursor-pointer translate-x-1/4 md:grid place-items-center aspect-square`}
             onClick={handleScrollRight}
           >
             <svg
