@@ -1,3 +1,2 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), Tailwind, Firebase and love.
-
-Temporary website url - [tripcamp.netlify.app](https://tripcamp.netlify.app/)
+## The website is LIVE 🔴
+# Visit here 👉 [gotripcamp.com](https://gotripcamp.com/)
