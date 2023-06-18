@@ -232,55 +232,58 @@ export default function Navbar() {
           </div>
         </div>
       )}
-      {/* search suggestions */}
+      {/* search suggestions/autocomplete */}
       <ul
-        className={`fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1 ${
+        className={`fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1  ${
           pathname == "/"
-            ? "top-[6.4rem] 2xl:top-[9rem]"
+            ? "top-[6rem] 2xl:top-[9rem]"
             : "top-[6.4rem] md:top-[4.5rem]"
-        }   shadow-xl rounded-xl bg-white divide-y max-h-[70vh] overflow-y-scroll z-50`}
+        }   shadow-xl rounded-xl bg-white divide-y max-h-[70vh] overflow-hidden z-50`}
+        // turn of overflow-hidden if it should be scrollable
       >
         {activeStates.search &&
-          filteredHouses.map((house) => {
-            return (
-              <li
-                key={house.Id}
-                className="flex flex-col p-3 overflow-x-hidden text-black cursor-pointer group"
-                onClick={() => handleHouseClick(house.Address)}
-              >
-                <div className="flex flex-row gap-x-3">
-                  <div className="flex items-center text-gray-400">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 256 256"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M128 64a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm0-112a88.1 88.1 0 0 0-88 88c0 31.4 14.51 64.68 42 96.25a254.19 254.19 0 0 0 41.45 38.3a8 8 0 0 0 9.18 0a254.19 254.19 0 0 0 41.37-38.3c27.45-31.57 42-64.85 42-96.25a88.1 88.1 0 0 0-88-88Zm0 206c-16.53-13-72-60.75-72-118a72 72 0 0 1 144 0c0 57.23-55.47 105-72 118Z"
-                      />
-                    </svg>
+          filteredHouses.map((house, index) => {
+            if (index <= 5)
+              // turn off if needed
+              return (
+                <li
+                  key={index}
+                  className="flex flex-col p-3 overflow-x-hidden text-black cursor-pointer group"
+                  onClick={() => handleHouseClick(house.Address)}
+                >
+                  <div className="flex flex-row gap-x-3">
+                    <div className="flex items-center text-gray-400">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M128 64a40 40 0 1 0 40 40a40 40 0 0 0-40-40Zm0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24Zm0-112a88.1 88.1 0 0 0-88 88c0 31.4 14.51 64.68 42 96.25a254.19 254.19 0 0 0 41.45 38.3a8 8 0 0 0 9.18 0a254.19 254.19 0 0 0 41.37-38.3c27.45-31.57 42-64.85 42-96.25a88.1 88.1 0 0 0-88-88Zm0 206c-16.53-13-72-60.75-72-118a72 72 0 0 1 144 0c0 57.23-55.47 105-72 118Z"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="">{house.Name}</span>
+                      <small className="text-sm">
+                        {formatAddress(house.Address)
+                          .split(new RegExp(`(${searchTerm})`, "gi"))
+                          .map((part, index) =>
+                            part.toLowerCase() === searchTerm.toLowerCase() ? (
+                              <span key={index} className="text-blue-600">
+                                {part}
+                              </span>
+                            ) : (
+                              <span key={index}>{part}</span>
+                            )
+                          )}
+                      </small>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="">{house.Name}</span>
-                    <small className="text-sm">
-                      {formatAddress(house.Address)
-                        .split(new RegExp(`(${searchTerm})`, "gi"))
-                        .map((part, index) =>
-                          part.toLowerCase() === searchTerm.toLowerCase() ? (
-                            <span key={index} className="text-blue-600">
-                              {part}
-                            </span>
-                          ) : (
-                            <span key={index}>{part}</span>
-                          )
-                        )}
-                    </small>
-                  </div>
-                </div>
-              </li>
-            );
+                </li>
+              );
           })}
       </ul>
       <div className="sticky top-0 left-0 z-20 w-full bg-white shadow-sm">
@@ -322,8 +325,8 @@ export default function Navbar() {
             <div className="relative z-40 bg-white">
               {/* check this later  */}
               <div
-                className={`absolute
-                md:h-[80%] 2xl:h-[90%]  grid w-full grid-cols-[3fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2`}
+                className="absolute
+                md:h-[80%] 2xl:h-[90%]  grid w-full grid-cols-[3fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2"
               >
                 <div
                   ref={refMap.search}
