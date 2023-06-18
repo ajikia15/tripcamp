@@ -94,7 +94,7 @@ const PriceFilter = ({
       )}
 
       {active && (
-        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] left-0 right-0 md:-left-16 w-96 z-50">
+        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-2xl absolute top-[calc(100%+1rem)] left-0 right-0 md:-left-16 w-96 z-50">
           <div className="flex items-center justify-between my-6">
             <div className="flex flex-col justify-start pl-3 pr-8 border-2 border-gray-200 rounded-md">
               <span className="text-sm text-gray-600">Minimum price</span>

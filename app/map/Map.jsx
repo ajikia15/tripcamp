@@ -12,7 +12,7 @@ const Map = ({ filteredHouses }) => {
     <MapContainer
       center={[42.3, 43.6433]}
       zoom={7.5}
-      style={{ height: "83vh" }}
+      style={{ height: "90vh" }}
     >
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"

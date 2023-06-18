@@ -61,9 +61,8 @@ export default function Search({
     <>
       {active ? (
         <li className="relative flex flex-col w-full">
-          {/* temporary fix with the w- limitation on the input, replace with removing before elements later */}
           <input
-            className="w-4/5 h=full my-4 bg-gray-100 outline-none md:bg-white md:my-0"
+            className="w-4/5 h-full my-4 bg-gray-100 outline-none md:bg-white md:my-0"
             type="text"
             autoFocus
             value={searchTerm}

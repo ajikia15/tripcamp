@@ -44,7 +44,7 @@ const AddGuests = ({ active, guestsAmount, setGuestsAmount }) => {
         </>
       )}
       {active && (
-        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-xl absolute top-[calc(100%+2rem)] md:-left-24 md:-right-24 right-0 left-0">
+        <div className="flex flex-col px-6 py-4 bg-white rounded-lg shadow-2xl absolute top-[calc(100%+1rem)] md:-left-24 md:-right-24 right-0 left-0">
           <div className="flex items-center justify-between my-6 ">
             <div>
               <p className="font-bold text-zinc-800 test-md">Guests</p>

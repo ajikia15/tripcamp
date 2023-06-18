@@ -26,8 +26,7 @@ export default function Navbar() {
     guestsAmount,
     setGuestsAmount,
   } = useGlobalContext();
-  let path;
-  path = window.location.pathname;
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -162,7 +161,6 @@ export default function Navbar() {
     }));
   };
   const suggestionsRef = useRef(null);
-  const navbarRef = useRef(null);
   useEffect(() => {
     suggestionsRef.current && autoAnimate(suggestionsRef.current);
   }, [suggestionsRef]);
@@ -243,11 +241,11 @@ export default function Navbar() {
       {/* search suggestions/autocomplete */}
       <ul
         ref={suggestionsRef}
-        className={`fixed left-2 right-2 md:left-1/4 md:right-[45%] grid grid-cols-1  ${
+        className={`fixed left-2 right-2 md:left-[16%] md:right-[45%] lg:left-[20%] xl:left-[29%] grid grid-cols-1  ${
           pathname == "/"
-            ? "top-[6rem] 2xl:top-[9rem]"
+            ? "top-[6rem] md:top-[4.6rem] lg:top-[4.7rem] 2xl:top-[10.5rem]"
             : "top-[6.4rem] md:top-[4.5rem]"
-        }   shadow-xl rounded-xl bg-white divide-y max-h-[70vh] overflow-hidden z-50`}
+        }   shadow-2xl rounded-xl bg-white divide-y max-h-[70vh] overflow-hidden z-50`}
         // turn of overflow-hidden if it should be scrollable
       >
         {activeStates.search &&
@@ -295,8 +293,17 @@ export default function Navbar() {
               );
           })}
       </ul>
-      {/* use this for padding */}
-      <div className="w-full h-[20vh] 2xl:h-[25vh]"></div>
+      {/* use this for padding dummy */}
+      {/* "h-[18vh]" : "h-[25vh] 2xl:h-[30vh]" */}
+      <div
+        className={
+          pathname !== "/map" && pathname !== "/"
+            ? "h-[20vh]"
+            : pathname === "/map"
+            ? "h-[18vh]"
+            : "h-25vh 2xl:h-[30vh]"
+        }
+      />
       <div className="fixed top-0 left-0 z-20 w-full bg-white shadow-sm">
         {/* pc */}
         {(activeStates.search ||
@@ -309,13 +316,13 @@ export default function Navbar() {
           <div
             className={`w-full  ${
               pathname == "/"
-                ? "h-[6rem] 2xl:h-[9rem] 2xl:grid-rows-2"
-                : "h-[3rem] md:h-[4.5rem]"
-            }  bg-white z-40 grid grid-cols-1  mb-4 divide-x`}
+                ? "h-[6rem] 2xl:h-[11.5rem] 2xl:grid-rows-[5fr_8fr]"
+                : "h-[3rem] md:h-[6rem]"
+            }  bg-white z-40 grid grid-cols-1 divide-x`}
           >
             <div
-              className={`z-50 hidden w-full  bg-white place-items-center ${
-                pathname == "/" && "2xl:grid"
+              className={`z-50 hidden w-full mx-auto bg-white justify-center border-b border-gray-200 ${
+                pathname == "/" && "2xl:flex"
               }`}
             >
               <Link
@@ -323,22 +330,30 @@ export default function Navbar() {
                 onClick={() => {
                   setFilterTerm([]);
                 }}
+                className="flex flex-row items-center w-11/12 gap-x-2"
               >
                 <Image
-                  src="/Logo_Horizontal.svg"
+                  src="/Logo_symbol.svg"
                   className="hidden 2xl:block"
-                  width={200}
-                  height={50}
+                  width={40}
+                  height={40}
                   alt="Logo"
                 />
+                <h1 className="text-2xl font-semibold">TripCamp</h1>
               </Link>
             </div>
             <div className="relative z-40 bg-white">
               {/* check this later  */}
               <div
-                className="absolute
-                md:h-[80%] 2xl:h-[90%]  grid w-full grid-cols-[3fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl transition-all cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2"
+                className={`
+                 ${
+                   pathname == "/"
+                     ? "md:h-[62%] 2xl:h-[55%]"
+                     : "md:h-[62%] 2xl:h-[60%]"
+                 } absolute grid w-full grid-cols-[3fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2`}
               >
+                {/* xl:w-4/12 */}
+
                 <div
                   ref={refMap.search}
                   onClick={() => handleChildClick("search")}
@@ -408,16 +423,8 @@ export default function Navbar() {
                 className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2"
               >
                 <Image
-                  src="/Logo_Horizontal.svg"
-                  className="hidden xl:block 2xl:hidden"
-                  width={180}
-                  height={50}
-                  alt="Logo"
-                />
-
-                <Image
                   src="/Logo_Symbol.svg"
-                  className="hidden lg:block xl:hidden"
+                  className={pathname === "/" ? "xl:hidden" : ""}
                   width={50}
                   height={50}
                   alt="Logo"
@@ -477,7 +484,7 @@ export default function Navbar() {
           </>
         )}
 
-        <div className="pb-2">
+        <div className="pb-4 md:pt-4 ">
           <Categories
             filterTerm={filterTerm}
             setFilterTerm={setFilterTerm}
