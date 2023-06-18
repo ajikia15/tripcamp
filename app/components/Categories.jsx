@@ -94,7 +94,7 @@ export default function Categories({
 
   return (
     <>
-      {houseId}
+      {/* {houseId} */}
       <div className="flex flex-row items-center justify-center w-11/12 m-auto lg:justify-between lg:w-3/4">
         <div className="relative flex flex-row items-center w-11/12 md:mr-6">
           <div

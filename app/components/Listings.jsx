@@ -52,7 +52,7 @@ export default function Listings({ houses }) {
     <>
       {/* {console.log(searchTerm)} */}
       <div className="grid w-full place-items-center min-h-[80vh] pb-24 pt-3">
-        {houseId}
+        {/* {houseId} */}
         <div className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12">
           {filteredHouses.slice(0, housesToDisplay).map((house, index) => {
             if (index == housesToDisplay - 1) {
