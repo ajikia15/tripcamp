@@ -2,10 +2,47 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useGlobalContext } from "../context/store";
+import { useEffect, useState } from "react";
 const MainMap = () => {
-  const { houseId, guestsAmount, minMax, filterTerm, searchTerm, houses } =
-    useGlobalContext();
-
+  const {
+    houseId,
+    guestsAmount,
+    minMax,
+    filterTerm,
+    searchTerm,
+    houses,
+    setHouses,
+  } = useGlobalContext();
+  const [loading, setLoading] = useState(false);
+  // useEffect(() => {
+  //   if (houses.length < 1) {
+  //     setLoading(true);
+  //     const getHouses = async () => {
+  //       const { collection, getDocs, query, orderBy } = await import(
+  //         "firebase/firestore"
+  //       );
+  //       const { db } = await import("../../firebase-config");
+  //       const housesCollectionRef = collection(db, "Houses");
+  //       const firestoreQuery = query(
+  //         housesCollectionRef,
+  //         orderBy("CreatedAt", "desc")
+  //       );
+  //       const data = await getDocs(firestoreQuery);
+  //       if (data.empty) {
+  //         setLoading(false);
+  //         return;
+  //       }
+  //       const housesData = data.docs.map((doc) => ({
+  //         ...doc.data(),
+  //         id: doc.id,
+  //       }));
+  //       housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
+  //       setHouses(housesData);
+  //       setLoading(false);
+  //     };
+  //     getHouses();
+  //   }
+  // }, []); // fix for no content after refreshing map
   const filteredHouses = houses.filter(
     (house) =>
       (houseId == null || house.Options.includes(houseId)) &&
@@ -16,9 +53,9 @@ const MainMap = () => {
         filterTerm.every(
           (term) => house.Options.split(",").includes(`${term}`) // stringify
         )) &&
-      house.Address.toLowerCase()
-        .replace(/[^\w\s]/gi, "") // :(
-        .includes(searchTerm.toLowerCase().replace(/[^\w]/gi, ""))
+      house.Address.toLowerCase().includes(
+        searchTerm.split(", ").slice(0, 3).join("~").toLowerCase()
+      )
   );
   const Map = dynamic(() => import("./Map"), {
     ssr: false,
@@ -27,7 +64,7 @@ const MainMap = () => {
   return (
     <>
       <div className="fixed z-20 -translate-x-1/2 cursor-pointer bottom-12 left-1/2">
-        <Link href={`/`}>
+        <Link href="/">
           <div className="flex flex-row items-center p-2 px-3 font-semibold text-white bg-gray-900 rounded-full gap-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"

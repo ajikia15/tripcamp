@@ -10,18 +10,19 @@ export default function Listings({ houses }) {
   const { houseId, filterTerm, minMax, searchTerm, guestsAmount } =
     useGlobalContext();
   const filteredHouses = houses.filter(
-    (house) =>
-      (houseId == null || house.Options.includes(houseId)) &&
-      house.Beds >= guestsAmount &&
-      house.Price >= minMax[0] &&
-      house.Price <= minMax[1] &&
-      (filterTerm.length < 1 ||
-        filterTerm.every(
-          (term) => house.Options.split(",").includes(`${term}`) // stringify
-        )) &&
-      house.Address.toLowerCase().includes(
-        searchTerm.split(", ").slice(0, 3).join("~").toLowerCase()
-      )
+    (house) => houseId == null || house.Options.includes(houseId)
+    // && // activate if you need native filtering
+    // house.Beds >= guestsAmount &&
+    // house.Price >= minMax[0] &&
+    // house.Price <= minMax[1] &&
+    // (filterTerm.length < 1 ||
+    //   filterTerm.every(
+    //     (term) => house.Options.split(",").includes(`${term}`) // stringify
+    //   )) &&
+    // house.Address.toLowerCase().includes(
+    //   searchTerm.split(", ").slice(0, 3).join("~").toLowerCase()
+    // ) &&
+    // searchTerm.length >= 2
   );
 
   const lastHouseRef = useRef(null);
