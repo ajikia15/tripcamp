@@ -1,10 +1,12 @@
 "use client";
 import "./style.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import FilterParts from "./FilterParts";
 import Link from "next/link";
 import { useGlobalContext } from "../context/store";
 import { usePathname } from "next/navigation";
+import autoAnimate from "@formkit/auto-animate";
+
 const Filter = ({
   filterClose,
   active,
@@ -17,23 +19,46 @@ const Filter = ({
   const [checkedItems, setCheckedItems] = useState([]);
   const { houses, houseId, guestsAmount, minMax, searchTerm } =
     useGlobalContext();
+  const filteredHouses = houses.filter((house) => {
+    // filter based on HouseTypeParameters
+    if (filterTerm.some((term) => term <= 30)) {
+      const houseTypeFilters = filterTerm.filter((term) => term <= 30);
+      const matchesHouseTypeFilters = houseTypeFilters.some((term) =>
+        house.Options.split(",").includes(`${term}`)
+      );
+      if (!matchesHouseTypeFilters) {
+        return false;
+      }
+    }
 
-  const filteredHouses = houses.filter(
-    (house) =>
+    // filter based on AmenityParameters
+    if (filterTerm.some((term) => term > 30)) {
+      const amenityFilters = filterTerm.filter((term) => term > 30);
+      const matchesAmenityFilters = amenityFilters.every((term) =>
+        house.Options.split(",").includes(`${term}`)
+      );
+      if (!matchesAmenityFilters) {
+        return false;
+      }
+    }
+
+    // filter based on other criteria
+    const addressFilter = searchTerm
+      .split(", ")
+      .slice(0, 3)
+      .join("~")
+      .toLowerCase();
+    return (
       (houseId == null || house.Options.includes(houseId)) &&
       house.Beds >= guestsAmount &&
       house.Price >= minMax[0] &&
       house.Price <= minMax[1] &&
-      (filterTerm.length < 1 ||
-        filterTerm.every(
-          (term) => house.Options.split(",").includes(`${term}`) // stringify
-        )) &&
-      house.Address.toLowerCase()
-        .replace(/[^\w\s]/gi, "") // :(
-        .includes(searchTerm.toLowerCase().replace(/[^\w]/gi, ""))
-  ); // this is slow. change later. if paid.
+      house.Address.toLowerCase().includes(addressFilter)
+    );
+  });
+
   useEffect(() => {
-    // Update the checked state when filterTerm prop changes
+    // update the checked state when filterTerm prop changes
     setCheckedItems(filterTerm);
   }, [filterTerm]);
 
@@ -53,6 +78,10 @@ const Filter = ({
     setCheckedItems([]);
     setFilterTerm([]);
   };
+  const filterRef = useRef(null);
+  useEffect(() => {
+    filterRef.current && autoAnimate(filterRef.current);
+  }, [filterRef]);
 
   return (
     <>
@@ -94,7 +123,7 @@ const Filter = ({
         </svg>
       </div>
       {active && (
-        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[10%] lg:inset-x-[15%] inset-0 min-h-[100vh] md:min-h-0">
+        <div className="fixed z-[60] overflow-y-scroll text-lg bg-white  rounded-2xl lg:inset-y-[10%] lg:inset-x-[15%] xl:inset-x-[30%] inset-0 min-h-[100vh] md:min-h-0">
           <div className="relative flex flex-col px-6 gap-y-5">
             {/* header */}
             <div className="sticky top-0">
@@ -124,6 +153,18 @@ const Filter = ({
                 <p>Checked IDs: {filterTerm.join(", ")}</p>
               </div> */}
               <div className="flex flex-col gap-y-5">
+                <div className="flex flex-col border-b-2 gap-y-5">
+                  <div>
+                    <p className="text-lg font-bold">Houses</p>
+                    <p className="text-sm text-zinc-400">Choose the houses</p>
+                  </div>
+                  <FilterParts
+                    min={10}
+                    max={30}
+                    checked={isCheckboxChecked}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                </div>
                 <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
                     <p className="text-lg font-bold">Amenities</p>
@@ -175,7 +216,7 @@ const Filter = ({
               <Link
                 onClick={filterClose}
                 href={
-                  pathname != "/"
+                  pathname != "/map"
                     ? `/listings/search/${generatedSearchQuery()}`
                     : `/`
                 }

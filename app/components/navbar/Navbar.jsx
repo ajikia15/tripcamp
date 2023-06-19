@@ -301,7 +301,7 @@ export default function Navbar() {
             ? "h-[20vh]"
             : pathname === "/map"
             ? "h-[18vh]"
-            : "h-25vh 2xl:h-[30vh]"
+            : "h-[25vh] 2xl:h-[30vh]"
         }
       />
       <div className="fixed top-0 left-0 z-20 w-full bg-white shadow-sm">

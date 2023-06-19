@@ -55,17 +55,49 @@ const Page = (props) => {
       }));
 
       // Client side filter
-      const filteredHouses = fetchedHouses.filter(
-        (house) =>
+      const filteredHouses = fetchedHouses.filter((house) => {
+        // Convert filterTerm to an array
+        const filterArray = filterTerm ? filterTerm.split(",") : [];
+
+        // filter based on HouseTypeParameters
+        if (filterArray.some((term) => parseInt(term) <= 30)) {
+          const houseTypeFilters = filterArray.filter(
+            (term) => parseInt(term) <= 30
+          );
+          const matchesHouseTypeFilters = houseTypeFilters.some((term) =>
+            house.Options.split(",").includes(`${term}`)
+          );
+          if (!matchesHouseTypeFilters) {
+            return false;
+          }
+        }
+
+        // filter based on AmenityParameters
+        if (filterArray.some((term) => parseInt(term) > 30)) {
+          const amenityFilters = filterArray.filter(
+            (term) => parseInt(term) > 30
+          );
+          const matchesAmenityFilters = amenityFilters.every((term) =>
+            house.Options.split(",").includes(`${term}`)
+          );
+          if (!matchesAmenityFilters) {
+            return false;
+          }
+        }
+
+        // filter based on other criteria
+        return (
           house.Price >= minMax[0] &&
           house.Price <= minMax[1] &&
           house.Beds >= guests &&
           house.Address.toLowerCase().includes(searchTerm) &&
           (filterTerm === null ||
-            filterTerm
-              .split(",")
-              .every((term) => house.Options.split(",").includes(term)))
-      );
+            filterArray.every((term) =>
+              house.Options.split(",").includes(term)
+            ))
+        );
+      });
+
       const sortedHouses = filteredHouses.sort((a, b) => b.Prior - a.Prior);
       setHouses(sortedHouses);
       if (sortedHouses[0]) {
