@@ -2,7 +2,7 @@
 import Listings from "./components/Listings";
 import FooterFixed from "./components/footer/FooterFixed";
 import { db } from "../firebase-config";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "./context/store";
 export default function Page() {
@@ -15,7 +15,8 @@ export default function Page() {
     const getHouses = async () => {
       const firestoreQuery = query(
         housesCollectionRef,
-        orderBy("CreatedAt", "desc")
+        where("Status", "==", "Active"),
+        orderBy("Prior"),
       );
       const data = await getDocs(firestoreQuery);
       if (data.empty) {

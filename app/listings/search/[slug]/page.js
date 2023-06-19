@@ -87,6 +87,7 @@ const Page = (props) => {
 
         // filter based on other criteria
         return (
+
           house.Price >= minMax[0] &&
           house.Price <= minMax[1] &&
           house.Beds >= guests &&
@@ -145,21 +146,18 @@ const Page = (props) => {
       {/* {slug} */}
 
       <div
-        className={`grid w-full place-items-center ${
-          searchTerm !== null &&
+        className={`grid w-full place-items-center ${searchTerm !== null &&
           searchTerm !== "" &&
           !mapState &&
           "md:grid-cols-[3fr_2fr]"
-        } `}
+          } `}
       >
         <div
-          className={`grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh] relative ${
-            mapState && "hidden"
-          } ${
-            searchTerm == null ||
+          className={`grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh] relative ${mapState && "hidden"
+            } ${searchTerm == null ||
             (searchTerm == "" &&
               "sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12")
-          }`}
+            }`}
         >
           {currentPosts.map((house) => (
             <Link key={house.id} href={`/listings/${house.id}`}>
