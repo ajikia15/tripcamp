@@ -54,9 +54,9 @@ const Page = (props) => {
         id: doc.id,
       }));
 
-      // Client side filter
+      // client side filter
       const filteredHouses = fetchedHouses.filter((house) => {
-        // Convert filterTerm to an array
+        // convert filterTerm to an array
         const filterArray = filterTerm ? filterTerm.split(",") : [];
 
         // filter based on HouseTypeParameters

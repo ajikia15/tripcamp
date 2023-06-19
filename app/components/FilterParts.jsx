@@ -2,7 +2,13 @@ import React, { useState, useCallback, useRef } from "react";
 import list from "../list";
 
 import Image from "next/image";
-const FilterParts = ({ min, max, handleCheckboxChange, checked }) => {
+const FilterParts = ({
+  min,
+  max,
+  handleCheckboxChange,
+  checked,
+  setCheckedItems,
+}) => {
   const [displayCount, setDisplayCount] = useState(4);
   const [showAll, setShowAll] = useState(false);
 
@@ -17,6 +23,7 @@ const FilterParts = ({ min, max, handleCheckboxChange, checked }) => {
   }, []);
 
   const filteredItems = list.filter((item) => item.id > min && item.id < max);
+
   return (
     <>
       <div className="flex flex-wrap">
@@ -27,10 +34,13 @@ const FilterParts = ({ min, max, handleCheckboxChange, checked }) => {
                 <input
                   type="checkbox"
                   id={item.id}
+                  className="hidden"
                   onChange={(e) => handleCheckboxChange(e, item.id)}
                   checked={checked(item.id)}
                 />
-                <label htmlFor={item.id}>{item.name} sex</label>
+                <label htmlFor={item.id} className="bg-blue-300 aspect-square">
+                  {item.name}
+                </label>
               </div>
             ))
           : filteredItems.slice(0, displayCount).map((item, index) => (
