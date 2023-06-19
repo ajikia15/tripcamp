@@ -216,9 +216,9 @@ const Filter = ({
               <Link
                 onClick={filterClose}
                 href={
-                  pathname != "/map"
+                  pathname !== "/map"
                     ? `/listings/search/${generatedSearchQuery()}`
-                    : `/`
+                    : `/map`
                 }
                 className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
               >
