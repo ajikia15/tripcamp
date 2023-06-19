@@ -314,23 +314,24 @@ export default function Navbar() {
         )}
         {!isMobile ? (
           <div
-            className={`w-full  ${
+            className={`w-full bg-white z-40 grid grid-cols-1 divide-x ${
               pathname == "/"
                 ? "h-[6rem] 2xl:h-[11.5rem] 2xl:grid-rows-[5fr_8fr]"
                 : "h-[3rem] md:h-[6rem]"
-            }  bg-white z-40 grid grid-cols-1 divide-x`}
+            }`}
           >
             <div
-              className={`z-50 hidden w-full mx-auto bg-white justify-center border-b border-gray-200 ${
+              className={`z-50 hidden w-full mx-auto bg-white justify-center items-center border-b border-gray-200 ${
                 pathname == "/" && "2xl:flex"
               }`}
             >
+              {/* main one with separate bar */}
               <Link
                 href="/"
                 onClick={() => {
                   setFilterTerm([]);
                 }}
-                className="flex flex-row items-center w-11/12 gap-x-2"
+                className="flex flex-row w-11/12 h-full gap-x-4"
               >
                 <Image
                   src="/Logo_symbol.svg"
@@ -339,7 +340,9 @@ export default function Navbar() {
                   height={40}
                   alt="Logo"
                 />
-                <h1 className="text-2xl font-semibold">TripCamp</h1>
+                <div className="flex items-center h-full ">
+                  <h1 className="text-[1.4rem] font-bold pt-3.5">TripCamp</h1>
+                </div>
               </Link>
             </div>
             <div className="relative z-40 bg-white">
@@ -349,8 +352,8 @@ export default function Navbar() {
                  ${
                    pathname == "/"
                      ? "md:h-[62%] 2xl:h-[55%]"
-                     : "md:h-[62%] 2xl:h-[60%]"
-                 } absolute grid w-full grid-cols-[3fr_1fr_2fr] grid-rows-1 pl-6 text-xl -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2`}
+                     : "md:h-[62%] 2xl:h-[60%]  md:w-2/3 lg:w-3/5 xl:w-5/12 "
+                 } absolute grid w-full grid-cols-[4fr_2fr_3fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2`}
               >
                 {/* xl:w-4/12 */}
 
@@ -366,6 +369,7 @@ export default function Navbar() {
                     filteredHouses={filteredHouses}
                     setFilteredHouses={setFilteredHouses}
                     formatAddress={formatAddress}
+                    pathname={pathname}
                   />
                 </div>
 
@@ -389,6 +393,7 @@ export default function Navbar() {
                     priceCap={10}
                     minMax={minMax}
                     setMinMax={setMinMax}
+                    pathname={pathname}
                   />
                 </div>
                 <div
@@ -400,6 +405,7 @@ export default function Navbar() {
                     active={activeStates.guests}
                     guestsAmount={guestsAmount}
                     setGuestsAmount={setGuestsAmount}
+                    pathname={pathname}
                   />
                 </div>
                 <Link href={`/listings/search/${generatedSearchQuery()}`}>
@@ -420,15 +426,21 @@ export default function Navbar() {
               </div>
               <Link
                 href="/"
-                className="absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2"
+                className={`absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2 ${
+                  pathname === "/" ? "2xl:hidden" : ""
+                }`}
               >
                 <Image
                   src="/Logo_Symbol.svg"
-                  className={pathname === "/" ? "xl:hidden" : ""}
-                  width={50}
-                  height={50}
+                  width={40}
+                  height={40}
                   alt="Logo"
                 />
+                <div className="flex items-center h-full ">
+                  <h1 className="text-[1.4rem] font-bold pt-3.5 md:hidden">
+                    TripCamp
+                  </h1>
+                </div>
               </Link>
             </div>
           </div>
@@ -484,7 +496,7 @@ export default function Navbar() {
           </>
         )}
 
-        <div className="pb-4 md:pt-4 ">
+        <div className="pb-4 md:pt-2">
           <Categories
             filterTerm={filterTerm}
             setFilterTerm={setFilterTerm}

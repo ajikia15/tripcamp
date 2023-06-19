@@ -10,6 +10,7 @@ const PriceFilter = ({
   priceCap,
   minMax,
   setMinMax,
+  pathname,
 }) => {
   const progressRef = useRef(null);
 
@@ -63,13 +64,39 @@ const PriceFilter = ({
   };
   return (
     <li className="flex md:flex-col relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-3 before:top-1/2 before:-translate-y-1/2 cursor-pointer flex-row w-full justify-between items-center md:my-0 my-4 md:items-baseline">
-      <h3 className="font-semibold">Price</h3>
+      {/* {pathname === "/" && <h3 className="font-semibold">Price</h3>}
       {minMax[0] === min && minMax[1] === max ? (
-        <p className="text-xs text-gray-500">Any</p>
+        <p
+          className={`${
+            pathname === "/"
+              ? "text-xs text-gray-500"
+              : "text-xl font-semibold text-black"
+          }`}
+        >
+          Any
+        </p>
       ) : (
         <p className="text-xs text-gray-500">
           {minMax[0]} - {minMax[1]}
         </p>
+      )} */}
+      {pathname !== "/" ? (
+        <ul>
+          <p className="text-lg font-semibold">
+            {minMax[0] === min && minMax[1] === max
+              ? "Price"
+              : `${minMax[0]} to ${minMax[1]}`}
+          </p>
+        </ul>
+      ) : (
+        <ul>
+          <p className="text-xl font-semibold">Price</p>
+          <p className="text-xs text-gray-500 ">
+            {minMax[0] === min && minMax[1] === max
+              ? "Any"
+              : `${minMax[0]} to ${minMax[1]}`}
+          </p>
+        </ul>
       )}
       {(minMax[1] != max || minMax[0] != min) && active && (
         <>

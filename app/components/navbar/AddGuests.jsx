@@ -1,6 +1,6 @@
 "use client";
 
-const AddGuests = ({ active, guestsAmount, setGuestsAmount }) => {
+const AddGuests = ({ active, guestsAmount, setGuestsAmount, pathname }) => {
   const minusGuests = () => {
     if (guestsAmount > 1) setGuestsAmount((prevAmount) => prevAmount - 1);
   };
@@ -16,11 +16,19 @@ const AddGuests = ({ active, guestsAmount, setGuestsAmount }) => {
   };
   return (
     <li className="flex md:flex-col flex-row justify-between relative before:w-[1px] before:h-1/2 before:absolute before:bg-gray-200 before:-left-3 before:top-1/2 before:-translate-y-1/2 cursor-pointer my-4 md:my-0 items-center md:items-baseline">
-      <h3 className="font-semibold">Who?</h3>
-      {guestsAmount == 1 ? (
-        <p className="text-xs text-gray-500"> Add Guests </p>
+      {pathname !== "/" ? (
+        <ul>
+          <p className="text-lg font-semibold">
+            {guestsAmount > 1 ? `${guestsAmount} Guests` : "Who"}
+          </p>
+        </ul>
       ) : (
-        <p className="text-xs text-gray-500">{guestsAmount} Guests</p>
+        <ul>
+          <p className="text-xl font-semibold">Who</p>
+          <p className="text-xs text-gray-500 ">
+            {guestsAmount < 2 ? "Add guests" : `At least ${guestsAmount}`}
+          </p>
+        </ul>
       )}
       {guestsAmount > 1 && active && (
         <>

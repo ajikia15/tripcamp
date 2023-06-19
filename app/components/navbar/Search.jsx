@@ -9,6 +9,7 @@ export default function Search({
   setSearchTerm,
   setFilteredHouses,
   formatAddress,
+  pathname,
 }) {
   const [houses, setHouses] = useState([]);
   const housesCollectionRef = collection(db, "Houses");
@@ -49,11 +50,6 @@ export default function Search({
     setFilteredHouses(filtered);
   }, [houses, searchTerm, formatAddress]);
 
-  const handleHouseClick = (address) => {
-    const formattedAddress = formatAddress(address);
-    setSearchTerm(formattedAddress);
-  };
-
   const clearSearch = (e) => {
     setSearchTerm("");
   };
@@ -91,10 +87,10 @@ export default function Search({
         </li>
       ) : (
         <li className="flex flex-row justify-between w-full my-4 md:flex-col md:justify-normal">
-          <h3 className="font-semibold truncate md:w-4/5">
+          <h3 className="text-lg font-semibold truncate md:w-4/5">
             {searchTerm || "Where to?"}
           </h3>
-          {searchTerm ? null : (
+          {searchTerm || pathname != "/" ? null : (
             <p className="text-xs text-gray-500">
               Anywhere • Any Week • Add guests
             </p>

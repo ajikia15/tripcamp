@@ -104,8 +104,8 @@ export default function Categories({
   return (
     <>
       {/* {houseId} */}
-      <div className="flex flex-row items-center justify-center w-11/12 m-auto lg:justify-between lg:w-3/4">
-        <div className="relative flex flex-row items-center w-11/12 md:mr-6">
+      <div className="flex flex-row items-center justify-center w-full m-auto md:w-11/12 lg:justify-between lg:w-3/4">
+        <div className="relative flex flex-row items-center w-full md:w-11/12 md:mr-6">
           <div
             className={`z-20 hidden w-8 ${
               scrollPosition === 0 ? `opacity-0 cursor-default` : "opacity-100"
