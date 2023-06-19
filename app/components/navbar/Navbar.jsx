@@ -348,12 +348,12 @@ export default function Navbar() {
             <div className="relative z-40 bg-white">
               {/* check this later  */}
               <div
-                className={`
+                className={`absolute grid w-full grid-cols-[4fr_2fr_3fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2  top-1/2 transition-all
                  ${
-                   pathname == "/"
-                     ? "md:h-[62%] 2xl:h-[55%]"
-                     : "md:h-[62%] 2xl:h-[60%]  md:w-2/3 lg:w-3/5 xl:w-5/12 "
-                 } absolute grid w-full grid-cols-[4fr_2fr_3fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2 md:w-2/3 lg:w-3/5 xl:w-5/12 top-1/2`}
+                   pathname === "/"
+                     ? "md:h-[62%] 2xl:h-[55%] md:w-2/3 lg:w-3/5 xl:w-5/12 "
+                     : "md:h-[62%] 2xl:h-[60%] md:w-3/5 lg:w-5/12 xl:w-4/12"
+                 }`}
               >
                 {/* xl:w-4/12 */}
 
