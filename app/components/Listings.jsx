@@ -63,15 +63,15 @@ export default function Listings({ filteredHouses }) {
                         key={house.id}
                         href={`/listings/${house.id}`}
                         className="">
-                        <MemoizedCard listing={house} />
+                        <Card listing={house} />
                       </Link>
                     ); // Return null or render other elements for non-last houses
                   })
-              : filteredHouses.length &&
+              : !filteredHouses.length > 0 &&
                 Array(limit * 2)
                   .fill()
-                  .map((_, index) => (
-                    <div key={index}>
+                  .map((_, i) => (
+                    <div key={i}>
                       <SkeletonLoad />
                     </div>
                   ))
