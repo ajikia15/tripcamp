@@ -1,6 +1,10 @@
 "use client";
 import { db } from "../../../firebase-config";
-import { collection, query, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+} from "firebase/firestore";
 import { useState, useEffect } from "react";
 
 export default function Search({
@@ -41,7 +45,9 @@ export default function Search({
     const filtered =
       searchTerm !== ""
         ? houses.filter((house) => {
-            const formattedAddress = formatAddress(house.Address);
+            const formattedAddress = formatAddress(
+              house.Address
+            );
             return formattedAddress
               .toLowerCase()
               .includes(searchTerm.toLowerCase());
@@ -69,14 +75,12 @@ export default function Search({
             <button
               type="button"
               className="absolute text-gray-400 -translate-y-1/2 top-1/2 right-10"
-              onClick={clearSearch}
-            >
+              onClick={clearSearch}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
-                viewBox="0 0 256 256"
-              >
+                viewBox="0 0 256 256">
                 <path
                   fill="currentColor"
                   d="M205.66 194.34a8 8 0 0 1-11.32 11.32L128 139.31l-66.34 66.35a8 8 0 0 1-11.32-11.32L116.69 128L50.34 61.66a8 8 0 0 1 11.32-11.32L128 116.69l66.34-66.35a8 8 0 0 1 11.32 11.32L139.31 128Z"
@@ -86,9 +90,11 @@ export default function Search({
           )}
         </li>
       ) : (
-        <li className="flex flex-row justify-between w-full my-4 md:flex-col md:justify-normal">
-          <h3 className="text-lg font-semibold truncate md:w-4/5">
-            {searchTerm || "Where to?"}
+        <li className="flex flex-row justify-between w-full my-4 md:flex-col md:justify-normal text-elipsis">
+          <h3 className="w-[92%] overflow-hidden text-lg font-semibold line-clamp-1">
+            {searchTerm.split(",")[1] ||
+              searchTerm ||
+              "Where to?"}
           </h3>
           {searchTerm || pathname != "/" ? null : (
             <p className="text-xs text-gray-500">

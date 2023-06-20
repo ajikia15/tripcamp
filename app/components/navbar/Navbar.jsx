@@ -371,7 +371,7 @@ export default function Navbar() {
             <div className="relative z-40 bg-white">
               {/* check this later  */}
               <div
-                className={`absolute grid w-full grid-cols-[4fr_2fr_3fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2  top-1/2 transition-all
+                className={`absolute grid w-full grid-cols-[3fr_2fr_2fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2  top-1/2 transition-all
                  ${
                    pathname === "/"
                      ? "md:h-[62%] 2xl:h-[55%] md:w-2/3 lg:w-3/5 xl:w-5/12 "
@@ -393,7 +393,6 @@ export default function Navbar() {
                     pathname={pathname}
                   />
                 </div>
-
                 {/* <div
                 ref={refMap.calendar}
                 onClick={() => handleChildClick("calendar")}
@@ -430,8 +429,9 @@ export default function Navbar() {
                   />
                 </div>
                 <Link
-                  href={`/listings/search/${generatedSearchQuery()}`}>
-                  <button className="absolute flex flex-col items-center justify-center text-white -translate-y-1/2 bg-blue-600 rounded-full shadow-sm right-4 h-4/5 aspect-square hover:shadow-md top-1/2">
+                  href={`/listings/search/${generatedSearchQuery()}`}
+                  className="absolute -translate-y-1/2 h-4/5 right-4 top-1/2">
+                  <button className="flex flex-col items-center justify-center h-full text-white bg-blue-600 rounded-full shadow-sm aspect-square hover:shadow-md">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="32"
