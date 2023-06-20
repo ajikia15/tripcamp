@@ -412,7 +412,7 @@ export default function Navbar() {
                 </div>
                 <Link
                   href={`/listings/search/${generatedSearchQuery()}`}
-                  className="absolute -translate-y-1/2 h-4/5 right-4 top-1/2"
+                  className="absolute -translate-y-1/2 h-4/5 right-8 top-1/2"
                 >
                   <button className="flex flex-col items-center justify-center h-full text-white bg-blue-600 rounded-full shadow-sm aspect-square hover:shadow-md">
                     <svg

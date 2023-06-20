@@ -69,3 +69,7 @@ html {
 .leaflet-popup-content{
   @apply w-full;
 }
+.fucktext{
+  margin: 0 !important;
+  
+}
