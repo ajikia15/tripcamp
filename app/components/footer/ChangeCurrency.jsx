@@ -5,7 +5,7 @@ import { useState } from "react";
 const ChangeCurrency = ({ active }) => {
   return (
     <>
-      <div className="cursor-pointer">$ USD</div>
+      <div className="hidden cursor-pointer">$ USD</div>
       {active && (
         <div className="absolute p-4 text-lg bg-white right-52 bottom-11 rounded-2xl">
           <ul className="flex flex-col">

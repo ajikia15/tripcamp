@@ -91,11 +91,8 @@ const Page = (props) => {
           house.Price >= minMax[0] &&
           house.Price <= minMax[1] &&
           house.Beds >= guests &&
-          house.Address.toLowerCase().includes(searchTerm) &&
-          (filterTerm === null ||
-            filterArray.every((term) =>
-              house.Options.split(",").includes(term)
-            ))
+          house.Address.toLowerCase().includes(searchTerm)
+
         );
       });
 
