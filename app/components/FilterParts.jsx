@@ -51,7 +51,7 @@ const FilterParts = ({
                 />
                 <label
                   htmlFor={item.id}
-                  className={`flex select-none flex-col w-full aspect-[4/3] border-2 transition-all rounded-md items-center justify-center ${
+                  className={`flex select-none flex-col w-full aspect-[4/3] border-2 transition-all rounded-md items-center justify-center gap-y-2 ${
                     checked(item.id)
                       ? "border-blue-600"
                       : "border-gray-300"
@@ -61,7 +61,9 @@ const FilterParts = ({
                     width={30}
                     height={40}
                   />
-                  <p>{item.name}</p>
+                  <h4 className="text-base font-semibold">
+                    {item.name}
+                  </h4>
                 </label>
               </div>
             ))}
