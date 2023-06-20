@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import SkeletonLoad from "./SkeletonLoad";
 import { useGlobalContext } from "../context/store";
 import autoAnimate from "@formkit/auto-animate";
+const MemoizedCard = React.memo(Card);
 export default function Listings({ filteredHouses }) {
   const limit = 8;
   const [mapLoadState, setMapLoadState] = useState(false);
@@ -45,33 +46,53 @@ export default function Listings({ filteredHouses }) {
         <div
           className="grid w-11/12 grid-cols-1 gap-6 pb-32 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 2xl:w-11/12"
           ref={listingsRef}>
-          {filteredHouses[0]
-            ? filteredHouses
-                .slice(0, housesToDisplay)
-                .map((house, index) => {
-                  if (index == housesToDisplay - 1) {
-                    return (
-                      <div ref={lastHouseRef} key={index}>
-                        <SkeletonLoad />
-                      </div>
-                    );
-                  }
+          {filteredHouses[0] ? (
+            filteredHouses
+              .slice(0, housesToDisplay)
+              .map((house, index) => {
+                if (index == housesToDisplay - 1) {
                   return (
-                    <Link
-                      key={house.id}
-                      href={`/listings/${house.id}`}
-                      className="">
-                      <Card listing={house} />
-                    </Link>
-                  ); // Return null or render other elements for non-last houses
-                })
-            : Array(limit * 2)
-                .fill()
-                .map((_, index) => (
-                  <div key={index}>
-                    <SkeletonLoad />
-                  </div>
-                ))}
+                    <div ref={lastHouseRef} key={index}>
+                      <SkeletonLoad />
+                    </div>
+                  );
+                }
+                return (
+                  <Link
+                    key={house.id}
+                    href={`/listings/${house.id}`}
+                    className="">
+                    <MemoizedCard listing={house} />
+                  </Link>
+                ); // Return null or render other elements for non-last houses
+              })
+          ) : filteredHouses.length ? (
+            Array(limit * 2)
+              .fill()
+              .map((_, index) => (
+                <div key={index}>
+                  <SkeletonLoad />
+                </div>
+              ))
+          ) : (
+            <div className="flex justify-center w-full h-full col-span-full min-h-[50vh] items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="96"
+                height="96"
+                className="text-gray-400"
+                viewBox="0 0 24 24">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1"
+                  d="M3 7v4a1 1 0 0 0 1 1h3m0-5v10m3-9v8a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1zm7-1v4a1 1 0 0 0 1 1h3m0-5v10"
+                />
+              </svg>
+            </div>
+          )}
 
           {/* this is disabled */}
         </div>
