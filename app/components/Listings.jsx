@@ -7,7 +7,7 @@ import { useGlobalContext } from "../context/store";
 import autoAnimate from "@formkit/auto-animate";
 export default function Listings({ filteredHouses }) {
   const limit = 8;
-  const [loadAnimation, setLoadAnimation] = useState(false);
+  const [mapLoadState, setMapLoadState] = useState(false);
   const { houseId } = useGlobalContext();
   const [housesToDisplay, setHousesToDisplay] =
     useState(limit);
@@ -32,7 +32,7 @@ export default function Listings({ filteredHouses }) {
         observer.unobserve(lastHouseRef.current);
       }
     };
-  }, [[], filteredHouses, houseId]);
+  }, [[], lastHouseRef]);
   const listingsRef = useRef(null);
   useEffect(() => {
     listingsRef.current && autoAnimate(listingsRef.current);
@@ -51,9 +51,7 @@ export default function Listings({ filteredHouses }) {
                 .map((house, index) => {
                   if (index == housesToDisplay - 1) {
                     return (
-                      <div
-                        ref={lastHouseRef}
-                        key={house.id}>
+                      <div ref={lastHouseRef} key={index}>
                         <SkeletonLoad />
                       </div>
                     );
@@ -67,7 +65,7 @@ export default function Listings({ filteredHouses }) {
                     </Link>
                   ); // Return null or render other elements for non-last houses
                 })
-            : Array(limit * 3)
+            : Array(limit * 2)
                 .fill()
                 .map((_, index) => (
                   <div key={index}>
@@ -81,12 +79,12 @@ export default function Listings({ filteredHouses }) {
       <div
         className="fixed z-20 -translate-x-1/2 cursor-pointer bottom-12 md:bottom-20 lg:bottom-12 left-1/2"
         onClick={() => {
-          setLoadAnimation(true);
+          setMapLoadState(true);
         }}>
         <Link href={`/map/`}>
           <div className="flex flex-row items-center p-2 px-3 font-semibold text-white bg-gray-900 rounded-full gap-x-2">
             <p>Map</p>
-            {!loadAnimation ? (
+            {!mapLoadState ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

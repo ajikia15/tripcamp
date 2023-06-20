@@ -15,8 +15,7 @@ export default function Page() {
     const getHouses = async () => {
       const firestoreQuery = query(
         housesCollectionRef,
-        where("Status", "==", "Active"),
-        orderBy("Status"),
+        orderBy("Prior"),
       );
       const data = await getDocs(firestoreQuery);
       if (data.empty) {
@@ -33,9 +32,11 @@ export default function Page() {
     getHouses();
   }, []);
   const filteredHouses = houses.filter(
-    (house) => houseId == null || house.Options.includes(houseId)
+    (house) =>
+      (houseId == null ||
+        house.Options.includes(houseId)) &&
+      house.Status == "Active"
   );
-
   return (
     <main className="p-0 m-0">
       <Listings filteredHouses={filteredHouses} />
