@@ -16,7 +16,7 @@ export default function Page() {
       const firestoreQuery = query(
         housesCollectionRef,
         where("Status", "==", "Active"),
-        orderBy("Prior"),
+        orderBy("Status"),
       );
       const data = await getDocs(firestoreQuery);
       if (data.empty) {

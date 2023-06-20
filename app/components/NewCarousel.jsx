@@ -35,7 +35,7 @@ const NewCarousel = ({ children, ...options }) => {
   };
 
   return (
-    <div className="transition-all carousel-container group relative">
+    <div className="relative transition-all carousel-container group">
       <div
         className="relative overflow-hidden"
         ref={emblaRef}>
@@ -88,7 +88,7 @@ const NewCarousel = ({ children, ...options }) => {
         )}
       </div>
 
-      <div className="flex justify-center mt-4 dots absolute bottom-4 left-1/2 -translate-x-1/2">
+      <div className="absolute flex justify-center mt-4 -translate-x-1/2 dots bottom-4 left-1/2">
         {children.map((_, index) => (
           <button
             key={index}
