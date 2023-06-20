@@ -20,7 +20,7 @@ body {
 .leaflet-popup-content p {
   margin: 0;
 }
-html{
+html {
   height: -webkit-fill-available;
 }
 
@@ -31,10 +31,10 @@ html{
   @apply grid bg-white rounded-full place-items-center w-14 aspect-square ring-8 ring-gray-200 ring-opacity-50;
 }
 
-
 .fade-in-out {
   opacity: 0;
-  animation: fade-in 2s ease-in forwards, fade-out 4s 1s ease-out forwards;
+  animation: fade-in 2s ease-in forwards,
+    fade-out 4s 1s ease-out forwards;
 }
 
 @keyframes fade-in {
@@ -49,5 +49,16 @@ html{
   }
   100% {
     opacity: 0;
+  }
+}
+
+.modal-fade-in {
+  opacity: 0;
+  animation: fade-in-modal 0.15s linear forwards,
+    fade-out-modal 0.1s ease-out forwards;
+}
+@keyframes fade-in-modal {
+  100% {
+    opacity: 0.5;
   }
 }

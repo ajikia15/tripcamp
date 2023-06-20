@@ -74,7 +74,7 @@ export default function Search({
           {searchTerm !== "" && (
             <button
               type="button"
-              className="absolute text-gray-400 -translate-y-1/2 top-1/2 right-10"
+              className="absolute text-gray-400 -translate-y-1/2 top-1/2 right-6"
               onClick={clearSearch}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

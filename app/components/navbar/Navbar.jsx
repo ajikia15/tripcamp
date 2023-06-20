@@ -178,11 +178,15 @@ export default function Navbar() {
     }));
   };
   const suggestionsRef = useRef(null);
+  const mainModalRef = useRef(null);
   useEffect(() => {
     suggestionsRef.current &&
       autoAnimate(suggestionsRef.current);
   }, [suggestionsRef]);
-
+  useEffect(() => {
+    mainModalRef.current &&
+      autoAnimate(mainModalRef.current);
+  }, [mainModalRef]);
   return (
     <>
       {mobnavState && (
@@ -334,7 +338,7 @@ export default function Navbar() {
           activeStates.priceFilter ||
           activeStates.guests ||
           activeStates.calendar) && (
-          <div className="fixed z-30 bg-black opacity-50 md:inset-0" />
+          <div className="fixed z-30 transition-all bg-black opacity-50 modal-fade-in md:inset-0" />
         )}
         {!isMobile ? (
           <div
