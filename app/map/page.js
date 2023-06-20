@@ -4,45 +4,40 @@ import dynamic from "next/dynamic";
 import { useGlobalContext } from "../context/store";
 import { useEffect, useState } from "react";
 const MainMap = () => {
-  const {
-    houseId,
-    guestsAmount,
-    minMax,
-    filterTerm,
-    searchTerm,
-    houses,
-    setHouses,
-  } = useGlobalContext();
+  const { houseId, guestsAmount, minMax, filterTerm, searchTerm } =
+    useGlobalContext();
   const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   if (houses.length < 1) {
-  //     setLoading(true);
-  //     const getHouses = async () => {
-  //       const { collection, getDocs, query, orderBy } = await import(
-  //         "firebase/firestore"
-  //       );
-  //       const { db } = await import("../../firebase-config");
-  //       const housesCollectionRef = collection(db, "Houses");
-  //       const firestoreQuery = query(
-  //         housesCollectionRef,
-  //         orderBy("CreatedAt", "desc")
-  //       );
-  //       const data = await getDocs(firestoreQuery);
-  //       if (data.empty) {
-  //         setLoading(false);
-  //         return;
-  //       }
-  //       const housesData = data.docs.map((doc) => ({
-  //         ...doc.data(),
-  //         id: doc.id,
-  //       }));
-  //       housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
-  //       setHouses(housesData);
-  //       setLoading(false);
-  //     };
-  //     getHouses();
-  //   }
-  // }, []); // fix for no content after refreshing map
+  const [houses, setHouses] = useState([]);
+  useEffect(() => {
+    if (houses.length < 1) {
+      setLoading(true);
+      const getHouses = async () => {
+        const { collection, getDocs, query, orderBy, where } = await import(
+          "firebase/firestore"
+        );
+        const { db } = await import("../../firebase-config");
+        const housesCollectionRef = collection(db, "Houses");
+        const firestoreQuery = query(
+          housesCollectionRef,
+          where("Status", "==", "Active"),
+          orderBy("Status")
+        );
+        const data = await getDocs(firestoreQuery);
+        if (data.empty) {
+          setLoading(false);
+          return;
+        }
+        const housesData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
+        setHouses(housesData);
+        setLoading(false);
+      };
+      getHouses();
+    }
+  }, []); // fix for no content after refreshing map
   const filteredHouses = houses.filter((house) => {
     // filter based on HouseTypeParameters
     if (filterTerm.some((term) => term <= 30)) {

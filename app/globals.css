@@ -62,3 +62,10 @@ html {
     opacity: 0.5;
   }
 }
+.leaflet-popup-content-wrapper{
+  @apply w-64;
+  border-radius: 26px !important;
+}
+.leaflet-popup-content{
+  @apply w-full;
+}
