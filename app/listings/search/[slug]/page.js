@@ -45,7 +45,7 @@ const Page = (props) => {
     const getHouses = async () => {
       const querySnapshot = query(
         housesCollectionRef,
-        orderBy("CreatedAt", "desc")
+        orderBy("Prior", "desc")
       );
       const data = await getDocs(querySnapshot);
 
@@ -87,6 +87,7 @@ const Page = (props) => {
 
         // filter based on other criteria
         return (
+          house.Status == "Active" &&
           house.Price >= minMax[0] &&
           house.Price <= minMax[1] &&
           house.Beds >= guests &&
