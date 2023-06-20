@@ -450,7 +450,7 @@ export default function Navbar() {
             </div>
           </div>
         ) : (
-          // mobile
+          //mobile
           <>
             <div className="relative w-full h-28">
               <div
