@@ -44,15 +44,15 @@ const Map = ({ filteredHouses }) => {
               </div>
               <Link
                 href={`/listings/${house.id}`}
-                className="flex flex-col pt-1 text-ellipsis"
+                className="flex flex-col pt-1 text-ellipsis fucktext"
               >
-                <p className="text-base p-0 m-0 font-semibold max-w-[84%] line-clamp-2 text-zinc-800">
+                <p className="text-base p-0 m-0 font-semibold max-w-[84%] line-clamp-2 text-zinc-800 fucktext">
                   {house.Name.split(" ").slice(0, 4).join(" ")}
                 </p>
-                <p className="w-[84%] text-xs text-zinc-500 text-ellipsis line-clamp-1 ">
+                <p className="w-[84%] text-xs text-zinc-500 text-ellipsis line-clamp-1 fucktext">
                   {house.Address.split("~").slice(0, 3).join(",")}
                 </p>
-                <p className="pt-1 font-bold text-zinc-600">
+                <p className="pt-1 font-bold text-zinc-600 fucktext">
                   {house.Price}₾/Night
                 </p>
               </Link>
