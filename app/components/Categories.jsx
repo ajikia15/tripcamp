@@ -100,6 +100,7 @@ export default function Categories({
       setScrollState(true);
     else setScrollState(false);
   }, [scrollPosition]);
+
   // useGlobalContext();
   return (
     <>
@@ -107,9 +108,9 @@ export default function Categories({
       <div className="flex flex-row items-center justify-center w-full m-auto md:w-11/12 lg:justify-between lg:w-3/4">
         <div className="relative flex flex-row items-center w-full md:w-11/12 md:mr-6">
           <div
-            className={`z-20 hidden w-8 ${
+            className={`z-20 hidden w-8  transition-all border border-gray-400 rounded-full cursor-pointer -translate-x-1/4 md:grid place-items-center aspect-square ${
               scrollPosition === 0 ? `opacity-0 cursor-default` : "opacity-100"
-            } transition-all border border-gray-400 rounded-full cursor-pointer -translate-x-1/4 md:grid place-items-center aspect-square`}
+            }`}
             onClick={handleScrollLeft}
           >
             <svg
@@ -131,7 +132,7 @@ export default function Categories({
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onScroll={handleScroll}
-            className="relative grid w-full grid-flow-col-dense overflow-x-hidden gap-x-2 lg:gap-x-12"
+            className="relative grid w-full grid-flow-col-dense overflow-x-hidden gap-x-3 md:gap-x-6 lg:gap-x-12"
           >
             <div
               onClick={(e) => {
@@ -139,7 +140,7 @@ export default function Categories({
               }}
               className={null == houseId && "border-b-2 border-blue-400"}
             >
-              <IconCategs name={"All houses"} id={400} />
+              <IconCategs name={"All Houses"} id={400} />
             </div>
             {list
               .filter((item) => item.id > 10 && item.id < 30)
