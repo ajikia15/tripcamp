@@ -83,7 +83,7 @@ export default function House(props) {
               {house.Name}
             </h1>
           </div>
-          <div className="relative flex overflow-hidden rounded-2xl mt-6">
+          <div className="relative flex mt-6 overflow-hidden rounded-2xl">
             <Link href={`/listings/${props.params.id}/gallery/`}>
               <div className="absolute z-10 p-2 px-4 font-semibold bg-white rounded-lg cursor-pointer bottom-3 right-3">
                 All Photos
@@ -132,7 +132,7 @@ export default function House(props) {
               })}
             </div>
           </div>
-          <p className="text-lg mt-6 font-bold">₾{house.Price}/Night </p>
+          <p className="mt-6 text-lg font-bold">₾{house.Price}/Night </p>
           <div className="relative flex flex-row">
             <div className="w-4/5">
               <div className="flex flex-row items-center ">
@@ -151,9 +151,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
@@ -171,9 +170,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
@@ -191,9 +189,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
@@ -211,9 +208,8 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${
-                            list.find((item) => item.id === option)?.id
-                          }.svg`}
+                          src={`/${list.find((item) => item.id === option)?.id
+                            }.svg`}
                           width={20}
                           height={20}
                         />
