@@ -317,7 +317,7 @@ export default function Navbar() {
         )}
         {!isMobile ? (
           <div
-            className={`w-full bg-white z-40 grid grid-cols-1 divide-x ${
+            className={`w-full  bg-white z-40 opacity-0 md:opacity-100 grid grid-cols-1 divide-x ${
               pathname == "/"
                 ? "h-[6rem] 2xl:h-[11.5rem] 2xl:grid-rows-[5fr_8fr]"
                 : "h-[3rem] md:h-[6rem]"
@@ -351,7 +351,7 @@ export default function Navbar() {
             <div className="relative z-40 bg-white">
               {/* check this later  */}
               <div
-                className={`absolute grid w-full grid-cols-[3fr_2fr_2fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2  top-1/2 transition-all
+                className={`absolute grid w-full grid-cols-[3fr_2fr_2fr_1fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2  top-1/2 transition-all
                  ${
                    pathname === "/"
                      ? "md:h-[62%] 2xl:h-[55%] md:w-2/3 lg:w-3/5 xl:w-5/12 "
@@ -410,24 +410,26 @@ export default function Navbar() {
                     pathname={pathname}
                   />
                 </div>
-                <Link
-                  href={`/listings/search/${generatedSearchQuery()}`}
-                  className="absolute -translate-y-1/2 h-4/5 right-8 top-1/2"
-                >
-                  <button className="flex flex-col items-center justify-center h-full text-white bg-blue-600 rounded-full shadow-sm aspect-square hover:shadow-md">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
-                      />
-                    </svg>
-                  </button>
-                </Link>
+                <div>
+                  <Link
+                    href={`/listings/search/${generatedSearchQuery()}`}
+                    className="grid h-full place-items-center"
+                  >
+                    <button className="flex flex-col items-center justify-center text-white bg-blue-600 rounded-full shadow-sm h-4/5 aspect-square hover:shadow-md">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="32"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.612 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3l-1.4 1.4ZM9.5 14q1.875 0 3.188-1.313T14 9.5q0-1.875-1.313-3.188T9.5 5Q7.625 5 6.312 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14Z"
+                        />
+                      </svg>
+                    </button>
+                  </Link>
+                </div>
               </div>
               <Link
                 href="/"

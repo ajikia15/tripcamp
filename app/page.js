@@ -10,31 +10,26 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
 
   const { houses, setHouses, houseId } = useGlobalContext();
-
+  const getHouses = async () => {
+    const firestoreQuery = query(housesCollectionRef, orderBy("Prior"));
+    const data = await getDocs(firestoreQuery);
+    if (data.empty) {
+      setLoading(false);
+      return;
+    }
+    const housesData = data.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
+    setHouses(housesData);
+  };
   useEffect(() => {
-    const getHouses = async () => {
-      const firestoreQuery = query(
-        housesCollectionRef,
-        orderBy("Prior"),
-      );
-      const data = await getDocs(firestoreQuery);
-      if (data.empty) {
-        setLoading(false);
-        return;
-      }
-      const housesData = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
-      setHouses(housesData);
-    };
     getHouses();
   }, []);
   const filteredHouses = houses.filter(
     (house) =>
-      (houseId == null ||
-        house.Options.includes(houseId)) &&
+      (houseId == null || house.Options.includes(houseId)) &&
       house.Status == "Active"
   );
   return (

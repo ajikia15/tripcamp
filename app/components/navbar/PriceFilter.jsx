@@ -102,7 +102,7 @@ const PriceFilter = ({
         <>
           <button
             type="button"
-            className="absolute text-gray-400 -translate-y-1/2 top-1/2 left-16"
+            className="absolute text-gray-400 -translate-y-1/2 right-2 md:right-5 lg:right-6 xl:right-8 top-1/2"
             onClick={clearMinMax}
           >
             <svg
