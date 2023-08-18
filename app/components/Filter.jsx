@@ -227,7 +227,7 @@ const Filter = ({
                 <div className="flex flex-col gap-y-5">
                   <div>
                     <p className="text-lg font-bold">
-                      Features
+                      Scenic Views
                     </p>
                     <p className="text-sm text-zinc-400">
                       Choose the views
