@@ -2,7 +2,7 @@ import Image from "next/image";
 export default function IconCategs({ name, id }) {
   return (
     <div>
-      <ul className="flex flex-row flex-wrap nowrap">
+      <ul className="flex flex-row flex-wrap cursor-pointer nowrap">
         <li className="flex flex-col text-gray-500 place-items-center gap-x-8 ">
           <div className="text-red-400 fill-sky-400">
             <Image
