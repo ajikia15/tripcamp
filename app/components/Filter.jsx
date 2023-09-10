@@ -38,7 +38,6 @@ const Filter = ({
         return false;
       }
     }
-
     // filter based on AmenityParameters
     if (filterTerm.some((term) => term > 30)) {
       const amenityFilters = filterTerm.filter(
@@ -52,7 +51,8 @@ const Filter = ({
         return false;
       }
     }
-
+    if (house.Status !== "Active" )
+    {return false;}
     // filter based on other criteria
     const addressFilter = searchTerm
       .split(", ")

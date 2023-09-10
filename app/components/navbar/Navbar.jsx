@@ -362,8 +362,6 @@ export default function Navbar() {
                  ${
                    "md:h-[62%] xl:h-[80%] md:w-3/5 lg:w-5/12 xl:w-4/12"
                  }`}>
-                  {/* xl:w-4/12 */}
-
                   <div
                     ref={refMap.search}
                     onClick={() =>
@@ -509,10 +507,11 @@ export default function Navbar() {
 
           <div
             className={`pb-4 md:pt-2 ${
-              pathname.includes("/listings/")
+              pathname.includes("/listings/") 
                 ? "hidden"
                 : ""
             } `}>
+              {/* aqanea */}
             <Categories
               filterTerm={filterTerm}
               setFilterTerm={setFilterTerm}

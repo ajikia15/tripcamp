@@ -9,7 +9,7 @@ const MemoizedCard = React.memo(Card);
 export default function Listings({ filteredHouses }) {
   const limit = 8;
   const [mapLoadState, setMapLoadState] = useState(false);
-  const { houseId } = useGlobalContext();
+  // const { houseId } = useGlobalContext();
   const [housesToDisplay, setHousesToDisplay] = useState(limit);
 
   const lastHouseRef = useRef(null);
