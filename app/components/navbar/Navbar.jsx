@@ -329,10 +329,10 @@ export default function Navbar() {
         <div
           className={
             pathname !== "/map" && pathname !== "/"
-              ? "h-[20vh]"
+              ? "h-[10vh]"
               : pathname === "/map"
               ? "h-[18vh]"
-              : "h-[25vh] 2xl:h-[30vh]"
+              : "h-[30vh] 2xl:h-[22vh]"
           }
         />
         <div
@@ -352,43 +352,15 @@ export default function Navbar() {
           {!isMobile ? (
             <div
               className={`w-full  bg-white z-40 opacity-0 md:opacity-100 grid grid-cols-1 divide-x ${
-                pathname == "/"
-                  ? "h-[6rem] 2xl:h-[11.5rem] 2xl:grid-rows-[5fr_8fr]"
-                  : "h-[3rem] md:h-[6rem]"
+                "h-[3rem] md:h-[5.5rem] xl:h-[6rem"
               }`}>
-              <div
-                className={`z-50 hidden w-full mx-auto bg-white justify-center items-center border-b border-gray-200 ${
-                  pathname == "/" && "2xl:flex"
-                }`}>
-                {/* main one with separate bar */}
-                <Link
-                  href="/"
-                  onClick={() => {
-                    setFilterTerm([]);
-                  }}
-                  className="flex flex-row w-11/12 h-full gap-x-4">
-                  <Image
-                    src="/Logo_symbol.svg"
-                    className="hidden 2xl:block"
-                    width={40}
-                    height={40}
-                    alt="Logo"
-                  />
-                  <div className="flex items-center h-full ">
-                    <h1 className="text-[1.4rem] font-bold pt-3.5">
-                      TripCamp
-                    </h1>
-                  </div>
-                </Link>
-              </div>
+
               <div className="relative z-40 bg-white">
                 {/* check this later  */}
                 <div
                   className={`absolute grid w-full grid-cols-[3fr_2fr_2fr_1fr] grid-rows-1 pl-6 text-lg -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full shadow-md hover:shadow-xl cursor-pointer left-1/2  top-1/2 transition-all
                  ${
-                   pathname === "/"
-                     ? "md:h-[62%] 2xl:h-[55%] md:w-2/3 lg:w-3/5 xl:w-5/12 "
-                     : "md:h-[62%] 2xl:h-[60%] md:w-3/5 lg:w-5/12 xl:w-4/12"
+                   "md:h-[62%] xl:h-[80%] md:w-3/5 lg:w-5/12 xl:w-4/12"
                  }`}>
                   {/* xl:w-4/12 */}
 
@@ -466,9 +438,7 @@ export default function Navbar() {
                 </div>
                 <Link
                   href="/"
-                  className={`absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2 ${
-                    pathname === "/" ? "2xl:hidden" : ""
-                  }`}>
+                  className={`absolute flex items-center mx-4 -translate-y-1/2 top-1/2 gap-x-2 `}>
                   <Image
                     src="/Logo_Symbol.svg"
                     width={40}

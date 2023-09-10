@@ -32,7 +32,7 @@ export default function Gallery(props) {
   }, []);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) => {
       if (house && house.Photo) {

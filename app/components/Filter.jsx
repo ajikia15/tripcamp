@@ -242,6 +242,27 @@ const Filter = ({
                     }
                   />
                 </div>
+                <div className="flex flex-col border-b-2 gap-y-5">
+
+                <div className="flex flex-col gap-y-5">
+                  <div>
+                    <p className="text-lg font-bold">
+                     Activities
+                    </p>
+                    <p className="text-sm text-zinc-400">
+                      Choose the activites you need
+                    </p>
+                  </div>
+                  <FilterParts
+                    min={80}
+                    max={99}
+                    checked={isCheckboxChecked}
+                    handleCheckboxChange={
+                      handleCheckboxChange
+                    }
+                  />
+                </div>
+                </div>
               </div>
             </div>
             <div className="sticky bottom-0 left-0 flex flex-row items-center justify-between w-full py-2 bg-white border-t-2 border-gray-200">
