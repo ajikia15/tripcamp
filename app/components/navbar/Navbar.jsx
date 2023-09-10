@@ -133,7 +133,6 @@ export default function Navbar() {
     setFilterState(false);
   };
   const handleClearSelection = () => {
-    e.preventDefault();
     setFilterTerm([]);
   };
   useEffect(() => {
@@ -504,10 +503,33 @@ export default function Navbar() {
               </div>
             </>
           )}
-
+          {pathname.includes("/search/") && (
+            <>
+            <div className="absolute z-[60] top-[1.65rem] right-1 hidden md:block">
+              <div
+                className="flex items-center justify-center"
+                ref={filterRef}
+                onClick={filterWasClicked}>
+                <Filter
+                  filterClose={filterClose}
+                  active={filterState}
+                  filterTerm={filterTerm}
+                  setFilterTerm={setFilterTerm}
+                  generatedSearchQuery={
+                    generatedSearchQuery
+                    }
+                  />
+                </div>
+              </div>
+              {filterState && (
+        <div className="fixed inset-0 z-[50] bg-black opacity-50 hidden md:block" />
+      )}
+            </>
+          )}
+            
           <div
             className={`pb-4 md:pt-2 ${
-              pathname.includes("/listings/") && !pathname.includes("/search/")
+              pathname.includes("/listings/")
                 ? "hidden"
                 : ""
             } `}>
