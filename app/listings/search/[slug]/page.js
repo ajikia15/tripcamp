@@ -159,7 +159,7 @@ const Page = (props) => {
           }`}
         >
           {currentPosts.map((house) => (
-            <Link key={house.id} href={`/listings/${house.id}`}>
+            <Link key={house.id} href={`/listings/${house.id}`} target="_blank">
               <Card listing={house} />
             </Link>
           ))}

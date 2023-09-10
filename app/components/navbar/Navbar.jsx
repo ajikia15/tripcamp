@@ -507,7 +507,7 @@ export default function Navbar() {
 
           <div
             className={`pb-4 md:pt-2 ${
-              pathname.includes("/listings/") 
+              pathname.includes("/listings/") && !pathname.includes("/search/")
                 ? "hidden"
                 : ""
             } `}>
