@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-    serverActions: true,
-  },
+  experimental: {},
   images: {
-    domains: ["images.unsplash.com", "firebasestorage.googleapis.com", "i0.wp.com", "simlitbangdiklat.kemenag.go.id"],
-
+    domains: [
+      "images.unsplash.com",
+      "firebasestorage.googleapis.com",
+      "i0.wp.com",
+      "simlitbangdiklat.kemenag.go.id",
+    ],
   },
   env: {
     APIKEY: process.env.APIKEY,
@@ -18,8 +19,7 @@ const nextConfig = {
     MESSAGINGSENDERID: process.env.MESSAGINGSENDERID,
     APPID: process.env.APPID,
     MEASUREMENTID: process.env.MEASUREMENTID,
-
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

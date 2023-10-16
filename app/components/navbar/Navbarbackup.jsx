@@ -4,7 +4,7 @@ import Link from "next/link";
 import Search from "./Search";
 import PriceFilter from "./PriceFilter";
 import AddGuests from "./AddGuests";
-import Categories from "../Categories";
+import Categories from "../QuickFilter";
 import Image from "next/image";
 import Filter from "../Filter";
 export default function Navbar() {

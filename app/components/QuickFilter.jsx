@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Filter from "./Filter";
 import list from "../list";
 import { useGlobalContext } from "../context/store";
-export default function Categories({
+export default function QuickFilter({
   filterTerm,
   setFilterTerm,
   generatedSearchQuery,
@@ -101,7 +101,16 @@ export default function Categories({
     else setScrollState(false);
   }, [scrollPosition]);
 
-  // useGlobalContext();
+  // reset the quickfilter if any of the filters is selected:
+  const isFiltersEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
+  useEffect(() => {
+    if (!isFiltersEmpty(filterTerm)) {
+      setHouseId(null);
+    }
+  }, [filterTerm]);
+
   return (
     <>
       {/* {houseId} */}
