@@ -1,10 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { db } from "../../../../firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import Link from "next/link";
 import "./gallery.css";
+import { useRouter } from "next/navigation";
 export default function Gallery(props) {
+  const router = useRouter();
   const [house, setHouse] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -32,24 +34,25 @@ export default function Gallery(props) {
   }, []);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const handlePrevImage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handlePrevImage = useCallback(() => {
     setCurrentImageIndex((prevIndex) => {
       if (house && house.Photo) {
         return (prevIndex + house.Photo.length - 1) % house.Photo.length;
       }
       return prevIndex;
     });
-  };
+  }, [house]);
 
-  const handleNextImage = () => {
+  const handleNextImage = useCallback(() => {
     setCurrentImageIndex((prevIndex) => {
       if (house && house.Photo) {
         return (prevIndex + 1) % house.Photo.length;
       }
       return prevIndex;
     });
-  };
+  }, [house]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -90,7 +93,9 @@ export default function Gallery(props) {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % house.Photo.length);
     }
   };
-
+  const exitGallery = () => {
+    router.replace(`listings/${props.params.id}`);
+  };
   return (
     <>
       {isModalOpen && (
@@ -179,14 +184,33 @@ export default function Gallery(props) {
       {!loading && house && (
         <>
           <div className="relative w-11/12 mx-auto my-16 xl:w-4/5 columns-2 md:columns-3 lg:columns-4">
-            <Link href={`listings/${props.params.id}`} className="fixed grid w-12 transition-all border border-gray-200 rounded-full shadow-lg cursor-pointer hover:shadow-xl left-12 top-12 aspect-square place-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 1024 1024">
-                <path fill="currentColor" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" /><path fill="currentColor" d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" /></svg>
-            </Link>
+            <div
+              onClick={() => {
+                router.back();
+              }}
+              className="fixed grid w-12 transition-all border border-gray-200 rounded-full shadow-lg cursor-pointer hover:shadow-xl left-12 top-12 aspect-square place-items-center "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 1024 1024"
+              >
+                <path
+                  fill="currentColor"
+                  d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
+                />
+                <path
+                  fill="currentColor"
+                  d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+                />
+              </svg>
+            </div>
             {house.Photo.map((item, index) => (
               <div
-                className={`pics transition-all duration-350 ease mb-3 hover:opacity-80 ${selectedImageIndex === index ? "selected" : ""
-                  }`}
+                className={`pics transition-all duration-350 ease mb-3 hover:opacity-80 ${
+                  selectedImageIndex === index ? "selected" : ""
+                }`}
                 key={index}
                 onClick={() => {
                   setIsModalOpen(true);
