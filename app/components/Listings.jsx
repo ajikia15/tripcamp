@@ -61,6 +61,7 @@ export default function Listings({ filteredHouses }) {
                       key={house.id}
                       href={`/listings/${house.id}`}
                       className=""
+                      target="_blank"
                     >
                       <Card listing={house} />
                     </Link>
