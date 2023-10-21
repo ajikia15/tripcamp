@@ -10,6 +10,7 @@ const MainMap = () => {
   const [loading, setLoading] = useState(false);
   const [filteredHouses, setFilteredHouses] = useState([]);
   useEffect(() => {
+    setLoading(true);
     setFilteredHouses(
       houses.filter((house) => {
         // filter based on HouseTypeParameters
@@ -50,6 +51,7 @@ const MainMap = () => {
     );
 
     console.table(houses);
+    setLoading(false);
   }, [houses, houseId, guestsAmount, minMax, filterTerm, searchTerm]);
   // fix for no content after refreshing map
   const Map = dynamic(() => import("./Map"), {
@@ -76,11 +78,7 @@ const MainMap = () => {
           </div>
         </Link>
       </div>
-      {filteredHouses.length > 0 ? (
-        <Map filteredHouses={filteredHouses} />
-      ) : (
-        "Loading"
-      )}
+      {!loading ? <Map filteredHouses={filteredHouses} /> : "Loading"}
     </>
   );
 };
