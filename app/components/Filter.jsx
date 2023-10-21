@@ -227,20 +227,27 @@ const Filter = ({
               >
                 Clear All
               </button>
-              <Link
-                onClick={filterClose}
-                href={
-                  pathname !== "/map"
-                    ? `/listings/search/${generatedSearchQuery()}`
-                    : ``
-                }
-                className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
-              >
-                <p className="text-sm">
-                  {" "}
-                  Show {filteredHouses.length} Glampings
-                </p>
-              </Link>
+              {pathname !== "/map" ? (
+                <Link
+                  onClick={filterClose}
+                  href={`/listings/search/${generatedSearchQuery()}`}
+                  className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
+                >
+                  <p className="text-sm">
+                    {" "}
+                    Show {filteredHouses.length} Glampings
+                  </p>
+                </Link>
+              ) : (
+                <div
+                  onClick={filterClose}
+                  className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
+                >
+                  <p className="text-sm">
+                    Show {filteredHouses.length} Glampings
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
