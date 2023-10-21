@@ -52,11 +52,12 @@ export default function QuickFilter({
     e.stopPropagation();
     setFilterState(false);
   };
-  const handleClearSelection = () => {
-    setFilterTerm([]);
-    setHouseId(null);
-  };
+
   useEffect(() => {
+    const handleClearSelection = () => {
+      setFilterTerm([]);
+      setHouseId(null);
+    };
     const handleClickOutside = (e) => {
       if (
         filterState &&

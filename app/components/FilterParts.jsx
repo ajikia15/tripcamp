@@ -15,7 +15,7 @@ const FilterParts = ({
   const showAllItems = useCallback(() => {
     setShowAll(true);
     setDisplayCount(list.length);
-  }, [list.length]);
+  }, []);
 
   const showLessItems = useCallback(() => {
     setShowAll(false);
