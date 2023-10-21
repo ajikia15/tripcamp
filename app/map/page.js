@@ -8,7 +8,47 @@ const MainMap = () => {
   const { houses, houseId, guestsAmount, minMax, filterTerm, searchTerm } =
     useGlobalContext();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    console.table(houses);
+  }, []);
   // fix for no content after refreshing map
+  const filteredHouses = houses.filter((house) => {
+    // filter based on HouseTypeParameters
+    if (filterTerm.some((term) => term <= 30)) {
+      const houseTypeFilters = filterTerm.filter((term) => term <= 30);
+      const matchesHouseTypeFilters = houseTypeFilters.some((term) =>
+        house.Options.split(",").includes(`${term}`)
+      );
+      if (!matchesHouseTypeFilters) {
+        return false;
+      }
+    }
+
+    // filter based on AmenityParameters
+    if (filterTerm.some((term) => term > 30)) {
+      const amenityFilters = filterTerm.filter((term) => term > 30);
+      const matchesAmenityFilters = amenityFilters.every((term) =>
+        house.Options.split(",").includes(`${term}`)
+      );
+      if (!matchesAmenityFilters) {
+        return false;
+      }
+    }
+    // filter based on other criteria
+    const addressFilter = searchTerm
+      .split(", ")
+      .slice(0, 3)
+      .join("~")
+      .toLowerCase();
+    return (
+      (houseId == null || house.Options.includes(houseId)) &&
+      house.Beds >= guestsAmount &&
+      house.Price >= minMax[0] &&
+      house.Price <= minMax[1] &&
+      house.Address.toLowerCase().includes(addressFilter)
+    );
+  });
   const Map = dynamic(() => import("./Map"), {
     ssr: false,
   });
@@ -33,7 +73,7 @@ const MainMap = () => {
           </div>
         </Link>
       </div>
-      <Map filteredHouses={houses} />
+      <Map filteredHouses={filteredHouses} />
     </>
   );
 };
