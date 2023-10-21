@@ -3,9 +3,11 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useGlobalContext } from "../context/store";
 import { useEffect, useState } from "react";
+
 const MainMap = () => {
   const { houses, houseId, guestsAmount, minMax, filterTerm, searchTerm } =
     useGlobalContext();
+  const [loading, setLoading] = useState(false);
   // fix for no content after refreshing map
   const filteredHouses = houses.filter((house) => {
     // filter based on HouseTypeParameters
@@ -29,7 +31,6 @@ const MainMap = () => {
         return false;
       }
     }
-
     // filter based on other criteria
     const addressFilter = searchTerm
       .split(", ")
@@ -41,8 +42,7 @@ const MainMap = () => {
       house.Beds >= guestsAmount &&
       house.Price >= minMax[0] &&
       house.Price <= minMax[1] &&
-      house.Address.toLowerCase().includes(addressFilter) &&
-      house.Status == "Active"
+      house.Address.toLowerCase().includes(addressFilter)
     );
   });
   const Map = dynamic(() => import("./Map"), {
