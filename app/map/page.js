@@ -20,7 +20,6 @@ const MainMap = () => {
   const [filteredHouses, setFilteredHouses] = useState([]);
   useEffect(() => {
     if (houses.length < 1) {
-      alert("length is less than 1 of houses, refetching houses");
       setLoading(true);
       const getHouses = async () => {
         const housesCollectionRef = collection(db, "Houses");
