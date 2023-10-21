@@ -17,22 +17,14 @@ const Filter = ({
   const pathname = usePathname();
 
   const [checkedItems, setCheckedItems] = useState([]);
-  const {
-    houses,
-    houseId,
-    guestsAmount,
-    minMax,
-    searchTerm,
-  } = useGlobalContext();
+  const { houses, houseId, guestsAmount, minMax, searchTerm } =
+    useGlobalContext();
   const filteredHouses = houses.filter((house) => {
     // filter based on HouseTypeParameters
     if (filterTerm.some((term) => term <= 30)) {
-      const houseTypeFilters = filterTerm.filter(
-        (term) => term <= 30
-      );
-      const matchesHouseTypeFilters = houseTypeFilters.some(
-        (term) =>
-          house.Options.split(",").includes(`${term}`)
+      const houseTypeFilters = filterTerm.filter((term) => term <= 30);
+      const matchesHouseTypeFilters = houseTypeFilters.some((term) =>
+        house.Options.split(",").includes(`${term}`)
       );
       if (!matchesHouseTypeFilters) {
         return false;
@@ -40,19 +32,17 @@ const Filter = ({
     }
     // filter based on AmenityParameters
     if (filterTerm.some((term) => term > 30)) {
-      const amenityFilters = filterTerm.filter(
-        (term) => term > 30
-      );
-      const matchesAmenityFilters = amenityFilters.every(
-        (term) =>
-          house.Options.split(",").includes(`${term}`)
+      const amenityFilters = filterTerm.filter((term) => term > 30);
+      const matchesAmenityFilters = amenityFilters.every((term) =>
+        house.Options.split(",").includes(`${term}`)
       );
       if (!matchesAmenityFilters) {
         return false;
       }
     }
-    if (house.Status !== "Active" )
-    {return false;}
+    if (house.Status !== "Active") {
+      return false;
+    }
     // filter based on other criteria
     const addressFilter = searchTerm
       .split(", ")
@@ -60,8 +50,7 @@ const Filter = ({
       .join("~")
       .toLowerCase();
     return (
-      (houseId == null ||
-        house.Options.includes(houseId)) &&
+      (houseId == null || house.Options.includes(houseId)) &&
       house.Beds >= guestsAmount &&
       house.Price >= minMax[0] &&
       house.Price <= minMax[1] &&
@@ -102,11 +91,9 @@ const Filter = ({
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
-          viewBox="0 0 24 24">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5">
+          viewBox="0 0 24 24"
+        >
+          <g fill="none" stroke="currentColor" strokeWidth="1.5">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -123,11 +110,9 @@ const Filter = ({
           xmlns="http://www.w3.org/2000/svg"
           width="28"
           height="28"
-          viewBox="0 0 24 24">
-          <g
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5">
+          viewBox="0 0 24 24"
+        >
+          <g fill="none" stroke="currentColor" strokeWidth="1.5">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -144,18 +129,18 @@ const Filter = ({
             {/* header */}
             <div className="sticky top-0">
               <div className="absolute top-0 left-0 right-0 flex items-center justify-center p-5 bg-white border-b-2">
-                <p className="font-extrabold text-md">
-                  Filters
-                </p>
+                <p className="font-extrabold text-md">Filters</p>
               </div>
               <div
                 className="absolute top-0 right-0 p-5 cursor-pointer z-[61]"
-                onClick={filterClose}>
+                onClick={filterClose}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="28"
                   height="28"
-                  viewBox="0 0 256 256">
+                  viewBox="0 0 256 256"
+                >
                   <path
                     fill="currentColor"
                     d="M205.66 194.34a8 8 0 0 1-11.32 11.32L128 139.31l-66.34 66.35a8 8 0 0 1-11.32-11.32L116.69 128L50.34 61.66a8 8 0 0 1 11.32-11.32L128 116.69l66.34-66.35a8 8 0 0 1 11.32 11.32L139.31 128Z"
@@ -168,27 +153,19 @@ const Filter = ({
               <div className="flex flex-col gap-y-5">
                 <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
-                    <p className="text-lg font-bold">
-                      Houses
-                    </p>
-                    <p className="text-sm text-zinc-400">
-                      Choose the houses
-                    </p>
+                    <p className="text-lg font-bold">Houses</p>
+                    <p className="text-sm text-zinc-400">Choose the houses</p>
                   </div>
                   <FilterParts
                     min={10}
                     max={30}
                     checked={isCheckboxChecked}
-                    handleCheckboxChange={
-                      handleCheckboxChange
-                    }
+                    handleCheckboxChange={handleCheckboxChange}
                   />
                 </div>
                 <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
-                    <p className="text-lg font-bold">
-                      Amenities
-                    </p>
+                    <p className="text-lg font-bold">Amenities</p>
                     <p className="text-sm text-zinc-400">
                       Choose the amenities
                     </p>
@@ -197,75 +174,57 @@ const Filter = ({
                     min={50}
                     max={80}
                     checked={isCheckboxChecked}
-                    handleCheckboxChange={
-                      handleCheckboxChange
-                    }
+                    handleCheckboxChange={handleCheckboxChange}
                   />
                 </div>
 
                 <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
-                    <p className="text-lg font-bold">
-                      Features
-                    </p>
-                    <p className="text-sm text-zinc-400">
-                      Choose the features
-                    </p>
+                    <p className="text-lg font-bold">Features</p>
+                    <p className="text-sm text-zinc-400">Choose the features</p>
                   </div>
                   <FilterParts
                     min={30}
                     max={40}
                     checked={isCheckboxChecked}
-                    handleCheckboxChange={
-                      handleCheckboxChange
-                    }
+                    handleCheckboxChange={handleCheckboxChange}
                   />
                 </div>
                 <div className="flex flex-col gap-y-5">
                   <div>
-                    <p className="text-lg font-bold">
-                      Scenic Views
-                    </p>
-                    <p className="text-sm text-zinc-400">
-                      Choose the views
-                    </p>
+                    <p className="text-lg font-bold">Scenic Views</p>
+                    <p className="text-sm text-zinc-400">Choose the views</p>
                   </div>
                   <FilterParts
                     min={40}
                     max={50}
                     checked={isCheckboxChecked}
-                    handleCheckboxChange={
-                      handleCheckboxChange
-                    }
+                    handleCheckboxChange={handleCheckboxChange}
                   />
                 </div>
                 <div className="flex flex-col border-b-2 gap-y-5">
-
-                <div className="flex flex-col gap-y-5">
-                  <div>
-                    <p className="text-lg font-bold">
-                     Activities
-                    </p>
-                    <p className="text-sm text-zinc-400">
-                      Choose the activites you need
-                    </p>
+                  <div className="flex flex-col gap-y-5">
+                    <div>
+                      <p className="text-lg font-bold">Activities</p>
+                      <p className="text-sm text-zinc-400">
+                        Choose the activites you need
+                      </p>
+                    </div>
+                    <FilterParts
+                      min={80}
+                      max={99}
+                      checked={isCheckboxChecked}
+                      handleCheckboxChange={handleCheckboxChange}
+                    />
                   </div>
-                  <FilterParts
-                    min={80}
-                    max={99}
-                    checked={isCheckboxChecked}
-                    handleCheckboxChange={
-                      handleCheckboxChange
-                    }
-                  />
-                </div>
                 </div>
               </div>
             </div>
             <div className="sticky bottom-0 left-0 flex flex-row items-center justify-between w-full py-2 bg-white border-t-2 border-gray-200">
               <button
                 className="text-sm font-bold text-zinc-700 "
-                onClick={handleClearSelection}>
+                onClick={handleClearSelection}
+              >
                 Clear All
               </button>
               <Link
@@ -273,9 +232,10 @@ const Filter = ({
                 href={
                   pathname !== "/map"
                     ? `/listings/search/${generatedSearchQuery()}`
-                    : `/map`
+                    : ``
                 }
-                className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l">
+                className="p-3 text-white transition duration-500 rounded-md bg-gradient-to-r from-blue-500 to-blue-600 hover:bg-gradient-to-l"
+              >
                 <p className="text-sm">
                   {" "}
                   Show {filteredHouses.length} Glampings
