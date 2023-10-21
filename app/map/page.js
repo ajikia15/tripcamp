@@ -83,7 +83,7 @@ const MainMap = () => {
         );
       })
     );
-  }, [houses, houseId, guestsAmount, minMax, filterTerm, searchTerm]);
+  }, [houseId, guestsAmount, minMax, filterTerm, searchTerm]);
   const Map = dynamic(() => import("./Map"), {
     ssr: false,
   });
@@ -108,7 +108,11 @@ const MainMap = () => {
           </div>
         </Link>
       </div>
-      <Map filteredHouses={filteredHouses} />
+      {filteredHouses.length > 0 ? (
+        <Map filteredHouses={filteredHouses} />
+      ) : (
+        <Map filteredHouses={houses} />
+      )}
     </>
   );
 };
