@@ -4,40 +4,9 @@ import dynamic from "next/dynamic";
 import { useGlobalContext } from "../context/store";
 import { useEffect, useState } from "react";
 const MainMap = () => {
-  const { houseId, guestsAmount, minMax, filterTerm, searchTerm } =
+  const { houses, houseId, guestsAmount, minMax, filterTerm, searchTerm } =
     useGlobalContext();
-  const [loading, setLoading] = useState(false);
-  const [houses, setHouses] = useState([]);
-  useEffect(() => {
-    if (houses.length < 1) {
-      setLoading(true);
-      const getHouses = async () => {
-        const { collection, getDocs, query, orderBy, where } = await import(
-          "firebase/firestore"
-        );
-        const { db } = await import("../../firebase-config");
-        const housesCollectionRef = collection(db, "Houses");
-        const firestoreQuery = query(
-          housesCollectionRef,
-          where("Status", "==", "Active"),
-          orderBy("Status")
-        );
-        const data = await getDocs(firestoreQuery);
-        if (data.empty) {
-          setLoading(false);
-          return;
-        }
-        const housesData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
-        setHouses(housesData);
-        setLoading(false);
-      };
-      getHouses();
-    }
-  }, []); // fix for no content after refreshing map
+  // fix for no content after refreshing map
   const filteredHouses = houses.filter((house) => {
     // filter based on HouseTypeParameters
     if (filterTerm.some((term) => term <= 30)) {
@@ -72,7 +41,8 @@ const MainMap = () => {
       house.Beds >= guestsAmount &&
       house.Price >= minMax[0] &&
       house.Price <= minMax[1] &&
-      house.Address.toLowerCase().includes(addressFilter)
+      house.Address.toLowerCase().includes(addressFilter) &&
+      house.Status == "Active"
     );
   });
   const Map = dynamic(() => import("./Map"), {

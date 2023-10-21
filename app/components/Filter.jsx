@@ -165,9 +165,6 @@ const Filter = ({
             </div>
             {/* mainpart */}
             <div className="flex-1 overflow-y-auto mt-14">
-              {/* <div className="flex flex-col border-b-2 gap-y-5">
-                <p>Checked IDs: {filterTerm.join(", ")}</p>
-              </div> */}
               <div className="flex flex-col gap-y-5">
                 <div className="flex flex-col border-b-2 gap-y-5">
                   <div>
