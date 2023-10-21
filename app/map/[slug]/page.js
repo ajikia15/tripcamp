@@ -83,7 +83,8 @@ const MainMap = () => {
           house.Beds >= guestsAmount &&
           house.Price >= minMax[0] &&
           house.Price <= minMax[1] &&
-          house.Address.toLowerCase().includes(addressFilter)
+          house.Address.toLowerCase().includes(addressFilter) &&
+          house.Status === "Active"
         );
       })
     );

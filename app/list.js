@@ -2,18 +2,18 @@ const list = [
   { id: 11, name: "Cottage" },
   { id: 12, name: "A Frames" },
   { id: 13, name: "Huts" },
-  { id: 14, name: "Wine Cellar" }, // 
-  { id: 15, name: "Art House" },
+  { id: 14, name: "Wine Cellar" }, //
+  // { id: 15, name: "Art House" }, // no results
   { id: 16, name: "Tree House" },
-  { id: 17, name: "Safari Tents" },
+  // { id: 17, name: "Safari Tents" }, // no results
   { id: 18, name: "Domes" },
-  { id: 19, name: "Floating" },
+  // { id: 19, name: "Floating" },
   { id: 20, name: "Containers" },
   { id: 21, name: "Yurts" },
-  { id: 22, name: "Castles" },
+  // { id: 22, name: "Castles" }, // no results
   { id: 23, name: "Pods" },
   { id: 25, name: "Campsite" },
-  { id: 27, name: "Rvs" },
+  // { id: 27, name: "Rvs" }, // no results
   // Features (30-40)
   { id: 31, name: "Pets allowed" },
   { id: 32, name: "Breakfast" },
