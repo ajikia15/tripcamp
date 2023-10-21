@@ -20,6 +20,7 @@ const MainMap = () => {
   const [filteredHouses, setFilteredHouses] = useState([]);
   useEffect(() => {
     if (houses.length < 1) {
+      console.alert("length is less than 1 of houses, refetching houses");
       setLoading(true);
       const getHouses = async () => {
         const housesCollectionRef = collection(db, "Houses");
@@ -42,9 +43,12 @@ const MainMap = () => {
         setLoading(false);
       };
       getHouses();
+      console.alert("fetched houses");
     }
   }, [houses]); // fix for no content after refreshing map
   useEffect(() => {
+    console.alert("filtering houses");
+
     setFilteredHouses(
       houses.filter((house) => {
         // filter based on HouseTypeParameters
@@ -83,6 +87,7 @@ const MainMap = () => {
         );
       })
     );
+    console.alert("filtering done");
   }, [houseId, guestsAmount, minMax, filterTerm, searchTerm]);
   const Map = dynamic(() => import("./Map"), {
     ssr: false,
