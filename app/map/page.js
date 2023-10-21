@@ -43,7 +43,7 @@ const MainMap = () => {
       };
       getHouses();
     }
-  }, []); // fix for no content after refreshing map
+  }, [houses]); // fix for no content after refreshing map
   useEffect(() => {
     setFilteredHouses(
       houses.filter((house) => {
