@@ -43,12 +43,9 @@ const MainMap = () => {
         setLoading(false);
       };
       getHouses();
-      alert("fetched houses");
     }
   }, []); // fix for no content after refreshing map
   useEffect(() => {
-    alert("filtering houses");
-
     setFilteredHouses(
       houses.filter((house) => {
         // filter based on HouseTypeParameters
@@ -87,7 +84,6 @@ const MainMap = () => {
         );
       })
     );
-    alert("filtering done");
   }, [houses, houseId, guestsAmount, minMax, filterTerm, searchTerm]);
   const Map = dynamic(() => import("./Map"), {
     ssr: false,
