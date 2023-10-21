@@ -3,14 +3,48 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useGlobalContext } from "../context/store";
 import { useEffect, useState } from "react";
+import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 const MainMap = () => {
-  const { houses, houseId, guestsAmount, minMax, filterTerm, searchTerm } =
-    useGlobalContext();
+  const {
+    houses,
+    setHouses,
+    houseId,
+    guestsAmount,
+    minMax,
+    filterTerm,
+    searchTerm,
+  } = useGlobalContext();
   const [loading, setLoading] = useState(false);
   const [filteredHouses, setFilteredHouses] = useState([]);
   useEffect(() => {
-    setLoading(true);
+    if (houses.length < 1) {
+      setLoading(true);
+      const getHouses = async () => {
+        const housesCollectionRef = collection(db, "Houses");
+        const firestoreQuery = query(
+          housesCollectionRef,
+          where("Status", "==", "Active"),
+          orderBy("Status")
+        );
+        const data = await getDocs(firestoreQuery);
+        if (data.empty) {
+          setLoading(false);
+          return;
+        }
+        const housesData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        housesData.sort((a, b) => b.Prior - a.Prior); // Sort the houses by Prior
+        setHouses(housesData);
+        setLoading(false);
+      };
+      getHouses();
+    }
+  }, []); // fix for no content after refreshing map
+  useEffect(() => {
     setFilteredHouses(
       houses.filter((house) => {
         // filter based on HouseTypeParameters
@@ -49,11 +83,7 @@ const MainMap = () => {
         );
       })
     );
-
-    console.table(houses);
-    setLoading(false);
   }, [houses, houseId, guestsAmount, minMax, filterTerm, searchTerm]);
-  // fix for no content after refreshing map
   const Map = dynamic(() => import("./Map"), {
     ssr: false,
   });
@@ -78,7 +108,7 @@ const MainMap = () => {
           </div>
         </Link>
       </div>
-      {!loading ? <Map filteredHouses={filteredHouses} /> : "Loading"}
+      <Map filteredHouses={filteredHouses} />
     </>
   );
 };
