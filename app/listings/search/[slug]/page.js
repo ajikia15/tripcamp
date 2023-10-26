@@ -117,23 +117,20 @@ const Page = (props) => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 12; // Number of houses to display per page
+  const postsPerPage = 12; // number of houses  per page
 
-  // Calculate the index of the first and last house on the current page
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = houses.slice(indexOfFirstPost, indexOfLastPost);
 
-  // Function to handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   const remainingCards = houses.length - postsPerPage * (currentPage - 1);
 
-  // Check if the remaining number of cards is less than 4
   const shouldFillRemainingSpace = remainingCards < 8;
 
-  // Calculate the number of dummy divs needed to fill the remaining space
+  //  number of dummy divs needed to fill the remaining space
   const dummyDivsCount =
     shouldFillRemainingSpace && remainingCards > 0 ? 8 - remainingCards : 0;
 

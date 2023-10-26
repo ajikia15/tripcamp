@@ -112,9 +112,6 @@ export default function Navbar() {
     setmobnavState(false);
     document.body.style.overflow = "visible";
   };
-  const resetQuickFilter = () => {
-    console.log("gay");
-  };
   const filterWasClicked = (e) => {
     e.stopPropagation();
     if (pathname.includes("/map")) {
