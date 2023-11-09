@@ -10,10 +10,12 @@ import StaticFooter from "../../components/footer/StaticFooter";
 import Link from "next/link";
 import L from "leaflet";
 import "./gallery/gallery.css"
+import useRatings from "@/app/hooks/useRatings";
 export default function House(props) {
   const [house, setHouse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [options, setOptions] = useState([]);
+  const { ratings, avg } = useRatings(props.params.id)
 
   useEffect(() => {
     // Function to fetch the document
