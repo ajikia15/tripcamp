@@ -11,6 +11,8 @@ import Link from "next/link";
 import L from "leaflet";
 import "./gallery/gallery.css"
 import useRatings from "@/app/hooks/useRatings";
+import moment from "moment";
+
 export default function House(props) {
   const [house, setHouse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -424,6 +426,33 @@ export default function House(props) {
               </div>
             </div>
           </div>
+          {
+            ratings.length ? (
+              <div className="w-full flex/column">
+                <ul class="grid grid-cols-1 pb-4 border-b-2 gap-y-3"></ul>
+                <div className="pb-7 pt-5">
+                  <span className="star">&#9733; </span> <span className="pl-2 pr-2">{avg}</span> <span>{ratings.length} reviews</span>
+                </div>
+                <div className="grid gap-5 grid-cols-1">
+                  {
+                    ratings.map(item => (
+                      <div key={item.id}>
+                        <h5>{item.FromName}</h5>
+                        <span className="block text-sm text-gray-500 pt-1 pb-1">{moment(item.DateRev.seconds * 1000).format('MMMM D, YYYY')}</span>
+                        {
+                          [...Array(item.Points)].map(star => (
+                            <span className="mr-1" style={{ color: '#ffc90f' }} key="star">&#9733;</span>
+                          ))
+                        }
+                        <p className="pt-1">{item.Message}</p>
+                        <ul class="grid grid-cols-1 pb-4 border-b-2 gap-y-3"></ul>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            ) : null
+          }
         </div>
       )}
       <StaticFooter />

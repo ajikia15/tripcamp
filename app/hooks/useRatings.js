@@ -41,7 +41,7 @@ const useRatings = (houseId) => {
     if (ratings.length) {
       const avg = ratings.map(({ Points }) => Points).reduce((a, b) => a + b, 0) / ratings.length;
 
-      setAvg(parseFloat(avg).toFixed(2))
+      setAvg(parseFloat(avg).toFixed(1))
     }
   }, [ratings])
 
