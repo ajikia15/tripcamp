@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
 import { GlobalContextProvider } from "./context/store";
+import DeviceDetect from "./components/DeviceDetect";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

@@ -12,6 +12,7 @@ import L from "leaflet";
 import "./gallery/gallery.css"
 import useRatings from "@/app/hooks/useRatings";
 import moment from "moment";
+import DeviceDetect from "@/app/components/DeviceDetect";
 
 export default function House(props) {
   const [house, setHouse] = useState(null);
@@ -455,6 +456,9 @@ export default function House(props) {
           }
         </div>
       )}
+      {
+        house?.Price ? <DeviceDetect price={house?.Price} /> : null
+      }
       <StaticFooter />
     </>
   );
