@@ -28,7 +28,7 @@ const Card = ({ listing }) => {
           <li className="text-xl font-semibold capitalize line-clamp-1">
             {listing.Name}
           </li>
-          <li className="text-sm text-gray-600 truncate">
+          <li className="text-sm text-gray-600">
             {listing.Address.split("~").slice(0, 3).join(", ")}
           </li>
           <li className="font-semibold">
