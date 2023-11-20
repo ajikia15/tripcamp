@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react'
 const DeviceDetect = ({ price }) => {
     const [os, setOs] = useState('');
     const [hide, setHidden] = useState(false);
-    const [open, setOpen] = useState(!localStorage.getItem('nativeapp:suggestion'));
+    const [open, setOpen] = useState(false);
 
     const isoLink = 'https://apps.apple.com/ge/app/tripcamp/id1614463439';
     const androidLink = 'https://play.google.com/store/apps/details?id=com.pompok.xcolt.pompok&hl=en&gl=US&pli=1';
 
     useEffect(() => {
+        setOpen(!localStorage.getItem('nativeapp:suggestion'))
+
         const getOperatingSystem = (window) => {
             let operatingSystem = 'Not known';
 
