@@ -5,6 +5,7 @@ import { db } from "../firebase-config";
 import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useGlobalContext } from "./context/store";
+import DeviceDetect from "./components/DeviceDetect";
 export default function Page() {
   const housesCollectionRef = collection(db, "Houses");
   const [loading, setLoading] = useState(true);
@@ -35,6 +36,7 @@ export default function Page() {
   return (
     <main className="p-0 m-0">
       <Listings filteredHouses={filteredHouses} />
+      <DeviceDetect />
       <FooterFixed />
     </main>
   );

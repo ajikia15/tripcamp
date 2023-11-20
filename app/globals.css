@@ -73,3 +73,104 @@ html {
   margin: 0 !important;
   
 }
+
+.star {
+  position: relative;
+}
+
+.deviceDetect {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999999;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0px -4px 40px rgba(37, 37, 37, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.8s;
+}
+.deviceDetect.hidden {
+  bottom: -500px;
+}
+
+.deviceDetect h3 {
+  color: #202228;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.deviceDetect p {
+  color: #202228;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: .6;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.deviceDetect span {
+  display: block;
+  text-align: center;
+  margin: 16px 0;
+  color: var(--Brandeis-Blue, #076DF2);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.deviceDetect .touch {
+  width: 50px;
+  height: 5px;
+  border-radius: var(--8, 8px);
+  background: #E6E6E6;
+  text-align: center;
+  margin: -8px auto;
+}
+
+.deviceDetect.inner {
+  flex-direction: row;
+  box-shadow: 0px -4px 40px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 0;
+  align-items: center;
+}
+
+.deviceDetect.inner h4 {
+  color: #252525;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.deviceDetect.inner span {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: left;
+  color: #252525;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.deviceDetect.inner p {
+  color: #252525;
+  text-align: right;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0;
+  margin-right: 16px;
+}
