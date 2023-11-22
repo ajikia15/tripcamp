@@ -13,6 +13,7 @@ import "./gallery/gallery.css"
 import useRatings from "@/app/hooks/useRatings";
 import moment from "moment";
 import DeviceDetect from "@/app/components/DeviceDetect";
+import QRCode from "react-qr-code";
 
 export default function House(props) {
   const [house, setHouse] = useState(null);
@@ -391,7 +392,13 @@ export default function House(props) {
             <div>
               <div className="mt-4 p-4 sticky top-56 hidden  md:ml-2 h-64 flex-col lg:flex-row lg:justify-around lg:w-[360px]  bg-white shadow-lg rounded-lg text-white md:flex  justify-center items-center">
                 <div className="relative flex items-center justify-center rounded-lg md:w-1/2 md:h-1/2 md:mb-2 lg:h-3/4 md:flex-row ">
-                  <Image src="/qr-code.svg" fill={true} />
+                  {/* <Image src="/qr-code.svg" fill={true} /> */}
+                  <QRCode
+                    size={210}
+                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                    value={`https://pompok.app.link/${props.params.id}`}
+                    viewBox={`0 0 210 210`}
+                  />
                 </div>
                 <p className="text-sm w-36 text-zinc-800 md:text-center">
                   Scan code to Download Tripcamp application to make reservation
