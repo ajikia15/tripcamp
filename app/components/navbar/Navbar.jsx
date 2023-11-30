@@ -93,7 +93,7 @@ export default function Navbar() {
       minMax[1]
     )}&searchTerm=${encodeURIComponent(
       searchTerm
-    )}&filterTerm=${encodeURIComponent(filterTerm.join(","))}&`;
+    )}&filterTerm=${encodeURIComponent(filterTerm.join(","))}`;
     return query;
   };
 
@@ -475,7 +475,7 @@ export default function Navbar() {
               </div>
             </>
           )}
-          {pathname.includes("/search/") && (
+          {/* {pathname.includes("/search/") && (
             <>
               <div className="absolute z-[60] top-[1.65rem] right-1 hidden md:block mr-6">
                 <div
@@ -496,11 +496,11 @@ export default function Navbar() {
                 <div className="fixed inset-0 z-[50] bg-black opacity-50 hidden md:block" />
               )}
             </>
-          )}
+          )} */}
 
           <div
             className={`pb-4 md:pt-2 ${
-              pathname.includes("/listings/") ? "hidden" : ""
+              pathname.includes("/listings/") && !pathname.includes("/listings/search") ? "hidden" : ""
             } `}
           >
             {/* aqanea */}

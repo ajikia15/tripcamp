@@ -7,6 +7,7 @@ const FilterParts = ({
   max,
   handleCheckboxChange,
   checked,
+  large,
   setCheckedItems,
 }) => {
   const [displayCount, setDisplayCount] = useState(4);
@@ -26,7 +27,7 @@ const FilterParts = ({
 
   return (
     <>
-      {max === 30 ? (
+      {max === 100 || large ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {filteredItems.slice(0, displayCount).map((item, index) => (
             <div key={index} className="flex items-center">

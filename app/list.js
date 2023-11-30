@@ -13,7 +13,7 @@ const list = [
   // { id: 22, name: "Castles" }, // no results
   { id: 23, name: "Pods" },
   { id: 25, name: "Campsite" },
-  // { id: 27, name: "Rvs" }, // no results
+  { id: 27, name: "Rvs" }, // no results
   // Features (30-40)
   { id: 31, name: "Pets allowed" },
   { id: 32, name: "Breakfast" },

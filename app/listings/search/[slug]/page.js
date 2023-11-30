@@ -10,10 +10,13 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import Pagination from "./Pagination";
 import StaticFooter from "@/app/components/footer/StaticFooter";
+import { useGlobalContext } from "@/app/context/store";
+
 const Page = (props) => {
   const [mapState, setMapState] = useState(false);
   const [longit, setLongit] = useState(0);
   const [latid, setLatid] = useState(0);
+  const { houseId } = useGlobalContext();
 
   const slug = decodeURIComponent(props.params.slug);
   const params = slug.split("&"); // splitting the query parameters
@@ -40,7 +43,9 @@ const Page = (props) => {
   });
 
   const [houses, setHouses] = useState([]);
+  const [allHouses, setAllHouses] = useState([]);
   const housesCollectionRef = collection(db, "Houses");
+
   useEffect(() => {
     const getHouses = async () => {
       const querySnapshot = query(
@@ -57,8 +62,13 @@ const Page = (props) => {
       // client side filter
       const filteredHouses = fetchedHouses.filter((house) => {
         // convert filterTerm to an array
-        const filterArray = filterTerm ? filterTerm.split(",") : [];
+        let filterArray = filterTerm ? filterTerm.split(",") : [];
 
+        if (houseId !== "") {
+          filterArray = [houseId]
+        } 
+
+        console.log(filterArray, 'filterArray');
         // filter based on HouseTypeParameters
         if (filterArray.some((term) => parseInt(term) <= 30)) {
           const houseTypeFilters = filterArray.filter(
@@ -102,8 +112,9 @@ const Page = (props) => {
         setLongit(sortedHouses[0].Position.Longi);
       }
     };
+
     getHouses();
-  }, []);
+  }, [houseId]);
 
   // these are used to force update of the map after resizing, because of the leaflet limitation
   const [mapKey, setMapKey] = useState(0);
@@ -145,6 +156,7 @@ const Page = (props) => {
           !mapState &&
           "md:grid-cols-[3fr_2fr]"
         } `}
+        style={{ marginTop: '150px' }}
       >
         <div
           className={`grid w-11/12 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-h-[77vh] relative ${

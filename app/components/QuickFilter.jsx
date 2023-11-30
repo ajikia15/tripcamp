@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Filter from "./Filter";
 import list from "../list";
 import { useGlobalContext } from "../context/store";
+
 export default function QuickFilter({
   filterTerm,
   setFilterTerm,
@@ -18,6 +19,7 @@ export default function QuickFilter({
 
   const handleHouseClick = (id) => {
     setHouseId(id);
+    setFilterTerm([])
   };
   const handleScroll = () => {
     setScrollPosition(containerRef.current.scrollLeft);
@@ -51,6 +53,7 @@ export default function QuickFilter({
   const filterClose = (e) => {
     e.stopPropagation();
     setFilterState(false);
+    setHouseId("")
   };
 
   useEffect(() => {
@@ -148,12 +151,12 @@ export default function QuickFilter({
               onClick={(e) => {
                 e.preventDefault(), handleHouseClick(null);
               }}
-              className={null == houseId && "border-b-2 border-blue-400"}
+              className={null == houseId && !filterTerm.length && "border-b-2 border-blue-400"}
             >
               <IconCategs name={"All Houses"} id={400} />
             </div>
             {list
-              .filter((item) => item.id > 10 && item.id < 30)
+              .filter((item) => item.id <= 30)
               .map((item) => (
                 <div
                   key={item.id}

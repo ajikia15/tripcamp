@@ -159,6 +159,7 @@ const Filter = ({
                   <FilterParts
                     min={10}
                     max={30}
+                    large={true}
                     checked={isCheckboxChecked}
                     handleCheckboxChange={handleCheckboxChange}
                   />
@@ -211,8 +212,8 @@ const Filter = ({
                       </p>
                     </div>
                     <FilterParts
-                      min={80}
-                      max={99}
+                      min={79}
+                      max={92}
                       checked={isCheckboxChecked}
                       handleCheckboxChange={handleCheckboxChange}
                     />
