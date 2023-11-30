@@ -30,7 +30,7 @@ const Pagination = ({
     paginationRef.current && autoAnimate(paginationRef.current);
   }, [paginationRef]);
   return (
-    <div className="sticky bottom-0 left-0 right-0 grid py-2 bg-white col-span-full">
+    <div className="bottom-0 left-0 right-0 grid py-2 bg-white col-span-full">
       <div
         ref={paginationRef}
         className="flex items-center justify-center w-full gap-2 md:gap-4"

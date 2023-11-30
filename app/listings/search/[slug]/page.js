@@ -237,7 +237,7 @@ const Page = (props) => {
                 </svg>
               </button>
             )}
-            <div className="right-0 w-full lg:top-[9.5rem]">
+            <div className="sticky right-0 w-full lg:top-[9.5rem]">
               {longit !== 0 && latid !== 0 ? (
                 <MapContainer
                   key={mapKey}
