@@ -44,7 +44,8 @@ const DeviceDetect = ({ price }) => {
         return (
             <div className="deviceDetect inner p-5 flex">
                 <div>
-                    <h4>{price}₾</h4>
+                    
+                    <h4>{Math.round(price * 1.15)}₾</h4>
                     <span>Night</span>
                 </div>
                 <div className='flex items-center'>

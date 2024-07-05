@@ -30,7 +30,7 @@ const Map = ({ filteredHouses }) => {
           position={[house.Position.Latit, house.Position.Longi]}
           icon={L.divIcon({
             className: "custom-icon",
-            html: `<div>₾${house.Price}</div>`,
+            html: `<div>₾${Math.round(house.Price  * 1.15)}</div>`,
           })}
         >
           <Popup closeButton={false}>
@@ -53,7 +53,7 @@ const Map = ({ filteredHouses }) => {
                   {house.Address.split("~").slice(0, 3).join(",")}
                 </p>
                 <p className="pt-1 font-bold text-zinc-600 fucktext">
-                  {house.Price}₾/Night
+                  {Math.round(house.Price  * 1.15)}₾/Night
                 </p>
               </Link>
             </div>

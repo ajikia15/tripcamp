@@ -32,7 +32,7 @@ const Card = ({ listing }) => {
             {listing.Address.split("~").slice(0, 3).join(", ")}
           </li>
           <li className="font-semibold">
-            {listing.Price}₾<span className="font-[500]">/Night</span>
+            {Math.round(listing.Price  * 1.15) }₾<span className="font-[500]">/Night</span>
           </li>
         </ul>
         {

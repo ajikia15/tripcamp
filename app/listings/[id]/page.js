@@ -9,7 +9,7 @@ import list from "../../list";
 import StaticFooter from "../../components/footer/StaticFooter";
 import Link from "next/link";
 import L from "leaflet";
-import "./gallery/gallery.css"
+import "./gallery/gallery.css";
 import useRatings from "@/app/hooks/useRatings";
 import moment from "moment";
 import DeviceDetect from "@/app/components/DeviceDetect";
@@ -19,7 +19,7 @@ export default function House(props) {
   const [house, setHouse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [options, setOptions] = useState([]);
-  const { ratings, avg } = useRatings(props.params.id)
+  const { ratings, avg } = useRatings(props.params.id);
 
   useEffect(() => {
     // Function to fetch the document
@@ -49,7 +49,7 @@ export default function House(props) {
 
     fetchHouse();
   }, []);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const handlePrevImage = () => {
@@ -111,7 +111,7 @@ export default function House(props) {
   };
   return (
     <>
-          {isModalOpen && (
+      {isModalOpen && (
         <div
           className="overlay"
           onClick={(e) => e.target === e.currentTarget && setIsModalOpen(false)}
@@ -238,13 +238,14 @@ export default function House(props) {
                 All Photos
               </div>
             </Link>
-            <div 
-             onClick={() => {
-              setIsModalOpen(true);
-              setCurrentImageIndex(0);
-              setSelectedImageIndex(0);
-            }}
-            className="relative w-1/2 mr-2 overflow-hidden aspect-square bg-zinc-800 rounded-l-2xl cursor-pointer">
+            <div
+              onClick={() => {
+                setIsModalOpen(true);
+                setCurrentImageIndex(0);
+                setSelectedImageIndex(0);
+              }}
+              className="relative w-1/2 mr-2 overflow-hidden aspect-square bg-zinc-800 rounded-l-2xl cursor-pointer"
+            >
               <Image
                 className="object-cover rounded-l-2xl"
                 src={house.Photo[0]}
@@ -297,7 +298,9 @@ export default function House(props) {
               })}
             </div>
           </div>
-          <p className="mt-6 text-lg font-bold">₾{house.Price}/Night </p>
+          <p className="mt-6 text-lg font-bold">
+            ₾{Math.round(house.Price * 1.15)}/Night{" "}
+          </p>
           <div className="relative flex flex-row">
             <div className="w-4/5">
               <div className="flex flex-row items-center ">
@@ -316,8 +319,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
@@ -335,8 +339,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
@@ -354,8 +359,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
@@ -373,8 +379,9 @@ export default function House(props) {
                         key={option}
                       >
                         <Image
-                          src={`/${list.find((item) => item.id === option)?.id
-                            }.svg`}
+                          src={`/${
+                            list.find((item) => item.id === option)?.id
+                          }.svg`}
                           width={20}
                           height={20}
                         />
@@ -434,38 +441,42 @@ export default function House(props) {
               </div>
             </div>
           </div>
-          {
-            ratings.length ? (
-              <div className="w-full flex/column">
-                <ul class="grid grid-cols-1 pb-4 border-b-2 gap-y-3"></ul>
-                <div className="pb-7 pt-5">
-                  <span className="star">&#9733; </span> <span className="pl-2 pr-2">{avg}</span> <span>{ratings.length} reviews</span>
-                </div>
-                <div className="grid gap-5 grid-cols-1">
-                  {
-                    ratings.map(item => (
-                      <div key={item.id}>
-                        <h5>{item.FromName}</h5>
-                        <span className="block text-sm text-gray-500 pt-1 pb-1">{moment(item.DateRev.seconds * 1000).format('MMMM D, YYYY')}</span>
-                        {
-                          [...Array(item.Points)].map(star => (
-                            <span className="mr-1" style={{ color: '#ffc90f' }} key="star">&#9733;</span>
-                          ))
-                        }
-                        <p className="pt-1">{item.Message}</p>
-                        <ul class="grid grid-cols-1 pb-4 border-b-2 gap-y-3"></ul>
-                      </div>
-                    ))
-                  }
-                </div>
+          {ratings.length ? (
+            <div className="w-full flex/column">
+              <ul class="grid grid-cols-1 pb-4 border-b-2 gap-y-3"></ul>
+              <div className="pb-7 pt-5">
+                <span className="star">&#9733; </span>{" "}
+                <span className="pl-2 pr-2">{avg}</span>{" "}
+                <span>{ratings.length} reviews</span>
               </div>
-            ) : null
-          }
+              <div className="grid gap-5 grid-cols-1">
+                {ratings.map((item) => (
+                  <div key={item.id}>
+                    <h5>{item.FromName}</h5>
+                    <span className="block text-sm text-gray-500 pt-1 pb-1">
+                      {moment(item.DateRev.seconds * 1000).format(
+                        "MMMM D, YYYY"
+                      )}
+                    </span>
+                    {[...Array(item.Points)].map((star) => (
+                      <span
+                        className="mr-1"
+                        style={{ color: "#ffc90f" }}
+                        key="star"
+                      >
+                        &#9733;
+                      </span>
+                    ))}
+                    <p className="pt-1">{item.Message}</p>
+                    <ul class="grid grid-cols-1 pb-4 border-b-2 gap-y-3"></ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       )}
-      {
-        house?.Price ? <DeviceDetect price={house?.Price} /> : null
-      }
+      {house?.Price ? <DeviceDetect price={house?.Price} /> : null}
       <StaticFooter />
     </>
   );
